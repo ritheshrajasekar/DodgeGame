@@ -8,9 +8,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new DodgeGame(), config);
-		config.title = "Dodge";
-		config.width = 2000;
-		config.height = 1500;
+		config.title = DodgeGame.TITLE;
+		config.width = DodgeGame.WIDTH;
+		config.height = DodgeGame.HEIGHT;
 		config.resizable = false;
 	}
 }

@@ -9,6 +9,9 @@ import com.mygdx.game.com.mygdx.game.screens.MainGameScreen;
  */
 public class DodgeGame extends Game {
 
+	public static final int WIDTH = 2000;
+	public static final int HEIGHT = 1500;
+	public static final String TITLE = "Dodge";
 	public SpriteBatch batch;
 
 	

@@ -9,8 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new DodgeGame(), config);
 		config.title = "Dodge";
-		config.width = 1020;
-		config.height = 720;
-		config.resizable = true;
+		config.width = 2000;
+		config.height = 1500;
+		config.resizable = false;
 	}
 }

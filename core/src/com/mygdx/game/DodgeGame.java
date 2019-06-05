@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Main game class
+ */
 public class DodgeGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;

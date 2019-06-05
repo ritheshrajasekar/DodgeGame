@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Main game class
+ * Main game class.
  */
 public class DodgeGame extends ApplicationAdapter {
 	SpriteBatch batch;

@@ -3,6 +3,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
@@ -17,6 +18,7 @@ public class MainGameScreen implements Screen {
     public static final int SMILEY_FACE_WIDTH = 100;
     public static final int GRID_WIDTH = 1000;
     public static final int GRID_HEIGHT = 1000;
+    private Music music;
 
     DodgeGame game;
 
@@ -26,6 +28,10 @@ public class MainGameScreen implements Screen {
     public void show(){
         character = new Texture("smileyface.jpg");
         grid = new Texture("grid.jpg");
+        music = Gdx.audio.newMusic(Gdx.files.internal("naruto.mp3"));
+        music.setLooping(true);
+        music.setVolume(1f);
+        music.play();
     }
     public void render(float delta){
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
@@ -66,6 +72,8 @@ public class MainGameScreen implements Screen {
 
     }
     public void dispose(){
-
+        music.dispose();
+        character.dispose();
+        grid.dispose();
     }
 }

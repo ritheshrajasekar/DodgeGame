@@ -24,14 +24,15 @@ public class MainGameScreen implements Screen {
 
     public MainGameScreen(DodgeGame game) {
         this.game = game;
-    }
-    public void show(){
         character = new Texture("smileyface.jpg");
         grid = new Texture("grid.jpg");
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();
+    }
+    public void show(){
+
     }
     public void render(float delta){
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))

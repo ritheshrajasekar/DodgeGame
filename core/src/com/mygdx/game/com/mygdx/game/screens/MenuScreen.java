@@ -13,10 +13,10 @@ public class MenuScreen implements Screen {
     private Texture exitButtonActive;
     private Texture playButtonInactive;
     private Texture playButtonActive;
-    private static final int EXIT_BUTTON_WIDTH = 800;
-    private static final int EXIT_BUTTON_HEIGHT = 400;
-    private static final int PLAY_BUTTON_WIDTH = 800;
-    private static final int PLAY_BUTTON_HEIGHT = 400;
+    private static final int EXIT_BUTTON_WIDTH = 300;
+    private static final int EXIT_BUTTON_HEIGHT = 150;
+    private static final int PLAY_BUTTON_WIDTH = 300;
+    private static final int PLAY_BUTTON_HEIGHT = 150;
     private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.2);
     private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.6);
     private Music music;

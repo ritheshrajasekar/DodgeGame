@@ -2,6 +2,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
@@ -18,12 +19,17 @@ public class MenuScreen implements Screen {
     private static final int PLAY_BUTTON_HEIGHT = 400;
     private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.2);
     private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.6);
+    private Music music;
     public MenuScreen(DodgeGame game){
         this.game = game;
         exitButtonInactive = new Texture("exitButton.jpg");
         exitButtonActive = new Texture("exitButtonActive.jpg");
         playButtonInactive = new Texture("playButton2.jpg");
         playButtonActive = new Texture("playButton2Active.jpg");
+        music = Gdx.audio.newMusic(Gdx.files.internal("myName.mp3"));
+        music.setLooping(true);
+        music.setVolume(1f);
+        music.play();
     }
     public void show(){
 
@@ -52,6 +58,7 @@ public class MenuScreen implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < PLAY_BUTTON_YVALUE + PLAY_BUTTON_HEIGHT) {
             game.batch.draw(playButtonActive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, PLAY_BUTTON_YVALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
             if(Gdx.input.isTouched() == true){
+                music.stop();
                 this.dispose();
                 game.setScreen(new MainGameScreen(game));
             }
@@ -82,6 +89,6 @@ public class MenuScreen implements Screen {
 
     }
     public void dispose(){
-
+        music.dispose();
     }
 }

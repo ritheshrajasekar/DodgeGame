@@ -28,7 +28,7 @@ public class MainGameScreen implements Screen {
     public void show(){
         character = new Texture("smileyface.jpg");
         grid = new Texture("grid.jpg");
-        music = Gdx.audio.newMusic(Gdx.files.internal("naruto.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

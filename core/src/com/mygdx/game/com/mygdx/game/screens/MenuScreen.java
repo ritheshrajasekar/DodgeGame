@@ -20,6 +20,8 @@ public class MenuScreen implements Screen {
     private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.2);
     private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.6);
     private Music music;
+
+    //private timer Timer;
     public MenuScreen(DodgeGame game){
         this.game = game;
         exitButtonInactive = new Texture("exitButton.jpg");

@@ -11,13 +11,15 @@ import com.mygdx.game.DodgeGame;
 public class MainGameScreen implements Screen {
     Texture character;
     Texture grid;
-    float x;
-    float y;
-    public static final float DISTANCE = 100 ;
-    public static final int SMILEY_FACE_HEIGHT = 100;
-    public static final int SMILEY_FACE_WIDTH = 100;
-    public static final int GRID_WIDTH = 1000;
-    public static final int GRID_HEIGHT = 1000;
+
+    public static final float DISTANCE = 92 ;
+    public static final int SMILEY_FACE_HEIGHT = 85;
+    public static final int SMILEY_FACE_WIDTH = 85;
+    public static final int GRID_WIDTH = 700;
+    public static final int GRID_HEIGHT = 700;
+    float x = DodgeGame.WIDTH /2 - SMILEY_FACE_WIDTH / 2;
+    float y = DodgeGame.HEIGHT / 2 - SMILEY_FACE_HEIGHT / 2;
+
     private Music music;
 
     DodgeGame game;

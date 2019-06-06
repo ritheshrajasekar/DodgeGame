@@ -8,10 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
 public class MainGameScreen implements Screen {
-    Texture img;
+    Texture character;
+    Texture grid;
     float x;
     float y;
-    public static final float SPEED = 120;
+    public static final float DISTANCE = 100 ;
+    public static final int SMILEY_FACE_HEIGHT = 100;
+    public static final int SMILEY_FACE_WIDTH = 100;
+    public static final int GRID_WIDTH = 1000;
+    public static final int GRID_HEIGHT = 1000;
 
     DodgeGame game;
 
@@ -19,31 +24,33 @@ public class MainGameScreen implements Screen {
         this.game = game;
     }
     public void show(){
-        img = new Texture("smileyface.jpg");
+        character = new Texture("smileyface.jpg");
+        grid = new Texture("grid.jpg");
     }
     public void render(float delta){
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
         {
-            y += SPEED * Gdx.graphics.getDeltaTime();
+            y += DISTANCE ;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
         {
-            y -= SPEED * Gdx.graphics.getDeltaTime();
+            y -= DISTANCE ;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
         {
-            x -= SPEED * Gdx.graphics.getDeltaTime();
+            x -= DISTANCE ;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
         {
-            x += SPEED * Gdx.graphics.getDeltaTime();
+            x += DISTANCE ;
         }
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        game.batch.draw(img,x,y);
+        game.batch.draw(grid, DodgeGame.WIDTH/2  - GRID_WIDTH/2, DodgeGame.HEIGHT/2 - GRID_HEIGHT/2, GRID_WIDTH, GRID_HEIGHT);
+        game.batch.draw(character,x,y, SMILEY_FACE_WIDTH, SMILEY_FACE_HEIGHT);
         game.batch.end();
     }
     public void resize(int width, int height){

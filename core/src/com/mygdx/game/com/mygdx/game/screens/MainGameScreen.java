@@ -15,8 +15,8 @@ public class MainGameScreen implements Screen {
     public static final float DISTANCE = 92 ;
     public static final int SMILEY_FACE_HEIGHT = 85;
     public static final int SMILEY_FACE_WIDTH = 85;
-    public static final int GRID_WIDTH = 500;
-    public static final int GRID_HEIGHT = 500;
+    public static final int GRID_WIDTH = 665;
+    public static final int GRID_HEIGHT = 665;
     float x = DodgeGame.WIDTH /2 - SMILEY_FACE_WIDTH / 2;
     float y = DodgeGame.HEIGHT / 2 - SMILEY_FACE_HEIGHT / 2;
 

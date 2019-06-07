@@ -12,13 +12,14 @@ public class MainGameScreen implements Screen {
     Texture character;
     Texture grid;
 
-    public static final float DISTANCE = 92 ;
+    public static final int PLAYER_MOVE_DISTANCE = 63;
     public static final int SMILEY_FACE_HEIGHT = 85;
     public static final int SMILEY_FACE_WIDTH = 85;
     public static final int GRID_WIDTH = 665;
     public static final int GRID_HEIGHT = 665;
-    float x = DodgeGame.WIDTH /2 - SMILEY_FACE_WIDTH / 2;
-    float y = DodgeGame.HEIGHT / 2 - SMILEY_FACE_HEIGHT / 2;
+    public static final int GRID_OFFSET_X = 500;
+    public static final int GRID_OFFSET_Y = 500;
+    int[] playerCoord = {0, 0};
 
     private Music music;
 
@@ -33,25 +34,27 @@ public class MainGameScreen implements Screen {
         music.setVolume(1f);
         music.play();
     }
+
     public void show(){
 
     }
+
     public void render(float delta){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
         {
-            y += DISTANCE ;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
-        {
-            y -= DISTANCE ;
+            playerCoord[0]++;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
         {
-            x -= DISTANCE ;
+            playerCoord[0]--;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
         {
-            x += DISTANCE ;
+            playerCoord[1]++;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
+        {
+            playerCoord[1]--;
         }
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -59,14 +62,19 @@ public class MainGameScreen implements Screen {
 
         game.batch.begin();
         game.batch.draw(grid, DodgeGame.WIDTH/2  - GRID_WIDTH/2, DodgeGame.HEIGHT/2 - GRID_HEIGHT/2, GRID_WIDTH, GRID_HEIGHT);
-        game.batch.draw(character,x,y, SMILEY_FACE_WIDTH, SMILEY_FACE_HEIGHT);
+        game.batch.draw(character, xCoordToPixel(playerCoord[0]), yCoordToPixel(playerCoord[1]), SMILEY_FACE_WIDTH, SMILEY_FACE_HEIGHT);
         game.batch.end();
     }
+
+    public int xCoordToPixel(int x) {
+        return x * PLAYER_MOVE_DISTANCE + GRID_OFFSET_X;
+    }
+
+    public int yCoordToPixel(int y) {
+        return y * PLAYER_MOVE_DISTANCE + GRID_OFFSET_Y;
+    }
+
     public void resize(int width, int height){
-
-
-
-
 
     }
     public void pause(){

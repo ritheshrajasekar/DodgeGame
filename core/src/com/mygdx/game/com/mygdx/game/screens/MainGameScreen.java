@@ -13,12 +13,12 @@ public class MainGameScreen implements Screen {
     Texture grid;
 
     public static final int PLAYER_MOVE_DISTANCE = 63;
-    public static final int SMILEY_FACE_HEIGHT = 85;
-    public static final int SMILEY_FACE_WIDTH = 85;
+    public static final int SMILEY_FACE_HEIGHT = 63;
+    public static final int SMILEY_FACE_WIDTH = 63;
     public static final int GRID_WIDTH = 665;
     public static final int GRID_HEIGHT = 665;
-    public static final int GRID_OFFSET_X = 500;
-    public static final int GRID_OFFSET_Y = 500;
+    public static final int GRID_OFFSET_X = 600;
+    public static final int GRID_OFFSET_Y = 100;
     int[] playerCoord = {0, 0};
 
     private Music music;
@@ -41,21 +41,17 @@ public class MainGameScreen implements Screen {
 
     public void render(float delta){
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-        {
-            playerCoord[0]++;
-        }
+            if (playerCoord[0] < 7)
+                playerCoord[0]++;
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
-        {
-            playerCoord[0]--;
-        }
+            if (playerCoord[0] > 0)
+                playerCoord[0]--;
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-        {
-            playerCoord[1]++;
-        }
+            if (playerCoord[1] < 7)
+                playerCoord[1]++;
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
-        {
-            playerCoord[1]--;
-        }
+            if (playerCoord[1] > 0)
+                playerCoord[1]--;
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

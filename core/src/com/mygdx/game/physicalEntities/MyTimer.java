@@ -65,7 +65,7 @@ public class MyTimer {
 
         font.setColor(Color.GREEN);
         font.getData().setScale(4f);
-        font.draw(batch, getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 33, DodgeGame.HEIGHT/2 + 10);
+        font.draw(batch, getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 35, DodgeGame.HEIGHT/2 + 10);
 
 
 

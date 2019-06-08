@@ -3,6 +3,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
@@ -10,22 +11,30 @@ import com.mygdx.game.DodgeGame;
 public class MainGameScreen implements Screen {
     Texture character;
     Texture grid;
-    float x;
-    float y;
-    public static final float DISTANCE = 100 ;
-    public static final int SMILEY_FACE_HEIGHT = 100;
-    public static final int SMILEY_FACE_WIDTH = 100;
-    public static final int GRID_WIDTH = 1000;
-    public static final int GRID_HEIGHT = 1000;
+
+    public static final float DISTANCE = 92 ;
+    public static final int SMILEY_FACE_HEIGHT = 85;
+    public static final int SMILEY_FACE_WIDTH = 85;
+    public static final int GRID_WIDTH = 500;
+    public static final int GRID_HEIGHT = 500;
+    float x = DodgeGame.WIDTH /2 - SMILEY_FACE_WIDTH / 2;
+    float y = DodgeGame.HEIGHT / 2 - SMILEY_FACE_HEIGHT / 2;
+
+    private Music music;
 
     DodgeGame game;
 
     public MainGameScreen(DodgeGame game) {
         this.game = game;
-    }
-    public void show(){
         character = new Texture("smileyface.jpg");
         grid = new Texture("grid.jpg");
+        music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
+        music.setLooping(true);
+        music.setVolume(1f);
+        music.play();
+    }
+    public void show(){
+
     }
     public void render(float delta){
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
@@ -66,6 +75,8 @@ public class MainGameScreen implements Screen {
 
     }
     public void dispose(){
-
+        music.dispose();
+        character.dispose();
+        grid.dispose();
     }
 }

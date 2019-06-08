@@ -8,7 +8,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new DodgeGame(), config);
-		config.foregroundFPS = 60;
+		config.foregroundFPS = 30;
 		config.title = DodgeGame.TITLE;
 		config.width = DodgeGame.WIDTH;
 		config.height = DodgeGame.HEIGHT;

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.physicalEntities.boulder;
 
 public class MainGameScreen implements Screen {
     Texture player;
@@ -27,7 +28,7 @@ public class MainGameScreen implements Screen {
     int[] playerCoord = {0, 0};
 
     private Music music;
-    //private Music musicTest;
+    private boulder boulder = new boulder();
 
     DodgeGame game;
 
@@ -85,6 +86,8 @@ public class MainGameScreen implements Screen {
         game.batch.begin();
         game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
         game.batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(playerCoord[0]) + GRID_CORNER_SIZE, yCoordToPixel(playerCoord[1]) + GRID_CORNER_SIZE, PLAYER_SIZE, PLAYER_SIZE);
+        //game.batch.draw(boulder.getBoulderAnimation().getKeyFrame(elapsedTime, true), xCoordToPixel(boulder.getBoulderX()) + GRID_CORNER_SIZE, yCoordToPixel(boulder.getBoulderY()) + GRID_CORNER_SIZE, boulder.getBoulderLength(), boulder.getBoulderWidth());
+        game.batch.draw(boulder.getBoulder(), boulder.getBoulderX(), boulder.getBoulderY(), boulder.getBoulderLength(), boulder.getBoulderWidth());
         game.batch.end();
     }
 

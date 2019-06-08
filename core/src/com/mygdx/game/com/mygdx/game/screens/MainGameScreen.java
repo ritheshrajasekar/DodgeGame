@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.physicalEntities.*;
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainGameScreen implements Screen {
-    Texture grid;
-    MyTimer timer;
-    Player player;
+
 
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
     public static final int PLAYER_SIZE = 56;//8*7
@@ -22,11 +22,18 @@ public class MainGameScreen implements Screen {
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] directions  = {"UP", "DOWN", "LEFT", "RIGHT"};
+    public static final int RESPAWN_INTERVAL = 10;
 
+
+    private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     private Music music;
-    private Boulder boulder;
     private DodgeGame game;
     private String randDirection;
+    private Texture grid;
+    private MyTimer timer;
+    private MyTimer respawnInterval;
+    private Player player;
+
 
     public MainGameScreen(DodgeGame game) {
         this.game = game;
@@ -39,7 +46,12 @@ public class MainGameScreen implements Screen {
 
         randDirection = directions[(int)(Math.random() * (4))];
 
-        boulder = new Boulder(randDirection);
+        //boulder = new Boulder(randDirection);
+
+        for(int i = 0; i <= 3; i++){
+            boulderList.add(new Boulder(randDirection));
+        }
+
         player = new Player();
     }
 
@@ -77,17 +89,41 @@ public class MainGameScreen implements Screen {
         player.update();
         player.render(game.batch);
 
+        // goes through each boulder in the list
+        for(Boulder b : boulderList){
+            if(b.isOnScreen){
+                // updates the location of the boulder
+                b.update(delta, randDirection);
+                // renders the boulder
+                b.render(game.batch);
+            }
 
-        // updates the location of the boulder
-        if(!boulder.remove){
-            boulder.update(delta, randDirection);
-            boulder.render(game.batch);
-        } // renders the boulder
+            else if(respawnInterval == null){
+                respawnInterval= new MyTimer(RESPAWN_INTERVAL);
+            }
+
+
+            else if(respawnInterval.getWorldTimer() >= 0){
+                respawnInterval.update(delta);
+            }
+
+            else{
+                respawnInterval = null;
+                respawnBoulders();
+            }
+        }
 
         //ends SpriteBatch
         game.batch.end();
     }
 
+    public void respawnBoulders(){
+        boulderList.clear();
+        randDirection = directions[(int)(Math.random() * (4))];
+        for(int i = 0; i <= 3; i++){
+            boulderList.add(new Boulder(randDirection));
+        }
+    }
 
     public void resize(int width, int height){
 

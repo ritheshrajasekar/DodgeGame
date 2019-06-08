@@ -20,11 +20,11 @@ public class Boulder {
     Animation boulderAnimation;
     private float elapsedTime;
     private int x, y;
-    public boolean remove;
+    public boolean isOnScreen;
 
 
     public Boulder( String direction){
-        remove = false;
+        isOnScreen = true;
         // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
         if(direction == "UP"){
             x = xCoordToPixel((int)(Math.random() * 8));
@@ -74,25 +74,25 @@ public class Boulder {
         if(direction == "RIGHT"){
             x += SPEED * deltaTime;
             if(x > (GRID_WIDTH + GRID_OFFSET_X ))
-                remove = true;
+                isOnScreen= false;
         }
 
         else if(direction == "UP"){
             y += SPEED * deltaTime;
             if(y > (GRID_HEIGHT + GRID_OFFSET_Y ))
-                remove = true;
+                isOnScreen = false;
         }
 
         else if(direction == "LEFT"){
             x -= SPEED * deltaTime;
             if(x < (GRID_OFFSET_X ))
-                remove = true;
+                isOnScreen = false;
         }
 
         else if(direction == "DOWN"){
             y -= SPEED * deltaTime;
             if(y < (GRID_OFFSET_Y ))
-                remove = true;
+                isOnScreen = false;
         }
     }
 

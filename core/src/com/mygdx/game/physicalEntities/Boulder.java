@@ -8,43 +8,40 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
-public class Boulder {
+public class Boulder extends Entity {
     public static final int SPEED = 125;
     public static final int WIDTH = 56;
     public static final int LENGTH = 56;
-
 
     private static Texture boulderTexture;
     private TextureRegion[] boulderAnimationFrames;
     private Animation boulderAnimation;
     private float elapsedTime;
-    private int x, y;
     public boolean isOnScreen;
     public String direction;
 
-
-    public Boulder( String d){
+    public Boulder(String d){
         isOnScreen = true;
         direction = d;
 
         // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
         if(direction == "UP"){
-            x = xCoordToPixel((int)(Math.random() * 8));
-            y = yCoordToPixel(0);
+            setX(xCoordToPixel((int)(Math.random() * 8)));
+            setY(yCoordToPixel(0));
         }
         else if(direction == "DOWN"){
-            x = xCoordToPixel((int)(Math.random() * 8));
-            y = yCoordToPixel(7);
+            setX(xCoordToPixel((int)(Math.random() * 8)));
+            setY(yCoordToPixel(7));
         }
 
         else if(direction == "LEFT"){
-            x = xCoordToPixel(7);
-            y = yCoordToPixel((int)(Math.random() * 8));
+            setX(xCoordToPixel(7));
+            setY(yCoordToPixel((int)(Math.random() * 8)));
         }
 
         else if(direction == "RIGHT"){
-            x = xCoordToPixel(0);
-            y = yCoordToPixel((int)(Math.random() * 8));
+            setX(xCoordToPixel(0));
+            setY(yCoordToPixel((int)(Math.random() * 8)));
         }
 
         boulderTexture = new Texture("dodgeBoulder.png");
@@ -74,40 +71,32 @@ public class Boulder {
     public void update(float deltaTime){
         elapsedTime += Gdx.graphics.getDeltaTime();
         if(direction == "RIGHT"){
-            x += SPEED * deltaTime;
-            if(x > (GRID_WIDTH + GRID_OFFSET_X ))
+            setX((int) (getX() + SPEED * deltaTime));
+            if(getX() > (GRID_WIDTH + GRID_OFFSET_X ))
                 isOnScreen= false;
         }
 
         else if(direction == "UP"){
-            y += SPEED * deltaTime;
-            if(y > (GRID_HEIGHT + GRID_OFFSET_Y ))
+            setY((int) (getY() + SPEED * deltaTime));
+            if(getY() > (GRID_HEIGHT + GRID_OFFSET_Y ))
                 isOnScreen = false;
         }
 
         else if(direction == "LEFT"){
-            x -= SPEED * deltaTime;
-            if(x < (GRID_OFFSET_X ))
+            setX((int) (getX() - SPEED * deltaTime));
+            if(getX() < (GRID_OFFSET_X ))
                 isOnScreen = false;
         }
 
         else if(direction == "DOWN"){
-            y -= SPEED * deltaTime;
-            if(y < (GRID_OFFSET_Y ))
+            setY((int) (getY() - SPEED * deltaTime));
+            if(getY() < (GRID_OFFSET_Y ))
                 isOnScreen = false;
         }
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), x, y, WIDTH, LENGTH);
-    }
-
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
-        return y;
+        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), getX(), getY(), WIDTH, LENGTH);
     }
 }
 

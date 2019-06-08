@@ -117,7 +117,7 @@ public class Level1 implements Screen {
         coinList.clear();
         for(int i = 0; i < 2; i++){
             coinList.add(new Coin());
-            if(i == 1 && coinList.get(0).getxCoord() == coinList.get(1).getxCoord() && coinList.get(0).getyCoord() == coinList.get(1).getyCoord()){
+            if(i == 1 && coinList.get(0).getX() == coinList.get(1).getX() && coinList.get(0).getY() == coinList.get(1).getY()){
                 i--;
                 coinList.remove(1);
             }
@@ -128,6 +128,7 @@ public class Level1 implements Screen {
         boulderList.clear();
         for(int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
             boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));
+            new BlinkingArrow(boulderList.get(i).direction,boulderList.get(i).getX(), boulderList.get(i).getY()).render(game.batch);
         }
 
     }

@@ -10,7 +10,7 @@ import com.mygdx.game.com.mygdx.game.screens.MainGameScreen;
 import static com.mygdx.game.com.mygdx.game.screens.MainGameScreen.*;
 
 public class Boulder {
-    public static final int SPEED = 100;
+    public static final int SPEED = 125;
     public static final int WIDTH = 56;
     public static final int LENGTH = 56;
 
@@ -21,10 +21,13 @@ public class Boulder {
     private float elapsedTime;
     private int x, y;
     public boolean isOnScreen;
+    public String direction;
 
 
-    public Boulder( String direction){
+    public Boulder( String d){
         isOnScreen = true;
+        direction = d;
+
         // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
         if(direction == "UP"){
             x = xCoordToPixel((int)(Math.random() * 8));
@@ -69,7 +72,7 @@ public class Boulder {
         return y * PLAYER_MOVE_DISTANCE + GRID_OFFSET_Y +  GRID_CORNER_SIZE;
     }
 
-    public void update(float deltaTime, String direction){
+    public void update(float deltaTime){
         elapsedTime += Gdx.graphics.getDeltaTime();
         if(direction == "RIGHT"){
             x += SPEED * deltaTime;

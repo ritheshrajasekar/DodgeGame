@@ -24,14 +24,11 @@ public class MainGameScreen implements Screen {
     public static final String[] directions  = {"UP", "DOWN", "LEFT", "RIGHT"};
     public static final int RESPAWN_INTERVAL = 10;
 
-
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     private Music music;
     private DodgeGame game;
-    private String randDirection;
     private Texture grid;
     private MyTimer timer;
-    private MyTimer respawnInterval;
     private Player player;
 
 
@@ -44,12 +41,10 @@ public class MainGameScreen implements Screen {
         music.setVolume(1f);
         music.play();
 
-        randDirection = directions[(int)(Math.random() * (4))];
-
         //boulder = new Boulder(randDirection);
 
-        for(int i = 0; i <= 3; i++){
-            boulderList.add(new Boulder(randDirection));
+        for(int i = 0; i <= (int)(Math.random() * (3)); i++){
+            boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
         }
 
         player = new Player();
@@ -68,8 +63,7 @@ public class MainGameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //renders entities
-        game.batch.begin();
-        game.font.setColor(Color.GREEN);
+
 
         // print out the timer
         timer.render(game.batch, game.font);
@@ -93,27 +87,32 @@ public class MainGameScreen implements Screen {
         for(Boulder b : boulderList){
             if(b.isOnScreen){
                 // updates the location of the boulder
-                b.update(delta, randDirection);
+                b.update(delta);
                 // renders the boulder
                 b.render(game.batch);
             }
 
-            else if(timer.getWorldTimer() % 10 == 0){
+            else if(timer.getWorldTimer() % 5 == 0){
                 respawnBoulders();
             }
         }
 
+        //coin.render(SpriteBatch batch);
+        //if(every 5 seconds, call a method that spawsns 2 new coins
         //ends SpriteBatch
         game.batch.end();
     }
 
     public void respawnBoulders(){
         boulderList.clear();
-        randDirection = directions[(int)(Math.random() * (4))];
-        for(int i = 0; i <= 3; i++){
-            boulderList.add(new Boulder(randDirection));
+
+        for(int i = 0; i <= (int)(Math.random()*3); i++){
+            boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
         }
     }
+
+    // public void spawnCoins() - clear the arrayList of coins, and then adds 2 new coins
+    // need to add colission detection later
 
     public void resize(int width, int height){
 

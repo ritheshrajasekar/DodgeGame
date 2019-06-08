@@ -3,6 +3,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
@@ -21,6 +22,8 @@ public class Level1 implements Screen {
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
     public static final int MAX_BOULDERS = 6;
+    public static final String WORLD = "GRASS";
+    public static final String LEVEL = " LEVEL 1";
 
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
@@ -52,7 +55,7 @@ public class Level1 implements Screen {
 
     public void render(float delta) {
         //creates background
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(.135f, .206f, .235f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // print out the timer
@@ -103,7 +106,10 @@ public class Level1 implements Screen {
                 respawnBoulders();
             }
         }
-
+        game.font.setColor(Color.PURPLE);
+        game.font.getData().setScale(4f);
+        game.font.draw(game.batch, WORLD, (int)(DodgeGame.WIDTH * 0.07) , DodgeGame.HEIGHT/2 + 300);
+        game.font.draw(game.batch, LEVEL, (int)(DodgeGame.WIDTH * 0.25) , DodgeGame.HEIGHT/2 + 300);
         game.batch.end();
     }
 

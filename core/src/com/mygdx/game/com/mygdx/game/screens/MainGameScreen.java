@@ -93,11 +93,12 @@ public class MainGameScreen implements Screen {
 
         //renders entities
         game.batch.begin();
-        game.font.setColor(Color.WHITE);
+        game.font.setColor(Color.GREEN);
         // print out the timer
-        //game.font.getData().setScale(5f);
-        game.batch.draw(clock,100, 100);
-        game.font.draw(game.batch, timer.getWorldTimerString(), 100, 100);
+
+        game.batch.draw(clock,(int)(DodgeGame.WIDTH * 0.25) - 100, DodgeGame.HEIGHT/2 - 100,200 ,200 );
+        game.font.getData().setScale(4f);
+        game.font.draw(game.batch, timer.getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 22, DodgeGame.HEIGHT/2 + 10);
         if(timer.getWorldTimer() <= 0){
 
             music.stop();

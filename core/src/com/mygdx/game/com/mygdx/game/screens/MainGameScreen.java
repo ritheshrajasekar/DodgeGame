@@ -28,8 +28,8 @@ public class MainGameScreen implements Screen {
 
     public MainGameScreen(DodgeGame game) {
         this.game = game;
-        character = new Texture("smileyface.jpg");
-        grid = new Texture("grid.jpg");
+        character = new Texture("dodgeGuy.png");
+        grid = new Texture("dodgeGrid.png");
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);

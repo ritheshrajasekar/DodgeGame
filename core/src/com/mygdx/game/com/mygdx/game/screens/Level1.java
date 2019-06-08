@@ -33,6 +33,8 @@ public class Level1 implements Screen {
     private MyTimer timer;
     private Player player;
 
+    private boolean bouldersSpawned;
+
     public Level1(DodgeGame game) {
         this.game = game;
         grid = new Texture("dodgeGrid.png");
@@ -41,10 +43,6 @@ public class Level1 implements Screen {
         music.setLooping(true);
         music.setVolume(1f);
         music.play();
-
-        for(int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
-            boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));
-        }
 
         player = new Player();
     }
@@ -93,19 +91,24 @@ public class Level1 implements Screen {
             }
         }
 
-        // goes through each boulder in the list
-        for(Boulder b : boulderList){
-            if(b.isOnScreen){
+        if (timer.getWorldTimer() % 5 == 0 && !bouldersSpawned){
+            respawnBoulders();
+            bouldersSpawned = true;
+        }
+        if (timer.getWorldTimer() % 5 != 0){
+            bouldersSpawned = false;
+        }
+
+        // updates and renders each boulder in the list
+        for (Boulder b : boulderList){
+            if (b.isOnScreen){
                 // updates the location of the boulder
                 b.update(delta);
                 // renders the boulder
                 b.render(game.batch);
             }
-
-            else if(timer.getWorldTimer() % 5 == 0){
-                respawnBoulders();
-            }
         }
+
         game.font.setColor(Color.PURPLE);
         game.font.getData().setScale(4f);
         game.font.draw(game.batch, WORLD, (int)(DodgeGame.WIDTH * 0.07) , DodgeGame.HEIGHT/2 + 300);
@@ -115,9 +118,9 @@ public class Level1 implements Screen {
 
     public void respawnCoin(){
         coinList.clear();
-        for(int i = 0; i < 2; i++){
+        for (int i = 0; i < 2; i++){
             coinList.add(new Coin());
-            if(i == 1 && coinList.get(0).getX() == coinList.get(1).getX() && coinList.get(0).getY() == coinList.get(1).getY()){
+            if (i == 1 && coinList.get(0).x == coinList.get(1).x && coinList.get(0).y == coinList.get(1).y){
                 i--;
                 coinList.remove(1);
             }
@@ -126,11 +129,10 @@ public class Level1 implements Screen {
 
     public void respawnBoulders(){
         boulderList.clear();
-        for(int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
+        for (int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
             boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));
-            new BlinkingArrow(boulderList.get(i).direction,boulderList.get(i).getX(), boulderList.get(i).getY()).render(game.batch);
+            new BlinkingArrow(boulderList.get(i).direction,boulderList.get(i).x, boulderList.get(i).y).render(game.batch);
         }
-
     }
 
     // public void spawnCoins() - clear the arrayList of coins, and then adds 2 new coins

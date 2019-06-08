@@ -9,12 +9,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
-public class Player {
+public class Player extends Entity{
     Texture player;
     TextureRegion[] animationFrames;
     Animation animation;
     float elapsedTime;
-    int[] playerCoord = {0, 0};
 
     //creates the animation for the player
     public Player(){
@@ -34,33 +33,26 @@ public class Player {
         animation = new Animation(1f/9f,animationFrames);
     }
 
-    public int xCoordToPixel(int x) {
-        return x * PLAYER_MOVE_DISTANCE + GRID_OFFSET_X;
-    }
-
-    public int yCoordToPixel(int y) {
-        return y * PLAYER_MOVE_DISTANCE + GRID_OFFSET_Y;
-    }
     // updates the position of the player, and time elapsed for the animation
     public void update(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-            if (playerCoord[0] < 7)
-                playerCoord[0]++;
+            if (x < 7)
+                x++;
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
-            if (playerCoord[0] > 0)
-                playerCoord[0]--;
+            if (x > 0)
+                x--;
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-            if (playerCoord[1] < 7)
-                playerCoord[1]++;
+            if (y < 7)
+                y++;
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
-            if (playerCoord[1] > 0)
-                playerCoord[1]--;
+            if (y > 0)
+                y--;
         elapsedTime += Gdx.graphics.getDeltaTime();
     }
     // renders the player animation
     public void render(SpriteBatch batch){
 
-        batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(playerCoord[0]) + GRID_CORNER_SIZE, yCoordToPixel(playerCoord[1]) + GRID_CORNER_SIZE, PLAYER_SIZE, PLAYER_SIZE);
+        batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(x), yCoordToPixel(y), PLAYER_SIZE, PLAYER_SIZE);
     }
 
 

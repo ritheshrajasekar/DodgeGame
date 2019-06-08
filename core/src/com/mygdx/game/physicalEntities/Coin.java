@@ -17,8 +17,8 @@ public class Coin extends Entity{
     public Coin(){
         coin = new Texture("dodgeBigCoin.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(coin,8,8);
-        setX((int)(8 * Math.random()));
-        setY((int)(8 * Math.random()));
+        x = (int)(8 * Math.random());
+        y = (int)(8 * Math.random());
         animationFrames = new TextureRegion[24];
         int index = 0;
 
@@ -36,6 +36,6 @@ public class Coin extends Entity{
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(getX()) + GRID_CORNER_SIZE, yCoordToPixel(getY()) + GRID_CORNER_SIZE, COIN_SIZE, COIN_SIZE);
+        batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(x), yCoordToPixel(y), COIN_SIZE, COIN_SIZE);
     }
 }

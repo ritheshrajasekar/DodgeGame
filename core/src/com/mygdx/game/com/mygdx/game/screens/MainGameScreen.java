@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.physicalEntities.Boulder;
 
+import java.util.ArrayList;
+
 public class MainGameScreen implements Screen {
     Texture player;
     Texture grid;
@@ -31,7 +33,7 @@ public class MainGameScreen implements Screen {
     int[] playerCoord = {0, 0};
 
     private Music music;
-    private Boulder boulder;
+    Boulder boulder;
 
     DodgeGame game;
 
@@ -41,11 +43,13 @@ public class MainGameScreen implements Screen {
         player = new Texture("dodgeGuy.png");
         grid = new Texture("dodgeGrid.png");
         clock = new Texture("timer.png");
-        boulder = new Boulder(500);
+
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();
+
+        boulder = new Boulder(0, 8);
 
         //player animation
         TextureRegion[][] tmpFrames = TextureRegion.split(player,8,10);
@@ -69,9 +73,6 @@ public class MainGameScreen implements Screen {
     public void render(float delta){
         //timer code
         timer.update(delta);
-
-        boulder.update(delta); // updates the location of the boulder
-
 
         //get key presses for player movement
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
@@ -97,11 +98,13 @@ public class MainGameScreen implements Screen {
         //renders entities
         game.batch.begin();
         game.font.setColor(Color.GREEN);
-        // print out the timer
 
+        // print out the timer
         game.batch.draw(clock,(int)(DodgeGame.WIDTH * 0.25) - 100, DodgeGame.HEIGHT/2 - 100,200 ,200 );
         game.font.getData().setScale(4f);
         game.font.draw(game.batch, timer.getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 22, DodgeGame.HEIGHT/2 + 10);
+
+        //checks if time is up
         if(timer.getWorldTimer() <= 0){
 
             music.stop();
@@ -109,9 +112,19 @@ public class MainGameScreen implements Screen {
             game.setScreen(new MenuScreen(game));
         }
 
+        //draws the gird
         game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
+
+        //draws tbe player animation
         game.batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(playerCoord[0]) + GRID_CORNER_SIZE, yCoordToPixel(playerCoord[1]) + GRID_CORNER_SIZE, PLAYER_SIZE, PLAYER_SIZE);
-        if(!boulder.remove){boulder.render(game.batch);} // renders the boulder
+
+        // updates the location of the boulder
+        if((!boulder.remove) /*&& timer.getWorldTimer() <  55 */){
+            boulder.update(delta);
+            boulder.render(game.batch);
+        } // renders the boulder
+
+        //ends SpriteBatch
         game.batch.end();
     }
 

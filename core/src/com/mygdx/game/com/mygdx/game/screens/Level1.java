@@ -9,8 +9,7 @@ import com.mygdx.game.DodgeGame;
 import com.mygdx.game.physicalEntities.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MainGameScreen implements Screen {
-
+public class Level1 implements Screen {
 
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
     public static final int PLAYER_SIZE = 56;//8*7
@@ -20,8 +19,8 @@ public class MainGameScreen implements Screen {
     public static final int GRID_OFFSET_X = 588;
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
-    public static final String[] directions  = {"UP", "DOWN", "LEFT", "RIGHT"};
-    public static final int maxBoulders = 6;
+    public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
+    public static final int MAX_BOULDERS = 6;
 
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
@@ -31,8 +30,7 @@ public class MainGameScreen implements Screen {
     private MyTimer timer;
     private Player player;
 
-
-    public MainGameScreen(DodgeGame game) {
+    public Level1(DodgeGame game) {
         this.game = game;
         grid = new Texture("dodgeGrid.png");
 
@@ -41,14 +39,8 @@ public class MainGameScreen implements Screen {
         music.setVolume(1f);
         music.play();
 
-        //boulder = new Boulder(randDirection);
-
-        for(int i = 0; i <= (int)(maxBoulders * Math.random()); i++){
-            boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
-        }
-        for(int i = 0; i < 2; i++){
-            coinList.add(new Coin());
-            coinList.add(new Coin());
+        for(int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
+            boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));
         }
 
         player = new Player();
@@ -59,19 +51,14 @@ public class MainGameScreen implements Screen {
     }
 
     public void render(float delta) {
-        //timer code
-
-
         //creates background
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //renders entities
-
-
         // print out the timer
         timer.update(delta);
         timer.render(game.batch, game.font);
+
         //checks if time is up
         if (timer.getWorldTimer() <= 0) {
 
@@ -100,11 +87,8 @@ public class MainGameScreen implements Screen {
 
             for (Coin c : coinList) {
             c.render(game.batch);
+            }
         }
-    }
-
-
-
 
         // goes through each boulder in the list
         for(Boulder b : boulderList){
@@ -120,7 +104,6 @@ public class MainGameScreen implements Screen {
             }
         }
 
-
         game.batch.end();
     }
 
@@ -134,17 +117,17 @@ public class MainGameScreen implements Screen {
             }
         }
     }
+
     public void respawnBoulders(){
         boulderList.clear();
-
-        for(int i = 0; i <= (int)(maxBoulders * Math.random()); i++){
-            boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
+        for(int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
+            boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));
         }
 
     }
 
     // public void spawnCoins() - clear the arrayList of coins, and then adds 2 new coins
-    // need to add colission detection later
+    // need to add collision detection later
 
     public void resize(int width, int height){
 

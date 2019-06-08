@@ -5,9 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.game.com.mygdx.game.screens.MainGameScreen;
 
-import static com.mygdx.game.com.mygdx.game.screens.MainGameScreen.*;
+import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Boulder {
     public static final int SPEED = 125;

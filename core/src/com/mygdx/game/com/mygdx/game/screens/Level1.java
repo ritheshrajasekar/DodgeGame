@@ -2,7 +2,6 @@ package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,33 +9,19 @@ import com.mygdx.game.DodgeGame;
 import com.mygdx.game.physicalEntities.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Level1 implements Screen {
+public class Level1 extends Level implements Screen{
 
-    public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
-    public static final int PLAYER_SIZE = 56;//8*7
-    public static final int COIN_SIZE = 56; // 8*7
-    public static final int GRID_WIDTH = 665;
-    public static final int GRID_HEIGHT = 665;
-    public static final int GRID_OFFSET_X = 588;
-    public static final int GRID_OFFSET_Y = 27;
-    public static final int GRID_CORNER_SIZE = 84;//12*7
-    public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
     public static final int MAX_BOULDERS = 6;
     public static final String WORLD = "GRASS";
     public static final String LEVEL = " LEVEL 1";
 
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
-    private Music music;
-    private DodgeGame game;
-    private Texture grid;
-    private MyTimer timer;
-    private Player player;
 
     private boolean bouldersSpawned;
 
-    public Level1(DodgeGame game) {
-        this.game = game;
+    public Level1(DodgeGame g) {
+        game = g;
         grid = new Texture("dodgeGrid.png");
 
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));

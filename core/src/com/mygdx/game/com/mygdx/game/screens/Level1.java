@@ -67,7 +67,7 @@ public class Level1 implements Screen {
 
             music.stop();
             this.dispose();
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new StartScreen(game));
         }
 
         //draws the grid

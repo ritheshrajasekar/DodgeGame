@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -17,6 +18,7 @@ public class MainGameScreen implements Screen {
     TextureRegion[] animationFrames;
     Animation animation;
     float elapsedTime;
+    MyTimer timer;
 
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
     public static final int PLAYER_SIZE = 56;//8*7
@@ -34,6 +36,7 @@ public class MainGameScreen implements Screen {
 
     public MainGameScreen(DodgeGame game) {
         this.game = game;
+
         player = new Texture("dodgeGuy.png");
         grid = new Texture("dodgeGrid.png");
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
@@ -57,10 +60,14 @@ public class MainGameScreen implements Screen {
     }
 
     public void show(){
-
+        timer = new MyTimer(60);
     }
 
     public void render(float delta){
+        //timer code
+        timer.update(delta);
+
+
         //get key presses for player movement
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
             if (playerCoord[0] < 7)
@@ -84,6 +91,16 @@ public class MainGameScreen implements Screen {
 
         //renders entities
         game.batch.begin();
+        game.font.setColor(Color.WHITE);
+        // print out the timer
+        game.font.draw(game.batch, timer.getWorldTimerString(), 100, 100);
+        if(timer.getWorldTimer() <= 0){
+
+            music.stop();
+            this.dispose();
+            game.setScreen(new MenuScreen(game));
+        }
+
         game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
         game.batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(playerCoord[0]) + GRID_CORNER_SIZE, yCoordToPixel(playerCoord[1]) + GRID_CORNER_SIZE, PLAYER_SIZE, PLAYER_SIZE);
         //game.batch.draw(boulder.getBoulderAnimation().getKeyFrame(elapsedTime, true), xCoordToPixel(boulder.getBoulderX()) + GRID_CORNER_SIZE, yCoordToPixel(boulder.getBoulderY()) + GRID_CORNER_SIZE, boulder.getBoulderLength(), boulder.getBoulderWidth());
@@ -115,5 +132,6 @@ public class MainGameScreen implements Screen {
         music.dispose();
         player.dispose();
         grid.dispose();
+
     }
 }

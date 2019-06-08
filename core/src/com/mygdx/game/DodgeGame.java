@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.com.mygdx.game.screens.MainGameScreen;
@@ -15,6 +16,7 @@ public class DodgeGame extends Game {
 	public static final int HEIGHT = 720;
 	public static final String TITLE = "Dodge";
 	public SpriteBatch batch;
+	public BitmapFont font;
 
 
 	
@@ -22,6 +24,7 @@ public class DodgeGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		this.setScreen(new MenuScreen(this));
+		font = new BitmapFont();
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import com.mygdx.game.physicalEntities.boulder;
 public class MainGameScreen implements Screen {
     Texture player;
     Texture grid;
+    Texture clock;
     TextureRegion[] animationFrames;
     Animation animation;
     float elapsedTime;
@@ -39,6 +40,7 @@ public class MainGameScreen implements Screen {
 
         player = new Texture("dodgeGuy.png");
         grid = new Texture("dodgeGrid.png");
+        clock = new Texture("timer.png");
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
@@ -93,6 +95,8 @@ public class MainGameScreen implements Screen {
         game.batch.begin();
         game.font.setColor(Color.WHITE);
         // print out the timer
+        //game.font.getData().setScale(5f);
+        game.batch.draw(clock,100, 100);
         game.font.draw(game.batch, timer.getWorldTimerString(), 100, 100);
         if(timer.getWorldTimer() <= 0){
 

@@ -17,8 +17,8 @@ public class MenuScreen implements Screen {
     private static final int EXIT_BUTTON_HEIGHT = 150;
     private static final int PLAY_BUTTON_WIDTH = 300;
     private static final int PLAY_BUTTON_HEIGHT = 150;
-    private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.2);
-    private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.6);
+    private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.1);
+    private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.4);
     private Music music;
 
     //private timer Timer;

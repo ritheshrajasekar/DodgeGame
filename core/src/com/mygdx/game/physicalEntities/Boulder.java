@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.com.mygdx.game.screens.MainGameScreen;
-import sun.applet.Main;
+
 
 public class Boulder {
     public static final int SPEED = 100;

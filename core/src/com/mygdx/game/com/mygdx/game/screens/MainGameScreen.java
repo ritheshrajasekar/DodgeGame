@@ -3,12 +3,10 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.physicalEntities.*;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainGameScreen implements Screen {
@@ -23,7 +21,7 @@ public class MainGameScreen implements Screen {
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] directions  = {"UP", "DOWN", "LEFT", "RIGHT"};
-    public static final int RESPAWN_INTERVAL = 10;
+    public static final int maxBoulders = 6;
 
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
@@ -45,7 +43,7 @@ public class MainGameScreen implements Screen {
 
         //boulder = new Boulder(randDirection);
 
-        for(int i = 0; i <= (int)(Math.random() * (3)); i++){
+        for(int i = 0; i <= (int)(maxBoulders * Math.random()); i++){
             boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
         }
         for(int i = 0; i < 2; i++){
@@ -139,7 +137,7 @@ public class MainGameScreen implements Screen {
     public void respawnBoulders(){
         boulderList.clear();
 
-        for(int i = 0; i <= (int)(Math.random()*3); i++){
+        for(int i = 0; i <= (int)(maxBoulders * Math.random()); i++){
             boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
         }
 

@@ -103,6 +103,12 @@ public class Boulder {
         batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), x, y, WIDTH, LENGTH);
     }
 
+    public int getX(){
+        return x;
+    }
 
+    public int getY(){
+        return y;
+    }
 }
 

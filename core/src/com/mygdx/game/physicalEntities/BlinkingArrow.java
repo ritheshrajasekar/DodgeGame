@@ -42,9 +42,6 @@ public class BlinkingArrow {
     public void render(SpriteBatch batch){
         float elapsedTime = 0;
         elapsedTime += Gdx.graphics.getDeltaTime();
-        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), x, y, ARROW_WIDTH, ARROW_HEIGHT);
+        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), x, y, ARROW_WIDTH, ARROW_HEIGHT); // must use the x and y to pixel coordinates here
     }
-
-
-
 }

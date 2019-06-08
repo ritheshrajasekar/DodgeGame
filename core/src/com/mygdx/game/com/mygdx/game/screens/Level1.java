@@ -128,6 +128,7 @@ public class Level1 implements Screen {
         boulderList.clear();
         for(int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
             boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));
+            new BlinkingArrow(boulderList.get(i).direction,boulderList.get(i).getX(), boulderList.get(i).getY()).render(game.batch);
         }
 
     }

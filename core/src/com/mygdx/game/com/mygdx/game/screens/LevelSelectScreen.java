@@ -16,13 +16,14 @@ public class LevelSelectScreen implements Screen {
 
     private Music music;
 
-    private TextureRegion grassBackground;
     private Texture grass;
+    public static Sprite grassBackground;
     //private timer Timer;
     public LevelSelectScreen(DodgeGame game){
         this.game = game;
-        grass = new Texture("dodgeGrassBG.png");
-        grassBackground = new TextureRegion(grass, 0 , 0, (int)(grass.getWidth() * 0.6), grass.getHeight());
+        grass = new Texture("dodgeGrassBGS.png");
+        grassBackground = new Sprite(grass);
+        grassBackground.scale(7);
         music = Gdx.audio.newMusic(Gdx.files.internal("myName.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
@@ -36,8 +37,11 @@ public class LevelSelectScreen implements Screen {
         Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        game.batch.draw(grassBackground, 0, 0, 330, 720);
-        game.batch.end();
+       //grassBackground.setPosition(DodgeGame.WIDTH / 2 - grassBackground.getWidth()/2, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        grassBackground.setPosition(DodgeGame.WIDTH/8, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+
+        grassBackground.draw(game.batch);
+         game.batch.end();
     }
     public void resize(int width, int height){
 

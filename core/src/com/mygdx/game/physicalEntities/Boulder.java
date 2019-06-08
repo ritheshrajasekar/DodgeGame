@@ -15,8 +15,8 @@ public class Boulder {
 
 
     private static Texture boulderTexture;
-    TextureRegion[] boulderAnimationFrames;
-    Animation boulderAnimation;
+    private TextureRegion[] boulderAnimationFrames;
+    private Animation boulderAnimation;
     private float elapsedTime;
     private int x, y;
     public boolean isOnScreen;

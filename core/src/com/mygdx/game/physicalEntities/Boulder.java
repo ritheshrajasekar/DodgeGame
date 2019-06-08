@@ -14,17 +14,36 @@ public class Boulder {
     public static final int WIDTH = 56;
     public static final int LENGTH = 56;
 
+
     private static Texture boulderTexture;
     TextureRegion[] boulderAnimationFrames;
     Animation boulderAnimation;
     private float elapsedTime;
-    int x, y;
+    private int x, y;
+    public boolean remove;
 
-    public boolean remove = false;
 
-    public Boulder(int dx, int dy){
-        this.x = xCoordToPixel(dx);
-        this.y = yCoordToPixel(dy);
+    public Boulder( String direction){
+        remove = false;
+        // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
+        if(direction == "UP"){
+            x = xCoordToPixel((int)(Math.random() * 8));
+            y = yCoordToPixel(0);
+        }
+        else if(direction == "DOWN"){
+            x = xCoordToPixel((int)(Math.random() * 8));
+            y = yCoordToPixel(7);
+        }
+
+        else if(direction == "LEFT"){
+            x = xCoordToPixel(7);
+            y = yCoordToPixel((int)(Math.random() * 8));
+        }
+
+        else if(direction == "RIGHT"){
+            x = xCoordToPixel(0);
+            y = yCoordToPixel((int)(Math.random() * 8));
+        }
 
         boulderTexture = new Texture("dodgeBoulder.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(boulderTexture,8,8);
@@ -50,11 +69,31 @@ public class Boulder {
         return y * PLAYER_MOVE_DISTANCE + GRID_OFFSET_Y +  GRID_CORNER_SIZE;
     }
 
-    public void update(float deltaTime){
+    public void update(float deltaTime, String direction){
         elapsedTime += Gdx.graphics.getDeltaTime();
-        x += SPEED * deltaTime;
-        if(x > (MainGameScreen.GRID_WIDTH + MainGameScreen.GRID_OFFSET_X))
-            remove = true;
+        if(direction == "RIGHT"){
+            x += SPEED * deltaTime;
+            if(x > (GRID_WIDTH + GRID_OFFSET_X ))
+                remove = true;
+        }
+
+        else if(direction == "UP"){
+            y += SPEED * deltaTime;
+            if(y > (GRID_HEIGHT + GRID_OFFSET_Y ))
+                remove = true;
+        }
+
+        else if(direction == "LEFT"){
+            x -= SPEED * deltaTime;
+            if(x < (GRID_OFFSET_X ))
+                remove = true;
+        }
+
+        else if(direction == "DOWN"){
+            y -= SPEED * deltaTime;
+            if(y < (GRID_OFFSET_Y ))
+                remove = true;
+        }
     }
 
     public void render(SpriteBatch batch){

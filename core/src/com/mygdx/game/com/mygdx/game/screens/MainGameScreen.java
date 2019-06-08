@@ -21,14 +21,15 @@ public class MainGameScreen implements Screen {
     public static final int GRID_OFFSET_X = 588;
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
+    public static final String[] directions  = {"UP", "DOWN", "LEFT", "RIGHT"};
 
     private Music music;
-    Boulder boulder;
-    DodgeGame game;
+    private Boulder boulder;
+    private DodgeGame game;
+    private String randDirection;
 
     public MainGameScreen(DodgeGame game) {
         this.game = game;
-
         grid = new Texture("dodgeGrid.png");
 
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
@@ -36,7 +37,9 @@ public class MainGameScreen implements Screen {
         music.setVolume(1f);
         music.play();
 
-        boulder = new Boulder(0, 8);
+        randDirection = directions[(int)(Math.random() * (4))];
+
+        boulder = new Boulder(randDirection);
         player = new Player();
     }
 
@@ -77,7 +80,7 @@ public class MainGameScreen implements Screen {
 
         // updates the location of the boulder
         if(!boulder.remove){
-            boulder.update(delta);
+            boulder.update(delta, randDirection);
             boulder.render(game.batch);
         } // renders the boulder
 
@@ -100,8 +103,6 @@ public class MainGameScreen implements Screen {
     }
     public void dispose(){
         music.dispose();
-        /*player.dispose();*/
         grid.dispose();
-
     }
 }

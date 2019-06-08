@@ -7,7 +7,7 @@ import com.mygdx.game.com.mygdx.game.screens.MainGameScreen;
 import sun.applet.Main;
 
 public class Boulder {
-    public static final int SPEED = 200;
+    public static final int SPEED = 100;
     public static final int DEFAULT_FOR_TEST_Y = 500;
     public static final int WIDTH = 56;
     public static final int LENGTH = 56;

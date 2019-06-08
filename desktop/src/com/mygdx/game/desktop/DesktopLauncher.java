@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.title = DodgeGame.TITLE;
 		config.width = DodgeGame.WIDTH;
 		config.height = DodgeGame.HEIGHT;
-		config.resizable = false;
+		config.resizable = true;
 	}
 }

@@ -11,9 +11,8 @@ public class BlinkingArrow {
     public static final int ARROW_WIDTH = 10;
 
     private Texture arrow;
-    private TextureRegion blinkingArrow;
-    private TextureRegion[] boulderAnimationFrames;
-    private Animation boulderAnimation;
+    private TextureRegion[] arrowAnimationFrames;
+    private Animation arrowAnimation;
 
 
     private int x, y;
@@ -23,11 +22,29 @@ public class BlinkingArrow {
         direction = d;
         x = dx;
         y = dy;
-        
-        arrow = new Texture("dodgeBoulderArrow.png");
 
+
+        arrow = new Texture("dodgeBoulderArrow.png");
+        TextureRegion[][] tmpFrames = TextureRegion.split(arrow,8,10);
+        arrowAnimationFrames = new TextureRegion[12];
+
+        int index = 0;
+        for (int i = 0; i < 1; i++){
+            for(int j = 0; j < 2; j++) {
+                arrowAnimationFrames[index++] = tmpFrames[i][j];
+            }
+        }
+
+        arrowAnimation = new Animation(1f/12f, arrowAnimationFrames);
 
     }
+
+    public void render(SpriteBatch batch){
+        float elapsedTime = 0;
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), x, y, ARROW_WIDTH, ARROW_HEIGHT);
+    }
+
 
 
 }

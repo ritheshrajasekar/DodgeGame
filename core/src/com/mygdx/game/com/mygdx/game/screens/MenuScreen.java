@@ -37,7 +37,7 @@ public class MenuScreen implements Screen {
 
     }
     public void render(float delta){
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 
@@ -62,7 +62,7 @@ public class MenuScreen implements Screen {
             if(Gdx.input.isTouched() == true){
                 music.stop();
                 this.dispose();
-                game.setScreen(new MainGameScreen(game));
+                game.setScreen(new Level1(game));
             }
         }
         else {

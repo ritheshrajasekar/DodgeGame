@@ -3,7 +3,7 @@ package com.mygdx.game.physicalEntities;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Entity {
-    private int x, y;
+    public int x, y;
 
     public void setX(int newX){
         x = newX;

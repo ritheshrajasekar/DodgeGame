@@ -46,7 +46,7 @@ public class MyTimer {
         timeCount += dt;
         if (timeCount >= 1) {
             worldTimer--;
-            worldTimerString = " " + worldTimer;
+            worldTimerString = "" + worldTimer;
             timeCount = 0;
         }
     }
@@ -61,11 +61,16 @@ public class MyTimer {
 
     public void render(SpriteBatch batch, BitmapFont font) {
         batch.begin();
-        font.setColor(Color.GREEN);
-
         batch.draw(clock,(int)(DodgeGame.WIDTH * 0.25) - 100, DodgeGame.HEIGHT/2 - 100,200 ,200 );
+
+        font.setColor(Color.GREEN);
         font.getData().setScale(4f);
-        font.draw(batch, getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 22, DodgeGame.HEIGHT/2 + 10);
+        font.draw(batch, getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 33, DodgeGame.HEIGHT/2 + 10);
+
+
+
+
+
     }
 
 

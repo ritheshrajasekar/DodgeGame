@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class BlinkingArrow {
+public class BlinkingArrow extends Entity{
     public static final int ARROW_HEIGHT = 8;
     public static final int ARROW_WIDTH = 10;
 
@@ -14,8 +14,6 @@ public class BlinkingArrow {
     private TextureRegion[] arrowAnimationFrames;
     private Animation arrowAnimation;
 
-
-    private int x, y;
     public String direction;
 
     public BlinkingArrow(String d, int dx, int dy){
@@ -35,13 +33,15 @@ public class BlinkingArrow {
             }
         }
 
-        arrowAnimation = new Animation(1f/12f, arrowAnimationFrames);
+        arrowAnimation = new Animation(1f/2f, arrowAnimationFrames);
 
     }
+
+
 
     public void render(SpriteBatch batch){
         float elapsedTime = 0;
         elapsedTime += Gdx.graphics.getDeltaTime();
-        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), x, y, ARROW_WIDTH, ARROW_HEIGHT); // must use the x and y to pixel coordinates here
+        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x), yCoordToPixel(y), ARROW_WIDTH, ARROW_HEIGHT); // must use the x and y to pixel coordinates here
     }
 }

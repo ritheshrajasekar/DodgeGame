@@ -31,13 +31,11 @@ public class Coin extends Entity{
         animation = new Animation(1f/24f,animationFrames);
     }
 
-    public void update(){
+    public void update() {
         elapsedTime += Gdx.graphics.getDeltaTime();
     }
-    public void render(SpriteBatch batch){
 
+    public void render(SpriteBatch batch){
         batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(getX()) + GRID_CORNER_SIZE, yCoordToPixel(getY()) + GRID_CORNER_SIZE, COIN_SIZE, COIN_SIZE);
     }
-
-
 }

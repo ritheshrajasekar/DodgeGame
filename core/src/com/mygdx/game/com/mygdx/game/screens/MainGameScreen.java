@@ -16,6 +16,7 @@ public class MainGameScreen implements Screen {
 
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
     public static final int PLAYER_SIZE = 56;//8*7
+    public static final int COIN_SIZE = 56; // 8*7
     public static final int GRID_WIDTH = 665;
     public static final int GRID_HEIGHT = 665;
     public static final int GRID_OFFSET_X = 588;
@@ -25,6 +26,7 @@ public class MainGameScreen implements Screen {
     public static final int RESPAWN_INTERVAL = 10;
 
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
+    private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
     private Music music;
     private DodgeGame game;
     private Texture grid;
@@ -46,6 +48,10 @@ public class MainGameScreen implements Screen {
         for(int i = 0; i <= (int)(Math.random() * (3)); i++){
             boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
         }
+        for(int i = 0; i < 2; i++){
+            coinList.add(new Coin());
+            coinList.add(new Coin());
+        }
 
         player = new Player();
     }
@@ -54,9 +60,9 @@ public class MainGameScreen implements Screen {
         timer = new MyTimer(60);
     }
 
-    public void render(float delta){
+    public void render(float delta) {
         //timer code
-        timer.update(delta);
+
 
         //creates background
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -66,10 +72,10 @@ public class MainGameScreen implements Screen {
 
 
         // print out the timer
+        timer.update(delta);
         timer.render(game.batch, game.font);
-
         //checks if time is up
-        if(timer.getWorldTimer() <= 0){
+        if (timer.getWorldTimer() <= 0) {
 
             music.stop();
             this.dispose();
@@ -81,7 +87,26 @@ public class MainGameScreen implements Screen {
 
         //update and renders the player
         player.update();
+
         player.render(game.batch);
+
+        //update Coin
+        if (timer.getWorldTimer() % 10 == 0) {
+            respawnCoin();
+
+        }
+        else {
+            for (Coin c : coinList) {
+                c.update();
+            }
+
+            for (Coin c : coinList) {
+            c.render(game.batch);
+        }
+    }
+
+
+
 
         // goes through each boulder in the list
         for(Boulder b : boulderList){
@@ -97,18 +122,27 @@ public class MainGameScreen implements Screen {
             }
         }
 
-        //coin.render(SpriteBatch batch);
-        //if(every 5 seconds, call a method that spawsns 2 new coins
-        //ends SpriteBatch
+
         game.batch.end();
     }
 
+    public void respawnCoin(){
+        coinList.clear();
+        for(int i = 0; i < 2; i++){
+            coinList.add(new Coin());
+            if(i == 1 && coinList.get(0).getxCoord() == coinList.get(1).getxCoord() && coinList.get(0).getyCoord() == coinList.get(1).getyCoord()){
+                i--;
+                coinList.remove(1);
+            }
+        }
+    }
     public void respawnBoulders(){
         boulderList.clear();
 
         for(int i = 0; i <= (int)(Math.random()*3); i++){
             boulderList.add(new Boulder(directions[(int)(Math.random()*3)]));
         }
+
     }
 
     // public void spawnCoins() - clear the arrayList of coins, and then adds 2 new coins

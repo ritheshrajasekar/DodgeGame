@@ -43,11 +43,11 @@ public class Boulder {
     }
 
     public int xCoordToPixel(int x) {
-        return x * WIDTH + GRID_OFFSET_X + GRID_CORNER_SIZE;
+        return x * PLAYER_MOVE_DISTANCE+ GRID_OFFSET_X + GRID_CORNER_SIZE;
     }
 
     public int yCoordToPixel(int y) {
-        return y * LENGTH + GRID_OFFSET_Y +  GRID_CORNER_SIZE;
+        return y * PLAYER_MOVE_DISTANCE + GRID_OFFSET_Y +  GRID_CORNER_SIZE;
     }
 
     public void update(float deltaTime){

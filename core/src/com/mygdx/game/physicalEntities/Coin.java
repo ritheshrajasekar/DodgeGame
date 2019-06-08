@@ -30,14 +30,12 @@ public class Coin {
             }
         }
 
-        animation = new Animation(1f/27f,animationFrames);
+        animation = new Animation(1f/24f,animationFrames);
     }
-    public int getxCoord(){
+    public int getX(){
         return xCoord;
     }
-    public int getyCoord(){
-        return yCoord;
-    }
+    public int getY() { return yCoord; }
     public int xCoordToPixel(int x) {
         return x * PLAYER_MOVE_DISTANCE + GRID_OFFSET_X;
     }

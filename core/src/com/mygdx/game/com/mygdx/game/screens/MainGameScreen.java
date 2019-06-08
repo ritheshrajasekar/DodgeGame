@@ -98,17 +98,7 @@ public class MainGameScreen implements Screen {
                 b.render(game.batch);
             }
 
-            else if(respawnInterval == null){
-                respawnInterval= new MyTimer(RESPAWN_INTERVAL);
-            }
-
-
-            else if(respawnInterval.getWorldTimer() >= 0){
-                respawnInterval.update(delta);
-            }
-
-            else{
-                respawnInterval = null;
+            else if(timer.getWorldTimer() % 10 == 0){
                 respawnBoulders();
             }
         }

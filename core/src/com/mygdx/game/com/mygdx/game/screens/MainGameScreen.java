@@ -22,6 +22,7 @@ public class MainGameScreen implements Screen {
     int[] playerCoord = {0, 0};
 
     private Music music;
+    private Music musicTest;
 
     DodgeGame game;
 

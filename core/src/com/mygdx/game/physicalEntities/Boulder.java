@@ -18,30 +18,31 @@ public class Boulder extends Entity {
     private Animation boulderAnimation;
     private float elapsedTime;
     public boolean isOnScreen;
-    public String direction;
+
+    private int xOffset, yOffset;
 
     public Boulder(String d){
         isOnScreen = true;
         direction = d;
 
         // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
-        if(direction == "UP"){
-            setX(xCoordToPixel((int)(Math.random() * 8)));
-            setY(yCoordToPixel(0));
+        if (direction == "UP"){
+            x = (int)(Math.random() * 8);
+            y = -1;
         }
-        else if(direction == "DOWN"){
-            setX(xCoordToPixel((int)(Math.random() * 8)));
-            setY(yCoordToPixel(7));
-        }
-
-        else if(direction == "LEFT"){
-            setX(xCoordToPixel(7));
-            setY(yCoordToPixel((int)(Math.random() * 8)));
+        else if (direction == "DOWN"){
+            x = (int)(Math.random() * 8);
+            y = 8;
         }
 
-        else if(direction == "RIGHT"){
-            setX(xCoordToPixel(0));
-            setY(yCoordToPixel((int)(Math.random() * 8)));
+        else if (direction == "LEFT"){
+            x = 8;
+            y = (int)(Math.random() * 8);
+        }
+
+        else if (direction == "RIGHT"){
+            x = -1;
+            y = (int)(Math.random() * 8);
         }
 
         boulderTexture = new Texture("dodgeBoulder.png");
@@ -50,53 +51,59 @@ public class Boulder extends Entity {
 
         int index = 0;
         for (int i = 0; i < 4; i++){
-            for(int j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {
                 boulderAnimationFrames[index++] = tmpFrames[i][j];
             }
         }
 
         boulderAnimation = new Animation(1f/12f,boulderAnimationFrames);
-
-
-    }
-
-    public int xCoordToPixel(int x) {
-        return x * PLAYER_MOVE_DISTANCE+ GRID_OFFSET_X + GRID_CORNER_SIZE;
-    }
-
-    public int yCoordToPixel(int y) {
-        return y * PLAYER_MOVE_DISTANCE + GRID_OFFSET_Y +  GRID_CORNER_SIZE;
     }
 
     public void update(float deltaTime){
         elapsedTime += Gdx.graphics.getDeltaTime();
-        if(direction == "RIGHT"){
-            setX((int) (getX() + SPEED * deltaTime));
-            if(getX() > (GRID_WIDTH + GRID_OFFSET_X ))
-                isOnScreen= false;
+        if (direction == "RIGHT"){
+            xOffset += SPEED * deltaTime;
+            if (xOffset > PLAYER_MOVE_DISTANCE) {
+                xOffset %= PLAYER_MOVE_DISTANCE;
+                x++;
+            }
+            if (x > 8)
+                isOnScreen = false;
         }
 
         else if(direction == "UP"){
-            setY((int) (getY() + SPEED * deltaTime));
-            if(getY() > (GRID_HEIGHT + GRID_OFFSET_Y ))
+            yOffset += SPEED * deltaTime;
+            if (yOffset > PLAYER_MOVE_DISTANCE) {
+                yOffset %= PLAYER_MOVE_DISTANCE;
+                y++;
+            }
+            if (y > 8)
                 isOnScreen = false;
         }
 
         else if(direction == "LEFT"){
-            setX((int) (getX() - SPEED * deltaTime));
-            if(getX() < (GRID_OFFSET_X ))
+            xOffset -= SPEED * deltaTime;
+            if (-xOffset > PLAYER_MOVE_DISTANCE) {
+                xOffset %= PLAYER_MOVE_DISTANCE;
+                x--;
+            }
+            if (x < -1)
                 isOnScreen = false;
         }
 
         else if(direction == "DOWN"){
-            setY((int) (getY() - SPEED * deltaTime));
-            if(getY() < (GRID_OFFSET_Y ))
+            yOffset -= SPEED * deltaTime;
+            if (-yOffset > PLAYER_MOVE_DISTANCE) {
+                yOffset %= PLAYER_MOVE_DISTANCE;
+                y--;
+            }
+            if (y < -1)
                 isOnScreen = false;
         }
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), getX(), getY(), WIDTH, LENGTH);
+        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, WIDTH, LENGTH);
     }
 }
 

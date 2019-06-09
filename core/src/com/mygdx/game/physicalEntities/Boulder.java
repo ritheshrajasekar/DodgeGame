@@ -9,15 +9,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Boulder extends Entity {
-    public static final int SPEED = 125;
-    public static final int WIDTH = 56;
-    public static final int LENGTH = 56;
+    public static final int SPEED = 200;
 
     private static Texture boulderTexture;
     private TextureRegion[] boulderAnimationFrames;
     private Animation boulderAnimation;
     private float elapsedTime;
     public boolean isOnScreen;
+    public boolean spawned;
 
     private int xOffset, yOffset;
 
@@ -103,7 +102,7 @@ public class Boulder extends Entity {
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, WIDTH, LENGTH);
+        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_SIZE, PLAYER_SIZE);
     }
 }
 

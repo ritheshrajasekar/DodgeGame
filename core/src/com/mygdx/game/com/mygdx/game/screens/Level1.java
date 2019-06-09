@@ -12,23 +12,21 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level1 extends Level implements Screen{
-    private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();;
-    private CopyOnWriteArrayList<BlinkingArrow> arrowList = new CopyOnWriteArrayList<BlinkingArrow>();
+    private CopyOnWriteArrayList<BoulderArrow> boulderArrowList = new CopyOnWriteArrayList<BoulderArrow>();
 
     public static final int MIN_BOULDERS = 3;
     public static final int MAX_BOULDERS = 6;
     public static final int BOULDER_SPAWN_INTERVAL = 5;
     public static final int BOULDER_SPAWN_DELAY = 2;
-    public static final int COIN_SPAWN_TIME = 10;
     private boolean bouldersSpawned;
-    private boolean coinsSpawned;
 
     public Level1(DodgeGame g) {
         game = g;
         grid = new Texture("dodgeGrid.png");
         world = "GRASS";
         level = " LEVEL 1";
+        coinSpawnInterval = 10;
 
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
@@ -134,7 +132,7 @@ public class Level1 extends Level implements Screen{
             }
             if (!inList) {
                 boulderList.add(new Boulder(x, y, direction));
-                arrowList.add(new BlinkingArrow(x, y, direction));
+                boulderArrowList.add(new BoulderArrow(x, y, direction));
                 xList.add(x);
                 yList.add(y);
             } else {
@@ -145,11 +143,11 @@ public class Level1 extends Level implements Screen{
 
     public void spawnEntities() {
         //spawns coins
-        if (timer.getWorldTimer() % COIN_SPAWN_TIME == 0 && !coinsSpawned){
+        if (timer.getWorldTimer() % coinSpawnInterval == 0 && !coinsSpawned){
             spawnCoins();
             coinsSpawned = true;
         }
-        if (timer.getWorldTimer() % COIN_SPAWN_TIME != 0){
+        if (timer.getWorldTimer() % coinSpawnInterval != 0){
             coinsSpawned = false;
         }
 
@@ -174,7 +172,7 @@ public class Level1 extends Level implements Screen{
             c.render(game.batch);
         }
 
-        //updates and renders each boulder and arrow in the list
+        //updates and renders each boulder and arrowTexture in the list
         for (int i = 0; i < boulderList.size(); i++) {
             //only updates and renders once the boulder is spawned
             if (boulderList.get(i).spawned) {
@@ -182,17 +180,17 @@ public class Level1 extends Level implements Screen{
                 if (boulderList.get(i).isOnScreen) {
                     boulderList.get(i).update(delta);
                     boulderList.get(i).render(game.batch);
-                //deletes boulder and arrow once the boulder leaves the screen
+                //deletes boulder and arrowTexture once the boulder leaves the screen
                 } else {
                     boulderList.remove(i);
-                    arrowList.remove(i);
+                    boulderArrowList.remove(i);
                     i--;
                 }
-            //if the boulder hasn't spawned yet, the arrow will blink
+            //if the boulder hasn't spawned yet, the arrowTexture will blink
             //(it will stop blinking after the boulder is spawned because it exits this else statement)
             } else {
-                arrowList.get(i).render(game.batch);
-                if (arrowList.get(i).elapsedTime > BOULDER_SPAWN_DELAY)
+                boulderArrowList.get(i).render(game.batch);
+                if (boulderArrowList.get(i).elapsedTime > BOULDER_SPAWN_DELAY)
                     boulderList.get(i).spawned = true;
             }
         }

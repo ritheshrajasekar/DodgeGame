@@ -8,22 +8,23 @@ import com.mygdx.game.DodgeGame;
 
 
 public class Timer {
-    private int worldTimer;
+    private double worldTimer;
     private String worldTimerString;
     private float timeCount;
     private Texture clock =  new Texture("timer.png");
 
-    public Timer(int time) {
+    public Timer(double time) {
         worldTimer = time;
-        worldTimerString = "" + worldTimer;
+        worldTimerString = "" + (int) worldTimer;
         timeCount = 0;
     }
 
     public void update(float dt) {
         timeCount += dt;
-        if (timeCount >= 1) {
-            worldTimer--;
-            worldTimerString = "" + worldTimer;
+        if (timeCount >= 0.1) {
+            worldTimer -= 0.1;
+            worldTimer = (Math.round(worldTimer * 10)) / 10.0;
+            worldTimerString = "" + (int) worldTimer;
             timeCount = 0;
         }
     }
@@ -32,7 +33,7 @@ public class Timer {
         return worldTimerString;
     }
 
-    public int getWorldTimer() {
+    public double getWorldTimer() {
         return worldTimer;
     }
 

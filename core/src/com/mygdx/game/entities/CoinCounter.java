@@ -27,10 +27,6 @@ public class CoinCounter {
         return coinCountString;
     }
 
-    public int getCoinCount() {
-        return coins;
-    }
-
     public void render(SpriteBatch batch, BitmapFont font) {
         batch.end();
         batch.begin();

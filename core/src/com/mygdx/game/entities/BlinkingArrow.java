@@ -10,12 +10,12 @@ public class BlinkingArrow extends Entity{
     public static final int ARROW_WIDTH = 70;//10*7
     public static final int ARROW_HEIGHT = 56;//8*7
 
-    private Texture arrow;
+    public Texture arrowTexture;
     private TextureRegion[] arrowAnimationFrames;
     private Animation arrowAnimation;
 
     private float rotation;
-    //x and y offset here are used to reposition the arrow after rotation
+    //x and y offset here are used to reposition the arrowTexture after rotation
     private int xOffset, yOffset;
 
     public float elapsedTime;
@@ -25,7 +25,7 @@ public class BlinkingArrow extends Entity{
         y = dy;
         direction = d;
 
-        //rotates arrow and shifts it in the appropriate direction
+        //rotates arrowTexture and shifts it in the appropriate direction
         if (direction == "RIGHT") {
             rotation = 0f;
             xOffset = -14;
@@ -44,8 +44,9 @@ public class BlinkingArrow extends Entity{
             yOffset = 7;
         }
 
-        arrow = new Texture("dodgeBoulderArrow.png");
-        TextureRegion[][] tmpFrames = TextureRegion.split(arrow,10,8);
+        //default texture
+        arrowTexture = new Texture("dodgeBoulderArrow.png");
+        TextureRegion[][] tmpFrames = TextureRegion.split(arrowTexture,10,8);
         arrowAnimationFrames = new TextureRegion[2];
 
         int index = 0;

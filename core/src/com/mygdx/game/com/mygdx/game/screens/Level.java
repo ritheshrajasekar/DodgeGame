@@ -3,9 +3,12 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.entities.Coin;
 import com.mygdx.game.entities.CoinCounter;
 import com.mygdx.game.entities.Timer;
 import com.mygdx.game.entities.Player;
+
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level {
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
@@ -28,4 +31,7 @@ public class Level {
     public CoinCounter coinCounter;
     public Player player;
     public int coins;
+    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
+    public int coinSpawnInterval;
+    public boolean coinsSpawned;
 }

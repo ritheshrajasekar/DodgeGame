@@ -22,6 +22,7 @@ public class Level {
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
     public static final Texture grid = new Texture("dodgeGrid.png");
+    public static int levelNum;
     //public static final Music coinSound = Gdx.audio.newMusic(Gdx.files.internal("coin.mp3"));
     //public static final Music loseSound = Gdx.audio.newMusic(Gdx.files.internal("lose.mp3"));
 

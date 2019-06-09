@@ -117,11 +117,6 @@ public class LevelSelect implements Screen {
             game.setScreen(new Level1(game));
             }
         }
-
-
-
-
-
         game.batch.draw(button2, X_VALUE_LEFTMOST, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button3, X_VALUE_LEFTMOST, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button4,X_VALUE_LEFT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE );
@@ -134,7 +129,16 @@ public class LevelSelect implements Screen {
         game.batch.draw(button11, X_VALUE_RIGHTMOST, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button12, X_VALUE_RIGHTMOST,Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(homeButton, X_VALUE_HOME_BUTTOM, Y_VALUE_HOME_BUTTON, BUTTON_SIZE, BUTTON_SIZE  );
+        if(Gdx.input.getX() < X_VALUE_HOME_BUTTOM + BUTTON_SIZE &&
+                Gdx.input.getX() > X_VALUE_HOME_BUTTOM &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_HOME_BUTTON &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + BUTTON_SIZE) {
 
+            if(Gdx.input.isTouched()){
+                this.dispose();
+                game.setScreen(new Start(game));
+            }
+        }
         game.batch.end();
     }
     public void resize(int width, int height){

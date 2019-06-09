@@ -45,7 +45,7 @@ public class Level {
     public CopyOnWriteArrayList<BoulderArrow> boulderArrowList = new CopyOnWriteArrayList<BoulderArrow>();
 
     public static Sprite BackgroundSprite;
-    public static int levelNumber = 0;
+    public static int currentLevelNumber = 0;
 
     public void show(){
         timer = new Timer(60);

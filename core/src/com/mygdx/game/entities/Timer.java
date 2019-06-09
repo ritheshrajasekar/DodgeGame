@@ -11,7 +11,7 @@ public class Timer {
     private double worldTimer;
     private String worldTimerString;
     private float timeCount;
-    private Texture clock =  new Texture("timer.png");
+    private Texture clock =  new Texture("timer2.png");
 
     public Timer(double time) {
         worldTimer = time;
@@ -43,6 +43,6 @@ public class Timer {
 
         font.setColor(Color.GREEN);
         font.getData().setScale(4f);
-        font.draw(batch, getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 35, DodgeGame.HEIGHT/2 + 10);
+        font.draw(batch, getWorldTimerString(), (int)(DodgeGame.WIDTH * 0.20) + 45, DodgeGame.HEIGHT/2 + 25);
     }
 }

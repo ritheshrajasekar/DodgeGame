@@ -10,7 +10,7 @@ import com.mygdx.game.DodgeGame;
 public class GameOver implements Screen {
     private DodgeGame game;
 
-    private Music music;
+   private Music music;
 
     private Texture levels;
     private Texture retryButton;
@@ -21,6 +21,7 @@ public class GameOver implements Screen {
         this.game = game;
         levels = new Texture("levels.jpg");
         retryButton = new Texture("retryButton.jpg");
+        music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

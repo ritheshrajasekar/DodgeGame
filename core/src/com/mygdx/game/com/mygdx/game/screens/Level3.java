@@ -7,21 +7,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
 
-public class Level1 extends Level implements Screen{
+public class Level3 extends Level implements Screen{
     Texture level1;
 
-    public Level1(DodgeGame g) {
-        currentLevelNumber = 1;
-        levelNum = 1;
+    public Level3(DodgeGame g) {
+        currentLevelNumber = 3;
+        levelNum = 3;
         game = g;
         level1 = new Texture("dodgeGrassBG.png");
 
         world = "GRASS";
-        level = " LEVEL 1";
+        level = " LEVEL 3";
         coinSpawnInterval = 10;
         minBoulders = 3;
-        maxBoulders = 6;
-        boulderSpawnInterval = 5;
+        maxBoulders = 8;
+        boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
         playMusic();
@@ -33,7 +33,7 @@ public class Level1 extends Level implements Screen{
         Gdx.gl.glClearColor(.135f, .206f, .235f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //setting the background through passing in Texture into another methof in Level which Level1 extends
+        //setting the background through passing in Texture into another method in Level which Level1 extends
         displayBackground(level1);
 
         //creates background
@@ -88,3 +88,4 @@ public class Level1 extends Level implements Screen{
 
     }
 }
+

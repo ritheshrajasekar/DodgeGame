@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.physicalEntities.*;
+import com.mygdx.game.entities.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -41,7 +41,8 @@ public class Level1 extends Level implements Screen{
     }
 
     public void show(){
-        timer = new MyTimer(60);
+        timer = new Timer(60);
+        coinCounter = new CoinCounter();
     }
 
     public void render(float delta) {
@@ -49,7 +50,7 @@ public class Level1 extends Level implements Screen{
         Gdx.gl.glClearColor(.135f, .206f, .235f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //print out the timer
+        //display timer
         timer.update(delta);
         timer.render(game.batch, game.font);
 
@@ -57,8 +58,12 @@ public class Level1 extends Level implements Screen{
         if (timer.getWorldTimer() <= 0) {
             music.stop();
             this.dispose();
-            game.setScreen(new StartScreen(game));
+            game.setScreen(new Start(game));
         }
+
+        //display coin counter
+        coinCounter.update(coins);
+        coinCounter.render(game.batch, game.font);
 
         //draws the grid
         game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
@@ -198,7 +203,7 @@ public class Level1 extends Level implements Screen{
             if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
                 //loseSound.play()
                 this.dispose();
-                game.setScreen(new StartScreen(game));
+                game.setScreen(new Start(game));
             }
         }
     }

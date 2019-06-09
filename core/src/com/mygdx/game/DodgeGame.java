@@ -3,8 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.com.mygdx.game.screens.LevelSelectScreen;
-import com.mygdx.game.com.mygdx.game.screens.StartScreen;
+import com.mygdx.game.com.mygdx.game.screens.Start;
 
 /**
  * Main game class.
@@ -22,8 +21,8 @@ public class DodgeGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		//this.setScreen(new StartScreen(this));
-        this.setScreen(new StartScreen(this) );
+		//this.setScreen(new Start(this));
+        this.setScreen(new Start(this) );
 		font = new BitmapFont();
 	}
 

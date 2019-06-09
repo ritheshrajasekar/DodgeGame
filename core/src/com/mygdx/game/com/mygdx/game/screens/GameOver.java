@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 
 public class GameOver implements Screen {
@@ -39,7 +38,7 @@ public class GameOver implements Screen {
         game.batch.draw(levels, 220, 600, 250, 50);
         if(Gdx.input.justTouched()){
             this.dispose();
-            game.setScreen(new LevelSelectScreen(game));
+            game.setScreen(new LevelSelect(game));
         }
         game.batch.draw(retryButton, 220, 400, 100, 100);
         if(Gdx.input.justTouched()){

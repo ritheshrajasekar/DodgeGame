@@ -1,4 +1,4 @@
-package com.mygdx.game.physicalEntities;
+package com.mygdx.game.entities;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 

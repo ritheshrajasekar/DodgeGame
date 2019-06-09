@@ -11,7 +11,7 @@ import com.mygdx.game.DodgeGame;
 
 import java.awt.*;
 
-public class LevelSelectScreen implements Screen {
+public class LevelSelect implements Screen {
     private DodgeGame game;
 
     private Music music;
@@ -28,7 +28,7 @@ public class LevelSelectScreen implements Screen {
     public static Sprite jungleBackground;
     public static Sprite hellBackground;
     //private timer Timer;
-    public LevelSelectScreen(DodgeGame game){
+    public LevelSelect(DodgeGame game){
         this.game = game;
         button1 = new Texture("button1.png");
         button2 = new Texture("button2.png");

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 
-public class StartScreen implements Screen {
+public class Start implements Screen {
     private DodgeGame game;
     private Texture exitButtonInactive;
     private Texture exitButtonActive;
@@ -27,7 +27,7 @@ public class StartScreen implements Screen {
 
     public static Sprite backgroundSprite;
     //private timer Timer;
-    public StartScreen(DodgeGame game){
+    public Start(DodgeGame game){
         this.game = game;
         exitButtonInactive = new Texture("exitButton.jpg");
         exitButtonActive = new Texture("exitButtonActive.jpg");
@@ -76,7 +76,7 @@ public class StartScreen implements Screen {
             if(Gdx.input.isTouched() == true){
                 music.stop();
                 this.dispose();
-                game.setScreen(new LevelSelectScreen(game));
+                game.setScreen(new LevelSelect(game));
             }
         }
         else {

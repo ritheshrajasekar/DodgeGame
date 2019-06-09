@@ -1,11 +1,11 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.physicalEntities.MyTimer;
-import com.mygdx.game.physicalEntities.Player;
+import com.mygdx.game.entities.CoinCounter;
+import com.mygdx.game.entities.Timer;
+import com.mygdx.game.entities.Player;
 
 public class Level {
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
@@ -24,7 +24,8 @@ public class Level {
     public Music music;
     public DodgeGame game;
     public Texture grid;
-    public MyTimer timer;
+    public Timer timer;
+    public CoinCounter coinCounter;
     public Player player;
     public int coins;
 }

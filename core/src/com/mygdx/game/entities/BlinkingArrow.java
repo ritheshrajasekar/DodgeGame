@@ -1,12 +1,10 @@
-package com.mygdx.game.physicalEntities;
+package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import static com.mygdx.game.com.mygdx.game.screens.Level.PLAYER_SIZE;
 
 public class BlinkingArrow extends Entity{
     public static final int ARROW_WIDTH = 70;//10*7

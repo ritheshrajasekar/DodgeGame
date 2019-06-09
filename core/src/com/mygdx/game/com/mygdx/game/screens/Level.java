@@ -17,6 +17,7 @@ public class Level {
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
 
+    public String world, level;
     public Music music;
     public DodgeGame game;
     public Texture grid;

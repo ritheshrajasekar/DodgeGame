@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.entities.*;
 
@@ -42,9 +43,19 @@ public class Level {
     public CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();;
     public CopyOnWriteArrayList<BoulderArrow> boulderArrowList = new CopyOnWriteArrayList<BoulderArrow>();
 
+    public static Sprite BackgroundSprite;
+
     public void show(){
         timer = new Timer(60);
         coinCounter = new CoinCounter();
+    }
+    public void displayBackground(Texture background){
+        BackgroundSprite = new Sprite(background);
+        BackgroundSprite.scale(7);
+        game.batch.begin();
+        BackgroundSprite.setPosition(DodgeGame.WIDTH/2 -BackgroundSprite.getWidth()/2, DodgeGame.HEIGHT/2 - BackgroundSprite.getHeight()/2);
+        BackgroundSprite.draw(game.batch);
+        game.batch.end();
     }
 
     public void playMusic() {

@@ -38,7 +38,7 @@ public class Boulder extends Entity {
         if (direction == "DOWN") {
             rotation = 180f;
         }
-        if (direction == "RIGHT") {
+        if (direction == "RIGHT ") {
             rotation = 270f;
         }
 
@@ -61,8 +61,8 @@ public class Boulder extends Entity {
         elapsedTime += Gdx.graphics.getDeltaTime();
         if (direction == "RIGHT"){
             xOffset += SPEED * deltaTime;
-            if (xOffset > PLAYER_MOVE_DISTANCE) {
-                xOffset %= PLAYER_MOVE_DISTANCE;
+            if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
+                xOffset -= PLAYER_MOVE_DISTANCE;
                 x++;
             }
             if (x > 8)
@@ -71,8 +71,8 @@ public class Boulder extends Entity {
 
         else if(direction == "UP"){
             yOffset += SPEED * deltaTime;
-            if (yOffset > PLAYER_MOVE_DISTANCE) {
-                yOffset %= PLAYER_MOVE_DISTANCE;
+            if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
+                yOffset -= PLAYER_MOVE_DISTANCE;
                 y++;
             }
             if (y > 8)
@@ -81,8 +81,8 @@ public class Boulder extends Entity {
 
         else if(direction == "LEFT"){
             xOffset -= SPEED * deltaTime;
-            if (-xOffset > PLAYER_MOVE_DISTANCE) {
-                xOffset %= PLAYER_MOVE_DISTANCE;
+            if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
+                xOffset += PLAYER_MOVE_DISTANCE;
                 x--;
             }
             if (x < -1)
@@ -91,8 +91,8 @@ public class Boulder extends Entity {
 
         else if(direction == "DOWN"){
             yOffset -= SPEED * deltaTime;
-            if (-yOffset > PLAYER_MOVE_DISTANCE) {
-                yOffset %= PLAYER_MOVE_DISTANCE;
+            if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
+                yOffset += PLAYER_MOVE_DISTANCE;
                 y--;
             }
             if (y < -1)

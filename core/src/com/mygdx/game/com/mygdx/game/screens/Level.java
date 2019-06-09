@@ -1,5 +1,6 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
@@ -16,6 +17,8 @@ public class Level {
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
+    //public static final Music coinSound = Gdx.audio.newMusic(Gdx.files.internal("coin.mp3"));
+    //public static final Music loseSound = Gdx.audio.newMusic(Gdx.files.internal("lose.mp3"));
 
     public String world, level;
     public Music music;
@@ -23,4 +26,5 @@ public class Level {
     public Texture grid;
     public MyTimer timer;
     public Player player;
+    public int coins;
 }

@@ -67,6 +67,10 @@ public class Level1 extends Level implements Screen{
         
         renderEntities(delta);
 
+        detectCollision();
+
+        detectCoin();
+
         game.font.setColor(Color.PURPLE);
         game.font.getData().setScale(4f);
         game.font.draw(game.batch, world, (int)(DodgeGame.WIDTH * 0.07) , DodgeGame.HEIGHT/2 + 300);
@@ -185,6 +189,26 @@ public class Level1 extends Level implements Screen{
                 arrowList.get(i).render(game.batch);
                 if (arrowList.get(i).elapsedTime > BOULDER_SPAWN_DELAY)
                     boulderList.get(i).spawned = true;
+            }
+        }
+    }
+
+    public void detectCollision() {
+        for (int i = 0; i < boulderList.size(); i++) {
+            if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
+                //loseSound.play()
+                this.dispose();
+                game.setScreen(new StartScreen(game));
+            }
+        }
+    }
+
+    public void detectCoin() {
+        for (int i = 0; i < coinList.size(); i++) {
+            if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
+                coins++;
+                //coinSound.play();
+                coinList.remove(i);
             }
         }
     }

@@ -10,19 +10,17 @@ import com.mygdx.game.physicalEntities.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level1 extends Level implements Screen{
+    private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
+    private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
 
     public static final int MAX_BOULDERS = 6;
-    public static final String WORLD = "GRASS";
-    public static final String LEVEL = " LEVEL 1";
-
-    private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
-    private CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
-
     private boolean bouldersSpawned;
 
     public Level1(DodgeGame g) {
         game = g;
         grid = new Texture("dodgeGrid.png");
+        world = "GRASS";
+        level = " LEVEL 1";
 
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
@@ -47,7 +45,6 @@ public class Level1 extends Level implements Screen{
 
         //checks if time is up
         if (timer.getWorldTimer() <= 0) {
-
             music.stop();
             this.dispose();
             game.setScreen(new StartScreen(game));
@@ -61,10 +58,9 @@ public class Level1 extends Level implements Screen{
 
         player.render(game.batch);
 
-        //update Coin
+        //spawns coins
         if (timer.getWorldTimer() % 10 == 0) {
-            respawnCoin();
-
+            spawnCoin();
         }
         else {
             for (Coin c : coinList) {
@@ -76,8 +72,9 @@ public class Level1 extends Level implements Screen{
             }
         }
 
+        //spawns boulders
         if (timer.getWorldTimer() % 5 == 0 && !bouldersSpawned){
-            respawnBoulders();
+            spawnBoulders();
             bouldersSpawned = true;
         }
         if (timer.getWorldTimer() % 5 != 0){
@@ -96,12 +93,12 @@ public class Level1 extends Level implements Screen{
 
         game.font.setColor(Color.PURPLE);
         game.font.getData().setScale(4f);
-        game.font.draw(game.batch, WORLD, (int)(DodgeGame.WIDTH * 0.07) , DodgeGame.HEIGHT/2 + 300);
-        game.font.draw(game.batch, LEVEL, (int)(DodgeGame.WIDTH * 0.25) , DodgeGame.HEIGHT/2 + 300);
+        game.font.draw(game.batch, world, (int)(DodgeGame.WIDTH * 0.07) , DodgeGame.HEIGHT/2 + 300);
+        game.font.draw(game.batch, level, (int)(DodgeGame.WIDTH * 0.25) , DodgeGame.HEIGHT/2 + 300);
         game.batch.end();
     }
 
-    public void respawnCoin(){
+    public void spawnCoin(){
         coinList.clear();
         for (int i = 0; i < 2; i++){
             coinList.add(new Coin());
@@ -112,7 +109,7 @@ public class Level1 extends Level implements Screen{
         }
     }
 
-    public void respawnBoulders(){
+    public void spawnBoulders(){
         boulderList.clear();
         for (int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
             boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random()*3)]));

@@ -18,30 +18,28 @@ public class Boulder extends Entity {
     public boolean isOnScreen;
     public boolean spawned;
 
+    //x and y offset here are used to animate the movement of the boulder
     private int xOffset, yOffset;
+    private float rotation;
 
-    public Boulder(String d){
+    public Boulder(int dx, int dy, String d){
         isOnScreen = true;
+        x = dx;
+        y = dy;
         direction = d;
 
-        // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
-        if (direction == "UP"){
-            x = (int)(Math.random() * 8);
-            y = -1;
+        //rotates boulder
+        if (direction == "UP") {
+            rotation = 0f;
         }
-        else if (direction == "DOWN"){
-            x = (int)(Math.random() * 8);
-            y = 8;
+        if (direction == "LEFT") {
+            rotation = 90f;
         }
-
-        else if (direction == "LEFT"){
-            x = 8;
-            y = (int)(Math.random() * 8);
+        if (direction == "DOWN") {
+            rotation = 180f;
         }
-
-        else if (direction == "RIGHT"){
-            x = -1;
-            y = (int)(Math.random() * 8);
+        if (direction == "RIGHT") {
+            rotation = 270f;
         }
 
         boulderTexture = new Texture("dodgeBoulder.png");
@@ -58,6 +56,7 @@ public class Boulder extends Entity {
         boulderAnimation = new Animation(1f/12f,boulderAnimationFrames);
     }
 
+    //boulder movement
     public void update(float deltaTime){
         elapsedTime += Gdx.graphics.getDeltaTime();
         if (direction == "RIGHT"){
@@ -102,7 +101,7 @@ public class Boulder extends Entity {
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_SIZE, PLAYER_SIZE);
+        batch.draw(boulderAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_SIZE / 2, PLAYER_SIZE / 2, PLAYER_SIZE, PLAYER_SIZE, 1, 1, rotation);
     }
 }
 

@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.physicalEntities.*;
+
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level1 extends Level implements Screen{
@@ -14,6 +16,7 @@ public class Level1 extends Level implements Screen{
     private CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();;
     private CopyOnWriteArrayList<BlinkingArrow> arrowList = new CopyOnWriteArrayList<BlinkingArrow>();
 
+    public static final int MIN_BOULDERS = 3;
     public static final int MAX_BOULDERS = 6;
     public static final int BOULDER_SPAWN_INTERVAL = 5;
     public static final int BOULDER_SPAWN_DELAY = 2;
@@ -84,11 +87,50 @@ public class Level1 extends Level implements Screen{
 
     //spawns boulders and blinking arrows
     public void spawnBoulders(){
-        for (int i = 0; i <= (int)(MAX_BOULDERS * Math.random()); i++){
-            boulderList.add(new Boulder(DIRECTIONS[(int)(Math.random() * 4)]));
-            arrowList.add(new BlinkingArrow(boulderList.get(i).direction, boulderList.get(i).x, boulderList.get(i).y));
-            //debugging arrow position
-            System.out.println(arrowList.get(i).x + ", " + arrowList.get(i).y);
+        //x and y lists to test if it's trying spawn a boulder where one already exists
+        ArrayList<Integer> xList = new ArrayList<Integer>();
+        ArrayList<Integer> yList = new ArrayList<Integer>();
+
+        for (int i = 0; i < (int)((MAX_BOULDERS - MIN_BOULDERS + 1) * Math.random() + MIN_BOULDERS); i++){
+            int x = 0;
+            int y = 0;
+            String direction = DIRECTIONS[(int)(Math.random() * 4)];
+
+            // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
+            if (direction == "UP"){
+                x = (int)(Math.random() * 8);
+                y = -1;
+            }
+            else if (direction == "DOWN"){
+                x = (int)(Math.random() * 8);
+                y = 8;
+            }
+            else if (direction == "LEFT"){
+                x = 8;
+                y = (int)(Math.random() * 8);
+            }
+            else if (direction == "RIGHT"){
+                x = -1;
+                y = (int)(Math.random() * 8);
+            }
+
+            //does not create a boulder if one is already there
+            boolean inList = false;
+            for (int tempX : xList) {
+                for (int tempY : yList) {
+                    if (x == tempX && y == tempY) {
+                        inList = true;
+                    }
+                }
+            }
+            if (!inList) {
+                boulderList.add(new Boulder(x, y, direction));
+                arrowList.add(new BlinkingArrow(x, y, direction));
+                xList.add(x);
+                yList.add(y);
+            } else {
+                i--;
+            }
         }
     }
 
@@ -145,13 +187,6 @@ public class Level1 extends Level implements Screen{
                     boulderList.get(i).spawned = true;
             }
         }
-
-        //debugging blinking arrow positions
-        /*String arrowCoords = "";
-        for (int i = 0; i < arrowList.size(); i++) {
-            arrowCoords += "(" + arrowList.get(i).x + "," + arrowList.get(i).y + ") ";
-        }
-        System.out.println(arrowCoords);*/
     }
 
     public void resize(int width, int height){

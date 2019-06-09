@@ -9,19 +9,42 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level.PLAYER_SIZE;
 
 public class BlinkingArrow extends Entity{
-    public static final int ARROW_HEIGHT = 56;//8*7
     public static final int ARROW_WIDTH = 70;//10*7
+    public static final int ARROW_HEIGHT = 56;//8*7
 
     private Texture arrow;
     private TextureRegion[] arrowAnimationFrames;
     private Animation arrowAnimation;
 
-    public float elapsedTime = 0;
+    private float rotation;
+    //x and y offset here are used to reposition the arrow after rotation
+    private int xOffset, yOffset;
 
-    public BlinkingArrow(String d, int dx, int dy){
-        direction = d;
+    public float elapsedTime;
+
+    public BlinkingArrow(int dx, int dy, String d){
         x = dx;
         y = dy;
+        direction = d;
+
+        //rotates arrow and shifts it in the appropriate direction
+        if (direction == "RIGHT") {
+            rotation = 0f;
+            xOffset = -14;
+        }
+        if (direction == "UP") {
+            rotation = 90f;
+            xOffset = -7;
+            yOffset = -7;
+        }
+        if (direction == "LEFT") {
+            rotation = 180f;
+        }
+        if (direction == "DOWN") {
+            rotation = 270f;
+            xOffset = -7;
+            yOffset = 7;
+        }
 
         arrow = new Texture("dodgeBoulderArrow.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(arrow,10,8);
@@ -39,6 +62,6 @@ public class BlinkingArrow extends Entity{
 
     public void render(SpriteBatch batch){
         elapsedTime += Gdx.graphics.getDeltaTime();
-        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x), yCoordToPixel(y), ARROW_WIDTH, ARROW_HEIGHT); // must use the x and y to pixel coordinates here
+        batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, ARROW_WIDTH / 2, ARROW_HEIGHT / 2, ARROW_WIDTH, ARROW_HEIGHT, 1, 1, rotation); // must use the x and y to pixel coordinates here
     }
 }

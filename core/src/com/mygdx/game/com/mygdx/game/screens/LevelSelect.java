@@ -56,8 +56,20 @@ public class LevelSelect implements Screen {
     public LevelSelect(DodgeGame game){
         JSONHelper helper = new JSONHelper();
         this.game = game;
-        button1 = new Texture("button1.png");
-        button2 = new Texture("button2.png");
+        button1 = new Texture("buttonNum1.png");
+        button2 = new Texture("buttonNum2.png");
+        button3 = new Texture("buttonNum3.png");
+        button4 = new Texture("buttonNum4.png");
+        button5 = new Texture("buttonNum5.png");
+        button6 = new Texture("buttonNum6.png");
+        button7 = new Texture("buttonNum7.png");
+        button8 = new Texture("buttonNum8.png");
+        button9 = new Texture("buttonNum9.png");
+        button10 = new Texture("buttonNum10.png");
+        button11= new Texture("buttonNum11.png");
+        button12= new Texture("buttonNum12.png");
+        homeButton = new Texture("homeButton.png");
+
         grass = new Texture("dodgeGrassBGS.png");
         grassBackground = new Sprite(grass);
         grassBackground.scale(7);
@@ -102,7 +114,7 @@ public class LevelSelect implements Screen {
         if(Gdx.input.getX() < X_VALUE_LEFTMOST + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_LEFTMOST &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_TOP  &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_TOP + BUTTON_SIZE) {
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_TOP + BUTTON_SIZE && helper.read("LEVEL", "LEVEL1", false).equals("TRUE")){
 
             if(Gdx.input.isTouched()){
               this.dispose();

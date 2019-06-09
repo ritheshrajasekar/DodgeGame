@@ -3,7 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.com.mygdx.game.screens.GameOver;
 import com.mygdx.game.com.mygdx.game.screens.Start;
+import com.mygdx.game.com.mygdx.game.screens.WonLevel;
 
 /**
  * Main game class.

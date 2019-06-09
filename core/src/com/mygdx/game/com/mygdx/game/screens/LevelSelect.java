@@ -38,6 +38,17 @@ public class LevelSelect implements Screen {
     public static Sprite sandBackground;
     public static Sprite jungleBackground;
     public static Sprite hellBackground;
+
+    public static final int X_VALUE_LEFTMOST = 100;
+    public static final int X_VALUE_LEFT = 430;
+    public static final int X_VALUE_RIGHT = 750;
+    public static final int X_VALUE_RIGHTMOST = 1070;
+    public static final int Y_VALUE_TOP =  600;
+    public static final int Y_VALUE_MIDDLE = 350;
+    public static final int Y_VALUE_BOTTOM = 100;
+    public static final int X_VALUE_HOME_BUTTOM = 1180;
+    public static final int Y_VALUE_HOME_BUTTON = 0;
+    public static final int BUTTON_SIZE = 100;
     //private timer Timer;
     public LevelSelect(DodgeGame game){
         this.game = game;
@@ -95,23 +106,35 @@ public class LevelSelect implements Screen {
         hellBackground.setPosition(DodgeGame.WIDTH/8 + 320 + 320 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
         hellBackground.draw(game.batch);
 
-        game.batch.draw(button1, 110, 600, 100, 100);
-        game.batch.draw(button2, 110, 350, 100, 100);
-        game.batch.draw(button3, 110, 100, 100, 100);
-        game.batch.draw(button4,430, 600, 100, 100 );
-        game.batch.draw(button5, 430, 350, 100, 100);
-        game.batch.draw(button6, 430, 100, 100, 100);
-        game.batch.draw(button7, 750, 600, 100, 100);
-        game.batch.draw(button8, 750,350, 100, 100);
-        game.batch.draw(button9, 750, 100, 100, 100);
-        game.batch.draw(button10, 1070, 600, 100, 100);
-        game.batch.draw(button11, 1070, 350, 100, 100);
-        game.batch.draw(button12, 1070,100, 100, 100);
-        game.batch.draw(homeButton, 1180, 0, 100, 100  );
-        if(Gdx.input.justTouched()){
-            this.dispose();
+        game.batch.draw(button1, X_VALUE_LEFTMOST, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE);
+        if(Gdx.input.getX() < X_VALUE_LEFTMOST + BUTTON_SIZE &&
+                Gdx.input.getX() > X_VALUE_LEFTMOST &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_TOP  &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_TOP + BUTTON_SIZE) {
+
+            if(Gdx.input.isTouched()){
+              this.dispose();
             game.setScreen(new Level1(game));
+            }
         }
+
+
+
+
+
+        game.batch.draw(button2, X_VALUE_LEFTMOST, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button3, X_VALUE_LEFTMOST, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button4,X_VALUE_LEFT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE );
+        game.batch.draw(button5, X_VALUE_LEFT, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button6, X_VALUE_LEFT, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button7, X_VALUE_RIGHT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button8, X_VALUE_RIGHT,Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button9, X_VALUE_RIGHT, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button10, X_VALUE_RIGHTMOST, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button11, X_VALUE_RIGHTMOST, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(button12, X_VALUE_RIGHTMOST,Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(homeButton, X_VALUE_HOME_BUTTOM, Y_VALUE_HOME_BUTTON, BUTTON_SIZE, BUTTON_SIZE  );
+
         game.batch.end();
     }
     public void resize(int width, int height){

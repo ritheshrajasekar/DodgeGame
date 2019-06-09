@@ -22,6 +22,17 @@ public class LevelSelect implements Screen {
     private Texture hell;
     private Texture button1;
     private Texture button2;
+    private Texture button3;
+    private Texture button4;
+    private Texture button5;
+    private Texture button6;
+    private Texture button7;
+    private Texture button8;
+    private Texture button9;
+    private Texture button10;
+    private Texture button11;
+    private Texture button12;
+    private Texture homeButton;
 
     public static Sprite grassBackground;
     public static Sprite sandBackground;
@@ -30,8 +41,20 @@ public class LevelSelect implements Screen {
     //private timer Timer;
     public LevelSelect(DodgeGame game){
         this.game = game;
-        button1 = new Texture("button1.png");
-        button2 = new Texture("button2.png");
+        button1 = new Texture("buttonNum1.png");
+        button2 = new Texture("buttonNum2.png");
+        button3 = new Texture("buttonNum3.png");
+        button4 = new Texture("buttonNum4.png");
+        button5 = new Texture("buttonNum5.png");
+        button6 = new Texture("buttonNum6.png");
+        button7 = new Texture("buttonNum7.png");
+        button8 = new Texture("buttonNum8.png");
+        button9 = new Texture("buttonNum9.png");
+        button10 = new Texture("buttonNum10.png");
+        button11= new Texture("buttonNum11.png");
+        button12= new Texture("buttonNum12.png");
+        homeButton = new Texture("homeButton.png");
+
         grass = new Texture("dodgeGrassBGS.png");
         grassBackground = new Sprite(grass);
         grassBackground.scale(7);
@@ -72,12 +95,23 @@ public class LevelSelect implements Screen {
         hellBackground.setPosition(DodgeGame.WIDTH/8 + 320 + 320 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
         hellBackground.draw(game.batch);
 
-        game.batch.draw(button1, 220, 600, 100, 100);
+        game.batch.draw(button1, 110, 600, 100, 100);
+        game.batch.draw(button2, 110, 350, 100, 100);
+        game.batch.draw(button3, 110, 100, 100, 100);
+        game.batch.draw(button4,430, 600, 100, 100 );
+        game.batch.draw(button5, 430, 350, 100, 100);
+        game.batch.draw(button6, 430, 100, 100, 100);
+        game.batch.draw(button7, 750, 600, 100, 100);
+        game.batch.draw(button8, 750,350, 100, 100);
+        game.batch.draw(button9, 750, 100, 100, 100);
+        game.batch.draw(button10, 1070, 600, 100, 100);
+        game.batch.draw(button11, 1070, 350, 100, 100);
+        game.batch.draw(button12, 1070,100, 100, 100);
+        game.batch.draw(homeButton, 1180, 0, 100, 100  );
         if(Gdx.input.justTouched()){
             this.dispose();
             game.setScreen(new Level1(game));
         }
-        game.batch.draw(button2, 220, 400, 100, 100);
         game.batch.end();
     }
     public void resize(int width, int height){

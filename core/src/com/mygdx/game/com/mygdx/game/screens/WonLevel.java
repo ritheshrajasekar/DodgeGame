@@ -8,30 +8,30 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 
-public class GameOver implements Screen {
+public class WonLevel implements Screen {
     private DodgeGame game;
 
-   private Music music;
+    private Music music;
 
     private Texture levelSelectButton;
-    private Texture retryButton;
-    private Texture gameOverBackground;
+    private Texture nextButton;
+    private Texture wonLevelBackground;
     private static final int BUTTON_SIZE = 300;
-    private static final int XVALUE_RETRY_LEVEL = (int)(DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2 ;
+    private static final int XVALUE_NEXT_LEVEL = (int)(DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2 ;
     private static final int XVALUE_SELECT_LEVEL = (int)(DodgeGame.WIDTH * 0.75) - BUTTON_SIZE / 2;
-    private static final int YVALUE_RETRY_LEVEL = 100;
+    private static final int YVALUE_NEXT_LEVEL= 100;
     private static final int YVALUE_SELECT_LEVEL = 100;
 
-    public static Sprite gameOverBackgroundSprite;
+    public static Sprite wonLevelBackgroundSprite;
 
     //private timer Timer;
-    public GameOver(DodgeGame game){
+    public WonLevel(DodgeGame game){
         this.game = game;
         levelSelectButton = new Texture("levelSelectButton.png");
-        retryButton = new Texture("retryLevel.png");
-        gameOverBackground = new Texture("gameOverBackground.png");
-        gameOverBackgroundSprite = new Sprite(gameOverBackground);
-        gameOverBackgroundSprite.scale(7);
+        nextButton = new Texture("nextLevel.png");
+        wonLevelBackground = new Texture("completeLevelBackground.png");
+        wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
+        wonLevelBackgroundSprite.scale(7);
         music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
@@ -45,13 +45,13 @@ public class GameOver implements Screen {
         Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        gameOverBackgroundSprite.setPosition(DodgeGame.WIDTH/2 - gameOverBackgroundSprite.getWidth()/2,DodgeGame.HEIGHT/2 - gameOverBackgroundSprite.getHeight()/2);
-        gameOverBackgroundSprite.draw(game.batch);
-        game.batch.draw(retryButton, XVALUE_RETRY_LEVEL, YVALUE_RETRY_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
-        if(Gdx.input.getX() < XVALUE_RETRY_LEVEL + BUTTON_SIZE &&
-                Gdx.input.getX() > XVALUE_RETRY_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_RETRY_LEVEL  &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < YVALUE_RETRY_LEVEL + BUTTON_SIZE ){
+        wonLevelBackgroundSprite.setPosition(DodgeGame.WIDTH/2 - wonLevelBackgroundSprite.getWidth()/2,DodgeGame.HEIGHT/2 - wonLevelBackgroundSprite.getHeight()/2);
+        wonLevelBackgroundSprite.draw(game.batch);
+        game.batch.draw(nextButton, XVALUE_NEXT_LEVEL, YVALUE_NEXT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        if(Gdx.input.getX() < XVALUE_NEXT_LEVEL + BUTTON_SIZE &&
+                Gdx.input.getX() >XVALUE_NEXT_LEVEL&&
+                DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_NEXT_LEVEL  &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < YVALUE_NEXT_LEVEL + BUTTON_SIZE ){
 
             if(Gdx.input.isTouched()){
                 this.dispose();
@@ -70,6 +70,16 @@ public class GameOver implements Screen {
             }
         }
 
+        //  game.batch.draw(levels, 220, 600, 250, 50);
+      /*  if(Gdx.input.justTouched()){
+            this.dispose();
+            game.setScreen(new LevelSelect(game));
+        }
+        game.batch.draw(retryButton, 220, 400, 100, 100);
+        if(Gdx.input.justTouched()){
+            this.dispose();
+            game.setScreen(new Level1(game));
+        }*/
         game.batch.end();
     }
     public void resize(int width, int height){
@@ -88,3 +98,4 @@ public class GameOver implements Screen {
         music.dispose();
     }
 }
+

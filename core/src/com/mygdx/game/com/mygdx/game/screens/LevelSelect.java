@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.JSONHelper;
+
 
 import java.awt.*;
 
@@ -22,13 +24,14 @@ public class LevelSelect implements Screen {
     private Texture hell;
     private Texture button1;
     private Texture button2;
-
+    JSONHelper helper = new JSONHelper();
     public static Sprite grassBackground;
     public static Sprite sandBackground;
     public static Sprite jungleBackground;
     public static Sprite hellBackground;
     //private timer Timer;
     public LevelSelect(DodgeGame game){
+        JSONHelper helper = new JSONHelper();
         this.game = game;
         button1 = new Texture("button1.png");
         button2 = new Texture("button2.png");
@@ -73,7 +76,7 @@ public class LevelSelect implements Screen {
         hellBackground.draw(game.batch);
 
         game.batch.draw(button1, 220, 600, 100, 100);
-        if(Gdx.input.justTouched()){
+        if(Gdx.input.justTouched() && helper.read("LEVEL", "LEVEL1", false).equals("TRUE")){
             this.dispose();
             game.setScreen(new Level1(game));
         }

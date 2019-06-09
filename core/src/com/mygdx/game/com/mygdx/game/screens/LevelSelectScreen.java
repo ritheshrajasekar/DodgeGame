@@ -17,13 +17,33 @@ public class LevelSelectScreen implements Screen {
     private Music music;
 
     private Texture grass;
+    private Texture sand;
+    private Texture jungle;
+    private Texture hell;
+    private Texture button1;
+    private Texture button2;
+
     public static Sprite grassBackground;
+    public static Sprite sandBackground;
+    public static Sprite jungleBackground;
+    public static Sprite hellBackground;
     //private timer Timer;
     public LevelSelectScreen(DodgeGame game){
         this.game = game;
+        button1 = new Texture("button1.png");
+        button2 = new Texture("button2.png");
         grass = new Texture("dodgeGrassBGS.png");
         grassBackground = new Sprite(grass);
         grassBackground.scale(7);
+        sand = new Texture("dodgeGrassBGS.png");
+        sandBackground = new Sprite(sand);
+        sandBackground.scale(7);
+        jungle = new Texture("dodgeGrassBGS.png");
+        jungleBackground = new Sprite(jungle);
+        jungleBackground.scale(7);
+        hell = new Texture("dodgeGrassBGS.png");
+        hellBackground = new Sprite(hell);
+       hellBackground.scale(7);
         music = Gdx.audio.newMusic(Gdx.files.internal("myName.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
@@ -39,9 +59,26 @@ public class LevelSelectScreen implements Screen {
         game.batch.begin();
        //grassBackground.setPosition(DodgeGame.WIDTH / 2 - grassBackground.getWidth()/2, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
         grassBackground.setPosition(DodgeGame.WIDTH/8, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
-
         grassBackground.draw(game.batch);
-         game.batch.end();
+
+        sandBackground.setPosition(DodgeGame.WIDTH/8 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        sandBackground.draw(game.batch);
+
+
+        jungleBackground.setPosition(DodgeGame.WIDTH/8 + 320 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        jungleBackground.draw(game.batch);
+
+
+        hellBackground.setPosition(DodgeGame.WIDTH/8 + 320 + 320 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        hellBackground.draw(game.batch);
+
+        game.batch.draw(button1, 220, 600, 100, 100);
+        if(Gdx.input.justTouched()){
+            this.dispose();
+            game.setScreen(new Level1(game));
+        }
+        game.batch.draw(button2, 220, 400, 100, 100);
+        game.batch.end();
     }
     public void resize(int width, int height){
 

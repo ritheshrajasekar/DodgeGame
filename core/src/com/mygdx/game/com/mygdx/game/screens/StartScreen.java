@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 
-import java.awt.*;
-
 public class StartScreen implements Screen {
     private DodgeGame game;
     private Texture exitButtonInactive;
@@ -28,7 +26,6 @@ public class StartScreen implements Screen {
     private Music music;
 
     public static Sprite backgroundSprite;
-
     //private timer Timer;
     public StartScreen(DodgeGame game){
         this.game = game;
@@ -59,9 +56,9 @@ public class StartScreen implements Screen {
 
 
         if(Gdx.input.getX() < DodgeGame.WIDTH/2  + EXIT_BUTTON_WIDTH /2 &&
-            Gdx.input.getX() > DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2 &&
-                 DodgeGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_YVALUE  &&
-             DodgeGame.HEIGHT - Gdx.input.getY() < EXIT_BUTTON_YVALUE + EXIT_BUTTON_HEIGHT) {
+                Gdx.input.getX() > DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2 &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_YVALUE  &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < EXIT_BUTTON_YVALUE + EXIT_BUTTON_HEIGHT) {
             game.batch.draw(exitButtonActive, DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2,EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
             if(Gdx.input.isTouched() ==true){
                 Gdx.app.exit();
@@ -79,19 +76,13 @@ public class StartScreen implements Screen {
             if(Gdx.input.isTouched() == true){
                 music.stop();
                 this.dispose();
-                game.setScreen(new Level1(game));
+                game.setScreen(new LevelSelectScreen(game));
             }
         }
         else {
             game.batch.draw(playButtonInactive, DodgeGame.WIDTH/2 - PLAY_BUTTON_WIDTH/2,PLAY_BUTTON_YVALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
 
         }
-        //System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
-
-        //game.batch.draw(exitButtonInactive, DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2,EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-        //game.batch.draw(playButtonInactive, 0, 0, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-
-        //game.batch.draw(playButtonInactive, DodgeGame.WIDTH/2 - PLAY_BUTTON_WIDTH/2, PLAY_BUTTON_YVALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
 
         game.batch.end();
     }

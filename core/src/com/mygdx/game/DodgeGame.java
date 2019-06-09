@@ -23,7 +23,7 @@ public class DodgeGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		//this.setScreen(new StartScreen(this));
-        this.setScreen(new LevelSelectScreen(this) );
+        this.setScreen(new StartScreen(this) );
 		font = new BitmapFont();
 	}
 

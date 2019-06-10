@@ -88,7 +88,6 @@ public class JSONHelper {
         String currentKey;
 
 
-
         try {
             Object inpFileObject = parser.parse(new FileReader(myFileLocation));
             //parsing the JSON string inside the file that we created earlier.

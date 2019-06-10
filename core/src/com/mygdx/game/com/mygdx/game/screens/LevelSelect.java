@@ -36,6 +36,10 @@ public class LevelSelect implements Screen {
     private Texture button11;
     private Texture button12;
     private Texture homeButton;
+    private Texture oneStar;
+    private Texture zeroStar;
+    private Texture twoStar;
+    private Texture threeStar;
 
     public static Sprite grassBackground;
     public static Sprite sandBackground;
@@ -81,6 +85,10 @@ public class LevelSelect implements Screen {
         button11= new Texture("buttonNum11.png");
         button12= new Texture("buttonNum12.png");
         homeButton = new Texture("homeButton.png");
+        zeroStar = new Texture("dodge0Star.png");
+        oneStar = new Texture("dodge1Star.png");
+        twoStar = new Texture("dodge2Star.png");
+        threeStar = new Texture("dodge3Star.png");
 
         grass = new Texture("dodgeGrassBGS.png");
         grassBackground = new Sprite(grass);
@@ -208,26 +216,37 @@ public class LevelSelect implements Screen {
         if(level1Coins != null){
             //display 0 star for the level1 button
             if(Integer.parseInt(level1Coins) == 0){
-
+            game.batch.begin();
+            game.batch.draw(zeroStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
+            game.batch.end();
             }
             //display 1 star for the level1 button
-            else if(Integer.parseInt(level1Coins) < 5){
-
+            else if(Integer.parseInt(level1Coins) < 5) {
+                game.batch.begin();
+                game.batch.draw(oneStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
+                game.batch.end();
             }
             //display 2 stars for the level1 button
             else if((Integer.parseInt(level1Coins) < 9)){
-
+                    game.batch.begin();
+                    game.batch.draw(twoStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
+                    game.batch.end();
             }
             //display 3 stars for the level1 button
             else{
-
+                    game.batch.begin();
+                    game.batch.draw(threeStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
+                    game.batch.end();
+                }
             }
-        }
 
-        else if(level2Coins != null){
+
+        /*else if(level2Coins != null){
             //display 0 star for the level2 button
             if(Integer.parseInt(level2Coins) == 0){
-
+                game.batch.begin();
+                game.batch.draw(oneStar, X_VALUE_LEFTMOST, Y_VALUE_MIDDLE+ 50);
+                game.batch.end();
             }
             //display 1 star for the level2 button
             else if(Integer.parseInt(level2Coins) < 5){
@@ -246,7 +265,9 @@ public class LevelSelect implements Screen {
         else if(level3Coins != null){
             //display 0 star for the level3 button
             if(Integer.parseInt(level3Coins) == 0){
-
+                game.batch.begin();
+                game.batch.draw(oneStar, X_VALUE_LEFTMOST, Y_VALUE_BOTTOM + 50);
+                game.batch.end();
             }
             //display 1 star for the level3 button
             else if(Integer.parseInt(level3Coins) < 5){
@@ -430,9 +451,9 @@ public class LevelSelect implements Screen {
             //display 3 stars for the level12 button
             else{
 
-            }
+            }*/
         }
-    }
+
     public void resize(int width, int height){
 
     }

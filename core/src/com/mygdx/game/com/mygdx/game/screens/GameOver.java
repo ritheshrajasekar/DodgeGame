@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.GameLevelManager;
+
+import static com.mygdx.game.com.mygdx.game.screens.Level.currentLevelNumber;
 
 public class GameOver implements Screen {
     private DodgeGame game;
@@ -37,6 +40,7 @@ public class GameOver implements Screen {
         music.setVolume(1f);
         music.play();
     }
+
     public void show(){
 
     }
@@ -48,6 +52,7 @@ public class GameOver implements Screen {
         gameOverBackgroundSprite.setPosition(DodgeGame.WIDTH/2 - gameOverBackgroundSprite.getWidth()/2,DodgeGame.HEIGHT/2 - gameOverBackgroundSprite.getHeight()/2);
         gameOverBackgroundSprite.draw(game.batch);
         game.batch.draw(retryButton, XVALUE_RETRY_LEVEL, YVALUE_RETRY_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        //sees if the retry button is clicked, and if it is, calls GameLevelManager.retry() which retries the level
         if(Gdx.input.getX() < XVALUE_RETRY_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > XVALUE_RETRY_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_RETRY_LEVEL  &&
@@ -55,10 +60,11 @@ public class GameOver implements Screen {
 
             if(Gdx.input.isTouched()){
                 this.dispose();
-                game.setScreen(new Level1(game));
+                new GameLevelManager().retry(game, currentLevelNumber);
             }
         }
         game.batch.draw(levelSelectButton, XVALUE_SELECT_LEVEL, YVALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        //sees is the level select button is selected.
         if(Gdx.input.getX() < XVALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > XVALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_SELECT_LEVEL  &&
@@ -66,7 +72,7 @@ public class GameOver implements Screen {
 
             if(Gdx.input.isTouched()){
                 this.dispose();
-                game.setScreen(new Level1(game));
+                game.setScreen(new LevelSelect(game));
             }
         }
 

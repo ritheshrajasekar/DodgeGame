@@ -48,7 +48,7 @@ public class Level {
     public static int currentLevelNumber = 0;
 
     public void show(){
-        timer = new Timer(3);
+        timer = new Timer(60);
         coinCounter = new CoinCounter();
     }
     public void displayBackground(Texture background){
@@ -221,7 +221,7 @@ public class Level {
             if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
                 //loseSound.play()
                 music.dispose();
-                game.setScreen(new Start(game));
+                game.setScreen(new GameOver(game));
             }
         }
     }

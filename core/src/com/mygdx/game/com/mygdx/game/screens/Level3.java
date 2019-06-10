@@ -21,7 +21,7 @@ public class Level3 extends Level implements Screen{
         minBoulders = 5;
         maxBoulders = 8;
         boulderSpawnInterval = 2;
-        boulderSpawnDelay = 3;
+        boulderSpawnDelay = 2;
 
         playMusic();
         createPlayer();

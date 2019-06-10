@@ -13,7 +13,7 @@ public class Level4 extends Level implements Screen{
         levelTexture = new Texture("dodgeDesertBG.png");
         coins = 0;
         world = "SAND";
-        level = " LEVEL 1";
+        level = " LEVEL 4";
         coinSpawnInterval = 10;
 
 /*      minBoulders = 3;

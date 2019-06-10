@@ -42,7 +42,7 @@ public class Cannon extends Entity {
             rotation = 270f;
         }
 
-        cannonTexture = new Texture("dodgeCannonball.png");
+        cannonTexture = new Texture("sprites/dodgeCannonball.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(cannonTexture,8,8);
         cannonAnimationFrames = new TextureRegion[1];
 

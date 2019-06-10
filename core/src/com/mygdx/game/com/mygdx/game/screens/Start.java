@@ -27,11 +27,11 @@ public class Start implements Screen {
     //private timer Timer;
     public Start(DodgeGame game){
         this.game = game;
-        exitButtonInactive = new Texture("exitButton.jpg");
-        exitButtonActive = new Texture("exitButtonActive.jpg");
-        playButtonInactive = new Texture("playButton2.jpg");
-        playButtonActive = new Texture("playButton2Active.jpg");
-        startScreenBackground = new Texture("dodgeStartScreen.png");
+        exitButtonInactive = new Texture("sprites/exitButton.jpg");
+        exitButtonActive = new Texture("sprites/exitButtonActive.jpg");
+        playButtonInactive = new Texture("sprites/playButton2.jpg");
+        playButtonActive = new Texture("sprites/playButton2Active.jpg");
+        startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
         backgroundSprite = new Sprite(startScreenBackground);
         backgroundSprite.scale(7);
 

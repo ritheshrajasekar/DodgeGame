@@ -45,7 +45,7 @@ public class BlinkingArrow extends Entity{
         }
 
         //default texture
-        arrowTexture = new Texture("dodgeBoulderArrow.png");
+        arrowTexture = new Texture("sprites/dodgeBoulderArrow.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(arrowTexture,10,8);
         arrowAnimationFrames = new TextureRegion[2];
 

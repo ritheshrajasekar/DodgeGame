@@ -42,7 +42,7 @@ public class Boulder extends Entity {
             rotation = 270f;
         }
 
-        boulderTexture = new Texture("dodgeBoulder.png");
+        boulderTexture = new Texture("sprites/dodgeBoulder.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(boulderTexture,8,8);
         boulderAnimationFrames = new TextureRegion[12];
 

@@ -15,7 +15,7 @@ public class Coin extends Entity{
     float elapsedTime;
 
     public Coin(){
-        coin = new Texture("dodgeBigCoin.png");
+        coin = new Texture("sprites/dodgeBigCoin.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(coin,8,8);
         x = (int)(8 * Math.random());
         y = (int)(8 * Math.random());

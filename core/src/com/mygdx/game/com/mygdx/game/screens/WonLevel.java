@@ -18,9 +18,9 @@ public class WonLevel implements Screen {
 
     private Music music;
 
-    private static final Texture levelSelectButton = new Texture("levelSelectButton.png");
-    private static final Texture nextButton = new Texture("nextLevel.png");
-    private static final Texture wonLevelBackground = new Texture("completeLevelBackground.png");
+    private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
+    private static final Texture nextButton = new Texture("sprites/nextLevel.png");
+    private static final Texture wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
     private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
 
     private static final int BUTTON_SIZE = 300;

@@ -42,7 +42,7 @@ public class Laser extends Entity {
             rotation = 270f;
         }
 
-        laserTexture = new Texture("dodgeLaser.png");
+        laserTexture = new Texture("sprites/dodgeLaser.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(laserTexture,8,8);
         laserAnimationFrames = new TextureRegion[1];
 

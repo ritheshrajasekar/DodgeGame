@@ -15,7 +15,7 @@ import static com.mygdx.game.com.mygdx.game.screens.Level.COIN_SIZE;
 public class CoinCounter {
     private String coinCountString;
     private int coins;
-    //private Texture counter =  new Texture("timer.png");
+    //private Texture counter =  new Texture("sprites/timer.png");
     Texture coin;
     TextureRegion animationFrames[];
     Animation animation;
@@ -24,7 +24,7 @@ public class CoinCounter {
     public CoinCounter() {
         coins = 0;
         coinCountString = "" + coins;
-        coin = new Texture("dodgeBigCoin.png");
+        coin = new Texture("sprites/dodgeBigCoin.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(coin,8,8);
         animationFrames = new TextureRegion[24];
         int index = 0;

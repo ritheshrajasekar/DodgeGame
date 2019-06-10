@@ -29,9 +29,9 @@ public class GameOver implements Screen {
 
     public GameOver(DodgeGame game){
         this.game = game;
-        levelSelectButton = new Texture("levelSelectButton.png");
-        retryButton = new Texture("retryLevel.png");
-        gameOverBackground = new Texture("gameOverBackground.png");
+        levelSelectButton = new Texture("sprites/levelSelectButton.png");
+        retryButton = new Texture("sprites/retryLevel.png");
+        gameOverBackground = new Texture("sprites/gameOverBackground.png");
         gameOverBackgroundSprite = new Sprite(gameOverBackground);
         gameOverBackgroundSprite.scale(7);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/spinAndBurst.mp3"));

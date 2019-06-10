@@ -16,15 +16,15 @@ public class LevelSelect implements Screen {
     private DodgeGame game;
     private Music music;
 
-    private final Texture grass = new Texture("dodgeGrassBGS.png");
-    private final Texture sand = new Texture("dodgeDesertBGS.png");
-    private final Texture jungle = new Texture("dodgeJungleBGS.png");
-    private final Texture hell = new Texture("dodgeHellBGS.png");
-    private final Texture homeButton = new Texture("homeButton.png");
-    private final Texture zeroStar = new Texture("dodge0Star.png");;
-    private final Texture oneStar = new Texture("dodge1Star.png");
-    private final Texture twoStar = new Texture("dodge2Star.png");
-    private final Texture threeStar = new Texture("dodge3Star.png");
+    private final Texture grass = new Texture("sprites/dodgeGrassBGS.png");
+    private final Texture sand = new Texture("sprites/dodgeDesertBGS.png");
+    private final Texture jungle = new Texture("sprites/dodgeJungleBGS.png");
+    private final Texture hell = new Texture("sprites/dodgeHellBGS.png");
+    private final Texture homeButton = new Texture("sprites/homeButton.png");
+    private final Texture zeroStar = new Texture("sprites/dodge0Star.png");;
+    private final Texture oneStar = new Texture("sprites/dodge1Star.png");
+    private final Texture twoStar = new Texture("sprites/dodge2Star.png");
+    private final Texture threeStar = new Texture("sprites/dodge3Star.png");
     private final Texture[] buttons = new Texture[NUM_LEVELS];
 
     private final Sprite grassBackground = new Sprite(grass);
@@ -61,7 +61,7 @@ public class LevelSelect implements Screen {
         this.game = game;
         //assigns button textures
         for (int i = 0; i < NUM_LEVELS; i++) {
-            buttons[i] = new Texture("buttonNum" + (i + 1) + ".png");
+            buttons[i] = new Texture("sprites/buttonNum" + (i + 1) + ".png");
         }
 
         grassBackground.scale(7);

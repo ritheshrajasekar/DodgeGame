@@ -17,7 +17,7 @@ public class Player extends Entity{
 
     //creates the animation for the player
     public Player(){
-        player = new Texture("dodgeGuy.png");
+        player = new Texture("sprites/dodgeGuy.png");
 
         TextureRegion[][] tmpFrames = TextureRegion.split(player,8,10);
 

@@ -11,7 +11,7 @@ public class Timer {
     private double worldTimer;
     private String worldTimerString;
     private float timeCount;
-    private Texture clock =  new Texture("timer2.png");
+    private Texture clock =  new Texture("sprites/timer2.png");
 
     public Timer(double time) {
         worldTimer = time;

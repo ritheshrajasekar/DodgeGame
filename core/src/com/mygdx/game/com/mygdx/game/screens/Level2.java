@@ -8,12 +8,10 @@ import com.mygdx.game.DodgeGame;
 
 
 public class Level2 extends Level implements Screen{
-    Texture level1;
-
     public Level2(DodgeGame g) {
         currentLevelNumber = 2;
         game = g;
-        level1 = new Texture("dodgeGrassBG.png");
+        levelTexture = new Texture("dodgeGrassBG.png");
         coins = 0;
         world = "GRASS";
         level = " LEVEL 2";
@@ -28,16 +26,7 @@ public class Level2 extends Level implements Screen{
     }
 
     public void render(float delta) {
-        //rithesh i know youre doing something with the background here so imma leave this here
-        Gdx.gl.glClearColor(.135f, .206f, .235f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        //setting the background through passing in Texture into another methof in Level which Level1 extends
-        displayBackground(level1);
-
-        //creates background
-
-
+        displayBackground(levelTexture);
 
         //don't mess around with the order of the display methods unless you know what you're doing
         //it will cause a SpriteBatch.begin must be called before draw or SpriteBatch music be called before end error

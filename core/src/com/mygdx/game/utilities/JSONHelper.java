@@ -23,6 +23,7 @@ public class JSONHelper {
     public String read(String attrType, String key, boolean printObjValues) {
         JSONParser parser = new JSONParser();
         String retValue=new String();
+        String ZERO ="0";
 
         if(attrType==null)
             myFileLocation = levelFileLocation;
@@ -43,8 +44,26 @@ public class JSONHelper {
                 System.out.println("Searched for :"+key+", found:"+retValue);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             try (FileWriter file = new FileWriter(myFileLocation)) {
+                //If COIN FILES not found, create tokens for each level with default value of ZERO
+                if(attrType.equals("COIN")){
+                    //obj=readAll(myFileLocation);
+                    obj.put("COIN1",ZERO);
+                    obj.put("COIN2",ZERO);
+                    obj.put("COIN3",ZERO);
+                    obj.put("COIN4",ZERO);
+                    obj.put("COIN5",ZERO);
+                    obj.put("COIN6",ZERO);
+                    obj.put("COIN7",ZERO);
+                    obj.put("COIN8",ZERO);
+                    obj.put("COIN9",ZERO);
+                    obj.put("COIN10",ZERO);
+                    obj.put("COIN11",ZERO);
+                    obj.put("COIN12",ZERO);
+                    file.write(obj.toJSONString());
+                    retValue=ZERO;
+                }
                 //File Writer creates a file in write mode at the given location
                 //file.write(obj.toJSONString());
                 //write function is use to write in file,

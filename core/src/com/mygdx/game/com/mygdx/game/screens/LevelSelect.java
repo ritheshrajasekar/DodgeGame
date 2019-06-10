@@ -187,8 +187,6 @@ public class LevelSelect implements Screen {
             }
         }
 
-        displayStars();// calls displayStars which displays the stars!
-
         game.batch.draw(button4,X_VALUE_LEFT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE );
         game.batch.draw(button5, X_VALUE_LEFT, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button6, X_VALUE_LEFT, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
@@ -210,248 +208,31 @@ public class LevelSelect implements Screen {
             }
         }
         game.batch.end();
+        displayStars();// calls displayStars which displays the stars!
     }
 
     public void displayStars(){
-        if(level1Coins != null){
-            //display 0 star for the level1 button
-            if(Integer.parseInt(level1Coins) == 0){
-            game.batch.begin();
-            game.batch.draw(zeroStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
+        game.batch.begin();
+        if(new JSONHelper().read("LEVEL", "LEVEL1", false) != null && new JSONHelper().read("LEVEL", "LEVEL1", false).length()>0){
+            if(Integer.parseInt(level1Coins) >= 1 && Integer.parseInt(level1Coins) <=5 ){game.batch.draw(oneStar, X_VALUE_LEFTMOST - 56, Y_VALUE_TOP - 100, 224, 70);}
+            else if(Integer.parseInt(level1Coins) >= 6 &&  Integer.parseInt(level1Coins) <= 9) {game.batch.draw(twoStar, X_VALUE_LEFTMOST - 56, Y_VALUE_TOP -100, 224, 70);}
+            else if((Integer.parseInt(level1Coins) > 9)){game.batch.draw(threeStar, X_VALUE_LEFTMOST - 56, Y_VALUE_TOP -100, 224, 70);}
+            }
+
+        if(new JSONHelper().read("LEVEL", "LEVEL2", false) != null && new JSONHelper().read("LEVEL", "LEVEL2", false).length()>0){
+            if(Integer.parseInt(level2Coins) >= 1 && Integer.parseInt(level2Coins) <=5 ){game.batch.draw(oneStar, X_VALUE_LEFTMOST - 56, Y_VALUE_MIDDLE -100, 224, 70);}
+            else if(Integer.parseInt(level2Coins) >= 6 &&  Integer.parseInt(level2Coins) <= 9) {game.batch.draw(twoStar, X_VALUE_LEFTMOST - 56, Y_VALUE_MIDDLE -100, 224, 70);}
+            else if((Integer.parseInt(level2Coins) > 9)){game.batch.draw(threeStar, X_VALUE_LEFTMOST - 56, Y_VALUE_MIDDLE -100, 224, 70);}
+        }
+
+        if(new JSONHelper().read("LEVEL", "LEVEL3", false) != null && new JSONHelper().read("LEVEL", "LEVEL3", false).length()>0){
+            if(Integer.parseInt(level3Coins) >= 1 && Integer.parseInt(level3Coins) <=5 ){game.batch.draw(oneStar, X_VALUE_LEFTMOST - 56, Y_VALUE_BOTTOM -100, 224, 70);}
+            else if(Integer.parseInt(level3Coins) >= 6 &&  Integer.parseInt(level3Coins) <= 9) {game.batch.draw(twoStar, X_VALUE_LEFTMOST - 56, Y_VALUE_BOTTOM -100, 224, 70);}
+            else if((Integer.parseInt(level3Coins) > 9)){game.batch.draw(threeStar, X_VALUE_LEFTMOST - 56, Y_VALUE_BOTTOM -100, 224, 70);}
+        }
+
+
             game.batch.end();
-            }
-            //display 1 star for the level1 button
-            else if(Integer.parseInt(level1Coins) < 5) {
-                game.batch.begin();
-                game.batch.draw(oneStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
-                game.batch.end();
-            }
-            //display 2 stars for the level1 button
-            else if((Integer.parseInt(level1Coins) < 9)){
-                    game.batch.begin();
-                    game.batch.draw(twoStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
-                    game.batch.end();
-            }
-            //display 3 stars for the level1 button
-            else{
-                    game.batch.begin();
-                    game.batch.draw(threeStar, X_VALUE_LEFTMOST, Y_VALUE_TOP + 50);
-                    game.batch.end();
-                }
-            }
-
-
-        /*else if(level2Coins != null){
-            //display 0 star for the level2 button
-            if(Integer.parseInt(level2Coins) == 0){
-                game.batch.begin();
-                game.batch.draw(oneStar, X_VALUE_LEFTMOST, Y_VALUE_MIDDLE+ 50);
-                game.batch.end();
-            }
-            //display 1 star for the level2 button
-            else if(Integer.parseInt(level2Coins) < 5){
-
-            }
-            //display 2 stars for the level2 button
-            else if((Integer.parseInt(level2Coins) < 9)){
-
-            }
-            //display 3 stars for the level2 button
-            else{
-
-            }
-        }
-
-        else if(level3Coins != null){
-            //display 0 star for the level3 button
-            if(Integer.parseInt(level3Coins) == 0){
-                game.batch.begin();
-                game.batch.draw(oneStar, X_VALUE_LEFTMOST, Y_VALUE_BOTTOM + 50);
-                game.batch.end();
-            }
-            //display 1 star for the level3 button
-            else if(Integer.parseInt(level3Coins) < 5){
-
-            }
-            //display 2 stars for the level3 button
-            else if((Integer.parseInt(level3Coins) < 9)){
-
-            }
-            //display 3 stars for the level3 button
-            else{
-
-            }
-        }
-
-        else if(level4Coins != null){
-            //display 0 star for the level4 button
-            if(Integer.parseInt(level4Coins) == 0){
-
-            }
-            //display 1 star for the level4 button
-            else if(Integer.parseInt(level4Coins) < 5){
-
-            }
-            //display 2 stars for the level4 button
-            else if((Integer.parseInt(level4Coins) < 9)){
-
-            }
-            //display 3 stars for the level4 button
-            else{
-
-            }
-        }
-
-        else if(level5Coins != null){
-            //display  0 star for the level5 button
-            if(Integer.parseInt(level5Coins) == 0){
-
-            }
-            //display 1 star for the level5 button
-            else if(Integer.parseInt(level5Coins) < 5){
-
-            }
-            //display 2 stars for the level5 button
-            else if((Integer.parseInt(level5Coins) < 9)){
-
-            }
-            //display 3 stars for the level5 button
-            else{
-
-            }
-        }
-
-        else if(level6Coins != null){
-            //display  0 star for the level6 button
-            if(Integer.parseInt(level6Coins) == 0){
-
-            }
-            //display 1 star for the level6 button
-            else if(Integer.parseInt(level6Coins) < 5){
-
-            }
-            //display 2 stars for the level6 button
-            else if((Integer.parseInt(level6Coins) < 9)){
-
-            }
-            //display 3 stars for the level6 button
-            else{
-
-            }
-        }
-
-        else if(level7Coins != null){
-            //display  0 star for the level7 button
-            if(Integer.parseInt(level7Coins) == 0){
-
-            }
-            //display 1 star for the level7 button
-            else if(Integer.parseInt(level7Coins) < 5){
-
-            }
-            //display 2 stars for the level7 button
-            else if((Integer.parseInt(level7Coins) < 9)){
-
-            }
-            //display 3 stars for the level7 button
-            else{
-
-            }
-        }
-
-        else if(level8Coins != null){
-            //display  0 star for the level8 button
-            if(Integer.parseInt(level8Coins) == 0){
-
-            }
-            //display 1 star for the level8 button
-            else if(Integer.parseInt(level8Coins) < 5){
-
-            }
-            //display 2 stars for the level8 button
-            else if((Integer.parseInt(level8Coins) < 9)){
-
-            }
-            //display 3 stars for the level8 button
-            else{
-
-            }
-        }
-
-        else if(level9Coins != null){
-            //display  0 star for the level9 button
-            if(Integer.parseInt(level9Coins) == 0){
-
-            }
-            //display 1 star for the level9 button
-            else if(Integer.parseInt(level9Coins) < 5){
-
-            }
-            //display 2 stars for the level9 button
-            else if((Integer.parseInt(level9Coins) < 9)){
-
-            }
-            //display 3 stars for the level9 button
-            else{
-
-            }
-        }
-
-        else if(level10Coins != null){
-            //display  0 star for the level10 button
-            if(Integer.parseInt(level10Coins) == 0){
-
-            }
-            //display 1 star for the level10 button
-            else if(Integer.parseInt(level10Coins) < 5){
-
-            }
-            //display 2 stars for the level10 button
-            else if((Integer.parseInt(level10Coins) < 9)){
-
-            }
-            //display 3 stars for the level10 button
-            else{
-
-            }
-        }
-
-        else if(level11Coins != null){
-            //display  0 star for the level11 button
-            if(Integer.parseInt(level11Coins) == 0){
-
-            }
-            //display 1 star for the level11 button
-            else if(Integer.parseInt(level11Coins) < 5){
-
-            }
-            //display 2 stars for the level11 button
-            else if((Integer.parseInt(level11Coins) < 9)){
-
-            }
-            //display 3 stars for the level11 button
-            else{
-
-            }
-        }
-
-        else if(level12Coins != null){
-            //display  0 star for the level12 button
-            if(Integer.parseInt(level12Coins) == 0){
-
-            }
-            //display 1 star for the level12 button
-            else if(Integer.parseInt(level12Coins) < 5){
-
-            }
-            //display 2 stars for the level12 button
-            else if((Integer.parseInt(level12Coins) < 9)){
-
-            }
-            //display 3 stars for the level12 button
-            else{
-
-            }*/
         }
 
     public void resize(int width, int height){

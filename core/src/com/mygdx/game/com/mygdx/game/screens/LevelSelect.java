@@ -40,7 +40,7 @@ public class LevelSelect implements Screen {
     public static final int Y_VALUE_MIDDLE = 350;
     public static final int Y_VALUE_BOTTOM = 100;
     public static final int X_VALUE_HOME_BUTTON = 1180;
-    public static final int Y_VALUE_HOME_BUTTON = 0;
+    public static final int Y_VALUE_HOME_BUTTON = 100;
     public static final int BUTTON_SIZE = 100;
     public static final int[][] BUTTON_COORDS = {
         {X_VALUE_LEFTMOST, Y_VALUE_TOP},

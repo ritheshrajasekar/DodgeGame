@@ -1,6 +1,6 @@
 stars01: 3
-stars02: 3
-stars03: 3
+stars02: 0
+stars03: 0
 stars04: 0
 stars05: 0
 stars06: 0
@@ -10,4 +10,4 @@ stars09: 0
 stars10: 0
 stars11: 0
 stars12: 0
-unlockedLevel: 4
+unlockedLevel: 1

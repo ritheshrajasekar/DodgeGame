@@ -188,6 +188,17 @@ public class LevelSelect implements Screen {
         }
 
         game.batch.draw(button4,X_VALUE_LEFT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE );
+
+        if(Gdx.input.getX() < X_VALUE_LEFT + BUTTON_SIZE &&
+                Gdx.input.getX() > X_VALUE_LEFT &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_TOP  &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_TOP + BUTTON_SIZE && helper.read("LEVEL", "LEVEL4", false)!= null && helper.read("LEVEL", "LEVEL4", false).equals("TRUE")){
+
+            if(Gdx.input.isTouched()){
+                this.dispose();
+                game.setScreen(new Level4(game));
+            }
+        }
         game.batch.draw(button5, X_VALUE_LEFT, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button6, X_VALUE_LEFT, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button7, X_VALUE_RIGHT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE);

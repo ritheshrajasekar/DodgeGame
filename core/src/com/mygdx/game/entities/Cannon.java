@@ -18,7 +18,7 @@ public class Cannon extends Entity {
     public boolean isOnScreen;
     public boolean spawned;
 
-    //x and y offset here are used to animate the movement of the boulder
+    //x and y offset here are used to animate the movement of the cannon
     private int xOffset, yOffset;
     private float rotation;
 
@@ -28,7 +28,7 @@ public class Cannon extends Entity {
         y = dy;
         direction = d;
 
-        //rotates boulder
+        //rotates cannonball
         if (direction == "UP") {
             rotation = 0f;
         }
@@ -56,7 +56,7 @@ public class Cannon extends Entity {
         cannonAnimation = new Animation(1f/1f,cannonAnimationFrames);
     }
 
-    //boulder movement
+    //cannon movement
     public void update(float deltaTime){
         elapsedTime += Gdx.graphics.getDeltaTime();
         if (direction == "RIGHT"){

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Cannon extends Entity {
-    public static final int SPEED = 350;
+    public static final int SPEED = 500;
 
     private static Texture cannonTexture;
     private TextureRegion[] cannonAnimationFrames;

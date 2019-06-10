@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level {
+    public static final int NUM_LEVELS = 12;
     public static final int PLAYER_MOVE_DISTANCE = 63;//9*7, 7 is the scalar multiplier for all sprites
     public static final int PLAYER_WIDTH = 56;//8*7
     public static final int PLAYER_HEIGHT = 70;//10*7

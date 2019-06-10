@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.FileStreaming;
 import com.mygdx.game.utilities.GameLevelManager;
 import com.mygdx.game.utilities.JSONHelper;
 
@@ -52,6 +53,13 @@ public class WonLevel implements Screen {
 
         if(savedCoins == null || Integer.parseInt(savedCoins) < coins)
             jCoins.write("COIN", "COIN" + currentLevelNumber, "" + coins, false);
+
+        if (coins > FileStreaming.stars[currentLevelNumber - 1]) {
+
+        }
+        FileStreaming.stars[currentLevelNumber] = 0;
+        FileStreaming.unlockedLevel = currentLevelNumber + 1;
+        FileStreaming.write();
     }
 
     public void render(float delta){

@@ -54,7 +54,6 @@ public class LevelSelect implements Screen {
     public static final int BUTTON_SIZE = 100;
     //private timer Timer;
     public LevelSelect(DodgeGame game){
-        JSONHelper helper = new JSONHelper();
         this.game = game;
         button1 = new Texture("buttonNum1.png");
         button2 = new Texture("buttonNum2.png");

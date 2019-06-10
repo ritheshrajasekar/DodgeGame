@@ -12,7 +12,6 @@ public class Level3 extends Level implements Screen{
 
     public Level3(DodgeGame g) {
         currentLevelNumber = 3;
-        levelNum = 3;
         game = g;
         level1 = new Texture("dodgeGrassBG.png");
 

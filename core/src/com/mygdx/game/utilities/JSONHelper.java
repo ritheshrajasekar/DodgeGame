@@ -44,6 +44,15 @@ public class JSONHelper {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            try (FileWriter file = new FileWriter(myFileLocation)) {
+                //File Writer creates a file in write mode at the given location
+                //file.write(obj.toJSONString());
+                //write function is use to write in file,
+                //here we write the Json object in the file
+                file.flush();
+            }catch (IOException e2) {
+                e2.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -121,7 +130,7 @@ public class JSONHelper {
             //write function is use to write in file,
             //here we write the Json object in the file
             file.flush();
-        } catch (IOException e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
         if (printObjValues){

@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.GameLevelManager;
+import com.mygdx.game.utilities.JSONHelper;
+
+import static com.mygdx.game.com.mygdx.game.screens.Level.coins;
+import static com.mygdx.game.com.mygdx.game.screens.Level.currentLevelNumber;
 
 public class WonLevel implements Screen {
     private DodgeGame game;
@@ -38,7 +43,15 @@ public class WonLevel implements Screen {
         music.play();
     }
     public void show(){
+        JSONHelper jLevel = new JSONHelper();
+        JSONHelper jCoins= new JSONHelper();
+        String savedCoins = jLevel.read("COINS", "COINS" + currentLevelNumber, false);
+        // enables the next level to be true;
+        jLevel.write("LEVEL", "LEVEL" + (currentLevelNumber + 1), "TRUE", false);
+        // writes the new coin value into the String if currentValue is greater than previously earned value for that level;
 
+        if(savedCoins == null || Integer.parseInt(savedCoins) < coins)
+            jCoins.write("COIN", "COIN" + currentLevelNumber, "" + coins, false);
     }
 
     public void render(float delta){
@@ -48,6 +61,7 @@ public class WonLevel implements Screen {
         wonLevelBackgroundSprite.setPosition(DodgeGame.WIDTH/2 - wonLevelBackgroundSprite.getWidth()/2,DodgeGame.HEIGHT/2 - wonLevelBackgroundSprite.getHeight()/2);
         wonLevelBackgroundSprite.draw(game.batch);
         game.batch.draw(nextButton, XVALUE_NEXT_LEVEL, YVALUE_NEXT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        //creates the next level button
         if(Gdx.input.getX() < XVALUE_NEXT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() >XVALUE_NEXT_LEVEL&&
                 DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_NEXT_LEVEL  &&
@@ -55,10 +69,15 @@ public class WonLevel implements Screen {
 
             if(Gdx.input.isTouched()){
                 this.dispose();
-                game.setScreen(new Level1(game));
+                //game.setScreen(new Level1(game));
+                GameLevelManager gm = new GameLevelManager();
+                gm.nextLevel(game, currentLevelNumber);
+
             }
+
         }
         game.batch.draw(levelSelectButton, XVALUE_SELECT_LEVEL, YVALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        //creates the next level select button
         if(Gdx.input.getX() < XVALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > XVALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_SELECT_LEVEL  &&
@@ -66,7 +85,7 @@ public class WonLevel implements Screen {
 
             if(Gdx.input.isTouched()){
                 this.dispose();
-                game.setScreen(new Level1(game));
+                game.setScreen(new LevelSelect(game));
             }
         }
 

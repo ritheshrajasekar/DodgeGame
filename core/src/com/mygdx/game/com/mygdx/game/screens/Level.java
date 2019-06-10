@@ -32,7 +32,7 @@ public class Level {
     public Timer timer;
     public CoinCounter coinCounter;
     public Player player;
-    public int coins;
+    public static int coins;
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
     public int coinSpawnInterval;
     public boolean coinsSpawned;
@@ -48,7 +48,7 @@ public class Level {
     public static int currentLevelNumber = 0;
 
     public void show(){
-        timer = new Timer(60);
+        timer = new Timer(2); // for testing
         coinCounter = new CoinCounter();
     }
     public void displayBackground(Texture background){
@@ -81,7 +81,7 @@ public class Level {
         if (timer.getWorldTimer() <= 0) {
             music.stop();
             music.dispose();
-            game.setScreen(new Start(game));
+            game.setScreen(new WonLevel(game));
         }
     }
 

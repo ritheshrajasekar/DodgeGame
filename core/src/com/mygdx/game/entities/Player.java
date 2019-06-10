@@ -52,7 +52,7 @@ public class Player extends Entity{
     // renders the player animation
     public void render(SpriteBatch batch){
 
-        batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(x), yCoordToPixel(y), PLAYER_SIZE, PLAYER_SIZE);
+        batch.draw(animation.getKeyFrame(elapsedTime,true), xCoordToPixel(x), yCoordToPixel(y), PLAYER_WIDTH, PLAYER_HEIGHT);
     }
 
 

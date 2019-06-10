@@ -42,9 +42,9 @@ public class WonLevel implements Screen {
     public void show(){
         //coin to stars converter
         int stars = 0;
-        if (coins > 0 && coins <= 6)
+        if (coins > 0 && coins <= 8)
             stars = 1;
-        if (coins > 6 && coins <= 11)
+        if (coins > 8 && coins <= 11)
             stars = 2;
         if (coins >= 12)
             stars = 3;

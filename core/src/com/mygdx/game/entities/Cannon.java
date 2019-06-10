@@ -38,7 +38,7 @@ public class Cannon extends Entity {
         if (direction == "DOWN") {
             rotation = 180f;
         }
-        if (direction == "RIGHT ") {
+        if (direction == "RIGHT") {
             rotation = 270f;
         }
 

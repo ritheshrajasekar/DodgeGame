@@ -20,10 +20,10 @@ public class GameOver implements Screen {
     private Texture retryButton;
     private Texture gameOverBackground;
     private static final int BUTTON_SIZE = 300;
-    private static final int XVALUE_RETRY_LEVEL = (int)(DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2 ;
-    private static final int XVALUE_SELECT_LEVEL = (int)(DodgeGame.WIDTH * 0.75) - BUTTON_SIZE / 2;
-    private static final int YVALUE_RETRY_LEVEL = 100;
-    private static final int YVALUE_SELECT_LEVEL = 100;
+    private static final int X_VALUE_RETRY_LEVEL = (int)(DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2 ;
+    private static final int X_VALUE_SELECT_LEVEL = (int)(DodgeGame.WIDTH * 0.75) - BUTTON_SIZE / 2;
+    private static final int Y_VALUE_RETRY_LEVEL = 100;
+    private static final int Y_VALUE_SELECT_LEVEL = 100;
 
     public static Sprite gameOverBackgroundSprite;
 
@@ -35,7 +35,7 @@ public class GameOver implements Screen {
         gameOverBackground = new Texture("gameOverBackground.png");
         gameOverBackgroundSprite = new Sprite(gameOverBackground);
         gameOverBackgroundSprite.scale(7);
-        music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();
@@ -51,23 +51,23 @@ public class GameOver implements Screen {
         game.batch.begin();
         gameOverBackgroundSprite.setPosition(DodgeGame.WIDTH/2 - gameOverBackgroundSprite.getWidth()/2,DodgeGame.HEIGHT/2 - gameOverBackgroundSprite.getHeight()/2);
         gameOverBackgroundSprite.draw(game.batch);
-        game.batch.draw(retryButton, XVALUE_RETRY_LEVEL, YVALUE_RETRY_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(retryButton, X_VALUE_RETRY_LEVEL, Y_VALUE_RETRY_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
         //sees if the retry button is clicked, and if it is, calls GameLevelManager.retry() which retries the level
-        if (Gdx.input.getX() < XVALUE_RETRY_LEVEL + BUTTON_SIZE &&
-            Gdx.input.getX() > XVALUE_RETRY_LEVEL &&
-            DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_RETRY_LEVEL  &&
-            DodgeGame.HEIGHT - Gdx.input.getY() < YVALUE_RETRY_LEVEL + BUTTON_SIZE ){
+        if (Gdx.input.getX() < X_VALUE_RETRY_LEVEL + BUTTON_SIZE &&
+            Gdx.input.getX() > X_VALUE_RETRY_LEVEL &&
+            DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_RETRY_LEVEL &&
+            DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_RETRY_LEVEL + BUTTON_SIZE ){
             if(Gdx.input.isTouched()){
                 this.dispose();
                 GameLevelManager.playLevel(game, currentLevelNumber);
             }
         }
-        game.batch.draw(levelSelectButton, XVALUE_SELECT_LEVEL, YVALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(levelSelectButton, X_VALUE_SELECT_LEVEL, Y_VALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
         //sees is the level select button is selected.
-        if(Gdx.input.getX() < XVALUE_SELECT_LEVEL + BUTTON_SIZE &&
-                Gdx.input.getX() > XVALUE_SELECT_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_SELECT_LEVEL  &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < YVALUE_SELECT_LEVEL + BUTTON_SIZE ){
+        if(Gdx.input.getX() < X_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
+                Gdx.input.getX() > X_VALUE_SELECT_LEVEL &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_SELECT_LEVEL &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE ){
 
             if(Gdx.input.isTouched()){
                 this.dispose();

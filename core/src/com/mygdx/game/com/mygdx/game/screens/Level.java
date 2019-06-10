@@ -73,7 +73,7 @@ public class Level {
     }
 
     public void playMusic() {
-        music = Gdx.audio.newMusic(Gdx.files.internal("spinAndBurst.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/spinAndBurst.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

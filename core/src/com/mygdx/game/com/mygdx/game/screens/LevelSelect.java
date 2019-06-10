@@ -69,7 +69,7 @@ public class LevelSelect implements Screen {
         jungleBackground.scale(7);
         hellBackground.scale(7);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("myName.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/myName.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

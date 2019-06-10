@@ -48,7 +48,7 @@ public class Level {
     public static int currentLevelNumber = 0;
 
     public void show(){
-        timer = new Timer(60);
+        timer = new Timer(30);
         coinCounter = new CoinCounter();
     }
     public void displayBackground(Texture background){

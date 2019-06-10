@@ -85,6 +85,6 @@ public class Level1 extends Level implements Screen{
 
     }
     public void dispose(){
-
+        music.dispose();
     }
 }

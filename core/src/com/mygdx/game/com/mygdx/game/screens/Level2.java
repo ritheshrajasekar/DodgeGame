@@ -20,7 +20,7 @@ public class Level2 extends Level implements Screen{
         coinSpawnInterval = 10;
         minBoulders = 4;
         maxBoulders = 7;
-        boulderSpawnInterval = 3;
+        boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
         playMusic();
@@ -84,7 +84,7 @@ public class Level2 extends Level implements Screen{
 
     }
     public void dispose(){
-
+        music.dispose();
     }
 }
 

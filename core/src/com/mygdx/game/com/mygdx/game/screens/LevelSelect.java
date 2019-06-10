@@ -256,5 +256,6 @@ public class LevelSelect implements Screen {
         hell.dispose();
         button1.dispose();
         button2.dispose();
+        music.dispose();
     }
 }

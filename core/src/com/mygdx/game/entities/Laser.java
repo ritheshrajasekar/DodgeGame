@@ -8,58 +8,58 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
-public class Cannon extends Entity {
-    public static final int SPEED = 500;
+public class Laser extends Entity {
+    public static final int SPEED = 350;
 
-    private static Texture cannonTexture;
-    private TextureRegion[] cannonAnimationFrames;
-    private Animation cannonAnimation;
+    private static Texture laserTexture;
+    private TextureRegion[] laserAnimationFrames;
+    private Animation laserAnimation;
     private float elapsedTime;
     public boolean isOnScreen;
     public boolean spawned;
 
-    //x and y offset here are used to animate the movement of the cannon
+    //x and y offset here are used to animate the movement of the laser
     private int xOffset, yOffset;
     private float rotation;
 
-    public Cannon(int dx, int dy, String d){
+    public Laser(int dx, int dy, String d){
         isOnScreen = true;
         x = dx;
         y = dy;
         direction = d;
 
-        //rotates cannonball
-        if (direction == "UP") {
+        //rotates laser
+        if (direction.equals("UP")) {
             rotation = 0f;
         }
-        if (direction == "LEFT") {
+        if (direction.equals("LEFT")) {
             rotation = 90f;
         }
-        if (direction == "DOWN") {
+        if (direction.equals("DOWN")) {
             rotation = 180f;
         }
-        if (direction == "RIGHT") {
+        if (direction.equals("RIGHT")) {
             rotation = 270f;
         }
 
-        cannonTexture = new Texture("dodgeCannonball.png");
-        TextureRegion[][] tmpFrames = TextureRegion.split(cannonTexture,8,8);
-        cannonAnimationFrames = new TextureRegion[1];
+        laserTexture = new Texture("dodgeLaser.png");
+        TextureRegion[][] tmpFrames = TextureRegion.split(laserTexture,8,8);
+        laserAnimationFrames = new TextureRegion[1];
 
         int index = 0;
         for (int i = 0; i < 1; i++){
             for (int j = 0; j < 1; j++) {
-                cannonAnimationFrames[index++] = tmpFrames[i][j];
+                laserAnimationFrames[index++] = tmpFrames[i][j];
             }
         }
 
-        cannonAnimation = new Animation(1f/1f,cannonAnimationFrames);
+        laserAnimation = new Animation(1f/1f,laserAnimationFrames);
     }
 
-    //cannon movement
+    //laser movement
     public void update(float deltaTime){
         elapsedTime += Gdx.graphics.getDeltaTime();
-        if (direction == "RIGHT"){
+        if (direction.equals("RIGHT")){
             xOffset += SPEED * deltaTime;
             if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
                 xOffset -= PLAYER_MOVE_DISTANCE;
@@ -69,7 +69,7 @@ public class Cannon extends Entity {
                 isOnScreen = false;
         }
 
-        else if(direction == "UP"){
+        else if(direction.equals("UP")){
             yOffset += SPEED * deltaTime;
             if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
                 yOffset -= PLAYER_MOVE_DISTANCE;
@@ -79,7 +79,7 @@ public class Cannon extends Entity {
                 isOnScreen = false;
         }
 
-        else if(direction == "LEFT"){
+        else if(direction.equals("LEFT")){
             xOffset -= SPEED * deltaTime;
             if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
                 xOffset += PLAYER_MOVE_DISTANCE;
@@ -89,7 +89,7 @@ public class Cannon extends Entity {
                 isOnScreen = false;
         }
 
-        else if(direction == "DOWN"){
+        else if(direction.equals("DOWN")){
             yOffset -= SPEED * deltaTime;
             if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
                 yOffset += PLAYER_MOVE_DISTANCE;
@@ -101,7 +101,6 @@ public class Cannon extends Entity {
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(cannonAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
+        batch.draw(laserAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
     }
 }
-

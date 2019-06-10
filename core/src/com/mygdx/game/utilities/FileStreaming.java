@@ -30,6 +30,6 @@ public class FileStreaming {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(text);
+        //System.out.println(text);
     }
 }

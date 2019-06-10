@@ -23,7 +23,7 @@ public class Level4 extends Level implements Screen{
 
         minCannon = 3;
         maxCannon = 6;
-        cannonSpawnInterval = 5;
+        cannonSpawnInterval = 4;
         cannonSpawnDelay = 2;
 
         playMusic();

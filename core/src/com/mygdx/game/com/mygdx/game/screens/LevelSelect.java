@@ -48,6 +48,7 @@ public class LevelSelect implements Screen {
 
     public static final int X_VALUE_LEFTMOST = 100;
     public static final int X_VALUE_LEFT = 430;
+    public static final int X_VALUE_MIDDLE = 441;
     public static final int X_VALUE_RIGHT = 750;
     public static final int X_VALUE_RIGHTMOST = 1070;
     public static final int Y_VALUE_TOP =  600;
@@ -242,7 +243,11 @@ public class LevelSelect implements Screen {
             else if((Integer.parseInt(level3Coins) > 9)){game.batch.draw(threeStar, X_VALUE_LEFTMOST - 56, Y_VALUE_BOTTOM -100, 224, 70);}
         }
 
-
+        if(new JSONHelper().read("LEVEL", "LEVEL4", false) != null && new JSONHelper().read("LEVEL", "LEVEL4", false).length()>0){
+            if(Integer.parseInt(level4Coins) >= 1 && Integer.parseInt(level4Coins) <=5 ){game.batch.draw(oneStar, X_VALUE_MIDDLE - 56, Y_VALUE_TOP -100, 224, 70);}
+            else if(Integer.parseInt(level4Coins) >= 6 &&  Integer.parseInt(level4Coins) <= 9) {game.batch.draw(twoStar, X_VALUE_MIDDLE - 56, Y_VALUE_TOP -100, 224, 70);}
+            else if((Integer.parseInt(level4Coins) > 9)){game.batch.draw(threeStar, X_VALUE_MIDDLE - 56, Y_VALUE_TOP-100, 224, 70);}
+        }
 
             game.batch.end();
         }

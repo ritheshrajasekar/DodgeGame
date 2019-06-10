@@ -93,13 +93,13 @@ public class LevelSelect implements Screen {
         grass = new Texture("dodgeGrassBGS.png");
         grassBackground = new Sprite(grass);
         grassBackground.scale(7);
-        sand = new Texture("dodgeGrassBGS.png");
+        sand = new Texture("dodgeDesertBGS.png");
         sandBackground = new Sprite(sand);
         sandBackground.scale(7);
-        jungle = new Texture("dodgeGrassBGS.png");
+        jungle = new Texture("dodgeJungleBGS.png");
         jungleBackground = new Sprite(jungle);
         jungleBackground.scale(7);
-        hell = new Texture("dodgeGrassBGS.png");
+        hell = new Texture("dodgeHellBGS.png");
         hellBackground = new Sprite(hell);
         hellBackground.scale(7);
         music = Gdx.audio.newMusic(Gdx.files.internal("myName.mp3"));

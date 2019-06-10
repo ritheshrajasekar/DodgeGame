@@ -52,6 +52,19 @@ public class LevelSelect implements Screen {
     public static final int X_VALUE_HOME_BUTTOM = 1180;
     public static final int Y_VALUE_HOME_BUTTON = 0;
     public static final int BUTTON_SIZE = 100;
+
+    private String level1Coins;
+    private String level2Coins;
+    private String level3Coins;
+    private String level4Coins;
+    private String level5Coins;
+    private String level6Coins;
+    private String level7Coins;
+    private String level8Coins;
+    private String level9Coins;
+    private String level12Coins;
+    private String level10Coins;
+    private String level11Coins;
     //private timer Timer;
     public LevelSelect(DodgeGame game){
         this.game = game;
@@ -80,11 +93,26 @@ public class LevelSelect implements Screen {
         jungleBackground.scale(7);
         hell = new Texture("dodgeGrassBGS.png");
         hellBackground = new Sprite(hell);
-       hellBackground.scale(7);
+        hellBackground.scale(7);
         music = Gdx.audio.newMusic(Gdx.files.internal("myName.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();
+
+        level1Coins = helper.read("COIN", "COIN1", false);
+        level2Coins = helper.read("COIN", "COIN2", false);
+        level3Coins = helper.read("COIN", "COIN3", false);
+        level4Coins = helper.read("COIN", "COIN4", false);
+        level5Coins = helper.read("COIN", "COIN5", false);
+        level6Coins = helper.read("COIN", "COIN6", false);
+        level7Coins = helper.read("COIN", "COIN7", false);
+        level8Coins = helper.read("COIN", "COIN8", false);
+        level9Coins = helper.read("COIN", "COIN9", false);
+        level10Coins = helper.read("COIN", "COIN10", false);
+        level11Coins = helper.read("COIN", "COIN11", false);
+        level12Coins = helper.read("COIN", "COIN12", false);
+
+
     }
     public void show(){
 
@@ -94,6 +122,11 @@ public class LevelSelect implements Screen {
         Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
+        //
+
+
+
+
        //grassBackground.setPosition(DodgeGame.WIDTH / 2 - grassBackground.getWidth()/2, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
         grassBackground.setPosition(DodgeGame.WIDTH/8, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
         grassBackground.draw(game.batch);
@@ -145,6 +178,9 @@ public class LevelSelect implements Screen {
                 game.setScreen(new Level3(game));
             }
         }
+
+        displayStars();// calls displayStars which displays the stars!
+
         game.batch.draw(button4,X_VALUE_LEFT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE );
         game.batch.draw(button5, X_VALUE_LEFT, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button6, X_VALUE_LEFT, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
@@ -166,6 +202,236 @@ public class LevelSelect implements Screen {
             }
         }
         game.batch.end();
+    }
+
+    public void displayStars(){
+        if(level1Coins != null){
+            //display 0 star for the level1 button
+            if(Integer.parseInt(level1Coins) == 0){
+
+            }
+            //display 1 star for the level1 button
+            else if(Integer.parseInt(level1Coins) < 5){
+
+            }
+            //display 2 stars for the level1 button
+            else if((Integer.parseInt(level1Coins) < 9)){
+
+            }
+            //display 3 stars for the level1 button
+            else{
+
+            }
+        }
+
+        else if(level2Coins != null){
+            //display 0 star for the level2 button
+            if(Integer.parseInt(level2Coins) == 0){
+
+            }
+            //display 1 star for the level2 button
+            else if(Integer.parseInt(level2Coins) < 5){
+
+            }
+            //display 2 stars for the level2 button
+            else if((Integer.parseInt(level2Coins) < 9)){
+
+            }
+            //display 3 stars for the level2 button
+            else{
+
+            }
+        }
+
+        else if(level3Coins != null){
+            //display 0 star for the level3 button
+            if(Integer.parseInt(level3Coins) == 0){
+
+            }
+            //display 1 star for the level3 button
+            else if(Integer.parseInt(level3Coins) < 5){
+
+            }
+            //display 2 stars for the level3 button
+            else if((Integer.parseInt(level3Coins) < 9)){
+
+            }
+            //display 3 stars for the level3 button
+            else{
+
+            }
+        }
+
+        else if(level4Coins != null){
+            //display 0 star for the level4 button
+            if(Integer.parseInt(level4Coins) == 0){
+
+            }
+            //display 1 star for the level4 button
+            else if(Integer.parseInt(level4Coins) < 5){
+
+            }
+            //display 2 stars for the level4 button
+            else if((Integer.parseInt(level4Coins) < 9)){
+
+            }
+            //display 3 stars for the level4 button
+            else{
+
+            }
+        }
+
+        else if(level5Coins != null){
+            //display  0 star for the level5 button
+            if(Integer.parseInt(level5Coins) == 0){
+
+            }
+            //display 1 star for the level5 button
+            else if(Integer.parseInt(level5Coins) < 5){
+
+            }
+            //display 2 stars for the level5 button
+            else if((Integer.parseInt(level5Coins) < 9)){
+
+            }
+            //display 3 stars for the level5 button
+            else{
+
+            }
+        }
+
+        else if(level6Coins != null){
+            //display  0 star for the level6 button
+            if(Integer.parseInt(level6Coins) == 0){
+
+            }
+            //display 1 star for the level6 button
+            else if(Integer.parseInt(level6Coins) < 5){
+
+            }
+            //display 2 stars for the level6 button
+            else if((Integer.parseInt(level6Coins) < 9)){
+
+            }
+            //display 3 stars for the level6 button
+            else{
+
+            }
+        }
+
+        else if(level7Coins != null){
+            //display  0 star for the level7 button
+            if(Integer.parseInt(level7Coins) == 0){
+
+            }
+            //display 1 star for the level7 button
+            else if(Integer.parseInt(level7Coins) < 5){
+
+            }
+            //display 2 stars for the level7 button
+            else if((Integer.parseInt(level7Coins) < 9)){
+
+            }
+            //display 3 stars for the level7 button
+            else{
+
+            }
+        }
+
+        else if(level8Coins != null){
+            //display  0 star for the level8 button
+            if(Integer.parseInt(level8Coins) == 0){
+
+            }
+            //display 1 star for the level8 button
+            else if(Integer.parseInt(level8Coins) < 5){
+
+            }
+            //display 2 stars for the level8 button
+            else if((Integer.parseInt(level8Coins) < 9)){
+
+            }
+            //display 3 stars for the level8 button
+            else{
+
+            }
+        }
+
+        else if(level9Coins != null){
+            //display  0 star for the level9 button
+            if(Integer.parseInt(level9Coins) == 0){
+
+            }
+            //display 1 star for the level9 button
+            else if(Integer.parseInt(level9Coins) < 5){
+
+            }
+            //display 2 stars for the level9 button
+            else if((Integer.parseInt(level9Coins) < 9)){
+
+            }
+            //display 3 stars for the level9 button
+            else{
+
+            }
+        }
+
+        else if(level10Coins != null){
+            //display  0 star for the level10 button
+            if(Integer.parseInt(level10Coins) == 0){
+
+            }
+            //display 1 star for the level10 button
+            else if(Integer.parseInt(level10Coins) < 5){
+
+            }
+            //display 2 stars for the level10 button
+            else if((Integer.parseInt(level10Coins) < 9)){
+
+            }
+            //display 3 stars for the level10 button
+            else{
+
+            }
+        }
+
+        else if(level11Coins != null){
+            //display  0 star for the level11 button
+            if(Integer.parseInt(level11Coins) == 0){
+
+            }
+            //display 1 star for the level11 button
+            else if(Integer.parseInt(level11Coins) < 5){
+
+            }
+            //display 2 stars for the level11 button
+            else if((Integer.parseInt(level11Coins) < 9)){
+
+            }
+            //display 3 stars for the level11 button
+            else{
+
+            }
+        }
+
+        else if(level12Coins != null){
+            //display  0 star for the level12 button
+            if(Integer.parseInt(level12Coins) == 0){
+
+            }
+            //display 1 star for the level12 button
+            else if(Integer.parseInt(level12Coins) < 5){
+
+            }
+            //display 2 stars for the level12 button
+            else if((Integer.parseInt(level12Coins) < 9)){
+
+            }
+            //display 3 stars for the level12 button
+            else{
+
+            }
+        }
     }
     public void resize(int width, int height){
 

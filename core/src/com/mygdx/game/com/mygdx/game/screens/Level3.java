@@ -14,7 +14,7 @@ public class Level3 extends Level implements Screen{
         currentLevelNumber = 3;
         game = g;
         level1 = new Texture("dodgeGrassBG.png");
-
+        coins = 0;
         world = "GRASS";
         level = " LEVEL 3";
         coinSpawnInterval = 10;

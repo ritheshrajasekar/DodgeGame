@@ -34,7 +34,7 @@ public class WonLevel implements Screen {
 
         wonLevelBackgroundSprite.scale(7);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/spinAndBurst.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/smashLifelight.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

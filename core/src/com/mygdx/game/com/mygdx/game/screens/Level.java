@@ -297,7 +297,7 @@ public class Level {
             }
             cannonSpawned = true;
         }
-        if (timer.getWorldTimer() % boulderSpawnInterval != 0){
+        if (timer.getWorldTimer() % cannonSpawnInterval != 0){
             cannonSpawned = false;
         }
     }

@@ -15,9 +15,9 @@ public class GameLevelManager {
             case 2:
                 game.setScreen( new Level3(game));
                 break;
-//            case 3:
-//                game.setScreen( new Level4(game));
-//                break;
+           case 3:
+               game.setScreen( new Level4(game));
+               break;
 //            case 4:
 //                game.setScreen( new Level5(game));
 //                break;
@@ -61,9 +61,9 @@ public class GameLevelManager {
             case 3:
                game.setScreen( new Level3(game));
                break;
-//            case 4:
-//                game.setScreen( new Level4(game));
-//                break;
+            case 4:
+                game.setScreen( new Level4(game));
+                break;
 //            case 5:
 //                game.setScreen( new Level5(game));
 //                break;

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Cannon extends Entity {
-    public static final int SPEED = 300;
+    public static final int SPEED = 350;
 
     private static Texture cannonTexture;
     private TextureRegion[] cannonAnimationFrames;
@@ -44,7 +44,7 @@ public class Cannon extends Entity {
 
         cannonTexture = new Texture("dodgeCannonball.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(cannonTexture,8,8);
-        cannonAnimationFrames = new TextureRegion[12];
+        cannonAnimationFrames = new TextureRegion[1];
 
         int index = 0;
         for (int i = 0; i < 1; i++){
@@ -53,7 +53,7 @@ public class Cannon extends Entity {
             }
         }
 
-        cannonAnimation = new Animation(1f/12f,cannonAnimationFrames);
+        cannonAnimation = new Animation(1f/1f,cannonAnimationFrames);
     }
 
     //boulder movement

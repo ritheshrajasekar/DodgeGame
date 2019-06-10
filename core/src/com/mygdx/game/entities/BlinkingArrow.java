@@ -20,10 +20,11 @@ public class BlinkingArrow extends Entity{
 
     public float elapsedTime;
 
-    public BlinkingArrow(int dx, int dy, String d){
+    public BlinkingArrow(int dx, int dy, String d, String t){
         x = dx;
         y = dy;
         direction = d;
+        arrowTexture = new Texture(t);
 
         //rotates arrowTexture and shifts it in the appropriate direction
         if (direction == "RIGHT") {
@@ -44,8 +45,6 @@ public class BlinkingArrow extends Entity{
             yOffset = 7;
         }
 
-        //default texture
-        arrowTexture = new Texture("sprites/dodgeBoulderArrow.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(arrowTexture,10,8);
         arrowAnimationFrames = new TextureRegion[2];
 

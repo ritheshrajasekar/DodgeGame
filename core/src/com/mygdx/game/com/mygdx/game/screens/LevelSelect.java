@@ -110,6 +110,7 @@ public class LevelSelect implements Screen {
         hellBackground.draw(game.batch);
 
         game.batch.draw(button1, X_VALUE_LEFTMOST, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE);
+        // checks if the mouse is clicking the level 1 button, and if level 1 is even unlocked(which it is always)
         if(Gdx.input.getX() < X_VALUE_LEFTMOST + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_LEFTMOST &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_TOP  &&
@@ -121,7 +122,29 @@ public class LevelSelect implements Screen {
             }
         }
         game.batch.draw(button2, X_VALUE_LEFTMOST, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
+        // checks the level 2 condition: if mouse is clicking, and if the level is unlocked through file streaming
+        if(Gdx.input.getX() < X_VALUE_LEFTMOST + BUTTON_SIZE &&
+                Gdx.input.getX() > X_VALUE_LEFTMOST &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_MIDDLE  &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_MIDDLE + BUTTON_SIZE && helper.read("LEVEL", "LEVEL2", false)!= null && helper.read("LEVEL", "LEVEL2", false).equals("TRUE")){
+
+            if(Gdx.input.isTouched()){
+                this.dispose();
+                game.setScreen(new Level2(game));
+            }
+        }
         game.batch.draw(button3, X_VALUE_LEFTMOST, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);
+        // checks the level 3 condition: if mouse is clicking, and if the level is unlocked through file streaming
+        if(Gdx.input.getX() < X_VALUE_LEFTMOST + BUTTON_SIZE &&
+                Gdx.input.getX() > X_VALUE_LEFTMOST &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_BOTTOM  &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_BOTTOM + BUTTON_SIZE && helper.read("LEVEL", "LEVEL3", false)!= null && helper.read("LEVEL", "LEVEL3", false).equals("TRUE")){
+
+            if(Gdx.input.isTouched()){
+                this.dispose();
+                game.setScreen(new Level3(game));
+            }
+        }
         game.batch.draw(button4,X_VALUE_LEFT, Y_VALUE_TOP, BUTTON_SIZE, BUTTON_SIZE );
         game.batch.draw(button5, X_VALUE_LEFT, Y_VALUE_MIDDLE, BUTTON_SIZE, BUTTON_SIZE);
         game.batch.draw(button6, X_VALUE_LEFT, Y_VALUE_BOTTOM, BUTTON_SIZE, BUTTON_SIZE);

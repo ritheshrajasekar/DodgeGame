@@ -44,6 +44,5 @@ public class FileStreaming {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(stars[0]);
     }
 }

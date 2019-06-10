@@ -53,14 +53,13 @@ public class GameOver implements Screen {
         gameOverBackgroundSprite.draw(game.batch);
         game.batch.draw(retryButton, XVALUE_RETRY_LEVEL, YVALUE_RETRY_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
         //sees if the retry button is clicked, and if it is, calls GameLevelManager.retry() which retries the level
-        if(Gdx.input.getX() < XVALUE_RETRY_LEVEL + BUTTON_SIZE &&
-                Gdx.input.getX() > XVALUE_RETRY_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_RETRY_LEVEL  &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < YVALUE_RETRY_LEVEL + BUTTON_SIZE ){
-
+        if (Gdx.input.getX() < XVALUE_RETRY_LEVEL + BUTTON_SIZE &&
+            Gdx.input.getX() > XVALUE_RETRY_LEVEL &&
+            DodgeGame.HEIGHT - Gdx.input.getY() > YVALUE_RETRY_LEVEL  &&
+            DodgeGame.HEIGHT - Gdx.input.getY() < YVALUE_RETRY_LEVEL + BUTTON_SIZE ){
             if(Gdx.input.isTouched()){
                 this.dispose();
-                new GameLevelManager().retry(game, currentLevelNumber);
+                GameLevelManager.playLevel(game, currentLevelNumber);
             }
         }
         game.batch.draw(levelSelectButton, XVALUE_SELECT_LEVEL, YVALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);

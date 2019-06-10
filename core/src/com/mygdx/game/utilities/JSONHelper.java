@@ -87,14 +87,7 @@ public class JSONHelper {
         //String[][] kv = new String [24][2];
         String currentKey;
 
- /*       if(attrType==null)
-            myFileLocation = levelFileLocation;
-        else if(attrType.equals("LEVEL"))
-            myFileLocation = levelFileLocation;
-        else if(attrType.equals("COIN"))
-            myFileLocation = coinFileLocation;
-        else
-            myFileLocation = levelFileLocation;*/
+
 
         try {
             Object inpFileObject = parser.parse(new FileReader(myFileLocation));

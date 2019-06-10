@@ -18,9 +18,9 @@ public class Level3 extends Level implements Screen{
         world = "GRASS";
         level = " LEVEL 3";
         coinSpawnInterval = 10;
-        minBoulders = 4;
-        maxBoulders = 7;
-        boulderSpawnInterval = 3;
+        minBoulders = 5;
+        maxBoulders = 8;
+        boulderSpawnInterval = 2;
         boulderSpawnDelay = 2;
 
         playMusic();

@@ -41,8 +41,18 @@ public class Level {
     public int boulderSpawnInterval;
     public int boulderSpawnDelay;
     public boolean bouldersSpawned;
-    public CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();;
+
+    public int minCannon;
+    public int maxCannon;
+    public int cannonSpawnInterval;
+    public int cannonSpawnDelay;
+    public boolean cannonSpawned;
+
+    public CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
     public CopyOnWriteArrayList<BoulderArrow> boulderArrowList = new CopyOnWriteArrayList<BoulderArrow>();
+
+    public CopyOnWriteArrayList<Cannon> cannonList = new CopyOnWriteArrayList<Cannon>();
+    public CopyOnWriteArrayList<CannonArrow> cannonArrowList = new CopyOnWriteArrayList<CannonArrow>();
 
     public Texture levelTexture;
     public static Sprite BackgroundSprite;
@@ -148,6 +158,30 @@ public class Level {
         }
     }
 
+    public void renderCannon(float delta) {
+        for (int i = 0; i < cannonList.size(); i++) {
+            //only updates and renders once the boulder is spawned
+            if (cannonList.get(i).spawned) {
+                //updates and render if the boulder is on screen
+                if (cannonList.get(i).isOnScreen) {
+                    cannonList.get(i).update(delta);
+                    cannonList.get(i).render(game.batch);
+                    //deletes boulder and arrowTexture once the boulder leaves the screen
+                } else {
+                    cannonList.remove(i);
+                    cannonArrowList.remove(i);
+                    i--;
+                }
+                //if the boulder hasn't spawned yet, the arrowTexture will blink
+                //(it will stop blinking after the boulder is spawned because it exits this else statement)
+            } else {
+                cannonArrowList.get(i).render(game.batch);
+                if (cannonArrowList.get(i).elapsedTime > cannonSpawnDelay)
+                    cannonList.get(i).spawned = true;
+            }
+        }
+    }
+
 
     public void spawnCoins(){
         if (timer.getWorldTimer() % coinSpawnInterval == 0 && !coinsSpawned){
@@ -217,9 +251,70 @@ public class Level {
         }
     }
 
+    public void spawnCannon() {
+        if (timer.getWorldTimer() % cannonSpawnInterval == 0 && !cannonSpawned){
+            //x and y lists to test if it's trying spawn a boulder where one already exists
+            ArrayList<Integer> xList = new ArrayList<Integer>();
+            ArrayList<Integer> yList = new ArrayList<Integer>();
+
+            for (int i = 0; i < (int) ((maxCannon - minCannon + 1) * Math.random() + minCannon); i++) {
+                int x = 0;
+                int y = 0;
+                String direction = DIRECTIONS[(int) (Math.random() * 4)];
+
+                // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
+                if (direction == "UP") {
+                    x = (int) (Math.random() * 8);
+                    y = -1;
+                } else if (direction == "DOWN") {
+                    x = (int) (Math.random() * 8);
+                    y = 8;
+                } else if (direction == "LEFT") {
+                    x = 8;
+                    y = (int) (Math.random() * 8);
+                } else if (direction == "RIGHT") {
+                    x = -1;
+                    y = (int) (Math.random() * 8);
+                }
+
+                //does not create a boulder if one is already there
+                boolean inList = false;
+                for (int tempX : xList) {
+                    for (int tempY : yList) {
+                        if (x == tempX && y == tempY) {
+                            inList = true;
+                        }
+                    }
+                }
+                if (!inList) {
+                    cannonList.add(new Cannon(x, y, direction));
+                    cannonArrowList.add(new CannonArrow(x, y, direction));
+                    xList.add(x);
+                    yList.add(y);
+                } else {
+                    i--;
+                }
+            }
+            cannonSpawned = true;
+        }
+        if (timer.getWorldTimer() % boulderSpawnInterval != 0){
+            cannonSpawned = false;
+        }
+    }
+
     public void detectBoulderCollision() {
         for (int i = 0; i < boulderList.size(); i++) {
             if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
+                //loseSound.play()
+                music.dispose();
+                game.setScreen(new GameOver(game));
+            }
+        }
+    }
+
+    public void detectCannonCollision(){
+        for (int i = 0; i < cannonList.size(); i++) {
+            if (cannonList.get(i).x == player.x && cannonList.get(i).y == player.y) {
                 //loseSound.play()
                 music.dispose();
                 game.setScreen(new GameOver(game));

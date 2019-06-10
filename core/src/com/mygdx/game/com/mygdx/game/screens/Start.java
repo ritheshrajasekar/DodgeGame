@@ -19,8 +19,6 @@ public class Start implements Screen {
     private static final int EXIT_BUTTON_HEIGHT = 150;
     private static final int PLAY_BUTTON_WIDTH = 300;
     private static final int PLAY_BUTTON_HEIGHT = 150;
-    private static final int BACKGROUND_WIDTH = DodgeGame.WIDTH;
-    private static final int BACKGROUND_HEIGHT = DodgeGame.HEIGHT;
     private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.1);
     private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.4);
     private Music music;
@@ -52,8 +50,6 @@ public class Start implements Screen {
         game.batch.begin();
         backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth()/2, DodgeGame.HEIGHT/2 - backgroundSprite.getHeight()/2);
         backgroundSprite.draw(game.batch);
-        //game.batch.draw(startScreenBackground, DodgeGame.WIDTH/2 - BACKGROUND_WIDTH/2, DodgeGame.HEIGHT - BACKGROUND_HEIGHT/2, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
-
 
         if(Gdx.input.getX() < DodgeGame.WIDTH/2  + EXIT_BUTTON_WIDTH /2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2 &&

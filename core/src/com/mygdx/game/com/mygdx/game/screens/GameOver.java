@@ -27,7 +27,6 @@ public class GameOver implements Screen {
 
     public static Sprite gameOverBackgroundSprite;
 
-    //private timer Timer;
     public GameOver(DodgeGame game){
         this.game = game;
         levelSelectButton = new Texture("levelSelectButton.png");

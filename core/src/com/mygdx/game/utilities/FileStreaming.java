@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import static com.mygdx.game.com.mygdx.game.screens.Level.NUM_LEVELS;
 
 public class FileStreaming {
-    public static File file = new File("GameSave.txt");
+    public static File file = new File("saves/GameSave.txt");
     public static int stars[] = new int[NUM_LEVELS];
     public static int unlockedLevel = 1;
 

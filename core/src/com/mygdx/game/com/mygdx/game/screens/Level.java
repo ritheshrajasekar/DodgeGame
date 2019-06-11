@@ -204,7 +204,7 @@ public class Level {
                 }
 
                 if (!inList) {
-                    coinList.add(new Coin(x, y));
+                    coinList.add(new Coin());
                     xList.add(x);
                     yList.add(y);
                 }
@@ -348,5 +348,13 @@ public class Level {
                 game.setScreen(new GameOver(game));
             }
         }
+    }
+
+    public void dispose(){
+        grid.dispose();
+        coinSound.dispose();
+        music.dispose();
+        levelTexture.dispose();
+        BackgroundSprite.getTexture().dispose();
     }
 }

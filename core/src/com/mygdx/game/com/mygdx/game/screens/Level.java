@@ -187,7 +187,7 @@ public class Level {
             yList.clear();
         }
         if (timer.getWorldTimer() % coinSpawnInterval == 0 && !coinsSpawned){
-            coinList.clear();
+           // coinList.clear();
             for (int i = 0; i < 5; i++){
                 int x = (int)(8 * Math.random());
                 int y = (int)(8 * Math.random());
@@ -204,10 +204,11 @@ public class Level {
                 }
 
                 if (!inList) {
-                    coinList.add(new Coin());
+                    coinList.add(new Coin(x, y));
                     xList.add(x);
                     yList.add(y);
-                } else {
+                }
+                else {
                     i--;
                 }
             }

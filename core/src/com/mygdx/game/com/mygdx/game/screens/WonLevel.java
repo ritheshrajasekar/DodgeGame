@@ -19,15 +19,16 @@ public class WonLevel implements Screen {
     private Music music;
 
    // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
-   // private static final Texture nextButton = new Texture("sprites/nextLevel.png");
+  // private static final Texture nextButton = new Texture("sprites/nextLevel.png");
    // private static final Texture wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
    // private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
 
     //don't change the declaration of textures and sprites please because it messed up the code previously
     private Texture levelSelectButton;
     private Texture nextButton ;
-    private Texture wonLevelBackground;
-    public static Sprite wonLevelBackgroundSprite;
+   private Texture wonLevelBackground;
+    private  static Sprite wonLevelBackgroundSprite;
+
 
 
     private static final int BUTTON_SIZE = 300;
@@ -42,7 +43,7 @@ public class WonLevel implements Screen {
         nextButton = new Texture("sprites/nextLevel.png");
         wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
         wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
-        wonLevelBackgroundSprite.scale(7);
+        wonLevelBackgroundSprite.scale(6);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/02 - Win.mp3"));
         music.setLooping(false);

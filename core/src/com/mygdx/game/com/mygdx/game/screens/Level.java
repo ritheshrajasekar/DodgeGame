@@ -26,8 +26,8 @@ public class Level {
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
-    public static final Texture grid = new Texture("sprites/dodgeGrid.png");
-    public static final Music coinSound = Gdx.audio.newMusic(Gdx.files.internal("music/04 - Coin.mp3"));
+    public static final Texture GRID = new Texture("sprites/dodgeGrid.png");
+    public static final Music COIN_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/04 - Coin.mp3"));
 
     public String world, level;
     public Music music;
@@ -113,7 +113,7 @@ public class Level {
     }
 
     public void drawGrid() {
-        game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
+        game.batch.draw(GRID, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
     }
 
     public void renderPlayer() {
@@ -282,8 +282,8 @@ public class Level {
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
                 coins++;
-                coinSound.stop();
-                coinSound.play();
+                COIN_SOUND.stop();
+                COIN_SOUND.play();
                 coinList.remove(i);
             }
         }
@@ -307,8 +307,8 @@ public class Level {
     }
 
     public void dispose(){
-        grid.dispose();
-        coinSound.dispose();
+        GRID.dispose();
+        COIN_SOUND.dispose();
         music.dispose();
         levelTexture.dispose();
         BackgroundSprite.getTexture().dispose();

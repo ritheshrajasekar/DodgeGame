@@ -70,11 +70,9 @@ public class Level {
 
     public void displayBackground(Texture background) {
         BackgroundSprite = new Sprite(background);
-        BackgroundSprite.scale(7);
+        BackgroundSprite.scale(6);
         game.batch.begin();
         BackgroundSprite.setPosition(DodgeGame.WIDTH / 2 - BackgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - BackgroundSprite.getHeight() / 2);
-        // BackgroundSprite.setPosition(0, 0);
-
         BackgroundSprite.draw(game.batch);
         game.batch.end();
     }

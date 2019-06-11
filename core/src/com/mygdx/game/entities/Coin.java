@@ -12,7 +12,7 @@ public class Coin extends Entity{
     Texture coin;
     TextureRegion animationFrames[];
     Animation animation;
-    float elapsedTime;
+    public float elapsedTime;
 
     public Coin(int xVal, int yVal){
         coin = new Texture("sprites/dodgeBigCoin.png");

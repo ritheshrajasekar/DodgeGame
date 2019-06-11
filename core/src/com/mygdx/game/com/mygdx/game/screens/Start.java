@@ -34,7 +34,7 @@ public class Start implements Screen {
         playButtonActive = new Texture("sprites/playButton2Active.jpg");
         startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
         backgroundSprite = new Sprite(startScreenBackground);
-        backgroundSprite.scale(7);
+        backgroundSprite.scale(6);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);

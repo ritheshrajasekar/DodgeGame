@@ -33,7 +33,7 @@ public class GameOver implements Screen {
         retryButton = new Texture("sprites/retryLevel.png");
         gameOverBackground = new Texture("sprites/gameOverBackground.png");
         gameOverBackgroundSprite = new Sprite(gameOverBackground);
-        gameOverBackgroundSprite.scale(7);
+        gameOverBackgroundSprite.scale(6);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/03 - Lose.mp3"));
         music.setLooping(false);
         music.setVolume(1f);

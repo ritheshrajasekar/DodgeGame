@@ -18,7 +18,7 @@ public class Level {
     public static final int PLAYER_HEIGHT = 70;//10*7
     public static final int COIN_SIZE = 56; // 8*7
     public static final double COIN_SPAWN_INTERVAL = 10;
-    public static final double COIN_DESPAWN_DELAY = 7.5;
+    public static final double COIN_DESPAWN_DELAY = 4;
     public static final int GRID_WIDTH = 665;
     public static final int GRID_HEIGHT = 665;
     public static final int GRID_OFFSET_X = 588;
@@ -68,6 +68,8 @@ public class Level {
         BackgroundSprite.scale(7);
         game.batch.begin();
         BackgroundSprite.setPosition(DodgeGame.WIDTH/2 -BackgroundSprite.getWidth()/2, DodgeGame.HEIGHT/2 - BackgroundSprite.getHeight()/2);
+       // BackgroundSprite.setPosition(0, 0);
+
         BackgroundSprite.draw(game.batch);
         game.batch.end();
     }
@@ -196,7 +198,7 @@ public class Level {
                     }
                 }
 
-                if (!inList) {
+                if (inList == false) {
                     coinList.add(new Coin(x, y));
                     xList.add(x);
                     yList.add(y);

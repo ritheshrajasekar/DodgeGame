@@ -170,6 +170,7 @@ public class LevelSelect implements Screen {
         sand.dispose();
         jungle.dispose();
         hell.dispose();
+        homeButton.dispose();
         for (int i = 0; i < NUM_LEVELS; i++) {
             buttons[i].dispose();
         }

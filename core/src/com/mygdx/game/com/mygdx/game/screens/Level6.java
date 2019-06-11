@@ -3,26 +3,27 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.FileStreaming;
 
 
-public class Level4 extends Level implements Screen{
-    public Level4(DodgeGame g) {
-        currentLevelNumber = 4;
+public class Level6 extends Level implements Screen{
+    public Level6(DodgeGame g) {
+        currentLevelNumber = 6;
         game = g;
         levelTexture = new Texture("sprites/dodgeDesertBG.png");
         coins = 0;
         world = "SAND";
-        level = " LEVEL 4";
+        level = " LEVEL 6";
         coinSpawnInterval = 10;
 
         minBoulders = 3;
         maxBoulders = 6;
-        boulderSpawnInterval = 5;
+        boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
         minCannon = 3;
         maxCannon = 6;
-        cannonSpawnInterval = 7;
+        cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
         playMusic();

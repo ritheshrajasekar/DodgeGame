@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
 
-public class Level4 extends Level implements Screen{
-    public Level4(DodgeGame g) {
-        currentLevelNumber = 4;
+public class Level5 extends Level implements Screen{
+    public Level5(DodgeGame g) {
+        currentLevelNumber = 5;
         game = g;
         levelTexture = new Texture("sprites/dodgeDesertBG.png");
         coins = 0;
         world = "SAND";
-        level = " LEVEL 4";
+        level = " LEVEL 5";
         coinSpawnInterval = 10;
 
         minBoulders = 3;
@@ -22,7 +22,7 @@ public class Level4 extends Level implements Screen{
 
         minCannon = 3;
         maxCannon = 6;
-        cannonSpawnInterval = 7;
+        cannonSpawnInterval = 6;
         cannonSpawnDelay = 3;
 
         playMusic();

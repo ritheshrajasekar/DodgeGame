@@ -134,7 +134,7 @@ public class Level {
                     {6.6, 6.75},
                     {7, 7.1},
                     {7.2, 7.3},
-                    {7.4, 10}
+                    {7.4, 7.5}
             };
             boolean blink = false;
             for (double[] t : blinkTimes) {
@@ -213,7 +213,7 @@ public class Level {
             coinsSpawned = false;
         }
         //coins despawn after 7.5 seconds
-        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL + COIN_DESPAWN_DELAY == COIN_SPAWN_INTERVAL){
+        if (coinList.size() > 0 && coinList.get(0).elapsedTime > COIN_DESPAWN_DELAY){
             coinList.clear();
         }
     }

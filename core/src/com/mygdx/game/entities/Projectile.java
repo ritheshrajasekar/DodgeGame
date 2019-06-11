@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Projectile extends Entity {
+    //speed can not go above 1500 because that would be moving more than one tile per frame; it'll still work but is just not ideal
     private int speed;
     private float elapsedTime;
     public boolean isOnScreen;

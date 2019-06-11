@@ -1,8 +1,6 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
@@ -15,7 +13,7 @@ public class Level3 extends Level implements Screen{
         coins = 0;
         world = "GRASS";
         level = " LEVEL 3";
-        coinSpawnInterval = 10;
+        COIN_SPAWN_INTERVAL = 10;
         minBoulders = 5;
         maxBoulders = 8;
         boulderSpawnInterval = 3;

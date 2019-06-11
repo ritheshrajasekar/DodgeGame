@@ -9,7 +9,6 @@ import com.mygdx.game.DodgeGame;
 import com.mygdx.game.entities.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level {
@@ -18,6 +17,8 @@ public class Level {
     public static final int PLAYER_WIDTH = 56;//8*7
     public static final int PLAYER_HEIGHT = 70;//10*7
     public static final int COIN_SIZE = 56; // 8*7
+    public static final double COIN_SPAWN_INTERVAL = 10;
+    public static final double COIN_DESPAWN_DELAY = 7.5;
     public static final int GRID_WIDTH = 665;
     public static final int GRID_HEIGHT = 665;
     public static final int GRID_OFFSET_X = 588;
@@ -35,7 +36,6 @@ public class Level {
     public Player player;
     public static int coins;
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
-    public double coinSpawnInterval;
     public boolean coinsSpawned;
     public int minBoulders;
     public int maxBoulders;
@@ -178,21 +178,14 @@ public class Level {
 
 
     public void spawnCoins(){
-        ArrayList<Integer> xList = new ArrayList<Integer>();
-        ArrayList<Integer> yList = new ArrayList<Integer>();
+        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL == 0 && !coinsSpawned){
+            //x and y lists to test if it's trying spawn a coin where one already exists
+            ArrayList<Integer> xList = new ArrayList<Integer>();
+            ArrayList<Integer> yList = new ArrayList<Integer>();
 
-        if(timer.getWorldTimer() % 10 == 2.5){
-            coinList.clear();
-            xList.clear();
-            yList.clear();
-        }
-        if (timer.getWorldTimer() % coinSpawnInterval == 0 && !coinsSpawned){
-           // coinList.clear();
             for (int i = 0; i < 5; i++){
                 int x = (int)(8 * Math.random());
                 int y = (int)(8 * Math.random());
-
-
 
                 boolean inList = false;
                 for (int tempX : xList) {
@@ -207,15 +200,18 @@ public class Level {
                     coinList.add(new Coin(x, y));
                     xList.add(x);
                     yList.add(y);
-                }
-                else {
+                } else {
                     i--;
                 }
             }
             coinsSpawned = true;
         }
-        if (timer.getWorldTimer() % coinSpawnInterval != 0){
+        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL != 0){
             coinsSpawned = false;
+        }
+        //coins despawn after 7.5 seconds
+        if(timer.getWorldTimer() % COIN_SPAWN_INTERVAL - COIN_DESPAWN_DELAY == 0){
+            coinList.clear();
         }
     }
 

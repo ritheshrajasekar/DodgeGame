@@ -40,13 +40,13 @@ public class WonLevel implements Screen {
         music.play();
     }
     public void show(){
-        //coin to stars converter
-        int stars = 0;
-        if (coins > 0 && coins <= 8)
+        //coin to stars converter; total possible coins: 30
+        int stars;
+        if (coins < 20)
             stars = 1;
-        if (coins > 8 && coins <= 11)
+        else if (coins < 30)
             stars = 2;
-        if (coins >= 12)
+        else
             stars = 3;
 
         //assigns stars and unlockedLevel to their appropriate values

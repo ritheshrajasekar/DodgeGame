@@ -17,8 +17,14 @@ public class WonLevel implements Screen {
     private DodgeGame game;
 
     private Music music;
+    private int stars;
 
-   // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
+    private final Texture zeroStar = new Texture("sprites/dodge0Star.png");
+    private final Texture oneStar = new Texture("sprites/dodge1Star.png");
+    private final Texture twoStar = new Texture("sprites/dodge2Star.png");
+    private final Texture threeStar = new Texture("sprites/dodge3Star.png");
+
+    // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
   // private static final Texture nextButton = new Texture("sprites/nextLevel.png");
    // private static final Texture wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
    // private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
@@ -53,7 +59,6 @@ public class WonLevel implements Screen {
 
     public void show() {
         //coin to stars converter; total possible coins: 30
-        int stars;
         if (coins < 20)
             stars = 1;
         else if (coins < 30)
@@ -99,6 +104,16 @@ public class WonLevel implements Screen {
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
             }
+        }
+
+        if(stars == 3){
+            game.batch.draw(threeStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+        }
+        else if(stars == 2){
+            game.batch.draw(twoStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+        }
+        else if(stars == 1){
+            game.batch.draw(oneStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
         }
 
         game.batch.end();

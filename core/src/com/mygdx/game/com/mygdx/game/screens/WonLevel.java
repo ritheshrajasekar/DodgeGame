@@ -18,10 +18,17 @@ public class WonLevel implements Screen {
 
     private Music music;
 
-    private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
-    private static final Texture nextButton = new Texture("sprites/nextLevel.png");
-    private static final Texture wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
-    private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
+   // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
+   // private static final Texture nextButton = new Texture("sprites/nextLevel.png");
+   // private static final Texture wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
+   // private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
+
+    //don't change the declaration of textures and sprites please because it messed up the code previously
+    private Texture levelSelectButton;
+    private Texture nextButton ;
+    private Texture wonLevelBackground;
+    public static Sprite wonLevelBackgroundSprite;
+
 
     private static final int BUTTON_SIZE = 300;
     private static final int X_VALUE_NEXT_LEVEL = (int) (DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2;
@@ -31,7 +38,10 @@ public class WonLevel implements Screen {
 
     public WonLevel(DodgeGame game) {
         this.game = game;
-
+        levelSelectButton = new Texture("sprites/levelSelectButton.png");
+        nextButton = new Texture("sprites/nextLevel.png");
+        wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
+        wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
         wonLevelBackgroundSprite.scale(7);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/02 - Win.mp3"));
@@ -110,6 +120,9 @@ public class WonLevel implements Screen {
     }
 
     public void dispose() {
+       wonLevelBackground.dispose();
+       levelSelectButton.dispose();
+        nextButton.dispose();
         music.dispose();
     }
 }

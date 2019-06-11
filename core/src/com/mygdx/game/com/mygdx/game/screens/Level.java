@@ -64,7 +64,7 @@ public class Level {
     public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
 
     public void show() {
-        timer = new Timer(60.1);
+        timer = new Timer(5);
         coinCounter = new CoinCounter();
     }
 
@@ -99,7 +99,8 @@ public class Level {
         //checks if time is up
         if (timer.getWorldTimer() <= 0) {
             music.stop();
-            music.dispose();
+             music.dispose();
+
             game.setScreen(new WonLevel(game));
         }
     }

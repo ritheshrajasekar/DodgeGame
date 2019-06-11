@@ -94,9 +94,6 @@ public class GameOver implements Screen {
     }
 
     public void dispose() {
-        // gameOverBackground.dispose();
         music.dispose();
-        // levelSelectButton.dispose();
-        // retryButton.dispose();
     }
 }

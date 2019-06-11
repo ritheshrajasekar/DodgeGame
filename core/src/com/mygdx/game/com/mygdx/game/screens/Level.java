@@ -35,9 +35,14 @@ public class Level {
     public Timer timer;
     public CoinCounter coinCounter;
     public Player player;
+    public Texture levelTexture;
+    public static Sprite BackgroundSprite;
+    public static int currentLevelNumber = 0;
+    public boolean[][] spawnLocations = new boolean[4][8];
+
     public static int coins;
-    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
     public boolean coinsSpawned;
+
     public int minBoulders;
     public int maxBoulders;
     public double boulderSpawnInterval;
@@ -50,15 +55,13 @@ public class Level {
     public double cannonSpawnDelay;
     public boolean cannonSpawned;
 
+    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
+
     public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> boulderArrowList = new CopyOnWriteArrayList<>();
 
     public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
-
-    public Texture levelTexture;
-    public static Sprite BackgroundSprite;
-    public static int currentLevelNumber = 0;
 
     public void show() {
         timer = new Timer(60.1);
@@ -222,8 +225,8 @@ public class Level {
     public boolean spawnProjectile(double projectileSpawnInterval, boolean projectileSpawned, int maxProjectiles, int minProjectiles, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, int s, Animation a, String path) {
         if (timer.getWorldTimer() % projectileSpawnInterval == 0 && !projectileSpawned) {
             //x and y lists to test if it's trying spawn a projectile where one already exists
-            ArrayList<Integer> xList = new ArrayList<Integer>();
-            ArrayList<Integer> yList = new ArrayList<Integer>();
+            ArrayList<Integer> xList = new ArrayList<>();
+            ArrayList<Integer> yList = new ArrayList<>();
 
             for (int i = 0; i < (int) ((maxProjectiles - minProjectiles + 1) * Math.random() + minProjectiles); i++) {
                 int x = 0;

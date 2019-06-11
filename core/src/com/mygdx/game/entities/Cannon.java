@@ -3,7 +3,7 @@ package com.mygdx.game.entities;
 public class Cannon extends Projectile {
     public static final int SPEED = 500;
 
-    public Cannon(int dx, int dy, String d){
+    public Cannon(int dx, int dy, String d) {
         super(dx, dy, d, SPEED, createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1));
     }
 }

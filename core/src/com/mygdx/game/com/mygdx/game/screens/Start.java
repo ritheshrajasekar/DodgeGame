@@ -19,13 +19,14 @@ public class Start implements Screen {
     private static final int EXIT_BUTTON_HEIGHT = 150;
     private static final int PLAY_BUTTON_WIDTH = 300;
     private static final int PLAY_BUTTON_HEIGHT = 150;
-    private static final int EXIT_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.1);
-    private static final int PLAY_BUTTON_YVALUE = (int)(DodgeGame.HEIGHT * 0.4);
+    private static final int EXIT_BUTTON_YVALUE = (int) (DodgeGame.HEIGHT * 0.1);
+    private static final int PLAY_BUTTON_YVALUE = (int) (DodgeGame.HEIGHT * 0.4);
     private Music music;
 
     public static Sprite backgroundSprite;
+
     //private timer Timer;
-    public Start(DodgeGame game){
+    public Start(DodgeGame game) {
         this.game = game;
         exitButtonInactive = new Texture("sprites/exitButton.jpg");
         exitButtonActive = new Texture("sprites/exitButtonActive.jpg");
@@ -40,61 +41,64 @@ public class Start implements Screen {
         music.setVolume(1f);
         music.play();
     }
-    public void show(){
+
+    public void show() {
 
     }
 
-    public void render(float delta){
-        Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth()/2, DodgeGame.HEIGHT/2 - backgroundSprite.getHeight()/2);
+        backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - backgroundSprite.getHeight() / 2);
         backgroundSprite.draw(game.batch);
 
-        if(Gdx.input.getX() < DodgeGame.WIDTH/2  + EXIT_BUTTON_WIDTH /2 &&
-                Gdx.input.getX() > DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2 &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_YVALUE  &&
+        if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + EXIT_BUTTON_WIDTH / 2 &&
+                Gdx.input.getX() > DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2 &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_YVALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < EXIT_BUTTON_YVALUE + EXIT_BUTTON_HEIGHT) {
-            game.batch.draw(exitButtonActive, DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2,EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-            if(Gdx.input.isTouched() ==true){
+            game.batch.draw(exitButtonActive, DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2, EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
+            if (Gdx.input.isTouched() == true) {
                 Gdx.app.exit();
             }
+        } else {
+            game.batch.draw(exitButtonInactive, DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2, EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
         }
-
-        else {
-            game.batch.draw(exitButtonInactive, DodgeGame.WIDTH/2 - EXIT_BUTTON_WIDTH/2,EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-        }
-        if(Gdx.input.getX() < DodgeGame.WIDTH/2  + PLAY_BUTTON_WIDTH /2 &&
-                Gdx.input.getX() > DodgeGame.WIDTH/2 - PLAY_BUTTON_WIDTH/2 &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > PLAY_BUTTON_YVALUE  &&
+        if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + PLAY_BUTTON_WIDTH / 2 &&
+                Gdx.input.getX() > DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2 &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > PLAY_BUTTON_YVALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < PLAY_BUTTON_YVALUE + PLAY_BUTTON_HEIGHT) {
             game.batch.draw(playButtonActive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, PLAY_BUTTON_YVALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-            if(Gdx.input.isTouched() == true){
+            if (Gdx.input.isTouched() == true) {
                 music.stop();
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
             }
-        }
-        else {
-            game.batch.draw(playButtonInactive, DodgeGame.WIDTH/2 - PLAY_BUTTON_WIDTH/2,PLAY_BUTTON_YVALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+        } else {
+            game.batch.draw(playButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, PLAY_BUTTON_YVALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
 
         }
 
         game.batch.end();
     }
-    public void resize(int width, int height){
+
+    public void resize(int width, int height) {
 
     }
-    public void pause(){
+
+    public void pause() {
 
     }
-    public void resume(){
+
+    public void resume() {
 
     }
-    public void hide(){
+
+    public void hide() {
 
     }
-    public void dispose(){
+
+    public void dispose() {
         music.dispose();
     }
 }

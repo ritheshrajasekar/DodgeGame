@@ -24,12 +24,12 @@ public class WonLevel implements Screen {
     private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
 
     private static final int BUTTON_SIZE = 300;
-    private static final int X_VALUE_NEXT_LEVEL = (int)(DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2 ;
+    private static final int X_VALUE_NEXT_LEVEL = (int) (DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2;
     private static final int Y_VALUE_NEXT_LEVEL = 100;
-    private static final int X_VALUE_SELECT_LEVEL = (int)(DodgeGame.WIDTH * 0.75) - BUTTON_SIZE / 2;
+    private static final int X_VALUE_SELECT_LEVEL = (int) (DodgeGame.WIDTH * 0.75) - BUTTON_SIZE / 2;
     private static final int Y_VALUE_SELECT_LEVEL = 100;
 
-    public WonLevel(DodgeGame game){
+    public WonLevel(DodgeGame game) {
         this.game = game;
 
         wonLevelBackgroundSprite.scale(7);
@@ -39,7 +39,8 @@ public class WonLevel implements Screen {
         music.setVolume(1f);
         music.play();
     }
-    public void show(){
+
+    public void show() {
         //coin to stars converter; total possible coins: 30
         int stars;
         if (coins < 20)
@@ -58,32 +59,32 @@ public class WonLevel implements Screen {
         FileStreaming.write();
     }
 
-    public void render(float delta){
-        Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        wonLevelBackgroundSprite.setPosition(DodgeGame.WIDTH/2 - wonLevelBackgroundSprite.getWidth()/2,DodgeGame.HEIGHT/2 - wonLevelBackgroundSprite.getHeight()/2);
+        wonLevelBackgroundSprite.setPosition(DodgeGame.WIDTH / 2 - wonLevelBackgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - wonLevelBackgroundSprite.getHeight() / 2);
         wonLevelBackgroundSprite.draw(game.batch);
         game.batch.draw(nextButton, X_VALUE_NEXT_LEVEL, Y_VALUE_NEXT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
 
         //creates the next level button
-        if(Gdx.input.getX() < X_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
+        if (Gdx.input.getX() < X_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_NEXT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_NEXT_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_NEXT_LEVEL + BUTTON_SIZE ){
-            if(Gdx.input.isTouched()){
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_NEXT_LEVEL + BUTTON_SIZE) {
+            if (Gdx.input.isTouched()) {
                 this.dispose();
                 GameLevelManager.playLevel(game, currentLevelNumber + 1);
             }
         }
         game.batch.draw(levelSelectButton, X_VALUE_SELECT_LEVEL, Y_VALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
         //creates the next level select button
-        if(Gdx.input.getX() < X_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
+        if (Gdx.input.getX() < X_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_SELECT_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE ){
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE) {
 
-            if(Gdx.input.isTouched()){
+            if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
             }
@@ -91,19 +92,24 @@ public class WonLevel implements Screen {
 
         game.batch.end();
     }
-    public void resize(int width, int height){
+
+    public void resize(int width, int height) {
 
     }
-    public void pause(){
+
+    public void pause() {
 
     }
-    public void resume(){
+
+    public void resume() {
 
     }
-    public void hide(){
+
+    public void hide() {
 
     }
-    public void dispose(){
+
+    public void dispose() {
         music.dispose();
     }
 }

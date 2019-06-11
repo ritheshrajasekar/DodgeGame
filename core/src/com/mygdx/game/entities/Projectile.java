@@ -20,7 +20,7 @@ public class Projectile extends Entity {
     private int xOffset, yOffset;
     private float rotation;
 
-    public Projectile(int dx, int dy, String d, int s, Animation a){
+    public Projectile(int dx, int dy, String d, int s, Animation a) {
         isOnScreen = true;
         x = dx;
         y = dy;
@@ -52,18 +52,18 @@ public class Projectile extends Entity {
         projectileAnimationFrames = new TextureRegion[frames];
 
         int index = 0;
-        for (int i = 0; i < rows; i++){
+        for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 projectileAnimationFrames[index++] = tmpFrames[i][j];
             }
         }
-        return new Animation(1f/frames, projectileAnimationFrames);
+        return new Animation(1f / frames, projectileAnimationFrames);
     }
 
     //projectile movement
-    public void update(float deltaTime){
+    public void update(float deltaTime) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        if (direction == "RIGHT"){
+        if (direction == "RIGHT") {
             xOffset += speed * deltaTime;
             if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
                 xOffset -= PLAYER_MOVE_DISTANCE;
@@ -71,9 +71,7 @@ public class Projectile extends Entity {
             }
             if (x > 8)
                 isOnScreen = false;
-        }
-
-        else if(direction == "UP"){
+        } else if (direction == "UP") {
             yOffset += speed * deltaTime;
             if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
                 yOffset -= PLAYER_MOVE_DISTANCE;
@@ -81,9 +79,7 @@ public class Projectile extends Entity {
             }
             if (y > 8)
                 isOnScreen = false;
-        }
-
-        else if(direction == "LEFT"){
+        } else if (direction == "LEFT") {
             xOffset -= speed * deltaTime;
             if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
                 xOffset += PLAYER_MOVE_DISTANCE;
@@ -91,9 +87,7 @@ public class Projectile extends Entity {
             }
             if (x < -1)
                 isOnScreen = false;
-        }
-
-        else if(direction == "DOWN"){
+        } else if (direction == "DOWN") {
             yOffset -= speed * deltaTime;
             if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
                 yOffset += PLAYER_MOVE_DISTANCE;
@@ -104,7 +98,7 @@ public class Projectile extends Entity {
         }
     }
 
-    public void render(SpriteBatch batch){
-        batch.draw(projectileAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
+    public void render(SpriteBatch batch) {
+        batch.draw(projectileAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
     }
 }

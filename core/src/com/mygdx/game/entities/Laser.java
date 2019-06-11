@@ -22,7 +22,7 @@ public class Laser extends Entity {
     private int xOffset, yOffset;
     private float rotation;
 
-    public Laser(int dx, int dy, String d){
+    public Laser(int dx, int dy, String d) {
         isOnScreen = true;
         x = dx;
         y = dy;
@@ -43,23 +43,23 @@ public class Laser extends Entity {
         }
 
         laserTexture = new Texture("sprites/dodgeLaser.png");
-        TextureRegion[][] tmpFrames = TextureRegion.split(laserTexture,8,8);
+        TextureRegion[][] tmpFrames = TextureRegion.split(laserTexture, 8, 8);
         laserAnimationFrames = new TextureRegion[1];
 
         int index = 0;
-        for (int i = 0; i < 1; i++){
+        for (int i = 0; i < 1; i++) {
             for (int j = 0; j < 1; j++) {
                 laserAnimationFrames[index++] = tmpFrames[i][j];
             }
         }
 
-        laserAnimation = new Animation(1f/1f,laserAnimationFrames);
+        laserAnimation = new Animation(1f / 1f, laserAnimationFrames);
     }
 
     //laser movement
-    public void update(float deltaTime){
+    public void update(float deltaTime) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        if (direction.equals("RIGHT")){
+        if (direction.equals("RIGHT")) {
             xOffset += SPEED * deltaTime;
             if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
                 xOffset -= PLAYER_MOVE_DISTANCE;
@@ -67,9 +67,7 @@ public class Laser extends Entity {
             }
             if (x > 8)
                 isOnScreen = false;
-        }
-
-        else if(direction.equals("UP")){
+        } else if (direction.equals("UP")) {
             yOffset += SPEED * deltaTime;
             if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
                 yOffset -= PLAYER_MOVE_DISTANCE;
@@ -77,9 +75,7 @@ public class Laser extends Entity {
             }
             if (y > 8)
                 isOnScreen = false;
-        }
-
-        else if(direction.equals("LEFT")){
+        } else if (direction.equals("LEFT")) {
             xOffset -= SPEED * deltaTime;
             if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
                 xOffset += PLAYER_MOVE_DISTANCE;
@@ -87,9 +83,7 @@ public class Laser extends Entity {
             }
             if (x < -1)
                 isOnScreen = false;
-        }
-
-        else if(direction.equals("DOWN")){
+        } else if (direction.equals("DOWN")) {
             yOffset -= SPEED * deltaTime;
             if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
                 yOffset += PLAYER_MOVE_DISTANCE;
@@ -100,7 +94,7 @@ public class Laser extends Entity {
         }
     }
 
-    public void render(SpriteBatch batch){
-        batch.draw(laserAnimation.getKeyFrame(elapsedTime,true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
+    public void render(SpriteBatch batch) {
+        batch.draw(laserAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
     }
 }

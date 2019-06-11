@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class BlinkingArrow extends Entity{
+public class BlinkingArrow extends Entity {
     public static final int ARROW_WIDTH = 70;//10*7
     public static final int ARROW_HEIGHT = 56;//8*7
 
@@ -20,7 +20,7 @@ public class BlinkingArrow extends Entity{
 
     public float elapsedTime;
 
-    public BlinkingArrow(int dx, int dy, String d, String t){
+    public BlinkingArrow(int dx, int dy, String d, String t) {
         x = dx;
         y = dy;
         direction = d;
@@ -45,12 +45,12 @@ public class BlinkingArrow extends Entity{
             yOffset = 7;
         }
 
-        TextureRegion[][] tmpFrames = TextureRegion.split(arrowTexture,10,8);
+        TextureRegion[][] tmpFrames = TextureRegion.split(arrowTexture, 10, 8);
         arrowAnimationFrames = new TextureRegion[2];
 
         int index = 0;
-        for (int i = 0; i < 1; i++){
-            for(int j = 0; j < 2; j++) {
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < 2; j++) {
                 arrowAnimationFrames[index++] = tmpFrames[i][j];
             }
         }
@@ -58,7 +58,7 @@ public class BlinkingArrow extends Entity{
         arrowAnimation = new Animation(0.3f, arrowAnimationFrames);
     }
 
-    public void render(SpriteBatch batch){
+    public void render(SpriteBatch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
         batch.draw(arrowAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, ARROW_WIDTH / 2, ARROW_HEIGHT / 2, ARROW_WIDTH, ARROW_HEIGHT, 1, 1, rotation); // must use the x and y to pixel coordinates here
     }

@@ -60,16 +60,17 @@ public class Level {
     public static Sprite BackgroundSprite;
     public static int currentLevelNumber = 0;
 
-    public void show(){
+    public void show() {
         timer = new Timer(60.1);
         coinCounter = new CoinCounter();
     }
-    public void displayBackground(Texture background){
+
+    public void displayBackground(Texture background) {
         BackgroundSprite = new Sprite(background);
         BackgroundSprite.scale(7);
         game.batch.begin();
-        BackgroundSprite.setPosition(DodgeGame.WIDTH/2 -BackgroundSprite.getWidth()/2, DodgeGame.HEIGHT/2 - BackgroundSprite.getHeight()/2);
-       // BackgroundSprite.setPosition(0, 0);
+        BackgroundSprite.setPosition(DodgeGame.WIDTH / 2 - BackgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - BackgroundSprite.getHeight() / 2);
+        // BackgroundSprite.setPosition(0, 0);
 
         BackgroundSprite.draw(game.batch);
         game.batch.end();
@@ -108,8 +109,8 @@ public class Level {
     public void displayWorldAndLevel() {
         game.font.setColor(Color.PURPLE);
         game.font.getData().setScale(4f);
-        game.font.draw(game.batch, world, (int)(DodgeGame.WIDTH * 0.07) , DodgeGame.HEIGHT/2 + 300);
-        game.font.draw(game.batch, level, (int)(DodgeGame.WIDTH * 0.25) , DodgeGame.HEIGHT/2 + 300);
+        game.font.draw(game.batch, world, (int) (DodgeGame.WIDTH * 0.07), DodgeGame.HEIGHT / 2 + 300);
+        game.font.draw(game.batch, level, (int) (DodgeGame.WIDTH * 0.25), DodgeGame.HEIGHT / 2 + 300);
     }
 
     public void drawGrid() {
@@ -180,15 +181,15 @@ public class Level {
     }
 
 
-    public void spawnCoins(){
-        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL == 0 && !coinsSpawned){
+    public void spawnCoins() {
+        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL == 0 && !coinsSpawned) {
             //x and y lists to test if it's trying spawn a coin where one already exists
             ArrayList<Integer> xList = new ArrayList<Integer>();
             ArrayList<Integer> yList = new ArrayList<Integer>();
 
-            for (int i = 0; i < 5; i++){
-                int x = (int)(8 * Math.random());
-                int y = (int)(8 * Math.random());
+            for (int i = 0; i < 5; i++) {
+                int x = (int) (8 * Math.random());
+                int y = (int) (8 * Math.random());
 
                 boolean inList = false;
                 for (int tempX : xList) {
@@ -209,17 +210,17 @@ public class Level {
             }
             coinsSpawned = true;
         }
-        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL != 0){
+        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL != 0) {
             coinsSpawned = false;
         }
         //coins despawn after 7.5 seconds
-        if (coinList.size() > 0 && coinList.get(0).elapsedTime > COIN_DESPAWN_DELAY){
+        if (coinList.size() > 0 && coinList.get(0).elapsedTime > COIN_DESPAWN_DELAY) {
             coinList.clear();
         }
     }
 
     public boolean spawnProjectile(double projectileSpawnInterval, boolean projectileSpawned, int maxProjectiles, int minProjectiles, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, int s, Animation a, String path) {
-        if (timer.getWorldTimer() % projectileSpawnInterval == 0 && !projectileSpawned){
+        if (timer.getWorldTimer() % projectileSpawnInterval == 0 && !projectileSpawned) {
             //x and y lists to test if it's trying spawn a projectile where one already exists
             ArrayList<Integer> xList = new ArrayList<Integer>();
             ArrayList<Integer> yList = new ArrayList<Integer>();
@@ -264,7 +265,7 @@ public class Level {
             }
             projectileSpawned = true;
         }
-        if (timer.getWorldTimer() % projectileSpawnInterval != 0){
+        if (timer.getWorldTimer() % projectileSpawnInterval != 0) {
             projectileSpawned = false;
         }
         return projectileSpawned;
@@ -302,11 +303,11 @@ public class Level {
         detectProjectileCollision(boulderList);
     }
 
-    public void detectCannonCollision(){
+    public void detectCannonCollision() {
         detectProjectileCollision(cannonList);
     }
 
-    public void dispose(){
+    public void dispose() {
         GRID.dispose();
         COIN_SOUND.dispose();
         music.dispose();

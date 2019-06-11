@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
 
-public class Level1 extends Level implements Screen{
+public class Level1 extends Level implements Screen {
     public Level1(DodgeGame g) {
         currentLevelNumber = 1;
         game = g;
@@ -57,19 +57,23 @@ public class Level1 extends Level implements Screen{
         detectBoulderCollision();
     }
 
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
 
     }
-    public void pause(){
+
+    public void pause() {
 
     }
-    public void resume(){
+
+    public void resume() {
 
     }
-    public void hide(){
+
+    public void hide() {
 
     }
-    public void dispose(){
+
+    public void dispose() {
         super.dispose();
     }
 }

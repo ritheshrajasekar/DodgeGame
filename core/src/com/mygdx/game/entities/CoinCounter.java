@@ -25,16 +25,16 @@ public class CoinCounter {
         coins = 0;
         coinCountString = "" + coins;
         coin = new Texture("sprites/dodgeBigCoin.png");
-        TextureRegion[][] tmpFrames = TextureRegion.split(coin,8,8);
+        TextureRegion[][] tmpFrames = TextureRegion.split(coin, 8, 8);
         animationFrames = new TextureRegion[24];
         int index = 0;
 
-        for (int i = 0; i < 8; i++){
-            for(int j = 0; j < 3; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 3; j++) {
                 animationFrames[index++] = tmpFrames[i][j];
             }
         }
-        animation = new Animation(1f/24f,animationFrames);
+        animation = new Animation(1f / 24f, animationFrames);
     }
 
     public void update(int c) {
@@ -50,12 +50,12 @@ public class CoinCounter {
     public void render(SpriteBatch batch, BitmapFont font) {
         batch.end();
         batch.begin();
-       // batch.draw(counter,(int)(DodgeGame.WIDTH * 0.25) - 100, DodgeGame.HEIGHT/2 - 300,200 ,200 );
-        batch.draw(animation.getKeyFrame(elapsedTime,true),230, DodgeGame.HEIGHT/2 - 243, COIN_SIZE, COIN_SIZE);
+        // batch.draw(counter,(int)(DodgeGame.WIDTH * 0.25) - 100, DodgeGame.HEIGHT/2 - 300,200 ,200 );
+        batch.draw(animation.getKeyFrame(elapsedTime, true), 230, DodgeGame.HEIGHT / 2 - 243, COIN_SIZE, COIN_SIZE);
 
         font.setColor(Color.YELLOW);
         font.getData().setScale(4f);
-        font.draw(batch, "x", (int)(DodgeGame.WIDTH * 0.20) + 40, DodgeGame.HEIGHT/2 + -190);
-        font.draw(batch, getCoinCountString(), (int)(DodgeGame.WIDTH * 0.20) + 90, DodgeGame.HEIGHT/2 + -190);
+        font.draw(batch, "x", (int) (DodgeGame.WIDTH * 0.20) + 40, DodgeGame.HEIGHT / 2 + -190);
+        font.draw(batch, getCoinCountString(), (int) (DodgeGame.WIDTH * 0.20) + 90, DodgeGame.HEIGHT / 2 + -190);
     }
 }

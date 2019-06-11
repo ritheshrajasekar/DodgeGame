@@ -348,4 +348,12 @@ public class Level {
             }
         }
     }
+
+    public void dispose(){
+        grid.dispose();
+        coinSound.dispose();
+        music.dispose();
+        levelTexture.dispose();
+        BackgroundSprite.getTexture().dispose();
+    }
 }

@@ -178,13 +178,37 @@ public class Level {
 
 
     public void spawnCoins(){
+        ArrayList<Integer> xList = new ArrayList<Integer>();
+        ArrayList<Integer> yList = new ArrayList<Integer>();
+
+        if(timer.getWorldTimer() % 10 == 2.5){
+            coinList.clear();
+            xList.clear();
+            yList.clear();
+        }
         if (timer.getWorldTimer() % coinSpawnInterval == 0 && !coinsSpawned){
             coinList.clear();
-            for (int i = 0; i < 2; i++){
-                coinList.add(new Coin());
-                if (i == 1 && coinList.get(0).x == coinList.get(1).x && coinList.get(0).y == coinList.get(1).y){
+            for (int i = 0; i < 5; i++){
+                int x = (int)(8 * Math.random());
+                int y = (int)(8 * Math.random());
+
+
+
+                boolean inList = false;
+                for (int tempX : xList) {
+                    for (int tempY : yList) {
+                        if (x == tempX && y == tempY) {
+                            inList = true;
+                        }
+                    }
+                }
+
+                if (!inList) {
+                    coinList.add(new Coin());
+                    xList.add(x);
+                    yList.add(y);
+                } else {
                     i--;
-                    coinList.remove(1);
                 }
             }
             coinsSpawned = true;

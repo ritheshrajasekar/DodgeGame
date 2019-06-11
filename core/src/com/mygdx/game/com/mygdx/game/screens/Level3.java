@@ -26,8 +26,8 @@ public class Level3 extends Level implements Screen {
         displayBackground(levelTexture);
 
         //don't mess around with the order of the display methods unless you know what you're doing
-        //it will cause a SpriteBatch.begin must be called before draw or SpriteBatch music be called before end error
-        //for some reason displayTimer music be called first
+        //it will cause a "SpriteBatch.begin must be called before draw" or "SpriteBatch music be called before end" error
+        //for some reason displayTimer must be called first
         displayTimer(delta);
         displayWorldAndLevel();
         drawGrid();

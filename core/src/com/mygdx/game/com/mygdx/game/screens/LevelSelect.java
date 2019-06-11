@@ -40,8 +40,9 @@ public class LevelSelect implements Screen {
     public static final int Y_VALUE_MIDDLE = 350;
     public static final int Y_VALUE_BOTTOM = 100;
     public static final int X_VALUE_HOME_BUTTON = 1180;
-    public static final int Y_VALUE_HOME_BUTTON = 100;
+    public static final int Y_VALUE_HOME_BUTTON = 650;
     public static final int BUTTON_SIZE = 100;
+    public static final int HOME_BUTTON_SIZE = 100;
     public static final int[][] BUTTON_COORDS = {
         {X_VALUE_LEFTMOST, Y_VALUE_TOP},
         {X_VALUE_LEFTMOST, Y_VALUE_MIDDLE},
@@ -110,13 +111,13 @@ public class LevelSelect implements Screen {
         }
 
         //draws home button
-        game.batch.draw(homeButton, X_VALUE_HOME_BUTTON, Y_VALUE_HOME_BUTTON, BUTTON_SIZE, BUTTON_SIZE);
+        game.batch.draw(homeButton, X_VALUE_HOME_BUTTON, Y_VALUE_HOME_BUTTON, HOME_BUTTON_SIZE, HOME_BUTTON_SIZE);
 
         //checks home button click
         if (Gdx.input.getX() > X_VALUE_HOME_BUTTON &&
-            Gdx.input.getX() < X_VALUE_HOME_BUTTON + BUTTON_SIZE &&
+            Gdx.input.getX() < X_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
             DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_HOME_BUTTON &&
-            DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + BUTTON_SIZE) {
+            DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE) {
             if(Gdx.input.isTouched()){
                 this.dispose();
                 game.setScreen(new Start(game));

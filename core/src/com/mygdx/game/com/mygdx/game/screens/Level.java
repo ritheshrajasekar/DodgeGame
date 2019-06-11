@@ -19,15 +19,15 @@ public class Level {
     public static final int PLAYER_HEIGHT = 70;//10*7
     public static final int COIN_SIZE = 56; // 8*7
     public static final double COIN_SPAWN_INTERVAL = 10;
-    public static final double COIN_DESPAWN_DELAY = 4;
+    public static final double COIN_DESPAWN_DELAY = 7.5;
     public static final int GRID_WIDTH = 665;
     public static final int GRID_HEIGHT = 665;
     public static final int GRID_OFFSET_X = 588;
     public static final int GRID_OFFSET_Y = 27;
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
-    public static final Texture grid = new Texture("sprites/dodgeGrid.png");
-    public static final Music coinSound = Gdx.audio.newMusic(Gdx.files.internal("music/04 - Coin.mp3"));
+    public static final Texture GRID = new Texture("sprites/dodgeGrid.png");
+    public static final Music COIN_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/04 - Coin.mp3"));
 
     public String world, level;
     public Music music;
@@ -113,7 +113,7 @@ public class Level {
     }
 
     public void drawGrid() {
-        game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
+        game.batch.draw(GRID, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
     }
 
     public void renderPlayer() {
@@ -124,7 +124,25 @@ public class Level {
     public void renderCoins() {
         for (Coin c : coinList) {
             c.update();
-            c.render(game.batch);
+            //causes the coin to blink when near despawn time
+            double time = c.elapsedTime;
+            double[][] blinkTimes = {
+                    {5, 5.15},
+                    {5.4, 5.55},
+                    {5.8, 5.95},
+                    {6.2, 6.35},
+                    {6.6, 6.75},
+                    {7, 7.1},
+                    {7.2, 7.3},
+                    {7.4, 10}
+            };
+            boolean blink = false;
+            for (double[] t : blinkTimes) {
+                if (time > t[0] && time < t[1])
+                    blink = true;
+            }
+            if (!blink)
+                c.render(game.batch);
         }
     }
 
@@ -264,8 +282,8 @@ public class Level {
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
                 coins++;
-                coinSound.stop();
-                coinSound.play();
+                COIN_SOUND.stop();
+                COIN_SOUND.play();
                 coinList.remove(i);
             }
         }
@@ -289,8 +307,8 @@ public class Level {
     }
 
     public void dispose(){
-        grid.dispose();
-        coinSound.dispose();
+        GRID.dispose();
+        COIN_SOUND.dispose();
         music.dispose();
         levelTexture.dispose();
         BackgroundSprite.getTexture().dispose();

@@ -14,11 +14,11 @@ public class Coin extends Entity{
     Animation animation;
     float elapsedTime;
 
-    public Coin(){
+    public Coin(int xVal, int yVal){
         coin = new Texture("sprites/dodgeBigCoin.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(coin,8,8);
-        x = (int)(8 * Math.random());
-        y = (int)(8 * Math.random());
+        x = xVal;
+        y = yVal;
         animationFrames = new TextureRegion[24];
         int index = 0;
 

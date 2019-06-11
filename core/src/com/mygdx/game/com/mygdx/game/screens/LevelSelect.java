@@ -166,7 +166,6 @@ public class LevelSelect implements Screen {
 
     }
     public void dispose(){
-        music.dispose();
         grass.dispose();
         sand.dispose();
         jungle.dispose();

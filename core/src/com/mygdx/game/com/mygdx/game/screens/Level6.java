@@ -13,7 +13,6 @@ public class Level6 extends Level implements Screen{
         coins = 0;
         world = "SAND";
         level = " LEVEL 6";
-        COIN_SPAWN_INTERVAL = 10;
 
         minBoulders = 3;
         maxBoulders = 6;

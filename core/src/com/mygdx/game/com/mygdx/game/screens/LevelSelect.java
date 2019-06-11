@@ -22,7 +22,7 @@ public class LevelSelect implements Screen {
     private final Texture hell = new Texture("sprites/dodgeHellBGS.png");
     private final Texture homeButton = new Texture("sprites/homeButton.png");
     private final Texture zeroStar = new Texture("sprites/dodge0Star.png");
-    ;
+
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
     private final Texture twoStar = new Texture("sprites/dodge2Star.png");
     private final Texture threeStar = new Texture("sprites/dodge3Star.png");

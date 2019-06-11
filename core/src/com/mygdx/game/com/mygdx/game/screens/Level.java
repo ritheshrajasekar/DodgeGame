@@ -64,7 +64,8 @@ public class Level {
     public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
 
     public void show() {
-        timer = new Timer(5);
+        //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
+        timer = new Timer(60.1);
         coinCounter = new CoinCounter();
     }
 

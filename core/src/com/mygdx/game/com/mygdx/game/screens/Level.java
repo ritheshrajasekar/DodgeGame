@@ -269,22 +269,21 @@ public class Level {
         }
     }
 
-    public void detectBoulderCollision() {
-        for (int i = 0; i < boulderList.size(); i++) {
-            if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
+    public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList) {
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
         }
     }
 
+    public void detectBoulderCollision() {
+        detectProjectileCollision(boulderList);
+    }
+
     public void detectCannonCollision(){
-        for (int i = 0; i < cannonList.size(); i++) {
-            if (cannonList.get(i).x == player.x && cannonList.get(i).y == player.y) {
-                music.dispose();
-                game.setScreen(new GameOver(game));
-            }
-        }
+        detectProjectileCollision(cannonList);
     }
 
     public void dispose(){

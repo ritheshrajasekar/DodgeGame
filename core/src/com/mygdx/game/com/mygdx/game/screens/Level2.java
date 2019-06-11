@@ -21,7 +21,7 @@ public class Level2 extends Level implements Screen{
         boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
-        playMusic();
+        playMusic("music/05 - Grass World.mp3");
         createPlayer();
     }
 

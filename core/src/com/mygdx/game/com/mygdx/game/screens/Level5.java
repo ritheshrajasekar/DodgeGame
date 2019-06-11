@@ -20,12 +20,12 @@ public class Level5 extends Level implements Screen{
         boulderSpawnInterval = 5;
         boulderSpawnDelay = 2;
 
-        minCannon = 3;
-        maxCannon = 6;
+        minCannons = 3;
+        maxCannons = 6;
         cannonSpawnInterval = 6;
         cannonSpawnDelay = 3;
 
-        playMusic();
+        playMusic("music/06 - Sand World.mp3");
         createPlayer();
     }
 
@@ -59,7 +59,7 @@ public class Level5 extends Level implements Screen{
         renderPlayer();
         renderCoins();
         renderBoulders(delta);
-        renderCannon(delta);
+        renderCannons(delta);
     }
 
     public void detectCollision() {

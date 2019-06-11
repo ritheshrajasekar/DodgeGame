@@ -40,7 +40,7 @@ public class LevelSelect implements Screen {
     public static final int Y_VALUE_MIDDLE = 350;
     public static final int Y_VALUE_BOTTOM = 100;
     public static final int X_VALUE_HOME_BUTTON = 1180;
-    public static final int Y_VALUE_HOME_BUTTON = 650;
+    public static final int Y_VALUE_HOME_BUTTON = 620;
     public static final int BUTTON_SIZE = 100;
     public static final int HOME_BUTTON_SIZE = 100;
     public static final int[][] BUTTON_COORDS = {
@@ -70,7 +70,7 @@ public class LevelSelect implements Screen {
         jungleBackground.scale(7);
         hellBackground.scale(7);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/myName.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

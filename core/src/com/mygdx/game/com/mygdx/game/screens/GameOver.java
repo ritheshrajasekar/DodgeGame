@@ -34,8 +34,8 @@ public class GameOver implements Screen {
         gameOverBackground = new Texture("sprites/gameOverBackground.png");
         gameOverBackgroundSprite = new Sprite(gameOverBackground);
         gameOverBackgroundSprite.scale(7);
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/yamagsumi.mp3"));
-        music.setLooping(true);
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/03 - Lose.mp3"));
+        music.setLooping(false);
         music.setVolume(1f);
         music.play();
     }

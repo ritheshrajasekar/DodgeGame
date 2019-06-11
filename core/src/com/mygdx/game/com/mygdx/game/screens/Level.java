@@ -9,6 +9,7 @@ import com.mygdx.game.DodgeGame;
 import com.mygdx.game.entities.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Level {
@@ -24,8 +25,7 @@ public class Level {
     public static final int GRID_CORNER_SIZE = 84;//12*7
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
     public static final Texture grid = new Texture("sprites/dodgeGrid.png");
-    //public static final Music coinSound = Gdx.audio.newMusic(Gdx.files.internal("coin.mp3"));
-    //public static final Music loseSound = Gdx.audio.newMusic(Gdx.files.internal("lose.mp3"));
+    public static final Music coinSound = Gdx.audio.newMusic(Gdx.files.internal("music/04 - Coin.mp3"));
 
     public String world, level;
     public Music music;
@@ -35,18 +35,18 @@ public class Level {
     public Player player;
     public static int coins;
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
-    public int coinSpawnInterval;
+    public double coinSpawnInterval;
     public boolean coinsSpawned;
     public int minBoulders;
     public int maxBoulders;
-    public int boulderSpawnInterval;
-    public int boulderSpawnDelay;
+    public double boulderSpawnInterval;
+    public double boulderSpawnDelay;
     public boolean bouldersSpawned;
 
-    public int minCannon;
-    public int maxCannon;
-    public int cannonSpawnInterval;
-    public int cannonSpawnDelay;
+    public int minCannons;
+    public int maxCannons;
+    public double cannonSpawnInterval;
+    public double cannonSpawnDelay;
     public boolean cannonSpawned;
 
     public CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
@@ -72,8 +72,8 @@ public class Level {
         game.batch.end();
     }
 
-    public void playMusic() {
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/spinAndBurst.mp3"));
+    public void playMusic(String path) {
+        music = Gdx.audio.newMusic(Gdx.files.internal(path));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();
@@ -113,16 +113,6 @@ public class Level {
         game.batch.draw(grid, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
     }
 
-    public void detectCoin() {
-        for (int i = 0; i < coinList.size(); i++) {
-            if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
-                coins++;
-                //coinSound.play();
-                coinList.remove(i);
-            }
-        }
-    }
-
     public void renderPlayer() {
         player.update();
         player.render(game.batch);
@@ -134,6 +124,9 @@ public class Level {
             c.render(game.batch);
         }
     }
+
+    //public void renderProjectile(float delta, CopyOnWriteArrayList<Object> projectileList, CopyOnWriteArrayList<Object> arrowList, double spawnDelay) {}
+    //i was going to make this method but the lists are of type object which is incompatible with Boulder and BoulderArrow
 
     public void renderBoulders(float delta) {
         for (int i = 0; i < boulderList.size(); i++) {
@@ -159,7 +152,7 @@ public class Level {
         }
     }
 
-    public void renderCannon(float delta) {
+    public void renderCannons(float delta) {
         for (int i = 0; i < cannonList.size(); i++) {
             //only updates and renders once the boulder is spawned
             if (cannonList.get(i).spawned) {
@@ -258,7 +251,7 @@ public class Level {
             ArrayList<Integer> xList = new ArrayList<Integer>();
             ArrayList<Integer> yList = new ArrayList<Integer>();
 
-            for (int i = 0; i < (int) ((maxCannon - minCannon + 1) * Math.random() + minCannon); i++) {
+            for (int i = 0; i < (int) ((maxCannons - minCannons + 1) * Math.random() + minCannons); i++) {
                 int x = 0;
                 int y = 0;
                 String direction = DIRECTIONS[(int) (Math.random() * 4)];
@@ -303,10 +296,20 @@ public class Level {
         }
     }
 
+    public void detectCoin() {
+        for (int i = 0; i < coinList.size(); i++) {
+            if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
+                coins++;
+                coinSound.stop();
+                coinSound.play();
+                coinList.remove(i);
+            }
+        }
+    }
+
     public void detectBoulderCollision() {
         for (int i = 0; i < boulderList.size(); i++) {
             if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
-                //loseSound.play()
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
@@ -316,7 +319,6 @@ public class Level {
     public void detectCannonCollision(){
         for (int i = 0; i < cannonList.size(); i++) {
             if (cannonList.get(i).x == player.x && cannonList.get(i).y == player.y) {
-                //loseSound.play()
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }

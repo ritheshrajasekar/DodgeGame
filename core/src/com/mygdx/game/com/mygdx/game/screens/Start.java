@@ -35,7 +35,7 @@ public class Start implements Screen {
         backgroundSprite = new Sprite(startScreenBackground);
         backgroundSprite.scale(7);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/bluebird.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
         music.play();

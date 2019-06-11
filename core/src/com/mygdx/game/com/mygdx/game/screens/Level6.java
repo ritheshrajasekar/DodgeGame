@@ -3,7 +3,6 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.utilities.FileStreaming;
 
 
 public class Level6 extends Level implements Screen{
@@ -21,12 +20,12 @@ public class Level6 extends Level implements Screen{
         boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
-        minCannon = 3;
-        maxCannon = 6;
+        minCannons = 3;
+        maxCannons = 6;
         cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
-        playMusic();
+        playMusic("music/06 - Sand World.mp3");
         createPlayer();
     }
 
@@ -60,7 +59,7 @@ public class Level6 extends Level implements Screen{
         renderPlayer();
         renderCoins();
         renderBoulders(delta);
-        renderCannon(delta);
+        renderCannons(delta);
     }
 
     public void detectCollision() {

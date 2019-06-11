@@ -204,7 +204,7 @@ public class Level {
                 }
 
                 if (!inList) {
-                    coinList.add(new Coin(x, y));
+                    coinList.add(new Coin());
                     xList.add(x);
                     yList.add(y);
                 } else {

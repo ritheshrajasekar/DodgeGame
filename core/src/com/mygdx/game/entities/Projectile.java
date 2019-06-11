@@ -51,8 +51,8 @@ public class Projectile extends Entity {
         projectileAnimationFrames = new TextureRegion[frames];
 
         int index = 0;
-        for (int i = 0; i < cols; i++){
-            for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++) {
                 projectileAnimationFrames[index++] = tmpFrames[i][j];
             }
         }

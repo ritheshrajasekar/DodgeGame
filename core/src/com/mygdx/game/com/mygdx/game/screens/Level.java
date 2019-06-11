@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.entities.*;
@@ -35,13 +36,13 @@ public class Level {
     public CoinCounter coinCounter;
     public Player player;
     public static int coins;
-    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<Coin>();
+    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
     public boolean coinsSpawned;
     public int minBoulders;
     public int maxBoulders;
     public double boulderSpawnInterval;
     public double boulderSpawnDelay;
-    public boolean bouldersSpawned;
+    public boolean boulderSpawned;
 
     public int minCannons;
     public int maxCannons;
@@ -49,18 +50,18 @@ public class Level {
     public double cannonSpawnDelay;
     public boolean cannonSpawned;
 
-    public CopyOnWriteArrayList<Boulder> boulderList = new CopyOnWriteArrayList<Boulder>();
-    public CopyOnWriteArrayList<BoulderArrow> boulderArrowList = new CopyOnWriteArrayList<BoulderArrow>();
+    public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<BlinkingArrow> boulderArrowList = new CopyOnWriteArrayList<>();
 
-    public CopyOnWriteArrayList<Cannon> cannonList = new CopyOnWriteArrayList<Cannon>();
-    public CopyOnWriteArrayList<CannonArrow> cannonArrowList = new CopyOnWriteArrayList<CannonArrow>();
+    public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
 
     public Texture levelTexture;
     public static Sprite BackgroundSprite;
     public static int currentLevelNumber = 0;
 
     public void show(){
-        timer = new Timer(60);
+        timer = new Timer(60.1);
         coinCounter = new CoinCounter();
     }
     public void displayBackground(Texture background){
@@ -127,55 +128,37 @@ public class Level {
         }
     }
 
-    //public void renderProjectile(float delta, CopyOnWriteArrayList<Object> projectileList, CopyOnWriteArrayList<Object> arrowList, double spawnDelay) {}
-    //i was going to make this method but the lists are of type object which is incompatible with Boulder and BoulderArrow
-
-    public void renderBoulders(float delta) {
-        for (int i = 0; i < boulderList.size(); i++) {
-            //only updates and renders once the boulder is spawned
-            if (boulderList.get(i).spawned) {
-                //updates and render if the boulder is on screen
-                if (boulderList.get(i).isOnScreen) {
-                    boulderList.get(i).update(delta);
-                    boulderList.get(i).render(game.batch);
-                    //deletes boulder and arrowTexture once the boulder leaves the screen
+    //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
+    public void renderProjectile(float delta, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
+        for (int i = 0; i < projectileList.size(); i++) {
+            //only updates and renders once the projectile is spawned
+            if (projectileList.get(i).spawned) {
+                //updates and render if the projectile is on screen
+                if (projectileList.get(i).isOnScreen) {
+                    projectileList.get(i).update(delta);
+                    projectileList.get(i).render(game.batch);
+                    //deletes projectile and arrowTexture once the projectile leaves the screen
                 } else {
-                    boulderList.remove(i);
-                    boulderArrowList.remove(i);
+                    projectileList.remove(i);
+                    arrowList.remove(i);
                     i--;
                 }
-                //if the boulder hasn't spawned yet, the arrowTexture will blink
-                //(it will stop blinking after the boulder is spawned because it exits this else statement)
+                //if the projectile hasn't spawned yet, the arrowTexture will blink
+                //(it will stop blinking after the projectile is spawned because it exits this else statement)
             } else {
-                boulderArrowList.get(i).render(game.batch);
-                if (boulderArrowList.get(i).elapsedTime > boulderSpawnDelay)
-                    boulderList.get(i).spawned = true;
+                arrowList.get(i).render(game.batch);
+                if (arrowList.get(i).elapsedTime > spawnDelay)
+                    projectileList.get(i).spawned = true;
             }
         }
     }
 
+    public void renderBoulders(float delta) {
+        renderProjectile(delta, boulderList, boulderArrowList, boulderSpawnDelay);
+    }
+
     public void renderCannons(float delta) {
-        for (int i = 0; i < cannonList.size(); i++) {
-            //only updates and renders once the boulder is spawned
-            if (cannonList.get(i).spawned) {
-                //updates and render if the boulder is on screen
-                if (cannonList.get(i).isOnScreen) {
-                    cannonList.get(i).update(delta);
-                    cannonList.get(i).render(game.batch);
-                    //deletes boulder and arrowTexture once the boulder leaves the screen
-                } else {
-                    cannonList.remove(i);
-                    cannonArrowList.remove(i);
-                    i--;
-                }
-                //if the boulder hasn't spawned yet, the arrowTexture will blink
-                //(it will stop blinking after the boulder is spawned because it exits this else statement)
-            } else {
-                cannonArrowList.get(i).render(game.batch);
-                if (cannonArrowList.get(i).elapsedTime > cannonSpawnDelay)
-                    cannonList.get(i).spawned = true;
-            }
-        }
+        renderProjectile(delta, cannonList, cannonArrowList, cannonSpawnDelay);
     }
 
 
@@ -212,23 +195,23 @@ public class Level {
             coinsSpawned = false;
         }
         //coins despawn after 7.5 seconds
-        if(timer.getWorldTimer() % COIN_SPAWN_INTERVAL - COIN_DESPAWN_DELAY == 0){
+        if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL + COIN_DESPAWN_DELAY == COIN_SPAWN_INTERVAL){
             coinList.clear();
         }
     }
 
-    public void spawnBoulders() {
-        if (timer.getWorldTimer() % boulderSpawnInterval == 0 && !bouldersSpawned){
-            //x and y lists to test if it's trying spawn a boulder where one already exists
+    public boolean spawnProjectile(double projectileSpawnInterval, boolean projectileSpawned, int maxProjectiles, int minProjectiles, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, int s, Animation a, String path) {
+        if (timer.getWorldTimer() % projectileSpawnInterval == 0 && !projectileSpawned){
+            //x and y lists to test if it's trying spawn a projectile where one already exists
             ArrayList<Integer> xList = new ArrayList<Integer>();
             ArrayList<Integer> yList = new ArrayList<Integer>();
 
-            for (int i = 0; i < (int) ((maxBoulders - minBoulders + 1) * Math.random() + minBoulders); i++) {
+            for (int i = 0; i < (int) ((maxProjectiles - minProjectiles + 1) * Math.random() + minProjectiles); i++) {
                 int x = 0;
                 int y = 0;
                 String direction = DIRECTIONS[(int) (Math.random() * 4)];
 
-                // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
+                // randomly assigns a spawn position to the projectile based on what the direction of the projectile is
                 if (direction == "UP") {
                     x = (int) (Math.random() * 8);
                     y = -1;
@@ -243,7 +226,7 @@ public class Level {
                     y = (int) (Math.random() * 8);
                 }
 
-                //does not create a boulder if one is already there
+                //does not create a projectile if one is already there
                 boolean inList = false;
                 for (int tempX : xList) {
                     for (int tempY : yList) {
@@ -253,70 +236,28 @@ public class Level {
                     }
                 }
                 if (!inList) {
-                    boulderList.add(new Boulder(x, y, direction));
-                    boulderArrowList.add(new BoulderArrow(x, y, direction));
+                    projectileList.add(new Projectile(x, y, direction, s, a));
+                    arrowList.add(new BlinkingArrow(x, y, direction, path));
                     xList.add(x);
                     yList.add(y);
                 } else {
                     i--;
                 }
             }
-            bouldersSpawned = true;
+            projectileSpawned = true;
         }
-        if (timer.getWorldTimer() % boulderSpawnInterval != 0){
-            bouldersSpawned = false;
+        if (timer.getWorldTimer() % projectileSpawnInterval != 0){
+            projectileSpawned = false;
         }
+        return projectileSpawned;
+    }
+
+    public void spawnBoulders() {
+        boulderSpawned = spawnProjectile(boulderSpawnInterval, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3), "sprites/dodgeBoulderArrow.png");
     }
 
     public void spawnCannon() {
-        if (timer.getWorldTimer() % cannonSpawnInterval == 0 && !cannonSpawned){
-            //x and y lists to test if it's trying spawn a boulder where one already exists
-            ArrayList<Integer> xList = new ArrayList<Integer>();
-            ArrayList<Integer> yList = new ArrayList<Integer>();
-
-            for (int i = 0; i < (int) ((maxCannons - minCannons + 1) * Math.random() + minCannons); i++) {
-                int x = 0;
-                int y = 0;
-                String direction = DIRECTIONS[(int) (Math.random() * 4)];
-
-                // randomly assigns a spawn position to the boulder based on what the direction of the boulder is
-                if (direction == "UP") {
-                    x = (int) (Math.random() * 8);
-                    y = -1;
-                } else if (direction == "DOWN") {
-                    x = (int) (Math.random() * 8);
-                    y = 8;
-                } else if (direction == "LEFT") {
-                    x = 8;
-                    y = (int) (Math.random() * 8);
-                } else if (direction == "RIGHT") {
-                    x = -1;
-                    y = (int) (Math.random() * 8);
-                }
-
-                //does not create a boulder if one is already there
-                boolean inList = false;
-                for (int tempX : xList) {
-                    for (int tempY : yList) {
-                        if (x == tempX && y == tempY) {
-                            inList = true;
-                        }
-                    }
-                }
-                if (!inList) {
-                    cannonList.add(new Cannon(x, y, direction));
-                    cannonArrowList.add(new CannonArrow(x, y, direction));
-                    xList.add(x);
-                    yList.add(y);
-                } else {
-                    i--;
-                }
-            }
-            cannonSpawned = true;
-        }
-        if (timer.getWorldTimer() % cannonSpawnInterval != 0){
-            cannonSpawned = false;
-        }
+        cannonSpawned = spawnProjectile(cannonSpawnInterval, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1), "sprites/dodgeCannonballArrow.png");
     }
 
     public void detectCoin() {
@@ -330,22 +271,21 @@ public class Level {
         }
     }
 
-    public void detectBoulderCollision() {
-        for (int i = 0; i < boulderList.size(); i++) {
-            if (boulderList.get(i).x == player.x && boulderList.get(i).y == player.y) {
+    public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList) {
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
         }
     }
 
+    public void detectBoulderCollision() {
+        detectProjectileCollision(boulderList);
+    }
+
     public void detectCannonCollision(){
-        for (int i = 0; i < cannonList.size(); i++) {
-            if (cannonList.get(i).x == player.x && cannonList.get(i).y == player.y) {
-                music.dispose();
-                game.setScreen(new GameOver(game));
-            }
-        }
+        detectProjectileCollision(cannonList);
     }
 
     public void dispose(){

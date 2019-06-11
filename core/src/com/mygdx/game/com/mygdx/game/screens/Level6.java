@@ -14,7 +14,6 @@ public class Level6 extends Level implements Screen{
         world = "SAND";
         level = " LEVEL 6";
 
-
         minBoulders = 3;
         maxBoulders = 6;
         boulderSpawnInterval = 4;

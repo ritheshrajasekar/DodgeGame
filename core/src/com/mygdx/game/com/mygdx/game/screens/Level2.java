@@ -13,6 +13,7 @@ public class Level2 extends Level implements Screen{
         coins = 0;
         world = "GRASS";
         level = " LEVEL 2";
+
         minBoulders = 4;
         maxBoulders = 7;
         boulderSpawnInterval = 4;

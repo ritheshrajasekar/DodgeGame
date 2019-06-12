@@ -42,6 +42,7 @@ public class Level {
 
     public static int coins;
     public boolean coinsSpawned;
+    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
 
     public int minBoulders;
     public int maxBoulders;
@@ -50,6 +51,9 @@ public class Level {
     public double[] boulderSpawnIntervalRandom = new double[1];
     public double boulderSpawnDelay;
     public boolean boulderSpawned;
+    public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<Projectile> boulderListOneFrameAgo = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<BlinkingArrow> boulderArrowList = new CopyOnWriteArrayList<>();
 
     public int minCannons;
     public int maxCannons;
@@ -57,6 +61,9 @@ public class Level {
     public double[] cannonSpawnIntervalRandom = new double[1];
     public double cannonSpawnDelay;
     public boolean cannonSpawned;
+    public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<Projectile> cannonListOneFrameAgo = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
 
     public int minBoomerangs;
     public int maxBoomerangs;
@@ -64,16 +71,8 @@ public class Level {
     public double[] boomerangSpawnIntervalRandom = new double[1];
     public double boomerangSpawnDelay;
     public boolean boomerangSpawned;
-
-    public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
-
-    public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<BlinkingArrow> boulderArrowList = new CopyOnWriteArrayList<>();
-
-    public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
-
     public CopyOnWriteArrayList<Projectile> boomerangList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<Projectile> boomerangListOneFrameAgo = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> boomerangArrowList = new CopyOnWriteArrayList<>();
 
     public void show() {
@@ -349,25 +348,32 @@ public class Level {
         }
     }
 
-    public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList) {
+    public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<Projectile> projectileListOneFrameAgo) {
         for (int i = 0; i < projectileList.size(); i++) {
             if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
         }
+        for (int i = 0; i < projectileListOneFrameAgo.size(); i++) {
+            if (projectileListOneFrameAgo.get(i).x == player.x && projectileListOneFrameAgo.get(i).y == player.y) {
+                music.dispose();
+                game.setScreen(new GameOver(game));
+            }
+        }
+        projectileListOneFrameAgo = new CopyOnWriteArrayList<>(projectileList);
     }
 
     public void detectBoulderCollision() {
-        detectProjectileCollision(boulderList);
+        detectProjectileCollision(boulderList, boulderListOneFrameAgo);
     }
 
     public void detectCannonCollision() {
-        detectProjectileCollision(cannonList);
+        detectProjectileCollision(cannonList, cannonListOneFrameAgo);
     }
 
     public void detectBoomerangCollision(){
-        detectProjectileCollision(boomerangList);
+        detectProjectileCollision(boomerangList, boomerangListOneFrameAgo);
     }
 
     public void dispose() {

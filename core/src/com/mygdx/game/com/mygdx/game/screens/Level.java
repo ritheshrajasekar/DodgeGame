@@ -168,7 +168,6 @@ public class Level {
                 if (projectileList.get(i).isOnScreen) {
                     //checks if the projectile is a boomerang
                     if(isBoomerang){
-                        System.out.println("reverse");
                         projectileList.get(i).updateBoomerang(delta);
                     }
                     //else renders normally

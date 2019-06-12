@@ -8,8 +8,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
-public class Laser extends Entity {
-    public static final int SPEED = 350;
+public class Laser extends Projectile{
+    public static final int SPEED = 500;
+    public Laser(int dx, int dy, String d) {
+        super(dx, dy, d, SPEED, createAnimation("sprites/dodgelaser.png", 8, 8, 1, 1));
+    }
+    /*public static final int SPEED = 350;
 
     private static Texture laserTexture;
     private TextureRegion[] laserAnimationFrames;
@@ -96,5 +100,5 @@ public class Laser extends Entity {
 
     public void render(SpriteBatch batch) {
         batch.draw(laserAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
-    }
+    }*/
 }

@@ -75,6 +75,16 @@ public class Level {
     public CopyOnWriteArrayList<BlinkingArrow> boomerangArrowList = new CopyOnWriteArrayList<>();
     public ArrayList<Integer[]> boomerangOldPos = new ArrayList<>();
 
+    public int minLasers;
+    public int maxLasers;
+    public double laserSpawnInterval;
+    public double[] laserSpawnIntervalRandom = new double[1];
+    public double laserSpawnDelay;
+    public boolean laserSpawned;
+    public CopyOnWriteArrayList<Projectile> laserList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<BlinkingArrow> laserArrowList = new CopyOnWriteArrayList<>();
+    public ArrayList<Integer[]> laserOldPos = new ArrayList<>();
+
     public void show() {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
         timer = new Timer(60.1);
@@ -163,7 +173,7 @@ public class Level {
     }
 
     //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
-    public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay, boolean isBoomerang) {
+    public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay, boolean isBoomerang, boolean isLaser) {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
             if (projectileList.get(i).spawned) {
@@ -206,15 +216,19 @@ public class Level {
     }
 
     public void renderBoulders(float delta) {
-        renderProjectile(delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay, false);
+        renderProjectile(delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay, false, false);
     }
 
     public void renderCannons(float delta) {
-        renderProjectile(delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay, false);
+        renderProjectile(delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay, false, false);
     }
 
     public void renderBoomerang(float delta){
-        renderProjectile(delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay, true);
+        renderProjectile(delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay, true, false);
+    }
+
+    public void renderLaser(float delta){
+        renderProjectile(delta, laserSpawnInterval, laserSpawnIntervalRandom, laserList, laserArrowList, laserSpawnDelay, false, true);
     }
 
 
@@ -336,7 +350,10 @@ public class Level {
     public void spawnBoomerang(){
         boomerangSpawned = spawnProjectile(boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 3, 3), "sprites/dodgeBoomerangArrow.png");
     }
-
+    // fix the tile height and width!
+    public void spawnLaser(){
+        laserSpawned = spawnProjectile(laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 1, 1), "sprites/dodgeLaserArrow.png");
+    }
     public void detectCoin() {
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
@@ -382,6 +399,24 @@ public class Level {
         detectProjectileCollision(boomerangList, boomerangOldPos);
     }
 
+    public void detectLaserCollision(){
+        for (int i = 0; i < laserList.size(); i++) {
+            if(laserList.get(i).direction.equals("UP") || laserList.get(i).direction.equals("DOWN")){
+                if (laserList.get(i).x == player.x) {
+                    music.dispose();
+                    game.setScreen(new GameOver(game));
+                }
+            }
+
+            else{
+                if (laserList.get(i).y == player.y) {
+                    music.dispose();
+                    game.setScreen(new GameOver(game));
+                }
+            }
+
+        }
+    }
     public void dispose() {
         GRID.dispose();
         COIN_SOUND.dispose();

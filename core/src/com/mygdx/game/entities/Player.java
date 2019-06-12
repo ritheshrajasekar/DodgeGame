@@ -35,16 +35,16 @@ public class Player extends Entity {
 
     // updates the position of the player, and time elapsed for the animation
     public void update() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) || Gdx.input.isKeyJustPressed(Input.Keys.D))
             if (x < 7)
                 x++;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.A))
             if (x > 0)
                 x--;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W))
             if (y < 7)
                 y++;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.S))
             if (y > 0)
                 y--;
         elapsedTime += Gdx.graphics.getDeltaTime();

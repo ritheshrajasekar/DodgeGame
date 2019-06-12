@@ -262,6 +262,8 @@ public class Level {
         double interval = projectileSpawnInterval / 4;
         while (projectileSpawnIntervalRandom[0] == projectileSpawnInterval || projectileSpawnIntervalRandom[0] <= 0.0)
             projectileSpawnIntervalRandom[0] = (Math.round((projectileSpawnInterval + Math.random() * interval * 2 - interval) * 10)) / 10.0;
+
+        //calculates the amount of seconds left until a projectile spawns
         double spawnTime = Math.round(((60 - timer.getWorldTimer()) % projectileSpawnIntervalRandom[0]) * 10) / 10.0;
         //this == 0.1 because spawnTime never actually reaches 0.0 due to double rounding
         if (spawnTime == 0.1 && !projectileSpawned) {

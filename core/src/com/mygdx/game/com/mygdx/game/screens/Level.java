@@ -366,12 +366,12 @@ public class Level {
                 game.setScreen(new GameOver(game));
             }
         }
-        for (int i = 0; i < projectileListTwoFramesAgo.size(); i++) {
+        /*for (int i = 0; i < projectileListTwoFramesAgo.size(); i++) {
             if (projectileListTwoFramesAgo.get(i).x == player.x && projectileListTwoFramesAgo.get(i).y == player.y) {
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
-        }
+        }*/
         /*CopyOnWriteArrayList<Projectile> tempListTwoFramesAgo = new CopyOnWriteArrayList<>(projectileListOneFrameAgo);
         CopyOnWriteArrayList<Projectile> tempListOneFrameAgo = new CopyOnWriteArrayList<>(projectileList);
 
@@ -385,16 +385,29 @@ public class Level {
 
     public void detectBoulderCollision() {
         detectProjectileCollision(boulderList, boulderListOneFrameAgo, boulderListTwoFramesAgo);
-        if (boulderListTwoFramesAgo.size() > 0) {
+        /*if (boulderListTwoFramesAgo.size() > 0) {
             System.out.println(boulderListTwoFramesAgo.equals(boulderList));
             System.out.println(boulderList.get(0).x + ", " + boulderList.get(0).y);
             System.out.println(boulderListTwoFramesAgo.get(0).x + ", " + boulderListTwoFramesAgo.get(0).y);
             System.out.println("------------------------");
-        }
+        }*/
         /*boulderListOneFrameAgo = projectileListList.get(0);
         boulderListTwoFramesAgo = projectileListList.get(1);*/
-        boulderListTwoFramesAgo = new CopyOnWriteArrayList<>(boulderListOneFrameAgo);
-        boulderListOneFrameAgo = new CopyOnWriteArrayList<>(boulderList);
+        //boulderListTwoFramesAgo = new CopyOnWriteArrayList<>(boulderListOneFrameAgo);
+        if (boulderListOneFrameAgo.size() > 0) {
+            //boulderListOneFrameAgo.remove(0);
+            System.out.println(boulderListOneFrameAgo.equals(boulderList));
+            System.out.println(boulderList.get(0).x + ", " + boulderList.get(0).y);
+            System.out.println(boulderListOneFrameAgo.get(0).x + ", " + boulderListOneFrameAgo.get(0).y);
+            System.out.println("------------------------");
+        }
+        if (!boulderListOneFrameAgo.equals(boulderList)) {
+            boulderListOneFrameAgo.clear();
+            for (Projectile p : boulderList) {
+                boulderListOneFrameAgo.add(p);
+            }
+            //boulderListOneFrameAgo = new CopyOnWriteArrayList<>(boulderList);
+        }
     }
 
     public void detectCannonCollision() {

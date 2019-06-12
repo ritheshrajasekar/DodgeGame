@@ -52,9 +52,8 @@ public class Level {
     public double boulderSpawnDelay;
     public boolean boulderSpawned;
     public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<Projectile> boulderListOneFrameAgo = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<Projectile> boulderListTwoFramesAgo = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> boulderArrowList = new CopyOnWriteArrayList<>();
+    public ArrayList<Integer[]> boulderOldPos = new ArrayList<>();
 
     public int minCannons;
     public int maxCannons;
@@ -63,9 +62,8 @@ public class Level {
     public double cannonSpawnDelay;
     public boolean cannonSpawned;
     public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<Projectile> cannonListOneFrameAgo = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<Projectile> cannonListTwoFramesAgo = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
+    public ArrayList<Integer[]> cannonOldPos = new ArrayList<>();
 
     public int minBoomerangs;
     public int maxBoomerangs;
@@ -74,9 +72,8 @@ public class Level {
     public double boomerangSpawnDelay;
     public boolean boomerangSpawned;
     public CopyOnWriteArrayList<Projectile> boomerangList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<Projectile> boomerangListOneFrameAgo = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<Projectile> boomerangListTwoFramesAgo = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> boomerangArrowList = new CopyOnWriteArrayList<>();
+    public ArrayList<Integer[]> boomerangOldPos = new ArrayList<>();
 
     public void show() {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
@@ -351,71 +348,38 @@ public class Level {
         }
     }
 
-    public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<Projectile> projectileListOneFrameAgo, CopyOnWriteArrayList<Projectile> projectileListTwoFramesAgo) {
-
-        /*if (projectileListTwoFramesAgo.size() > 0) {
-            System.out.println(projectileListTwoFramesAgo.get(0).x + ", " + projectileListTwoFramesAgo.get(0).y);
-            System.out.println(projectileListOneFrameAgo.get(0).x + ", " + projectileListOneFrameAgo.get(0).y);
-            System.out.println(projectileList.get(0).x + ", " + projectileList.get(0).y);
-            System.out.println(projectileList.equals(projectileListTwoFramesAgo));
-            System.out.println("-----------------------");
-        }*/
+    public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList, ArrayList<Integer[]> projectileOldPos) {
+        //detect for current position
         for (int i = 0; i < projectileList.size(); i++) {
             if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
         }
-        /*for (int i = 0; i < projectileListTwoFramesAgo.size(); i++) {
-            if (projectileListTwoFramesAgo.get(i).x == player.x && projectileListTwoFramesAgo.get(i).y == player.y) {
+        //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
+        for (Integer[] pos : projectileOldPos) {
+            if (pos[0] == player.x && pos[1] == player.y) {
                 music.dispose();
                 game.setScreen(new GameOver(game));
             }
-        }*/
-        /*CopyOnWriteArrayList<Projectile> tempListTwoFramesAgo = new CopyOnWriteArrayList<>(projectileListOneFrameAgo);
-        CopyOnWriteArrayList<Projectile> tempListOneFrameAgo = new CopyOnWriteArrayList<>(projectileList);
-
-        ArrayList<CopyOnWriteArrayList<Projectile>> projectileListList = new ArrayList<>();
-        projectileListList.add(tempListOneFrameAgo);
-        projectileListList.add(tempListTwoFramesAgo);
-
-
-        return projectileListList;*/
+        }
+        //updates the old positions
+        projectileOldPos.clear();
+        for (Projectile p : projectileList) {
+            projectileOldPos.add(new Integer[]{p.x, p.y});
+        }
     }
 
     public void detectBoulderCollision() {
-        detectProjectileCollision(boulderList, boulderListOneFrameAgo, boulderListTwoFramesAgo);
-        /*if (boulderListTwoFramesAgo.size() > 0) {
-            System.out.println(boulderListTwoFramesAgo.equals(boulderList));
-            System.out.println(boulderList.get(0).x + ", " + boulderList.get(0).y);
-            System.out.println(boulderListTwoFramesAgo.get(0).x + ", " + boulderListTwoFramesAgo.get(0).y);
-            System.out.println("------------------------");
-        }*/
-        /*boulderListOneFrameAgo = projectileListList.get(0);
-        boulderListTwoFramesAgo = projectileListList.get(1);*/
-        //boulderListTwoFramesAgo = new CopyOnWriteArrayList<>(boulderListOneFrameAgo);
-        if (boulderListOneFrameAgo.size() > 0) {
-            //boulderListOneFrameAgo.remove(0);
-            System.out.println(boulderListOneFrameAgo.equals(boulderList));
-            System.out.println(boulderList.get(0).x + ", " + boulderList.get(0).y);
-            System.out.println(boulderListOneFrameAgo.get(0).x + ", " + boulderListOneFrameAgo.get(0).y);
-            System.out.println("------------------------");
-        }
-        if (!boulderListOneFrameAgo.equals(boulderList)) {
-            boulderListOneFrameAgo.clear();
-            for (Projectile p : boulderList) {
-                boulderListOneFrameAgo.add(p);
-            }
-            //boulderListOneFrameAgo = new CopyOnWriteArrayList<>(boulderList);
-        }
+        detectProjectileCollision(boulderList, boulderOldPos);
     }
 
     public void detectCannonCollision() {
-        detectProjectileCollision(cannonList, cannonListOneFrameAgo, cannonListTwoFramesAgo);
+        detectProjectileCollision(cannonList, cannonOldPos);
     }
 
     public void detectBoomerangCollision(){
-        detectProjectileCollision(boomerangList, boomerangListOneFrameAgo, boomerangListTwoFramesAgo);
+        detectProjectileCollision(boomerangList, boomerangOldPos);
     }
 
     public void dispose() {

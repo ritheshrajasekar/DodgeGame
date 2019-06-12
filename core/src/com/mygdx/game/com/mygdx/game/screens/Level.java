@@ -174,25 +174,13 @@ public class Level {
 
     //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
     //the way you update laser is different(at least i thought, so i made a boolean called isLaser
-    public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay, boolean isBoomerang, boolean isLaser) {
+    public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
             if (projectileList.get(i).spawned) {
                 //updates and render if the projectile is on screen
                 if (projectileList.get(i).isOnScreen) {
-                    //checks if the projectile is a boomerang
-                    if(isBoomerang){
-                        projectileList.get(i).updateBoomerang(delta);
-                    }
-                    //checks if projectile is a laser, you need to make this method(updateLaser()) zak
-                    else if(isLaser){
-
-                        projectileList.get(i).updateLaser(delta);
-                    }
-                    //else renders normally
-                    else{
-                        projectileList.get(i).update(delta);
-                    }
+                    projectileList.get(i).update(delta);
                     projectileList.get(i).render(game.batch);
                     //deletes projectile and arrowTexture once the projectile leaves the screen
                 } else {
@@ -222,19 +210,19 @@ public class Level {
     }
 
     public void renderBoulders(float delta) {
-        renderProjectile(delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay, false, false);
+        renderProjectile(delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay);
     }
 
     public void renderCannons(float delta) {
-        renderProjectile(delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay, false, false);
+        renderProjectile(delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay);
     }
 
     public void renderBoomerang(float delta){
-        renderProjectile(delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay, true, false);
+        renderProjectile(delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay);
     }
 
     public void renderLaser(float delta){
-        renderProjectile(delta, laserSpawnInterval, laserSpawnIntervalRandom, laserList, laserArrowList, laserSpawnDelay, false, true);
+        renderProjectile(delta, laserSpawnInterval, laserSpawnIntervalRandom, laserList, laserArrowList, laserSpawnDelay);
     }
 
 
@@ -276,7 +264,7 @@ public class Level {
         }
     }
 
-    public boolean spawnProjectile(double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, boolean projectileSpawned, int maxProjectiles, int minProjectiles, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, int s, Animation a, String path) {
+    public boolean spawnProjectile(String type, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, boolean projectileSpawned, int maxProjectiles, int minProjectiles, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, int s, Animation a, String path) {
         //chooses a random time to assign projectileSpawnIntervalRandom within a calculated interval of the projectileSpawnInterval
         double interval = projectileSpawnInterval / 4;
         while (projectileSpawnIntervalRandom[0] == projectileSpawnInterval || projectileSpawnIntervalRandom[0] <= 0.0)
@@ -326,7 +314,7 @@ public class Level {
                     }
                 }
                 if (!inList) {
-                    projectileList.add(new Projectile(x, y, direction, s, a));
+                    projectileList.add(new Projectile(type, x, y, direction, s, a));
                     arrowList.add(new BlinkingArrow(x, y, direction, path));
                     xList.add(x);
                     yList.add(y);
@@ -344,21 +332,21 @@ public class Level {
     }
 
     public void spawnBoulders() {
-        boulderSpawned = spawnProjectile(boulderSpawnInterval, boulderSpawnIntervalRandom, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3), "sprites/dodgeBoulderArrow.png");
+        boulderSpawned = spawnProjectile("Boulder", boulderSpawnInterval, boulderSpawnIntervalRandom, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3), "sprites/dodgeBoulderArrow.png");
         //System.out.println(boulderSpawnIntervalRandom[0]);
     }
 
 
     public void spawnCannon() {
-        cannonSpawned = spawnProjectile(cannonSpawnInterval, cannonSpawnIntervalRandom, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1), "sprites/dodgeCannonballArrow.png");
+        cannonSpawned = spawnProjectile("Cannon", cannonSpawnInterval, cannonSpawnIntervalRandom, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1), "sprites/dodgeCannonballArrow.png");
     }
 
     public void spawnBoomerang(){
-        boomerangSpawned = spawnProjectile(boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 3, 3), "sprites/dodgeBoomerangArrow.png");
+        boomerangSpawned = spawnProjectile("Boomerang", boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 3, 3), "sprites/dodgeBoomerangArrow.png");
     }
     // fix the tile height and width!
     public void spawnLaser(){
-        laserSpawned = spawnProjectile(laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 73, 8, 1, 1), "sprites/dodgeLaserArrow.png");
+        laserSpawned = spawnProjectile("Laser", laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 73, 8, 1, 1), "sprites/dodgeLaserArrow.png");
     }
     public void detectCoin() {
         for (int i = 0; i < coinList.size(); i++) {

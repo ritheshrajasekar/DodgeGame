@@ -118,7 +118,6 @@ public class Projectile extends Entity {
                     rightBehavior(deltaTime);
                 if (x > 6) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
                     acrossScreen = true;
-                System.out.println(x);
             } else if (direction == "UP") {
                 if (acrossScreen)// checks if the projectile has gone across the screen, and if it has, then it emulates the up direction behavior
                     downBehavior(deltaTime);

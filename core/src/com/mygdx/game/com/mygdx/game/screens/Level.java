@@ -38,7 +38,7 @@ public class Level {
     public Texture levelTexture;
     public static Sprite BackgroundSprite;
     public static int currentLevelNumber = 0;
-    //public boolean[][] spawnLocations = new boolean[4][8];
+    public ArrayList<Integer[]> projectileSpawnCoords = new ArrayList<>();
 
     public static int coins;
     public boolean coinsSpawned;
@@ -185,8 +185,17 @@ public class Level {
                 //(it will stop blinking after the projectile is spawned because it exits this else statement)
             } else {
                 arrowList.get(i).render(game.batch);
-                if (arrowList.get(i).elapsedTime > spawnDelay)
+                //starts rendering the projectile and stops rendering the blinking arrow
+                if (arrowList.get(i).elapsedTime > spawnDelay) {
                     projectileList.get(i).spawned = true;
+                    //finds the coords of the projectile and deletes it from the list
+                    for (Integer[] pos : projectileSpawnCoords) {
+                        if (pos[0] == projectileList.get(i).x && pos[1] == projectileList.get(i).y) {
+                            projectileSpawnCoords.remove(pos);
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
@@ -268,7 +277,7 @@ public class Level {
                     y = (int) (Math.random() * 8);
                 }
 
-                //does not create a projectile if one is already there
+                //checks to see if a projectile is already there
                 boolean inList = false;
                 for (int tempX : xList) {
                     for (int tempY : yList) {
@@ -277,11 +286,18 @@ public class Level {
                         }
                     }
                 }
+                //checks through all projectiles that are being spawned
+                for (Integer[] pos : projectileSpawnCoords) {
+                    if (x == pos[0] && y == pos[1]) {
+                        inList = true;
+                    }
+                }
                 if (!inList) {
                     projectileList.add(new Projectile(x, y, direction, s, a));
                     arrowList.add(new BlinkingArrow(x, y, direction, path));
                     xList.add(x);
                     yList.add(y);
+                    projectileSpawnCoords.add(new Integer[] {x, y});
                 } else {
                     i--;
                 }

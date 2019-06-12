@@ -1,8 +1,8 @@
 stars01: 3
 stars02: 2
 stars03: 1
-stars04: 1
-stars05: 1
+stars04: 2
+stars05: 2
 stars06: 1
 stars07: 0
 stars08: 0

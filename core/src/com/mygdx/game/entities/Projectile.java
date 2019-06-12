@@ -129,6 +129,11 @@ public class Projectile extends Entity {
         if (x > 8) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
             isOnScreen = false;
     }
+    //
+    public void updateLaser(float deltaTime){
+
+        elapsedTime += Gdx.graphics.getDeltaTime();
+    }
     //changes the entity x coordinates on its direction which is left
     public void leftBehavior(float deltaTime) {
         xOffset -= speed * deltaTime;

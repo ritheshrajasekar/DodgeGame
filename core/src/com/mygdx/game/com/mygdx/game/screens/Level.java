@@ -173,6 +173,7 @@ public class Level {
     }
 
     //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
+    //the way you update laser is different(at least i thought, so i made a boolean called isLaser
     public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay, boolean isBoomerang, boolean isLaser) {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
@@ -182,6 +183,11 @@ public class Level {
                     //checks if the projectile is a boomerang
                     if(isBoomerang){
                         projectileList.get(i).updateBoomerang(delta);
+                    }
+                    //checks if projectile is a laser, you need to make this method(updateLaser()) zak
+                    else if(isLaser){
+
+                        projectileList.get(i).updateLaser(delta);
                     }
                     //else renders normally
                     else{
@@ -352,7 +358,7 @@ public class Level {
     }
     // fix the tile height and width!
     public void spawnLaser(){
-        laserSpawned = spawnProjectile(laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 1, 1), "sprites/dodgeLaserArrow.png");
+        laserSpawned = spawnProjectile(laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 73, 8, 1, 1), "sprites/dodgeLaserArrow.png");
     }
     public void detectCoin() {
         for (int i = 0; i < coinList.size(); i++) {

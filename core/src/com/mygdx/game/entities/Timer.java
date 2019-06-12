@@ -23,6 +23,7 @@ public class Timer {
         timeCount += dt;
         if (timeCount >= 0.1) {
             worldTimer -= 0.1;
+            //rounds to the nearest tenth
             worldTimer = (Math.round(worldTimer * 10)) / 10.0;
             worldTimerString = "" + (int) worldTimer;
             timeCount = 0;

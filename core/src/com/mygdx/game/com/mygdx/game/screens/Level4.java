@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
 
-public class Level4 extends Level implements Screen{
+public class Level4 extends Level implements Screen {
     public Level4(DodgeGame g) {
         currentLevelNumber = 4;
         game = g;
@@ -13,7 +13,6 @@ public class Level4 extends Level implements Screen{
         coins = 0;
         world = "SAND";
         level = " LEVEL 4";
-        coinSpawnInterval = 10;
 
         minBoulders = 3;
         maxBoulders = 6;
@@ -33,8 +32,8 @@ public class Level4 extends Level implements Screen{
         displayBackground(levelTexture);
 
         //don't mess around with the order of the display methods unless you know what you're doing
-        //it will cause a SpriteBatch.begin must be called before draw or SpriteBatch music be called before end error
-        //for some reason displayTimer music be called first
+        //it will cause a "SpriteBatch.begin must be called before draw" or "SpriteBatch music be called before end" error
+        //for some reason displayTimer must be called first
         displayTimer(delta);
         displayWorldAndLevel();
         drawGrid();
@@ -67,19 +66,23 @@ public class Level4 extends Level implements Screen{
         detectCannonCollision();
     }
 
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
 
     }
-    public void pause(){
+
+    public void pause() {
 
     }
-    public void resume(){
+
+    public void resume() {
 
     }
-    public void hide(){
+
+    public void hide() {
 
     }
-    public void dispose(){
+
+    public void dispose() {
         super.dispose();
     }
 }

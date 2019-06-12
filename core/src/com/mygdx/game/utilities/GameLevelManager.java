@@ -1,28 +1,29 @@
 package com.mygdx.game.utilities;
+
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.com.mygdx.game.screens.*;
 
 public class GameLevelManager {
     //plays a level based on the level number
-    public static void playLevel(DodgeGame game, int level){
-        switch (level){
+    public static void playLevel(DodgeGame game, int level) {
+        switch (level) {
             case 1:
-                game.setScreen( new Level1(game));
+                game.setScreen(new Level1(game));
                 break;
             case 2:
-                game.setScreen( new Level2(game));
+                game.setScreen(new Level2(game));
                 break;
             case 3:
-               game.setScreen( new Level3(game));
-               break;
+                game.setScreen(new Level3(game));
+                break;
             case 4:
-                game.setScreen( new Level4(game));
+                game.setScreen(new Level4(game));
                 break;
             case 5:
-                game.setScreen( new Level5(game));
+                game.setScreen(new Level5(game));
                 break;
             case 6:
-                game.setScreen( new Level6(game));
+                game.setScreen(new Level6(game));
                 break;
 //            case 7:
 //                game.setScreen( new Level7(game));

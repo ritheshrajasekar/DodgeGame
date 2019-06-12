@@ -3,10 +3,9 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.utilities.FileStreaming;
 
 
-public class Level1 extends Level implements Screen{
+public class Level1 extends Level implements Screen {
     public Level1(DodgeGame g) {
         currentLevelNumber = 1;
         game = g;
@@ -14,7 +13,6 @@ public class Level1 extends Level implements Screen{
         coins = 0;
         world = "GRASS";
         level = " LEVEL 1";
-        coinSpawnInterval = 10;
         minBoulders = 3;
         maxBoulders = 6;
         boulderSpawnInterval = 5;
@@ -28,8 +26,8 @@ public class Level1 extends Level implements Screen{
         displayBackground(levelTexture);
 
         //don't mess around with the order of the display methods unless you know what you're doing
-        //it will cause a SpriteBatch.begin must be called before draw or SpriteBatch music be called before end error
-        //for some reason displayTimer music be called first
+        //it will cause a "SpriteBatch.begin must be called before draw" or "SpriteBatch music be called before end" error
+        //for some reason displayTimer must be called first
         displayTimer(delta);
         displayWorldAndLevel();
         drawGrid();
@@ -59,19 +57,23 @@ public class Level1 extends Level implements Screen{
         detectBoulderCollision();
     }
 
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
 
     }
-    public void pause(){
+
+    public void pause() {
 
     }
-    public void resume(){
+
+    public void resume() {
 
     }
-    public void hide(){
+
+    public void hide() {
 
     }
-    public void dispose(){
+
+    public void dispose() {
         super.dispose();
     }
 }

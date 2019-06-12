@@ -21,7 +21,8 @@ public class LevelSelect implements Screen {
     private final Texture jungle = new Texture("sprites/dodgeJungleBGS.png");
     private final Texture hell = new Texture("sprites/dodgeHellBGS.png");
     private final Texture homeButton = new Texture("sprites/homeButton.png");
-    private final Texture zeroStar = new Texture("sprites/dodge0Star.png");;
+    private final Texture zeroStar = new Texture("sprites/dodge0Star.png");
+
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
     private final Texture twoStar = new Texture("sprites/dodge2Star.png");
     private final Texture threeStar = new Texture("sprites/dodge3Star.png");
@@ -36,7 +37,7 @@ public class LevelSelect implements Screen {
     public static final int X_VALUE_LEFT = 430;
     public static final int X_VALUE_RIGHT = 750;
     public static final int X_VALUE_RIGHTMOST = 1070;
-    public static final int Y_VALUE_TOP =  600;
+    public static final int Y_VALUE_TOP = 600;
     public static final int Y_VALUE_MIDDLE = 350;
     public static final int Y_VALUE_BOTTOM = 100;
     public static final int X_VALUE_HOME_BUTTON = 1180;
@@ -44,21 +45,21 @@ public class LevelSelect implements Screen {
     public static final int BUTTON_SIZE = 100;
     public static final int HOME_BUTTON_SIZE = 100;
     public static final int[][] BUTTON_COORDS = {
-        {X_VALUE_LEFTMOST, Y_VALUE_TOP},
-        {X_VALUE_LEFTMOST, Y_VALUE_MIDDLE},
-        {X_VALUE_LEFTMOST, Y_VALUE_BOTTOM},
-        {X_VALUE_LEFT, Y_VALUE_TOP},
-        {X_VALUE_LEFT, Y_VALUE_MIDDLE},
-        {X_VALUE_LEFT, Y_VALUE_BOTTOM},
-        {X_VALUE_RIGHT, Y_VALUE_TOP},
-        {X_VALUE_RIGHT, Y_VALUE_MIDDLE},
-        {X_VALUE_RIGHT, Y_VALUE_BOTTOM},
-        {X_VALUE_RIGHTMOST, Y_VALUE_TOP},
-        {X_VALUE_RIGHTMOST, Y_VALUE_MIDDLE},
-        {X_VALUE_RIGHTMOST, Y_VALUE_BOTTOM},
+            {X_VALUE_LEFTMOST, Y_VALUE_TOP},
+            {X_VALUE_LEFTMOST, Y_VALUE_MIDDLE},
+            {X_VALUE_LEFTMOST, Y_VALUE_BOTTOM},
+            {X_VALUE_LEFT, Y_VALUE_TOP},
+            {X_VALUE_LEFT, Y_VALUE_MIDDLE},
+            {X_VALUE_LEFT, Y_VALUE_BOTTOM},
+            {X_VALUE_RIGHT, Y_VALUE_TOP},
+            {X_VALUE_RIGHT, Y_VALUE_MIDDLE},
+            {X_VALUE_RIGHT, Y_VALUE_BOTTOM},
+            {X_VALUE_RIGHTMOST, Y_VALUE_TOP},
+            {X_VALUE_RIGHTMOST, Y_VALUE_MIDDLE},
+            {X_VALUE_RIGHTMOST, Y_VALUE_BOTTOM},
     };
 
-    public LevelSelect(DodgeGame game){
+    public LevelSelect(DodgeGame game) {
         this.game = game;
         //assigns button textures
         for (int i = 0; i < NUM_LEVELS; i++) {
@@ -66,9 +67,9 @@ public class LevelSelect implements Screen {
         }
 
         grassBackground.scale(7);
-        sandBackground.scale(7);
-        jungleBackground.scale(7);
-        hellBackground.scale(7);
+        sandBackground.scale(6);
+        jungleBackground.scale(6);
+        hellBackground.scale(6);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
@@ -76,19 +77,19 @@ public class LevelSelect implements Screen {
         music.play();
     }
 
-    public void render(float delta){
-        Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 
         //displays backgrounds
-        grassBackground.setPosition(DodgeGame.WIDTH/8, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        grassBackground.setPosition(DodgeGame.WIDTH / 8, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         grassBackground.draw(game.batch);
-        sandBackground.setPosition(DodgeGame.WIDTH/8 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        sandBackground.setPosition(DodgeGame.WIDTH / 8 + 320, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         sandBackground.draw(game.batch);
-        jungleBackground.setPosition(DodgeGame.WIDTH/8 + 320 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        jungleBackground.setPosition(DodgeGame.WIDTH / 8 + 320 + 320, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         jungleBackground.draw(game.batch);
-        hellBackground.setPosition(DodgeGame.WIDTH/8 + 320 + 320 + 320, DodgeGame.HEIGHT/2 - grassBackground.getHeight()/2);
+        hellBackground.setPosition(DodgeGame.WIDTH / 8 + 320 + 320 + 320, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         hellBackground.draw(game.batch);
 
         //draws buttons
@@ -99,10 +100,10 @@ public class LevelSelect implements Screen {
         //checks button clicks and begins the corresponding level
         for (int i = 0; i < NUM_LEVELS; i++) {
             if (FileStreaming.unlockedLevel >= i + 1 &&
-                Gdx.input.getX() > BUTTON_COORDS[i][0] &&
-                Gdx.input.getX() < BUTTON_COORDS[i][0] + BUTTON_SIZE &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > BUTTON_COORDS[i][1] &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < BUTTON_COORDS[i][1] + BUTTON_SIZE) {
+                    Gdx.input.getX() > BUTTON_COORDS[i][0] &&
+                    Gdx.input.getX() < BUTTON_COORDS[i][0] + BUTTON_SIZE &&
+                    DodgeGame.HEIGHT - Gdx.input.getY() > BUTTON_COORDS[i][1] &&
+                    DodgeGame.HEIGHT - Gdx.input.getY() < BUTTON_COORDS[i][1] + BUTTON_SIZE) {
                 if (Gdx.input.isTouched()) {
                     this.dispose();
                     GameLevelManager.playLevel(game, i + 1);
@@ -115,10 +116,10 @@ public class LevelSelect implements Screen {
 
         //checks home button click
         if (Gdx.input.getX() > X_VALUE_HOME_BUTTON &&
-            Gdx.input.getX() < X_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
-            DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_HOME_BUTTON &&
-            DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE) {
-            if(Gdx.input.isTouched()){
+                Gdx.input.getX() < X_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_HOME_BUTTON &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE) {
+            if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new Start(game));
             }
@@ -128,7 +129,7 @@ public class LevelSelect implements Screen {
         displayStars();// calls displayStars which displays the stars!
     }
 
-    public void displayStars(){
+    public void displayStars() {
         game.batch.begin();
 
         for (int i = 0; i < NUM_LEVELS; i++) {
@@ -150,26 +151,32 @@ public class LevelSelect implements Screen {
         game.batch.end();
     }
 
-    public void show(){
+    public void show() {
 
     }
-    public void resize(int width, int height){
+
+    public void resize(int width, int height) {
 
     }
-    public void pause(){
+
+    public void pause() {
 
     }
-    public void resume(){
+
+    public void resume() {
 
     }
-    public void hide(){
+
+    public void hide() {
 
     }
-    public void dispose(){
+
+    public void dispose() {
         grass.dispose();
         sand.dispose();
         jungle.dispose();
         hell.dispose();
+        homeButton.dispose();
         for (int i = 0; i < NUM_LEVELS; i++) {
             buttons[i].dispose();
         }

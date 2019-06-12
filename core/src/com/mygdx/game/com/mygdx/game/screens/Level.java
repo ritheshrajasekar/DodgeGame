@@ -38,7 +38,7 @@ public class Level {
     public Texture levelTexture;
     public static Sprite BackgroundSprite;
     public static int currentLevelNumber = 0;
-    public boolean[][] spawnLocations = new boolean[4][8];
+    //public boolean[][] spawnLocations = new boolean[4][8];
 
     public static int coins;
     public boolean coinsSpawned;
@@ -55,6 +55,12 @@ public class Level {
     public double cannonSpawnDelay;
     public boolean cannonSpawned;
 
+    public int minBoomerangs;
+    public int maxBoomerangs;
+    public double boomerangSpawnInterval;
+    public double boomerangSpawnDelay;
+    public boolean boomerangSpawned;
+
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
 
     public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
@@ -62,6 +68,9 @@ public class Level {
 
     public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
+
+    public CopyOnWriteArrayList<Projectile> boomerangList = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<BlinkingArrow> boomerangArrowList = new CopyOnWriteArrayList<>();
 
     public void show() {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
@@ -151,13 +160,21 @@ public class Level {
     }
 
     //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
-    public void renderProjectile(float delta, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
+    public void renderProjectile(float delta, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay, boolean isBoomerang) {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
             if (projectileList.get(i).spawned) {
                 //updates and render if the projectile is on screen
                 if (projectileList.get(i).isOnScreen) {
-                    projectileList.get(i).update(delta);
+                    //checks if the projectile is a boomerang
+                    if(isBoomerang){
+                        System.out.println("reverse");
+                        projectileList.get(i).updateBoomerang(delta);
+                    }
+                    //else renders normally
+                    else{
+                        projectileList.get(i).update(delta);
+                    }
                     projectileList.get(i).render(game.batch);
                     //deletes projectile and arrowTexture once the projectile leaves the screen
                 } else {
@@ -176,11 +193,15 @@ public class Level {
     }
 
     public void renderBoulders(float delta) {
-        renderProjectile(delta, boulderList, boulderArrowList, boulderSpawnDelay);
+        renderProjectile(delta, boulderList, boulderArrowList, boulderSpawnDelay, false);
     }
 
     public void renderCannons(float delta) {
-        renderProjectile(delta, cannonList, cannonArrowList, cannonSpawnDelay);
+        renderProjectile(delta, cannonList, cannonArrowList, cannonSpawnDelay, false);
+    }
+
+    public void renderBoomerang(float delta){
+        renderProjectile(delta, boomerangList, boomerangArrowList, boomerangSpawnDelay, true);
     }
 
 
@@ -278,8 +299,13 @@ public class Level {
         boulderSpawned = spawnProjectile(boulderSpawnInterval, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3), "sprites/dodgeBoulderArrow.png");
     }
 
+
     public void spawnCannon() {
         cannonSpawned = spawnProjectile(cannonSpawnInterval, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1), "sprites/dodgeCannonballArrow.png");
+    }
+
+    public void spawnBoomerang(){
+        boomerangSpawned = spawnProjectile(boomerangSpawnInterval, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 3, 3), "sprites/dodgeBoomerangArrow.png");
     }
 
     public void detectCoin() {
@@ -310,6 +336,10 @@ public class Level {
         detectProjectileCollision(cannonList);
     }
 
+    public void detectBoomerangCollision(){
+        detectProjectileCollision(boomerangList);
+    }
+
     public void dispose() {
         GRID.dispose();
         COIN_SOUND.dispose();
@@ -317,4 +347,5 @@ public class Level {
         levelTexture.dispose();
         BackgroundSprite.getTexture().dispose();
     }
+
 }

@@ -14,7 +14,7 @@ public class Projectile extends Entity {
     private float elapsedTime;
     public boolean isOnScreen;
     Animation projectileAnimation;
-    public boolean spawned;
+    public boolean spawned, acrossScreen;
 
     //x and y offset here are used to animate the movement of the projectile
     private int xOffset, yOffset;
@@ -22,6 +22,8 @@ public class Projectile extends Entity {
 
     public Projectile(int dx, int dy, String d, int s, Animation a) {
         isOnScreen = true;
+        acrossScreen = false;
+
         x = dx;
         y = dy;
         direction = d;
@@ -60,41 +62,115 @@ public class Projectile extends Entity {
         return new Animation(1f / frames, projectileAnimationFrames);
     }
 
-    //projectile movement
+
+    // because a boomerang has to come across the screen and then back, this update method does exactly just that by using the across screen variable.
+    public void updateBoomerang(float deltaTime) {
+        elapsedTime += Gdx.graphics.getDeltaTime();
+
+        if (direction == "RIGHT") {
+            if (acrossScreen) { // checks if the projectile has gone across the screen, and if it has, then it emulates the left direction behavior
+                leftBehavior(deltaTime);
+            } else {
+                xOffset += speed * deltaTime;
+                if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
+                    xOffset -= PLAYER_MOVE_DISTANCE;
+                    x++;
+                }
+                if (x > 7) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
+                    acrossScreen = true;
+
+            }
+        } else if (direction == "UP") {
+            if (acrossScreen) { // checks if the projectile has gone across the screen, and if it has, then it emulates the up direction behavior
+                downBehavior(deltaTime);
+            } else {
+                yOffset += speed * deltaTime;
+                if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
+                    yOffset -= PLAYER_MOVE_DISTANCE;
+                    y++;
+                }
+                if (y > 7) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to falsev
+                    acrossScreen = true;
+            }
+        } else if (direction == "LEFT") {
+            if (acrossScreen) { // checks if the projectile has gone across the screen, and if it has, then it emulates the right direction behavior
+                rightBehavior(deltaTime);
+            } else {
+                xOffset -= speed * deltaTime;
+                if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
+                    xOffset += PLAYER_MOVE_DISTANCE;
+                    x--;
+                }
+                if (x < 0) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
+                    acrossScreen = true;
+            }
+
+        } else if (direction == "DOWN") {
+            if (acrossScreen) { // checks if the projectile has gone across the screen, and if it has, then it emulates the up direction behavior
+                upBehavior(deltaTime);
+            } else {
+                yOffset -= speed * deltaTime;
+                if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
+                    yOffset += PLAYER_MOVE_DISTANCE;
+                    y--;
+                }
+                if (y < 0) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
+                    acrossScreen = true;
+            }
+        }
+    }
+    //changes the entity x coordinates on its direction which is right
+    public void rightBehavior(float deltaTime) {
+        xOffset += speed * deltaTime;
+        if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
+            xOffset -= PLAYER_MOVE_DISTANCE;
+            x++;
+        }
+        if (x > 8) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
+            isOnScreen = false;
+    }
+    //changes the entity x coordinates on its direction which is left
+    public void leftBehavior(float deltaTime) {
+        xOffset -= speed * deltaTime;
+        if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
+            xOffset += PLAYER_MOVE_DISTANCE;
+            x--;
+        }
+        if (x < -1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
+            isOnScreen = false;
+    }
+    // changes the entity y coordinates based on its direction which is up
+    public void upBehavior(float deltaTime) {
+        yOffset += speed * deltaTime;
+        if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
+            yOffset -= PLAYER_MOVE_DISTANCE;
+            y++;
+        }
+        if (y > 8) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to falsev
+            isOnScreen = false;
+    }
+    // changes the entity y coordinates based on its direction which is down
+    public void downBehavior(float deltaTime) {
+        yOffset -= speed * deltaTime;
+        if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
+            yOffset += PLAYER_MOVE_DISTANCE;
+            y--;
+        }
+        if (y < -1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to false
+            isOnScreen = false;
+    }
+
+    // updates pos of entity based on direction which is then configured to the different behavior methods
     public void update(float deltaTime) {
         elapsedTime += Gdx.graphics.getDeltaTime();
         if (direction == "RIGHT") {
-            xOffset += speed * deltaTime;
-            if (xOffset > PLAYER_MOVE_DISTANCE / 2) {
-                xOffset -= PLAYER_MOVE_DISTANCE;
-                x++;
-            }
-            if (x > 8)
-                isOnScreen = false;
+            rightBehavior(deltaTime);
         } else if (direction == "UP") {
-            yOffset += speed * deltaTime;
-            if (yOffset > PLAYER_MOVE_DISTANCE / 2) {
-                yOffset -= PLAYER_MOVE_DISTANCE;
-                y++;
-            }
-            if (y > 8)
-                isOnScreen = false;
+            upBehavior(deltaTime);
         } else if (direction == "LEFT") {
-            xOffset -= speed * deltaTime;
-            if (-xOffset > PLAYER_MOVE_DISTANCE / 2) {
-                xOffset += PLAYER_MOVE_DISTANCE;
-                x--;
-            }
-            if (x < -1)
-                isOnScreen = false;
+            leftBehavior(deltaTime);
         } else if (direction == "DOWN") {
-            yOffset -= speed * deltaTime;
-            if (-yOffset > PLAYER_MOVE_DISTANCE / 2) {
-                yOffset += PLAYER_MOVE_DISTANCE;
-                y--;
-            }
-            if (y < -1)
-                isOnScreen = false;
+            downBehavior(deltaTime);
         }
     }
 

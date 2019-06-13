@@ -92,7 +92,7 @@ public class Projectile extends Entity {
             yOffset -= PLAYER_MOVE_DISTANCE;
             y++;
         }
-        if (y > 8) // checks if the projectile has moved across the screen, and if it has, sets isOnScreen to falsev
+        if (y > 8) // checks if the projectile has moved across the screen, and if it has, sets isOnScreen to false
             isOnScreen = false;
     }
     // changes the entity y coordinates based on its direction which is down
@@ -141,7 +141,13 @@ public class Projectile extends Entity {
                 if (y < 1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
                     acrossScreen = true;
             }
-        } else {
+        } else if (type == "Laser") {
+            if (direction == "RIGHT") {
+
+            }
+        }
+
+        else {
             if (direction == "RIGHT") {
                 rightBehavior(deltaTime);
             } else if (direction == "UP") {

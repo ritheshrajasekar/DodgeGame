@@ -141,7 +141,7 @@ public class Projectile extends Entity {
                 if (y < 1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
                     acrossScreen = true;
             }*/
-            double pos;
+            double pos = 0;
 
             pos = elapsedTime;
 

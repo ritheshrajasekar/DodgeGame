@@ -7,7 +7,7 @@ import com.mygdx.game.DodgeGame;
 
 public class Level11 extends Level implements Screen {
     public Level11(DodgeGame g) {
-        currentLevelNumber = 10;
+        currentLevelNumber = 11;
         game = g;
         levelTexture = new Texture("sprites/dodgeHellBG.png");
         coins = 0;

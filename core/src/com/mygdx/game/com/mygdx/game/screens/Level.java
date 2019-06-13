@@ -321,8 +321,9 @@ public class Level {
                 }
                 if (!inList) {
                     if (type == "Laser") {
+                        //creates 100 lasers that that have a wait time between 0 and 1 second
                         for (int j = 0; j <= 100; j++) {
-                            projectileList.add(new Projectile(type, x, y, direction, s, a, j / 50f));
+                            projectileList.add(new Projectile(type, x, y, direction, s, a, j / 100f));
                             arrowList.add(new BlinkingArrow(x, y, direction, path));
                         }
                     } else {

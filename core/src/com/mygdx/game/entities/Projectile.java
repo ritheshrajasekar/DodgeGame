@@ -112,43 +112,9 @@ public class Projectile extends Entity {
         elapsedTime += deltaTime;
         //because a boomerang has to come across the screen and then back, this update method does exactly just that by using the across screen variable
         if (type == "Boomerang") {
-            /*if (direction == "RIGHT") {
-                if (acrossScreen)// checks if the projectile has gone across the screen, and if it has, then it emulates the left direction behavior
-                    leftBehavior(deltaTime);
-                else
-                    rightBehavior(deltaTime);
-                if (x > 6) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
-                    acrossScreen = true;
-            } else if (direction == "UP") {
-                if (acrossScreen)// checks if the projectile has gone across the screen, and if it has, then it emulates the up direction behavior
-                    downBehavior(deltaTime);
-                else
-                    upBehavior(deltaTime);
-                if (y > 6) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
-                    acrossScreen = true;
-            } else if (direction == "LEFT") {
-                if (acrossScreen)// checks if the projectile has gone across the screen, and if it has, then it emulates the right direction behavior
-                    rightBehavior(deltaTime);
-                else
-                    leftBehavior(deltaTime);
-                if (x < 1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
-                    acrossScreen = true;
-            } else if (direction == "DOWN") {
-                if (acrossScreen)// checks if the projectile has gone across the screen, and if it has, then it emulates the up direction behavior
-                    upBehavior(deltaTime);
-                else
-                    downBehavior(deltaTime);
-                if (y < 1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
-                    acrossScreen = true;
-            }*/
-            double pos = 0;
+            double pos;
 
-            //example of linear movement
-            /*pos = elapsedTime * 4;
-            if (elapsedTime > 2)
-                pos = 8 - (elapsedTime - 2) * 4;*/
-
-            //create smooth movement here
+            //smooth movement here function using a parabola
             pos = -8 * Math.pow(elapsedTime - 1, 2) + 7;
 
             int roundedPos = (int) Math.round(pos) + 1;

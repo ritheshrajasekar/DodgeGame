@@ -4,7 +4,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.entities.Player;
 
 public class PlayerMoveTest implements Screen {
     Texture player;
@@ -23,6 +22,7 @@ public class PlayerMoveTest implements Screen {
     }
 
     public void render(float delta){
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) || Gdx.input.isKeyJustPressed(Input.Keys.D)){
             x++;
         }
@@ -38,9 +38,9 @@ public class PlayerMoveTest implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.S)){
             y--;
         }
-
+        game.batch.begin();
         game.batch.draw(player, x, y);
-
+        game.batch.end();
     }
 
     @Override

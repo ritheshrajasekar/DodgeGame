@@ -82,20 +82,23 @@ public class WonLevel implements Screen {
         game.batch.begin();
         wonLevelBackgroundSprite.setPosition(DodgeGame.WIDTH / 2 - wonLevelBackgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - wonLevelBackgroundSprite.getHeight() / 2);
         wonLevelBackgroundSprite.draw(game.batch);
-        game.batch.draw(nextButton, X_VALUE_NEXT_LEVEL, Y_VALUE_NEXT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
 
-        //creates the next level button
-        if (Gdx.input.getX() < X_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
-                Gdx.input.getX() > X_VALUE_NEXT_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_NEXT_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
-                Gdx.input.justTouched() ||
-                Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                this.dispose();
-                GameLevelManager.playLevel(game, currentLevelNumber + 1);
+
+        if(currentLevelNumber != 12){
+            //creates the next level button
+            game.batch.draw(nextButton, X_VALUE_NEXT_LEVEL, Y_VALUE_NEXT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
+            if (Gdx.input.getX() < X_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
+                    Gdx.input.getX() > X_VALUE_NEXT_LEVEL &&
+                    DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_NEXT_LEVEL &&
+                    DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
+                    Gdx.input.justTouched() ||
+                    Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                    this.dispose();
+                    GameLevelManager.playLevel(game, currentLevelNumber + 1);
+            }
         }
         game.batch.draw(levelSelectButton, X_VALUE_SELECT_LEVEL, Y_VALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
-        //creates the next level select button
+        //creates the level select button
         if (Gdx.input.getX() < X_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_SELECT_LEVEL &&

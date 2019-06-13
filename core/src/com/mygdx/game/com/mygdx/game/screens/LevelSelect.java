@@ -1,6 +1,8 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -74,7 +76,6 @@ public class LevelSelect implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
-        music.play();
     }
 
     public void render(float delta) {
@@ -104,7 +105,7 @@ public class LevelSelect implements Screen {
                     Gdx.input.getX() < BUTTON_COORDS[i][0] + BUTTON_SIZE &&
                     DodgeGame.HEIGHT - Gdx.input.getY() > BUTTON_COORDS[i][1] &&
                     DodgeGame.HEIGHT - Gdx.input.getY() < BUTTON_COORDS[i][1] + BUTTON_SIZE) {
-                if (Gdx.input.isTouched()) {
+                if (Gdx.input.justTouched()) {
                     this.dispose();
                     GameLevelManager.playLevel(game, i + 1);
                 }
@@ -119,7 +120,7 @@ public class LevelSelect implements Screen {
                 Gdx.input.getX() < X_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_HOME_BUTTON &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE) {
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.justTouched()) {
                 this.dispose();
                 game.setScreen(new Start(game));
             }

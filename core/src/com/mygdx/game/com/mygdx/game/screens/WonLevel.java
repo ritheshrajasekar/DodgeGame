@@ -88,7 +88,7 @@ public class WonLevel implements Screen {
                 Gdx.input.getX() > X_VALUE_NEXT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_NEXT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_NEXT_LEVEL + BUTTON_SIZE) {
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.justTouched()) {
                 this.dispose();
                 GameLevelManager.playLevel(game, currentLevelNumber + 1);
             }
@@ -100,7 +100,7 @@ public class WonLevel implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE) {
 
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.justTouched()) {
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
             }

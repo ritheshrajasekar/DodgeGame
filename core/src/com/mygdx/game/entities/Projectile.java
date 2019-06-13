@@ -143,20 +143,23 @@ public class Projectile extends Entity {
             }*/
             double pos = 0;
 
-            pos = elapsedTime;
+            pos = elapsedTime * 4;
+            if (elapsedTime > 2)
+                pos = 8 - (elapsedTime - 2) * 4;
 
+            int roundedPos = (int) Math.round(pos);
             if (direction == "RIGHT") {
-                x = (int) Math.round(pos);
+                x = roundedPos - 1;
                 xOffset = (int) ((pos - x) * PLAYER_MOVE_DISTANCE);
             } else if (direction == "UP") {
-                y = (int) Math.round(pos);
+                y = roundedPos - 1;
                 yOffset = (int) ((pos - y) * PLAYER_MOVE_DISTANCE);
             } else if (direction == "LEFT") {
-                x = 7 - (int) Math.round(pos);
-                xOffset = (int) ((pos - x) * PLAYER_MOVE_DISTANCE) - PLAYER_MOVE_DISTANCE;
+                x = 8 - roundedPos;
+                xOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE);
             } else if (direction == "DOWN") {
-                y = 7 - (int) Math.round(pos);
-                yOffset = (int) ((pos - y) * PLAYER_MOVE_DISTANCE) - PLAYER_MOVE_DISTANCE;
+                y = 8 - roundedPos;
+                yOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE);
             }
         }
 

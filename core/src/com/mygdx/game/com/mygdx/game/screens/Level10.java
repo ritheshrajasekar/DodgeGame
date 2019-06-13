@@ -31,9 +31,9 @@ public class Level10 extends Level implements Screen {
 
         minLasers = 1;
         maxLasers = 2;
-        laserSpawnInterval = 4
-        laserSpawnDelay = 3
-                
+        laserSpawnInterval = 4;
+        laserSpawnDelay = 3;
+
         playMusic("music/07 - Jungle World.mp3");
         createPlayer();
     }
@@ -63,6 +63,7 @@ public class Level10 extends Level implements Screen {
         spawnBoulders();
         spawnCannon();
         spawnBoomerang();
+        spawnLaser();
     }
 
     public void renderEntities(float delta) {

@@ -357,7 +357,7 @@ public class Level {
     }
 
     public void spawnBoomerang() {
-        boomerangSpawned = spawnProjectile("Boomerang", boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 3, 3), "sprites/dodgeBoomerangArrow.png");
+        boomerangSpawned = spawnProjectile("Boomerang", boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 2, 4), "sprites/dodgeBoomerangArrow.png");
     }
 
     public void spawnLaser() {

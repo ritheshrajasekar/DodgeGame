@@ -348,7 +348,6 @@ public class Level {
         boulderSpawned = spawnProjectile("Boulder", boulderSpawnInterval, boulderSpawnIntervalRandom, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3), "sprites/dodgeBoulderArrow.png");
     }
 
-
     public void spawnCannon() {
         cannonSpawned = spawnProjectile("Cannon", cannonSpawnInterval, cannonSpawnIntervalRandom, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1), "sprites/dodgeCannonballArrow.png");
     }

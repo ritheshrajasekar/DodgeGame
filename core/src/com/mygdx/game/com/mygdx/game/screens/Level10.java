@@ -72,12 +72,14 @@ public class Level10 extends Level implements Screen {
         renderBoulders(delta);
         renderCannons(delta);
         renderBoomerang(delta);
+        renderLaser(delta);
     }
 
     public void detectCollision() {
         detectBoulderCollision();
         detectCannonCollision();
         detectBoomerangCollision();
+        detectLaserCollision();
     }
 
     public void resize(int width, int height) {

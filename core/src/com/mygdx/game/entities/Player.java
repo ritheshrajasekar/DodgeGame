@@ -10,10 +10,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Player extends Entity {
-    Texture player;
-    TextureRegion[] animationFrames;
-    Animation animation;
-    float elapsedTime;
+    private Texture player;
+    private TextureRegion[] animationFrames;
+    private Animation animation;
+    private float elapsedTime;
+    private int shiftCount;
+
 
     //creates the animation for the player
     public Player() {
@@ -36,7 +38,15 @@ public class Player extends Entity {
     // updates the position of the player, and time elapsed for the animation
     public void update() {
         elapsedTime += Gdx.graphics.getDeltaTime();
+        //increments shiftCount if shift is pressed because without shiftCount, the player moves too fast
         if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
+            shiftCount++;
+            if (shiftCount == 3)
+                shiftCount = 0;
+        } else {
+            shiftCount = -1;
+        }
+        if (shiftCount == 0) {
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D))
                 if (x < 7)
                     x++;

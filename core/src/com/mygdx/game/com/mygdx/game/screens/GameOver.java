@@ -56,7 +56,7 @@ public class GameOver implements Screen {
                 Gdx.input.getX() > X_VALUE_RETRY_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_RETRY_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_RETRY_LEVEL + BUTTON_SIZE) {
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.justTouched()) {
                 this.dispose();
                 GameLevelManager.playLevel(game, currentLevelNumber);
             }
@@ -68,7 +68,7 @@ public class GameOver implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE) {
 
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.justTouched()) {
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
             }

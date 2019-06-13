@@ -1,3 +1,8 @@
+// this class launches the game by creating a new object of DodgeGame
+// this class was created by the Rithesh Rajasekar
+/**
+ *
+ */
 package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -10,6 +15,7 @@ public class DesktopLauncher {
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new DodgeGame(), config);
+		//sets the attributes of the screen such as FPS and Dimensions
 		config.foregroundFPS = 30;
 		config.title = DodgeGame.TITLE;
 		config.width = DodgeGame.WIDTH;

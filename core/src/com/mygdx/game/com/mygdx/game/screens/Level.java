@@ -1,3 +1,6 @@
+//Authors were Zackary Asis, Matt Seng, Rithesh Rajsaekar, and Rithik Rajasekar
+// the purpose of this class is to be the super class for all the specific levels so that all the game logic is consolidated into one class
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -362,6 +365,7 @@ public class Level {
     }
 
     public void detectCoin() {
+        //detects coin collision
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
                 coins++;
@@ -411,6 +415,7 @@ public class Level {
     }
 
     public void dispose() {
+        //disposes of all textures and sounds
         GRID.dispose();
         COIN_SOUND.dispose();
         music.dispose();

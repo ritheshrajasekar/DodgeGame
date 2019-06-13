@@ -1,6 +1,7 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -53,30 +54,40 @@ public class Start implements Screen {
         backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - backgroundSprite.getHeight() / 2);
         backgroundSprite.draw(game.batch);
 
+        //checks exit button click
         if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + EXIT_BUTTON_WIDTH / 2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < EXIT_BUTTON_Y_VALUE + EXIT_BUTTON_HEIGHT) {
             game.batch.draw(exitButtonActive, DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2, EXIT_BUTTON_Y_VALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-            if (Gdx.input.justTouched() == true) {
+            if (Gdx.input.justTouched()) {
                 Gdx.app.exit();
             }
         } else {
             game.batch.draw(exitButtonInactive, DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2, EXIT_BUTTON_Y_VALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
         }
+        //checks level select button click
         if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + PLAY_BUTTON_WIDTH / 2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > PLAY_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < PLAY_BUTTON_Y_VALUE + PLAY_BUTTON_HEIGHT) {
             game.batch.draw(playButtonActive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, PLAY_BUTTON_Y_VALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-            if (Gdx.input.justTouched() == true) {
+            if (Gdx.input.justTouched()) {
                 music.stop();
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
             }
         } else {
             game.batch.draw(playButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, PLAY_BUTTON_Y_VALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+        }
 
+        //can also use escape to exit or space to go to level select
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+            Gdx.app.exit();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            music.stop();
+            this.dispose();
+            game.setScreen(new LevelSelect(game));
         }
 
         game.batch.end();

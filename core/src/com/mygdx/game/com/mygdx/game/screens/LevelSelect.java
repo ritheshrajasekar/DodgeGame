@@ -119,11 +119,11 @@ public class LevelSelect implements Screen {
         if (Gdx.input.getX() > X_VALUE_HOME_BUTTON &&
                 Gdx.input.getX() < X_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_HOME_BUTTON &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE) {
-            if (Gdx.input.justTouched()) {
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
+                Gdx.input.justTouched() ||
+                Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 this.dispose();
                 game.setScreen(new Start(game));
-            }
         }
 
         game.batch.end();

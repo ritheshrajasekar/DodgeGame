@@ -34,7 +34,7 @@ public class Level10 extends Level implements Screen {
         laserSpawnInterval = 4;
         laserSpawnDelay = 3;
 
-        playMusic("music/07 - Jungle World.mp3");
+        playMusic("music/08 - Hell World.mp3");
         createPlayer();
     }
 

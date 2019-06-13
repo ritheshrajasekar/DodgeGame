@@ -143,11 +143,15 @@ public class Projectile extends Entity {
             }*/
             double pos = 0;
 
-            pos = elapsedTime * 4;
+            //example of linear movement
+            /*pos = elapsedTime * 4;
             if (elapsedTime > 2)
-                pos = 8 - (elapsedTime - 2) * 4;
+                pos = 8 - (elapsedTime - 2) * 4;*/
 
-            int roundedPos = (int) Math.round(pos);
+            //create smooth movement here
+            pos = -8 * Math.pow(elapsedTime - 1, 2) + 7;
+
+            int roundedPos = (int) Math.round(pos) + 1;
             if (direction == "RIGHT") {
                 x = roundedPos - 1;
                 xOffset = (int) ((pos - x) * PLAYER_MOVE_DISTANCE);
@@ -156,10 +160,10 @@ public class Projectile extends Entity {
                 yOffset = (int) ((pos - y) * PLAYER_MOVE_DISTANCE);
             } else if (direction == "LEFT") {
                 x = 8 - roundedPos;
-                xOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE);
+                xOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE) - PLAYER_MOVE_DISTANCE;
             } else if (direction == "DOWN") {
                 y = 8 - roundedPos;
-                yOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE);
+                yOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE) - PLAYER_MOVE_DISTANCE;
             }
         }
 

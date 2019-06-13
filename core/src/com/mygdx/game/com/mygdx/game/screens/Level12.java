@@ -5,32 +5,32 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
 
 
-public class Level10 extends Level implements Screen {
-    public Level10(DodgeGame g) {
+public class Level12 extends Level implements Screen {
+    public Level12(DodgeGame g) {
         currentLevelNumber = 10;
         game = g;
         levelTexture = new Texture("sprites/dodgeHellBG.png");
         coins = 0;
         world = "HELL";
-        level = " LEVEL 10";
+        level = " LEVEL 12";
 
-        minBoulders = 1;
-        maxBoulders = 2;
+        minBoulders = 2;
+        maxBoulders = 3;
         boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
-        minCannons = 1;
-        maxCannons = 2;
+        minCannons = 2;
+        maxCannons = 3;
         cannonSpawnInterval = 4;
         cannonSpawnDelay = 3;
 
-        minBoomerangs = 1;
-        maxBoomerangs = 2;
+        minBoomerangs = 3;
+        maxBoomerangs = 4;
         boomerangSpawnInterval = 5;
         boomerangSpawnDelay = 3;
 
-        minLasers = 1;
-        maxLasers = 2;
+        minLasers = 2;
+        maxLasers = 3;
         laserSpawnInterval = 4;
         laserSpawnDelay = 3;
 

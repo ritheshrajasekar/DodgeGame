@@ -99,6 +99,6 @@ public class Start implements Screen {
     }
 
     public void dispose() {
-        music.dispose();
+       music.dispose();
     }
 }

@@ -14,13 +14,13 @@ public class Level10 extends Level implements Screen {
         world = "HELL";
         level = " LEVEL 10";
 
-        minBoulders = 4;
-        maxBoulders = 5;
-        boulderSpawnInterval = 3;
+        minBoulders = 1;
+        maxBoulders = 2;
+        boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
-        minCannons = 4;
-        maxCannons = 5;
+        minCannons = 1;
+        maxCannons = 2;
         cannonSpawnInterval = 4;
         cannonSpawnDelay = 3;
 
@@ -29,7 +29,11 @@ public class Level10 extends Level implements Screen {
         boomerangSpawnInterval = 5;
         boomerangSpawnDelay = 3;
 
-
+        minLasers = 1;
+        maxLasers = 2;
+        laserSpawnInterval = 4
+        laserSpawnDelay = 3
+                
         playMusic("music/07 - Jungle World.mp3");
         createPlayer();
     }

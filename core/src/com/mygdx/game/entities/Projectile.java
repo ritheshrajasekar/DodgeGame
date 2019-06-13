@@ -16,6 +16,7 @@ public class Projectile extends Entity {
     Animation projectileAnimation;
     public boolean spawned;
     public String type;
+    public float waitTime;
 
     //x and y offset here are used to animate the movement of the projectile
     public int xOffset, yOffset;
@@ -23,7 +24,7 @@ public class Projectile extends Entity {
 
     private boolean acrossScreen;
 
-    public Projectile(String t, int dx, int dy, String d, int s, Animation a) {
+    public Projectile(String t, int dx, int dy, String d, int s, Animation a, float w) {
         isOnScreen = true;
 
         type = t;
@@ -32,6 +33,7 @@ public class Projectile extends Entity {
         direction = d;
         speed = s;
         projectileAnimation = a;
+        waitTime = w;
 
         //rotates projectile
         if (direction == "UP") {
@@ -108,7 +110,9 @@ public class Projectile extends Entity {
 
     // updates pos of entity based on direction which is then configured to the different behavior methods
     public void update(float deltaTime) {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        elapsedTime += deltaTime;
+        if (waitTime > 0)
+            waitTime -= deltaTime;
         //because a boomerang has to come across the screen and then back, this update method does exactly just that by using the across screen variable
         if (type == "Boomerang") {
             if (direction == "RIGHT") {
@@ -140,10 +144,6 @@ public class Projectile extends Entity {
                     downBehavior(deltaTime);
                 if (y < 1) // checks if the projectile has moved across the screen, and if it has, sets acrossScreen to true
                     acrossScreen = true;
-            }
-        } else if (type == "Laser") {
-            if (direction == "RIGHT") {
-
             }
         }
 

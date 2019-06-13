@@ -313,15 +313,20 @@ public class Level {
                         inList = true;
                     }
                 }
-                if (!inList) {
-                    projectileList.add(new Projectile(type, x, y, direction, s, a));
-                    arrowList.add(new BlinkingArrow(x, y, direction, path));
-                    xList.add(x);
-                    yList.add(y);
-                    projectileSpawnCoords.add(new Integer[] {x, y});
+
+                if(type == "LASER") {
+
                 } else {
-                    i--;
-                }
+                    //if not in list, spawns projectile
+                    } if (!inList) {
+                        projectileList.add(new Projectile(type, x, y, direction, s, a));
+                        arrowList.add(new BlinkingArrow(x, y, direction, path));
+                        xList.add(x);
+                        yList.add(y);
+                        projectileSpawnCoords.add(new Integer[] {x, y});
+                    } else {
+                        i--;
+                    }
             }
             projectileSpawned = true;
         }

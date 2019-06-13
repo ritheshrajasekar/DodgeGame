@@ -29,6 +29,7 @@ public class Level10 extends Level implements Screen {
         boomerangSpawnInterval = 5;
         boomerangSpawnDelay = 3;
 
+
         playMusic("music/07 - Jungle World.mp3");
         createPlayer();
     }

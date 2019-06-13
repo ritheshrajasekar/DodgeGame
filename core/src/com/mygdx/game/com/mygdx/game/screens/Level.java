@@ -407,20 +407,7 @@ public class Level {
     }
 
     public void detectLaserCollision() {
-        for (int i = 0; i < laserList.size(); i++) {
-            if (laserList.get(i).direction.equals("UP") || laserList.get(i).direction.equals("DOWN")) {
-                if (laserList.get(i).x == player.x) {
-                    music.dispose();
-                    game.setScreen(new GameOver(game));
-                }
-            } else {
-                if (laserList.get(i).y == player.y) {
-                    music.dispose();
-                    game.setScreen(new GameOver(game));
-                }
-            }
-
-        }
+        detectProjectileCollision(laserList, laserOldPos);
     }
 
     public void dispose() {

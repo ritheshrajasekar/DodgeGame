@@ -131,6 +131,10 @@ public class Projectile extends Entity {
                 y = 8 - roundedPos;
                 yOffset = (int) -((pos - roundedPos) * PLAYER_MOVE_DISTANCE) - PLAYER_MOVE_DISTANCE;
             }
+
+            //if the boomerang leaves the screen
+            if (x < 0 || x > 7 || y < 0 || y > 7)
+                isOnScreen = false;
         }
 
         else {

@@ -264,7 +264,7 @@ public class Level {
         if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL != 0) {
             coinsSpawned = false;
         }
-        //coins despawn after 7.5 seconds
+        //coins despawn after a set number of seconds
         if (coinList.size() > 0 && coinList.get(0).elapsedTime > COIN_DESPAWN_DELAY) {
             coinList.clear();
         }

@@ -176,8 +176,7 @@ public class Level {
     //the way you update laser is different(at least i thought, so i made a boolean called isLaser
     public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
         for (int i = 0; i < projectileList.size(); i++) {
-            //only updates and renders once the projectile is spawned
-            if (projectileList.get(i).spawned) {
+            if (projectileList.get(i).waitTime <= 0) {
                 //updates and render if the projectile is on screen
                 if (projectileList.get(i).isOnScreen) {
                     projectileList.get(i).update(delta);
@@ -312,21 +311,26 @@ public class Level {
                     if (x == pos[0] && y == pos[1]) {
                         inList = true;
                     }
-                }
 
-                if(type == "LASER") {
 
-                } else {
-                    //if not in list, spawns projectile
-                    } if (!inList) {
-                        projectileList.add(new Projectile(type, x, y, direction, s, a));
-                        arrowList.add(new BlinkingArrow(x, y, direction, path));
-                        xList.add(x);
-                        yList.add(y);
-                        projectileSpawnCoords.add(new Integer[] {x, y});
+
+                //if not in list, spawns projectile
+                } if (!inList) {
+                    if (type == "Laser") {
+                        for (int j = 0; j <= 100; j++){
+                            projectileList.add(new Projectile(type, x, y, direction, s, a, j/25f));
+                            arrowList.add(new BlinkingArrow(x, y, direction, path));
+                        }
                     } else {
-                        i--;
-                    }
+                        projectileList.add(new Projectile(type, x, y, direction, s, a, 0));
+                        arrowList.add(new BlinkingArrow(x, y, direction, path));
+
+                    } xList.add(x);
+                    yList.add(y);
+                    projectileSpawnCoords.add(new Integer[] {x, y});
+                } else {
+                    i--;
+                }
             }
             projectileSpawned = true;
         }

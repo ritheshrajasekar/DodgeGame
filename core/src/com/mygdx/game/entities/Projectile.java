@@ -111,8 +111,6 @@ public class Projectile extends Entity {
     // updates pos of entity based on direction which is then configured to the different behavior methods
     public void update(float deltaTime) {
         elapsedTime += deltaTime;
-        if (waitTime > 0)
-            waitTime -= deltaTime;
         //because a boomerang has to come across the screen and then back, this update method does exactly just that by using the across screen variable
         if (type == "Boomerang") {
             if (direction == "RIGHT") {
@@ -158,6 +156,13 @@ public class Projectile extends Entity {
                 downBehavior(deltaTime);
             }
         }
+    }
+
+    public void wait(float deltaTime) {
+        if (waitTime > 0)
+            waitTime -= deltaTime;
+        if (waitTime < 0)
+            waitTime = 0;
     }
 
     public void render(SpriteBatch batch) {

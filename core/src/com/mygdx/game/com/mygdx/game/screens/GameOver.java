@@ -1,6 +1,7 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -55,23 +56,22 @@ public class GameOver implements Screen {
         if (Gdx.input.getX() < X_VALUE_RETRY_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_RETRY_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_RETRY_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_RETRY_LEVEL + BUTTON_SIZE) {
-            if (Gdx.input.justTouched()) {
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_RETRY_LEVEL + BUTTON_SIZE &&
+                Gdx.input.justTouched() ||
+                Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 this.dispose();
                 GameLevelManager.playLevel(game, currentLevelNumber);
-            }
         }
         game.batch.draw(levelSelectButton, X_VALUE_SELECT_LEVEL, Y_VALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
         //sees is the level select button is selected.
         if (Gdx.input.getX() < X_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.getX() > X_VALUE_SELECT_LEVEL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > Y_VALUE_SELECT_LEVEL &&
-                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE) {
-
-            if (Gdx.input.justTouched()) {
+                DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
+                Gdx.input.justTouched() ||
+                Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
-            }
         }
 
         game.batch.end();

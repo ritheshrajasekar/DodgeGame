@@ -322,7 +322,7 @@ public class Level {
                 if (!inList) {
                     if (type == "Laser") {
                         for (int j = 0; j <= 100; j++) {
-                            projectileList.add(new Projectile(type, x, y, direction, s, a, j / 25f));
+                            projectileList.add(new Projectile(type, x, y, direction, s, a, j / 50f));
                             arrowList.add(new BlinkingArrow(x, y, direction, path));
                         }
                     } else {

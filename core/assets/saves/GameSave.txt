@@ -10,4 +10,4 @@ stars09: 0
 stars10: 4
 stars11: 1
 stars12: 0
-unlockedLevel: 12
+unlockedLevel: 2

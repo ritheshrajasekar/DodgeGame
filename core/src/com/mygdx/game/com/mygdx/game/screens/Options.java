@@ -1,5 +1,6 @@
 package com.mygdx.game.com.mygdx.game.screens;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -8,7 +9,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.FileStreaming;
 
+import java.io.File;
+
+import static com.mygdx.game.com.mygdx.game.screens.Level.NUM_LEVELS;
 import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
 
 public class Options implements Screen {
@@ -28,7 +33,7 @@ public class Options implements Screen {
 
     private static final int MUTE_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.01);
     private static final int CLEAR_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.23);
-    private static final int UNLOCK_BUTTON_Y_VALUE = (int)(DodgeGame.HEIGHT * 0.45);
+    private static final int UNLOCK_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.45);
     private Music music;
 
     public static Sprite backgroundSprite;
@@ -48,7 +53,7 @@ public class Options implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
-        if(!isMuted){
+        if (!isMuted) {
             music.play();
         }
     }
@@ -65,59 +70,59 @@ public class Options implements Screen {
         backgroundSprite.draw(game.batch);
 
         //draws mute or unmute button and then checks if its clicked
-        if(isMuted){
-            game.batch.draw(unmuteButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH/2, MUTE_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
-        }
-        else{
-            game.batch.draw(muteButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH/2, MUTE_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
+        if (isMuted) {
+            game.batch.draw(unmuteButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, MUTE_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
+        } else {
+            game.batch.draw(muteButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, MUTE_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + BUTTON_WIDTH / 2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > MUTE_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < MUTE_BUTTON_Y_VALUE + BUTTON_HEIGHT && Gdx.input.justTouched()) {
-                if(!isMuted){
-                    isMuted = true;
-                    music.pause();
-                }
-                else if(isMuted){
-                    isMuted = false;
-                    music.play();
-                }
-
+            if (!isMuted) {
+                isMuted = true;
+                music.pause();
+            } else if (isMuted) {
+                isMuted = false;
+                music.play();
+            }
         }
 
         //displays clearAllButton and see if it's clicked
-        game.batch.draw(clearAllButton, DodgeGame.WIDTH /2 - BUTTON_WIDTH / 2, CLEAR_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
+        game.batch.draw(clearAllButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, CLEAR_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
         if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + BUTTON_WIDTH / 2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > CLEAR_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < CLEAR_BUTTON_Y_VALUE + BUTTON_HEIGHT && Gdx.input.justTouched()) {
-            //add code here to clear data
-
+            //clear all save data
+            FileStreaming.stars = new int[NUM_LEVELS];
+            FileStreaming.unlockedLevel = 1;
+            FileStreaming.write();
         }
 
         //displays unlock all levels buttons and see if it's clicked
-        game.batch.draw(unlockButton, DodgeGame.WIDTH /2 - BUTTON_WIDTH / 2, UNLOCK_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
+        game.batch.draw(unlockButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, UNLOCK_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
         if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + BUTTON_WIDTH / 2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > UNLOCK_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < UNLOCK_BUTTON_Y_VALUE + BUTTON_HEIGHT && Gdx.input.justTouched()) {
-            //add code here to unlock all levels
-
+            //unlocks all levels
+            FileStreaming.unlockedLevel = 12;
+            FileStreaming.write();
         }
 
         //displays home button and see if it's clicked
-        game.batch.draw(homeButton, HOME_BUTTON_XVAL,HOME_BUTTON_YVAL , HOME_BUTTON_SIZE, HOME_BUTTON_SIZE);
+        game.batch.draw(homeButton, HOME_BUTTON_XVAL, HOME_BUTTON_YVAL, HOME_BUTTON_SIZE, HOME_BUTTON_SIZE);
         if (Gdx.input.getX() > HOME_BUTTON_XVAL &&
                 Gdx.input.getX() < HOME_BUTTON_XVAL + HOME_BUTTON_SIZE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > HOME_BUTTON_YVAL &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < HOME_BUTTON_YVAL + HOME_BUTTON_SIZE &&
-                Gdx.input.justTouched()) {
-                music.stop();
-                this.dispose();
-                game.setScreen(new Start(game));
+                Gdx.input.justTouched() ||
+                Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            music.stop();
+            this.dispose();
+            game.setScreen(new Start(game));
         }
-
 
         game.batch.end();
     }

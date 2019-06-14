@@ -1,7 +1,5 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.Gdx;
-
 public class Boomerang extends Projectile {
     public static final int SPEED = 600;
 

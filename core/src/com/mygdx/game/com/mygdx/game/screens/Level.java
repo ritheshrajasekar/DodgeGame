@@ -141,10 +141,27 @@ public class Level {
     }
 
     public void displayWorldAndLevel() {
-        game.font.setColor(Color.PURPLE);
+        game.font.setColor(Color.WHITE);
         game.font.getData().setScale(4f);
-        game.font.draw(game.batch, world, (int) (DodgeGame.WIDTH * 0.07), DodgeGame.HEIGHT / 2 + 300);
-        game.font.draw(game.batch, level, (int) (DodgeGame.WIDTH * 0.25), DodgeGame.HEIGHT / 2 + 300);
+        double width = 0;
+        int height = 300;
+        switch (world) {
+            case "GRASS":
+                width = 0.23;
+                break;
+            case "SAND":
+                width = 0.2;
+                break;
+            case "JUNGLE":
+                width = 0.25;
+                break;
+            case "HELL":
+                width = 0.2;
+                height = 225;
+                break;
+        }
+        game.font.draw(game.batch, world, (int) (DodgeGame.WIDTH * 0.07), DodgeGame.HEIGHT / 2 + height);
+        game.font.draw(game.batch, level, (int) (DodgeGame.WIDTH * width), DodgeGame.HEIGHT / 2 + height);
     }
 
     public void drawGrid() {

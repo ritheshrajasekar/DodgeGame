@@ -24,18 +24,11 @@ public class WonLevel implements Screen {
     private final Texture threeStar = new Texture("sprites/dodge3Star.png");
     private final Texture perfectStar = new Texture("sprites/dodgePerfectStar.png");
 
-    // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
-  // private static final Texture nextButton = new Texture("sprites/nextLevel.png");
-   // private static final Texture wonLevelBackground = new Texture("sprites/completeLevelBackground.png");
-   // private static final Sprite wonLevelBackgroundSprite = new Sprite(wonLevelBackground);
-
     //don't change the declaration of textures and sprites please because it messed up the code previously
     private Texture levelSelectButton;
-    private Texture nextButton ;
-   private Texture wonLevelBackground;
-    private  static Sprite wonLevelBackgroundSprite;
-
-
+    private Texture nextButton;
+    private Texture wonLevelBackground;
+    private static Sprite wonLevelBackgroundSprite;
 
     private static final int BUTTON_SIZE = 300;
     private static final int X_VALUE_NEXT_LEVEL = (int) (DodgeGame.WIDTH * 0.25) - BUTTON_SIZE / 2;
@@ -54,7 +47,7 @@ public class WonLevel implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/02 - Win.mp3"));
         music.setLooping(false);
         music.setVolume(1f);
-        if(!isMuted){
+        if (!isMuted) {
             music.play();
         }
     }
@@ -94,9 +87,9 @@ public class WonLevel implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_NEXT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.justTouched() ||
                 Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                music.stop();
-                this.dispose();
-                GameLevelManager.playLevel(game, currentLevelNumber + 1);
+            music.stop();
+            this.dispose();
+            GameLevelManager.playLevel(game, currentLevelNumber + 1);
         }
         game.batch.draw(levelSelectButton, X_VALUE_SELECT_LEVEL, Y_VALUE_SELECT_LEVEL, BUTTON_SIZE, BUTTON_SIZE);
         //creates the next level select button
@@ -106,23 +99,23 @@ public class WonLevel implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.justTouched() ||
                 Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-                music.stop();
-                this.dispose();
-                game.setScreen(new LevelSelect(game));
+            music.stop();
+            this.dispose();
+            game.setScreen(new LevelSelect(game));
         }
 
         switch (stars) {
             case 1:
-                game.batch.draw(oneStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                game.batch.draw(oneStar, DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
                 break;
             case 2:
-                game.batch.draw(twoStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                game.batch.draw(twoStar, DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
                 break;
             case 3:
-                game.batch.draw(threeStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                game.batch.draw(threeStar, DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
                 break;
             case 4:
-                game.batch.draw(perfectStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                game.batch.draw(perfectStar, DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
                 break;
         }
 
@@ -146,8 +139,8 @@ public class WonLevel implements Screen {
     }
 
     public void dispose() {
-       wonLevelBackground.dispose();
-       levelSelectButton.dispose();
+        wonLevelBackground.dispose();
+        levelSelectButton.dispose();
         nextButton.dispose();
         music.dispose();
     }

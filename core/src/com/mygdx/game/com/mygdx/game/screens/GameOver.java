@@ -45,7 +45,6 @@ public class GameOver implements Screen {
         music.setVolume(1f);
         if(!isMuted){
             music.play();
-
         }
     }
 

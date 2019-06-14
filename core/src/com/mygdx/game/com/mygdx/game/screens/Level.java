@@ -31,6 +31,10 @@ public class Level {
     public static final String[] DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT"};
     public static final Texture GRID = new Texture("sprites/dodgeGrid.png");
     public static final Music COIN_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/04 - Coin.mp3"));
+    public static final Music BOULDER_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Boulder.mp3"));
+    public static final Music CANNON_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Cannonball.mp3"));
+    public static final Music BOOMERANG_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Boomerang.mp3"));
+    public static final Music LASER_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Laser.mp3"));
 
     public String world, level;
     public Music music;
@@ -200,7 +204,7 @@ public class Level {
 
     //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
     //the way you update laser is different(at least i thought, so i made a boolean called isLaser
-    public void renderProjectile(float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
+    public void renderProjectile(String type, float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
             if (projectileList.get(i).spawned) {
@@ -233,33 +237,51 @@ public class Level {
                     }
                     //resets projectileSpawnIntervalRandom
                     projectileSpawnIntervalRandom[0] = projectileSpawnInterval;
+
+                    //sound effects for each projectile
+                    if (!isMuted) {
+                        switch (type) {
+                            case "Boulder":
+                                BOULDER_SOUND.play();
+                                break;
+                            case "Cannon":
+                                CANNON_SOUND.play();
+                                break;
+                            case "Boomerang":
+                                BOOMERANG_SOUND.play();
+                                break;
+                            case "Laser":
+                                LASER_SOUND.play();
+                                break;
+                        }
+                    }
                 }
             }
         }
     }
 
     public void renderBoulders(float delta) {
-        renderProjectile(delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay);
+        renderProjectile("Boulder", delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay);
     }
 
     public void renderCannons(float delta) {
-        renderProjectile(delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay);
+        renderProjectile("Cannon", delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay);
     }
 
     public void renderBoomerang(float delta) {
-        renderProjectile(delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay);
+        renderProjectile("Boomerang", delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay);
     }
 
     public void renderLaser(float delta) {
-        renderProjectile(delta, laserSpawnInterval, laserSpawnIntervalRandom, laserList, laserArrowList, laserSpawnDelay);
+        renderProjectile("Laser", delta, laserSpawnInterval, laserSpawnIntervalRandom, laserList, laserArrowList, laserSpawnDelay);
     }
 
 
     public void spawnCoins() {
         if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL == 0 && !coinsSpawned) {
             //x and y lists to test if it's trying spawn a coin where one already exists
-            ArrayList<Integer> xList = new ArrayList<Integer>();
-            ArrayList<Integer> yList = new ArrayList<Integer>();
+            ArrayList<Integer> xList = new ArrayList<>();
+            ArrayList<Integer> yList = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
                 int x = (int) (8 * Math.random());

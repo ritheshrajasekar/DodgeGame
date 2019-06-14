@@ -49,13 +49,13 @@ public class Projectile extends Entity {
         }
     }
 
-    public static Animation createAnimation(String path, int width, int height, int rows, int cols) {
-        int frames = rows * cols;
+    public static Animation createAnimation(String path, int width, int height, int rows, int cols, int frames) {
+        int numTextures = rows * cols;
 
         Texture projectileTexture = new Texture(path);
         TextureRegion[] projectileAnimationFrames;
         TextureRegion[][] tmpFrames = TextureRegion.split(projectileTexture, width, height);
-        projectileAnimationFrames = new TextureRegion[frames];
+        projectileAnimationFrames = new TextureRegion[numTextures];
 
         int index = 0;
         for (int i = 0; i < rows; i++) {

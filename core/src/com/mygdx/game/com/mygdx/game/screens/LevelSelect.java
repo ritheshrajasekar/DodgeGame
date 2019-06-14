@@ -29,6 +29,7 @@ public class LevelSelect implements Screen {
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
     private final Texture twoStar = new Texture("sprites/dodge2Star.png");
     private final Texture threeStar = new Texture("sprites/dodge3Star.png");
+    private final Texture perfectStar = new Texture("sprites/dodgePerfectStar");
     private final Texture[] buttons = new Texture[NUM_LEVELS];
 
     private final Sprite grassBackground = new Sprite(grass);
@@ -151,6 +152,8 @@ public class LevelSelect implements Screen {
                 case 3:
                     starTexture = threeStar;
                     break;
+                case 4:
+                    starTexture = perfectStar;
             }
             game.batch.draw(starTexture, BUTTON_COORDS[i][0] - 56, BUTTON_COORDS[i][1] - 100, 224, 70);
         }

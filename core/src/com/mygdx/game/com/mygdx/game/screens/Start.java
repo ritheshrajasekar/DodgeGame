@@ -26,9 +26,9 @@ public class Start implements Screen {
     private static final int PLAY_BUTTON_HEIGHT = 150;
     private static final int OPTIONS_BUTTON_WIDTH = 300;
     private static final int OPTION_BUTTON_HEIGHT = 150;
+    private static final int PLAY_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.45);
+    private static final int OPTIONS_BUTTON_Y_VALUE = (int)(DodgeGame.HEIGHT * 0.23);
     private static final int EXIT_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.01);
-    private static final int PLAY_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.23);
-    private static final int OPTIONS_BUTTON_Y_VALUE = (int)(DodgeGame.HEIGHT * 0.45);
     private Music music;
 
     public static Sprite backgroundSprite;

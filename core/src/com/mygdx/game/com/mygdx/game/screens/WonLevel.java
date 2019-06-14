@@ -23,6 +23,7 @@ public class WonLevel implements Screen {
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
     private final Texture twoStar = new Texture("sprites/dodge2Star.png");
     private final Texture threeStar = new Texture("sprites/dodge3Star.png");
+    private final Texture perfectStar = new Texture("sprites/dodgePerfectStar");
 
     // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
   // private static final Texture nextButton = new Texture("sprites/nextLevel.png");
@@ -61,12 +62,14 @@ public class WonLevel implements Screen {
 
     public void show() {
         //coin to stars converter; total possible coins: 30
-        if (coins < 20)
+        if (coins < 15)
             stars = 1;
-        else if (coins < 30)
+        else if (coins < 25)
             stars = 2;
-        else
+        else if (coins < 30)
             stars = 3;
+        else
+            stars = 4;
 
         //assigns stars and unlockedLevel to their appropriate values
         if (stars > FileStreaming.stars[currentLevelNumber - 1])
@@ -109,14 +112,19 @@ public class WonLevel implements Screen {
                 game.setScreen(new LevelSelect(game));
         }
 
-        if(stars == 3){
-            game.batch.draw(threeStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
-        }
-        else if(stars == 2){
-            game.batch.draw(twoStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
-        }
-        else if(stars == 1){
-            game.batch.draw(oneStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+        switch (stars) {
+            case 1:
+                game.batch.draw(oneStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                break;
+            case 2:
+                game.batch.draw(twoStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                break;
+            case 3:
+                game.batch.draw(threeStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                break;
+            case 4:
+                game.batch.draw(perfectStar, DodgeGame.WIDTH/ 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);
+                break;
         }
 
         game.batch.end();

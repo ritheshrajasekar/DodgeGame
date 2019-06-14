@@ -91,7 +91,7 @@ public class Level {
 
     public void show() {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
-        timer = new Timer(60.1);
+        timer = new Timer(10);
         coinCounter = new CoinCounter();
     }
 
@@ -125,7 +125,7 @@ public class Level {
         timer.render(game.batch, game.font);
 
         //checks if time is up
-        if (timer.getWorldTimer() <= 0) {
+        if (timer.getWorldTimer() < 1) {
             if(!isMuted){
                 music.stop();
                 music.dispose();

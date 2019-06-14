@@ -19,11 +19,10 @@ public class WonLevel implements Screen {
     private Music music;
     private int stars;
 
-    private final Texture zeroStar = new Texture("sprites/dodge0Star.png");
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
     private final Texture twoStar = new Texture("sprites/dodge2Star.png");
     private final Texture threeStar = new Texture("sprites/dodge3Star.png");
-    private final Texture perfectStar = new Texture("sprites/dodgePerfectStar");
+    private final Texture perfectStar = new Texture("sprites/dodgePerfectStar.png");
 
     // private static final Texture levelSelectButton = new Texture("sprites/levelSelectButton.png");
   // private static final Texture nextButton = new Texture("sprites/nextLevel.png");

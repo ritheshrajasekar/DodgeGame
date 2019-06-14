@@ -24,6 +24,7 @@ public class LevelSelect implements Screen {
     private final Texture jungle = new Texture("sprites/dodgeJungleBGS.png");
     private final Texture hell = new Texture("sprites/dodgeHellBGS.png");
     private final Texture homeButton = new Texture("sprites/homeButton.png");
+    private final Texture lock = new Texture("sprites/lock.png");
     private final Texture zeroStar = new Texture("sprites/dodge0Star.png");
 
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
@@ -47,6 +48,7 @@ public class LevelSelect implements Screen {
     public static final int X_VALUE_HOME_BUTTON = 1180;
     public static final int Y_VALUE_HOME_BUTTON = 620;
     public static final int BUTTON_SIZE = 100;
+    public static final int LOCK_SIZE = 100;
     public static final int HOME_BUTTON_SIZE = 100;
     public static final int[][] BUTTON_COORDS = {
             {X_VALUE_LEFTMOST, Y_VALUE_TOP},
@@ -101,6 +103,9 @@ public class LevelSelect implements Screen {
         //draws buttons
         for (int i = 0; i < NUM_LEVELS; i++) {
             game.batch.draw(buttons[i], BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], BUTTON_SIZE, BUTTON_SIZE);
+            if(FileStreaming.unlockedLevel < i + 1){
+                game.batch.draw(lock, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
+            }
         }
 
         //checks button clicks and begins the corresponding level

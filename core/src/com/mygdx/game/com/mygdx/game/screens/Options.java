@@ -24,6 +24,8 @@ public class Options implements Screen {
     private Texture homeButton;
     private Texture unlockButton;
     private Texture background;
+    private Texture clearAllClicked;
+    private Texture unlockAllClicked;
 
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 100;
@@ -46,6 +48,8 @@ public class Options implements Screen {
         clearAllButton = new Texture("sprites/clearDataButton.png");
         unlockButton = new Texture("sprites/unlockAllButton.png");
         homeButton = new Texture("sprites/homeButton.png");
+        clearAllClicked = new Texture("sprites/clearDataButtonClicked.png");
+        unlockAllClicked = new Texture("sprites/unlockAllButtonClicked.png");
         background = new Texture("sprites/dodgeStartScreen.png");
         backgroundSprite = new Sprite(background);
         backgroundSprite.scale(6);
@@ -98,6 +102,8 @@ public class Options implements Screen {
             FileStreaming.stars = new int[NUM_LEVELS];
             FileStreaming.unlockedLevel = 1;
             FileStreaming.write();
+            game.batch.draw(clearAllClicked, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, CLEAR_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
+
         }
 
         //displays unlock all levels buttons and see if it's clicked
@@ -107,6 +113,7 @@ public class Options implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() > UNLOCK_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < UNLOCK_BUTTON_Y_VALUE + BUTTON_HEIGHT && Gdx.input.justTouched()) {
             //unlocks all levels
+            game.batch.draw(unlockAllClicked, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, UNLOCK_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
             FileStreaming.unlockedLevel = 12;
             FileStreaming.write();
         }

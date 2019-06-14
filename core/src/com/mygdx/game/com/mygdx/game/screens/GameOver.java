@@ -51,7 +51,7 @@ public class GameOver implements Screen {
 
     }
 
-    public void render(float delta, SpriteBatch batch, BitmapFont font) {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();

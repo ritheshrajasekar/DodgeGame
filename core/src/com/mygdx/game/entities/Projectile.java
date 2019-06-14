@@ -133,7 +133,7 @@ public class Projectile extends Entity {
             }
 
             //if the boomerang leaves the screen
-            if (x < 0 || x > 7 || y < 0 || y > 7)
+            if (x < -1 || x > 8 || y < -1 || y > 8)
                 isOnScreen = false;
         }
 

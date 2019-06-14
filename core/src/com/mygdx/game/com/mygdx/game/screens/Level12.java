@@ -14,16 +14,14 @@ public class Level12 extends Level implements Screen {
         world = "HELL";
         level = " LEVEL 12";
 
-/*
         minBoulders = 2;
         maxBoulders = 3;
-        boulderSpawnInterval = 4;
+        boulderSpawnInterval = 5;
         boulderSpawnDelay = 2;
-*/
 
         minCannons = 2;
         maxCannons = 3;
-        cannonSpawnInterval = 4;
+        cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
         minBoomerangs = 2;
@@ -32,7 +30,7 @@ public class Level12 extends Level implements Screen {
         boomerangSpawnDelay = 3;
 
         minLasers = 2;
-        maxLasers = 3;
+        maxLasers = 4;
         laserSpawnInterval = 4;
         laserSpawnDelay = 3;
 
@@ -62,7 +60,7 @@ public class Level12 extends Level implements Screen {
 
     public void spawnEntities() {
         spawnCoins();
-        /*spawnBoulders();*/
+        spawnBoulders();
         spawnCannon();
         spawnBoomerang();
         spawnLaser();
@@ -71,14 +69,14 @@ public class Level12 extends Level implements Screen {
     public void renderEntities(float delta) {
         renderPlayer();
         renderCoins();
-        /*renderBoulders(delta);*/
+        renderBoulders(delta);
         renderCannons(delta);
         renderBoomerang(delta);
         renderLaser(delta);
     }
 
     public void detectCollision() {
-        /*detectBoulderCollision();*/
+        detectBoulderCollision();
         detectCannonCollision();
         detectBoomerangCollision();
         detectLaserCollision();

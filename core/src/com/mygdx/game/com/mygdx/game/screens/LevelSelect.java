@@ -2,7 +2,6 @@ package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -76,6 +75,7 @@ public class LevelSelect implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
+        music.play();
     }
 
     public void render(float delta) {

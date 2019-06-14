@@ -14,24 +14,24 @@ public class Level11 extends Level implements Screen {
         world = "HELL";
         level = " LEVEL 11";
 
-        minBoulders = 2;
+        minBoulders = 1;
         maxBoulders = 3;
         boulderSpawnInterval = 5;
         boulderSpawnDelay = 2;
 
-        minCannons = 2;
+        minCannons = 1;
         maxCannons = 3;
         cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
-        minBoomerangs = 2;
+        minBoomerangs = 1;
         maxBoomerangs = 2;
-        boomerangSpawnInterval = 6;
+        boomerangSpawnInterval = 5;
         boomerangSpawnDelay = 3;
 
         minLasers = 2;
         maxLasers = 3;
-        laserSpawnInterval = 5;
+        laserSpawnInterval = 4.5;
         laserSpawnDelay = 3;
 
         playMusic("music/08 - Hell World.mp3");

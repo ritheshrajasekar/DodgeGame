@@ -16,12 +16,12 @@ public class Level10 extends Level implements Screen {
 
         minBoulders = 1;
         maxBoulders = 2;
-        boulderSpawnInterval = 4;
+        boulderSpawnInterval = 5;
         boulderSpawnDelay = 2;
 
         minCannons = 1;
         maxCannons = 2;
-        cannonSpawnInterval = 4;
+        cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
         minBoomerangs = 1;

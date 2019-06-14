@@ -14,17 +14,17 @@ public class Level7 extends Level implements Screen {
         world = "JUNGLE";
         level = " LEVEL 7";
 
-        minBoulders = 2;
+        minBoulders = 1;
         maxBoulders = 3;
         boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
-        minCannons = 2;
+        minCannons = 1;
         maxCannons = 3;
         cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
-        minBoomerangs = 2;
+        minBoomerangs = 1;
         maxBoomerangs = 3;
         boomerangSpawnInterval = 5;
         boomerangSpawnDelay = 3;

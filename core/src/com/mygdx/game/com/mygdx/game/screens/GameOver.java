@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -30,6 +31,7 @@ public class GameOver implements Screen {
     private static final int Y_VALUE_SELECT_LEVEL = 100;
 
     public static Sprite gameOverBackgroundSprite;
+    public static String time;
 
     public GameOver(DodgeGame game) {
         this.game = game;
@@ -83,7 +85,9 @@ public class GameOver implements Screen {
         }
 
         //displays time
-        //font.draw(batch, getWorldTimerString(), DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35);
+        game.font.setColor(Color.BLUE);
+        game.font.getData().setScale(4f);
+        game.font.draw(game.batch, "Time: " + time, DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35);
 
         game.batch.end();
     }

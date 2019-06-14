@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.com.mygdx.game.screens.GameOver;
 
 
 public class Timer {
@@ -45,5 +46,8 @@ public class Timer {
         font.setColor(Color.GREEN);
         font.getData().setScale(4f);
         font.draw(batch, getWorldTimerString(), (int) (DodgeGame.WIDTH * 0.20) + 45, DodgeGame.HEIGHT / 2 + 25);
+
+        //sets the time for the gave over screen
+        GameOver.time = getWorldTimerString();
     }
 }

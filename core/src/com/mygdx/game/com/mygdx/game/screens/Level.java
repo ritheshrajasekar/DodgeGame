@@ -44,6 +44,7 @@ public class Level {
     public ArrayList<Integer[]> projectileSpawnCoords = new ArrayList<>();
 
     public static int coins;
+    public static boolean isMuted = false;
     public boolean coinsSpawned;
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
 
@@ -104,10 +105,13 @@ public class Level {
     }
 
     public void playMusic(String path) {
-        music = Gdx.audio.newMusic(Gdx.files.internal(path));
-        music.setLooping(true);
-        music.setVolume(1f);
-        music.play();
+        if(!isMuted){
+            music = Gdx.audio.newMusic(Gdx.files.internal(path));
+            music.setLooping(true);
+            music.setVolume(1f);
+            music.play();
+        }
+
     }
 
     public void createPlayer() {
@@ -122,8 +126,10 @@ public class Level {
 
         //checks if time is up
         if (timer.getWorldTimer() <= 0) {
-            music.stop();
-            music.dispose();
+            if(!isMuted){
+                music.stop();
+                music.dispose();
+            }
 
             game.setScreen(new WonLevel(game));
         }
@@ -135,10 +141,27 @@ public class Level {
     }
 
     public void displayWorldAndLevel() {
-        game.font.setColor(Color.PURPLE);
+        game.font.setColor(Color.WHITE);
         game.font.getData().setScale(4f);
-        game.font.draw(game.batch, world, (int) (DodgeGame.WIDTH * 0.07), DodgeGame.HEIGHT / 2 + 300);
-        game.font.draw(game.batch, level, (int) (DodgeGame.WIDTH * 0.25), DodgeGame.HEIGHT / 2 + 300);
+        double width = 0;
+        int height = 300;
+        switch (world) {
+            case "GRASS":
+                width = 0.23;
+                break;
+            case "SAND":
+                width = 0.2;
+                break;
+            case "JUNGLE":
+                width = 0.25;
+                break;
+            case "HELL":
+                width = 0.2;
+                height = 225;
+                break;
+        }
+        game.font.draw(game.batch, world, (int) (DodgeGame.WIDTH * 0.07), DodgeGame.HEIGHT / 2 + height);
+        game.font.draw(game.batch, level, (int) (DodgeGame.WIDTH * width), DodgeGame.HEIGHT / 2 + height);
     }
 
     public void drawGrid() {
@@ -264,7 +287,7 @@ public class Level {
         if (timer.getWorldTimer() % COIN_SPAWN_INTERVAL != 0) {
             coinsSpawned = false;
         }
-        //coins despawn after 7.5 seconds
+        //coins despawn after a set number of seconds
         if (coinList.size() > 0 && coinList.get(0).elapsedTime > COIN_DESPAWN_DELAY) {
             coinList.clear();
         }
@@ -349,19 +372,19 @@ public class Level {
     }
 
     public void spawnBoulders() {
-        boulderSpawned = spawnProjectile("Boulder", boulderSpawnInterval, boulderSpawnIntervalRandom, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3), "sprites/dodgeBoulderArrow.png");
+        boulderSpawned = spawnProjectile("Boulder", boulderSpawnInterval, boulderSpawnIntervalRandom, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3, 12), "sprites/dodgeBoulderArrow.png");
     }
 
     public void spawnCannon() {
-        cannonSpawned = spawnProjectile("Cannon", cannonSpawnInterval, cannonSpawnIntervalRandom, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1), "sprites/dodgeCannonballArrow.png");
+        cannonSpawned = spawnProjectile("Cannon", cannonSpawnInterval, cannonSpawnIntervalRandom, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1, 1), "sprites/dodgeCannonballArrow.png");
     }
 
     public void spawnBoomerang() {
-        boomerangSpawned = spawnProjectile("Boomerang", boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 2, 4), "sprites/dodgeBoomerangArrow.png");
+        boomerangSpawned = spawnProjectile("Boomerang", boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 2, 4, 8), "sprites/dodgeBoomerangArrow.png");
     }
 
     public void spawnLaser() {
-        laserSpawned = spawnProjectile("Laser", laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 73, 8, 1, 1), "sprites/dodgeLaserArrow.png");
+        laserSpawned = spawnProjectile("Laser", laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 8, 8, 1, 1, 1), "sprites/dodgeLaserArrow.png");
     }
 
     public void detectCoin() {
@@ -369,8 +392,10 @@ public class Level {
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
                 coins++;
-                COIN_SOUND.stop();
-                COIN_SOUND.play();
+                if(!isMuted){
+                    COIN_SOUND.stop();
+                    COIN_SOUND.play();
+                }
                 coinList.remove(i);
             }
         }
@@ -380,14 +405,18 @@ public class Level {
         //detect for current position
         for (int i = 0; i < projectileList.size(); i++) {
             if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
-                music.dispose();
+                if(!isMuted){
+                    music.dispose();
+                }
                 game.setScreen(new GameOver(game));
             }
         }
         //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
         for (Integer[] pos : projectileOldPos) {
             if (pos[0] == player.x && pos[1] == player.y) {
-                music.dispose();
+                if(!isMuted){
+                    music.dispose();
+                }
                 game.setScreen(new GameOver(game));
             }
         }

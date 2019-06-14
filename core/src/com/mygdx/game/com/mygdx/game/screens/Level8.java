@@ -14,19 +14,19 @@ public class Level8 extends Level implements Screen {
         world = "JUNGLE";
         level = " LEVEL 8";
 
-        minBoulders = 3;
+        minBoulders = 2;
         maxBoulders = 4;
         boulderSpawnInterval = 4;
         boulderSpawnDelay = 2;
 
-        minCannons = 3;
+        minCannons = 2;
         maxCannons = 4;
         cannonSpawnInterval = 5;
         cannonSpawnDelay = 3;
 
-        minBoomerangs = 3;
+        minBoomerangs = 2;
         maxBoomerangs = 4;
-        boomerangSpawnInterval = 5;
+        boomerangSpawnInterval = 4.5;
         boomerangSpawnDelay = 3;
 
         playMusic("music/07 - Jungle World.mp3");

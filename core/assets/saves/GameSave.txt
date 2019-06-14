@@ -7,7 +7,7 @@ stars06: 0
 stars07: 0
 stars08: 0
 stars09: 0
-stars10: 1
+stars10: 0
 stars11: 0
 stars12: 0
 unlockedLevel: 12

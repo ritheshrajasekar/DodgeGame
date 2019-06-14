@@ -13,6 +13,7 @@ import com.mygdx.game.utilities.FileStreaming;
 import com.mygdx.game.utilities.GameLevelManager;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level.NUM_LEVELS;
+import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
 
 public class LevelSelect implements Screen {
     private DodgeGame game;
@@ -76,6 +77,9 @@ public class LevelSelect implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
+        if(!isMuted){
+            music.play();
+        }
     }
 
     public void render(float delta) {
@@ -106,6 +110,7 @@ public class LevelSelect implements Screen {
                     DodgeGame.HEIGHT - Gdx.input.getY() > BUTTON_COORDS[i][1] &&
                     DodgeGame.HEIGHT - Gdx.input.getY() < BUTTON_COORDS[i][1] + BUTTON_SIZE) {
                 if (Gdx.input.justTouched()) {
+                    music.stop();
                     this.dispose();
                     GameLevelManager.playLevel(game, i + 1);
                 }
@@ -122,6 +127,7 @@ public class LevelSelect implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
                 Gdx.input.justTouched() ||
                 Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                music.stop();
                 this.dispose();
                 game.setScreen(new Start(game));
         }

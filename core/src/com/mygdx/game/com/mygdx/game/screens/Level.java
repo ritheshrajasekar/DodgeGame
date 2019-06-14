@@ -44,6 +44,7 @@ public class Level {
     public ArrayList<Integer[]> projectileSpawnCoords = new ArrayList<>();
 
     public static int coins;
+    public static boolean isMuted = false;
     public boolean coinsSpawned;
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
 
@@ -104,10 +105,13 @@ public class Level {
     }
 
     public void playMusic(String path) {
-        music = Gdx.audio.newMusic(Gdx.files.internal(path));
-        music.setLooping(true);
-        music.setVolume(1f);
-        music.play();
+        if(!isMuted){
+            music = Gdx.audio.newMusic(Gdx.files.internal(path));
+            music.setLooping(true);
+            music.setVolume(1f);
+            music.play();
+        }
+
     }
 
     public void createPlayer() {
@@ -122,8 +126,10 @@ public class Level {
 
         //checks if time is up
         if (timer.getWorldTimer() <= 0) {
-            music.stop();
-            music.dispose();
+            if(!isMuted){
+                music.stop();
+                music.dispose();
+            }
 
             game.setScreen(new WonLevel(game));
         }
@@ -369,8 +375,10 @@ public class Level {
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
                 coins++;
-                COIN_SOUND.stop();
-                COIN_SOUND.play();
+                if(!isMuted){
+                    COIN_SOUND.stop();
+                    COIN_SOUND.play();
+                }
                 coinList.remove(i);
             }
         }
@@ -380,14 +388,18 @@ public class Level {
         //detect for current position
         for (int i = 0; i < projectileList.size(); i++) {
             if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
-                music.dispose();
+                if(!isMuted){
+                    music.dispose();
+                }
                 game.setScreen(new GameOver(game));
             }
         }
         //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
         for (Integer[] pos : projectileOldPos) {
             if (pos[0] == player.x && pos[1] == player.y) {
-                music.dispose();
+                if(!isMuted){
+                    music.dispose();
+                }
                 game.setScreen(new GameOver(game));
             }
         }

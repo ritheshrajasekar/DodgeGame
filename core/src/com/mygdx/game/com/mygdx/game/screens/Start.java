@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 
+import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
+
 public class Start implements Screen {
     private DodgeGame game;
     private Texture exitButtonInactive;
@@ -16,12 +18,17 @@ public class Start implements Screen {
     private Texture playButtonInactive;
     private Texture playButtonActive;
     private Texture startScreenBackground;
+    private Texture optionsButtonInactive;
+    private Texture optionsButtonActive;
     private static final int EXIT_BUTTON_WIDTH = 300;
     private static final int EXIT_BUTTON_HEIGHT = 150;
     private static final int PLAY_BUTTON_WIDTH = 300;
     private static final int PLAY_BUTTON_HEIGHT = 150;
-    private static final int EXIT_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.1);
-    private static final int PLAY_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.4);
+    private static final int OPTIONS_BUTTON_WIDTH = 300;
+    private static final int OPTION_BUTTON_HEIGHT = 150;
+    private static final int EXIT_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.01);
+    private static final int PLAY_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.23);
+    private static final int OPTIONS_BUTTON_Y_VALUE = (int)(DodgeGame.HEIGHT * 0.45);
     private Music music;
 
     public static Sprite backgroundSprite;
@@ -34,13 +41,17 @@ public class Start implements Screen {
         playButtonInactive = new Texture("sprites/playButton2.jpg");
         playButtonActive = new Texture("sprites/playButton2Active.jpg");
         startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
+        optionsButtonInactive = new Texture("sprites/optionsButton.jpg");
+        optionsButtonActive = new Texture("sprites/optionsButtonActive.jpg");
         backgroundSprite = new Sprite(startScreenBackground);
         backgroundSprite.scale(6);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
-        music.play();
+        if(!isMuted){
+            music.play();
+        }
     }
 
     public void show() {
@@ -80,7 +91,20 @@ public class Start implements Screen {
         } else {
             game.batch.draw(playButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, PLAY_BUTTON_Y_VALUE, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
         }
-
+        //check options select button click
+        if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + OPTIONS_BUTTON_WIDTH / 2 &&
+                Gdx.input.getX() > DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2 &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > OPTIONS_BUTTON_Y_VALUE &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < OPTIONS_BUTTON_Y_VALUE + OPTION_BUTTON_HEIGHT) {
+            game.batch.draw(optionsButtonActive, DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE,OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
+            if (Gdx.input.justTouched()) {
+                music.stop();
+                this.dispose();
+                game.setScreen(new Options(game));
+            }
+        } else {
+            game.batch.draw(optionsButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2,OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH,OPTION_BUTTON_HEIGHT);
+        }
         //can also use escape to exit or space to go to level select
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
             Gdx.app.exit();

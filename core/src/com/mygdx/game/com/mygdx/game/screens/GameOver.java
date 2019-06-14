@@ -11,6 +11,7 @@ import com.mygdx.game.DodgeGame;
 import com.mygdx.game.utilities.GameLevelManager;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level.currentLevelNumber;
+import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
 
 public class GameOver implements Screen {
     private DodgeGame game;
@@ -38,7 +39,10 @@ public class GameOver implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/03 - Lose.mp3"));
         music.setLooping(false);
         music.setVolume(1f);
-        music.play();
+        if(!isMuted){
+            music.play();
+
+        }
     }
 
     public void show() {
@@ -59,6 +63,7 @@ public class GameOver implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_RETRY_LEVEL + BUTTON_SIZE &&
                 Gdx.input.justTouched() ||
                 Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                music.stop();
                 this.dispose();
                 GameLevelManager.playLevel(game, currentLevelNumber);
         }
@@ -70,6 +75,7 @@ public class GameOver implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_SELECT_LEVEL + BUTTON_SIZE &&
                 Gdx.input.justTouched() ||
                 Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                music.stop();
                 this.dispose();
                 game.setScreen(new LevelSelect(game));
         }

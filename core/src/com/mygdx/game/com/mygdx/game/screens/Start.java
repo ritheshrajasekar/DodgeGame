@@ -38,8 +38,8 @@ public class Start implements Screen {
         this.game = game;
         exitButtonInactive = new Texture("sprites/exitButton.jpg");
         exitButtonActive = new Texture("sprites/exitButtonActive.jpg");
-        playButtonInactive = new Texture("sprites/playButton2.jpg");
-        playButtonActive = new Texture("sprites/playButton2Active.jpg");
+        playButtonInactive = new Texture("sprites/playButton.jpg");
+        playButtonActive = new Texture("sprites/playButtonActive.jpg");
         startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
         optionsButtonInactive = new Texture("sprites/optionsButton.jpg");
         optionsButtonActive = new Texture("sprites/optionsButtonActive.jpg");

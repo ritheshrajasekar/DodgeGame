@@ -23,7 +23,11 @@ public class LevelSelect implements Screen {
     private final Texture jungle = new Texture("sprites/dodgeJungleBGS.png");
     private final Texture hell = new Texture("sprites/dodgeHellBGS.png");
     private final Texture homeButton = new Texture("sprites/homeButton.png");
-    private final Texture lock = new Texture("sprites/lock5.png");
+    private final Texture lockGrass = new Texture("sprites/lockGrass.png");
+    private final Texture lockSand = new Texture("sprites/lockSand.png");
+    private final Texture lockJungle = new Texture("sprites/lockJungle.png");
+    private final Texture lockHell = new Texture("sprites/lockHell.png");
+
     private final Texture zeroStar = new Texture("sprites/dodge0Star.png");
 
     private final Texture oneStar = new Texture("sprites/dodge1Star.png");
@@ -103,7 +107,20 @@ public class LevelSelect implements Screen {
         for (int i = 0; i < NUM_LEVELS; i++) {
             game.batch.draw(buttons[i], BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], BUTTON_SIZE, BUTTON_SIZE);
             if(FileStreaming.unlockedLevel < i + 1){
-                game.batch.draw(lock, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
+                if(i <= 2){
+                    game.batch.draw(lockGrass, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
+                }
+                else if( i<=5){
+                    game.batch.draw(lockSand, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
+                }
+                else if(i <=8){
+                    game.batch.draw(lockJungle, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
+
+                }
+                else{
+                    game.batch.draw(lockHell, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
+
+                }
             }
         }
 

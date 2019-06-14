@@ -204,13 +204,13 @@ public class Level {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
             if (projectileList.get(i).spawned) {
+                //deletes laser after 2 seconds
+                if (projectileList.get(i).type == "Laser" && projectileList.get(i).elapsedTime > 2)
+                    projectileList.get(i).isOnScreen = false;
                 //updates and render if the projectile is on screen
                 if (projectileList.get(i).isOnScreen) {
-                    projectileList.get(i).wait(delta);
-                    if (projectileList.get(i).waitTime == 0) {
-                        projectileList.get(i).update(delta);
-                        projectileList.get(i).render(game.batch);
-                    }
+                    projectileList.get(i).update(delta);
+                    projectileList.get(i).render(game.batch);
                     //deletes projectile and arrowTexture once the projectile leaves the screen
                 } else {
                     projectileList.remove(i);
@@ -341,19 +341,34 @@ public class Level {
                     if (x == pos[0] && y == pos[1]) {
                         inList = true;
                     }
-
-
-                    //if not in list, spawns projectile
-                }
+                }//if not in list, spawns projectile
                 if (!inList) {
                     if (type == "Laser") {
-                        //creates 100 lasers that that have a wait time between 0 and 1 second
-                        for (int j = 0; j <= 100; j++) {
-                            projectileList.add(new Projectile(type, x, y, direction, s, a, j / 100f));
-                            arrowList.add(new BlinkingArrow(x, y, direction, path));
+                        //creates 8 lasers for each tile
+                        boolean cutOffLastPixel = false;
+                        if (direction == "DOWN" || direction == "LEFT")
+                            cutOffLastPixel = true;
+                        for (int j = 0; j < 8; j++) {
+                            if ((direction == "UP" || direction == "RIGHT") && j == 7)
+                                cutOffLastPixel = true;
+                            if (direction == "UP") {
+                                projectileList.add(new Projectile(type, x, j, direction, s, a, cutOffLastPixel));
+                                arrowList.add(new BlinkingArrow(x, y, direction, path));
+                            } else if (direction == "DOWN") {
+                                projectileList.add(new Projectile(type, x, j, direction, s, a, cutOffLastPixel));
+                                arrowList.add(new BlinkingArrow(x, y, direction, path));
+                            } else if (direction == "LEFT") {
+                                projectileList.add(new Projectile(type, j, y, direction, s, a, cutOffLastPixel));
+                                arrowList.add(new BlinkingArrow(x, y, direction, path));
+                            } else if (direction == "RIGHT") {
+                                projectileList.add(new Projectile(type, j, y, direction, s, a, cutOffLastPixel));
+                                arrowList.add(new BlinkingArrow(x, y, direction, path));
+                            }
+                            if (direction == "DOWN" || direction == "LEFT")
+                                cutOffLastPixel = false;
                         }
                     } else {
-                        projectileList.add(new Projectile(type, x, y, direction, s, a, 0));
+                        projectileList.add(new Projectile(type, x, y, direction, s, a, false));
                         arrowList.add(new BlinkingArrow(x, y, direction, path));
                     }
                     xList.add(x);
@@ -384,7 +399,7 @@ public class Level {
     }
 
     public void spawnLaser() {
-        laserSpawned = spawnProjectile("Laser", laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 8, 8, 1, 1, 1), "sprites/dodgeLaserArrow.png");
+        laserSpawned = spawnProjectile("Laser", laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 8, 9, 1, 3, 10), "sprites/dodgeLaserArrow.png");
     }
 
     public void detectCoin() {
@@ -404,7 +419,7 @@ public class Level {
     public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList, ArrayList<Integer[]> projectileOldPos) {
         //detect for current position
         for (int i = 0; i < projectileList.size(); i++) {
-            if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y) {
+            if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y && projectileList.get(i).spawned) {
                 if(!isMuted){
                     music.dispose();
                 }
@@ -412,8 +427,8 @@ public class Level {
             }
         }
         //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
-        for (Integer[] pos : projectileOldPos) {
-            if (pos[0] == player.x && pos[1] == player.y) {
+        for (int i = 0; i < projectileOldPos.size(); i++) {
+            if (projectileOldPos.get(i)[0] == player.x && projectileOldPos.get(i)[1] == player.y) {
                 if(!isMuted){
                     music.dispose();
                 }
@@ -423,7 +438,8 @@ public class Level {
         //updates the old positions
         projectileOldPos.clear();
         for (Projectile p : projectileList) {
-            projectileOldPos.add(new Integer[]{p.x, p.y});
+            if (p.spawned)
+                projectileOldPos.add(new Integer[]{p.x, p.y});
         }
     }
 

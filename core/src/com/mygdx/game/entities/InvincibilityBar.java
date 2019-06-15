@@ -1,3 +1,5 @@
+//displays the invincibility bar
+//created by Matt Seng
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;

@@ -41,19 +41,19 @@ public class LevelSelect implements Screen {
     private final Sprite jungleBackground = new Sprite(jungle);
     private final Sprite hellBackground = new Sprite(hell);
 
-    public static final int X_VALUE_LEFTMOST = 100;
-    public static final int X_VALUE_LEFT = 430;
-    public static final int X_VALUE_RIGHT = 750;
-    public static final int X_VALUE_RIGHTMOST = 1070;
-    public static final int Y_VALUE_TOP = 600;
-    public static final int Y_VALUE_MIDDLE = 350;
-    public static final int Y_VALUE_BOTTOM = 100;
-    public static final int X_VALUE_HOME_BUTTON = 1180;
-    public static final int Y_VALUE_HOME_BUTTON = 620;
-    public static final int BUTTON_SIZE = 100;
-    public static final int LOCK_SIZE = 100;
-    public static final int HOME_BUTTON_SIZE = 100;
-    public static final int[][] BUTTON_COORDS = {
+    private static final int X_VALUE_LEFTMOST = 100;
+    private static final int X_VALUE_LEFT = 430;
+    private static final int X_VALUE_RIGHT = 750;
+    private static final int X_VALUE_RIGHTMOST = 1070;
+    private static final int Y_VALUE_TOP = 600;
+    private static final int Y_VALUE_MIDDLE = 350;
+    private static final int Y_VALUE_BOTTOM = 100;
+    private static final int X_VALUE_HOME_BUTTON = 1180;
+    private static final int Y_VALUE_HOME_BUTTON = 620;
+    private static final int BUTTON_SIZE = 100;
+    private static final int LOCK_SIZE = 100;
+    private static final int HOME_BUTTON_SIZE = 100;
+    private static final int[][] BUTTON_COORDS = {
             {X_VALUE_LEFTMOST, Y_VALUE_TOP},
             {X_VALUE_LEFTMOST, Y_VALUE_MIDDLE},
             {X_VALUE_LEFTMOST, Y_VALUE_BOTTOM},

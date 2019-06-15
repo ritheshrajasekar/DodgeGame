@@ -1,4 +1,4 @@
-//Authors were Zackary Asis, Matt Seng, Rithesh Rajsaekar, and Rithik Rajasekar
+//Authors were Zachary Asis, Mathew Seng, Rithesh Rajsaekar, and Rithik Rajasekar
 // the purpose of this class is to be the super class for all the specific levels so that all the game logic is consolidated into one class
 
 package com.mygdx.game.com.mygdx.game.screens;
@@ -46,58 +46,32 @@ public class Level {
     public Texture levelTexture;
     public static Sprite BackgroundSprite;
     public static int currentLevelNumber = 0;
-    public ArrayList<Integer[]> projectileSpawnCoords = new ArrayList<>();
-
-    public static int coins;
     public static boolean isMuted = false;
+    public static int coins;
     public boolean coinsSpawned;
     public CopyOnWriteArrayList<Coin> coinList = new CopyOnWriteArrayList<>();
-
-    public int minBoulders;
-    public int maxBoulders;
-    public double boulderSpawnInterval;
-    //this is a double array with only one value so it can be passed by reference to spawnProjectile()
-    public double[] boulderSpawnIntervalRandom = new double[1];
-    public double boulderSpawnDelay;
-    public boolean boulderSpawned;
-    public CopyOnWriteArrayList<Projectile> boulderList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<BlinkingArrow> boulderArrowList = new CopyOnWriteArrayList<>();
-    public ArrayList<Integer[]> boulderOldPos = new ArrayList<>();
-
-    public int minCannons;
-    public int maxCannons;
-    public double cannonSpawnInterval;
-    public double[] cannonSpawnIntervalRandom = new double[1];
-    public double cannonSpawnDelay;
-    public boolean cannonSpawned;
-    public CopyOnWriteArrayList<Projectile> cannonList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<BlinkingArrow> cannonArrowList = new CopyOnWriteArrayList<>();
-    public ArrayList<Integer[]> cannonOldPos = new ArrayList<>();
-
-    public int minBoomerangs;
-    public int maxBoomerangs;
-    public double boomerangSpawnInterval;
-    public double[] boomerangSpawnIntervalRandom = new double[1];
-    public double boomerangSpawnDelay;
-    public boolean boomerangSpawned;
-    public CopyOnWriteArrayList<Projectile> boomerangList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<BlinkingArrow> boomerangArrowList = new CopyOnWriteArrayList<>();
-    public ArrayList<Integer[]> boomerangOldPos = new ArrayList<>();
-
-    public int minLasers;
-    public int maxLasers;
-    public double laserSpawnInterval;
-    public double[] laserSpawnIntervalRandom = new double[1];
-    public double laserSpawnDelay;
-    public boolean laserSpawned;
-    public CopyOnWriteArrayList<Projectile> laserList = new CopyOnWriteArrayList<>();
-    public CopyOnWriteArrayList<BlinkingArrow> laserArrowList = new CopyOnWriteArrayList<>();
-    public ArrayList<Integer[]> laserOldPos = new ArrayList<>();
+    public ArrayList<Integer[]> projectileSpawnCoords = new ArrayList<>();
 
     public void show() {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
         timer = new Timer(60.1);
         coinCounter = new CoinCounter();
+        resetProjectiles();
+    }
+
+    public void resetProjectiles() {
+        Boulder.list = new CopyOnWriteArrayList<>();
+        Boulder.arrowList = new CopyOnWriteArrayList<>();
+        Boulder.oldPos = new ArrayList<>();
+        Cannon.list = new CopyOnWriteArrayList<>();
+        Cannon.arrowList = new CopyOnWriteArrayList<>();
+        Cannon.oldPos = new ArrayList<>();
+        Boomerang.list = new CopyOnWriteArrayList<>();
+        Boomerang.arrowList = new CopyOnWriteArrayList<>();
+        Boomerang.oldPos = new ArrayList<>();
+        Laser.list = new CopyOnWriteArrayList<>();
+        Laser.arrowList = new CopyOnWriteArrayList<>();
+        Laser.oldPos = new ArrayList<>();
     }
 
     public void displayBackground(Texture background) {
@@ -110,13 +84,12 @@ public class Level {
     }
 
     public void playMusic(String path) {
-        if(!isMuted){
+        if (!isMuted) {
             music = Gdx.audio.newMusic(Gdx.files.internal(path));
             music.setLooping(true);
             music.setVolume(1f);
             music.play();
         }
-
     }
 
     public void createPlayer() {
@@ -131,7 +104,7 @@ public class Level {
 
         //checks if time is up
         if (timer.getWorldTimer() < 1) {
-            if(!isMuted){
+            if (!isMuted) {
                 music.stop();
                 music.dispose();
             }
@@ -203,8 +176,6 @@ public class Level {
         }
     }
 
-    //i was going to make this method but the lists are of type object which is incompatible with Projectile and ProjectileArrow
-    //the way you update laser is different(at least i thought, so i made a boolean called isLaser
     public void renderProjectile(String type, float delta, double projectileSpawnInterval, double[] projectileSpawnIntervalRandom, CopyOnWriteArrayList<Projectile> projectileList, CopyOnWriteArrayList<BlinkingArrow> arrowList, double spawnDelay) {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
@@ -262,19 +233,19 @@ public class Level {
     }
 
     public void renderBoulders(float delta) {
-        renderProjectile("Boulder", delta, boulderSpawnInterval, boulderSpawnIntervalRandom, boulderList, boulderArrowList, boulderSpawnDelay);
+        renderProjectile("Boulder", delta, Boulder.spawnInterval, Boulder.spawnIntervalRandom, Boulder.list, Boulder.arrowList, Boulder.spawnDelay);
     }
 
     public void renderCannons(float delta) {
-        renderProjectile("Cannon", delta, cannonSpawnInterval, cannonSpawnIntervalRandom, cannonList, cannonArrowList, cannonSpawnDelay);
+        renderProjectile("Cannon", delta, Cannon.spawnInterval, Cannon.spawnIntervalRandom, Cannon.list, Cannon.arrowList, Cannon.spawnDelay);
     }
 
     public void renderBoomerang(float delta) {
-        renderProjectile("Boomerang", delta, boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangList, boomerangArrowList, boomerangSpawnDelay);
+        renderProjectile("Boomerang", delta, Boomerang.spawnInterval, Boomerang.spawnIntervalRandom, Boomerang.list, Boomerang.arrowList, Boomerang.spawnDelay);
     }
 
     public void renderLaser(float delta) {
-        renderProjectile("Laser", delta, laserSpawnInterval, laserSpawnIntervalRandom, laserList, laserArrowList, laserSpawnDelay);
+        renderProjectile("Laser", delta, Laser.spawnInterval, Laser.spawnIntervalRandom, Laser.list, Laser.arrowList, Laser.spawnDelay);
     }
 
 
@@ -414,19 +385,19 @@ public class Level {
     }
 
     public void spawnBoulders() {
-        boulderSpawned = spawnProjectile("Boulder", boulderSpawnInterval, boulderSpawnIntervalRandom, boulderSpawned, maxBoulders, minBoulders, boulderList, boulderArrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3, 12), "sprites/dodgeBoulderArrow.png");
+        Boulder.groupSpawned = spawnProjectile("Boulder", Boulder.spawnInterval, Boulder.spawnIntervalRandom, Boulder.groupSpawned, Boulder.max, Boulder.min, Boulder.list, Boulder.arrowList, Boulder.SPEED, Projectile.createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3, 12), "sprites/dodgeBoulderArrow.png");
     }
 
     public void spawnCannon() {
-        cannonSpawned = spawnProjectile("Cannon", cannonSpawnInterval, cannonSpawnIntervalRandom, cannonSpawned, maxCannons, minCannons, cannonList, cannonArrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1, 1), "sprites/dodgeCannonballArrow.png");
+        Cannon.groupSpawned = spawnProjectile("Cannon", Cannon.spawnInterval, Cannon.spawnIntervalRandom, Cannon.groupSpawned, Cannon.max, Cannon.min, Cannon.list, Cannon.arrowList, Cannon.SPEED, Projectile.createAnimation("sprites/dodgeCannonball.png", 8, 8, 1, 1, 1), "sprites/dodgeCannonballArrow.png");
     }
 
     public void spawnBoomerang() {
-        boomerangSpawned = spawnProjectile("Boomerang", boomerangSpawnInterval, boomerangSpawnIntervalRandom, boomerangSpawned, maxBoomerangs, minBoomerangs, boomerangList, boomerangArrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 2, 4, 8), "sprites/dodgeBoomerangArrow.png");
+        Boomerang.groupSpawned = spawnProjectile("Boomerang", Boomerang.spawnInterval, Boomerang.spawnIntervalRandom, Boomerang.groupSpawned, Boomerang.max, Boomerang.min, Boomerang.list, Boomerang.arrowList, Boomerang.SPEED, Projectile.createAnimation("sprites/dodgeBoomerang.png", 8, 8, 2, 4, 8), "sprites/dodgeBoomerangArrow.png");
     }
 
     public void spawnLaser() {
-        laserSpawned = spawnProjectile("Laser", laserSpawnInterval, laserSpawnIntervalRandom, laserSpawned, maxLasers, minLasers, laserList, laserArrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 8, 9, 1, 3, 10), "sprites/dodgeLaserArrow.png");
+        Laser.groupSpawned = spawnProjectile("Laser", Laser.spawnInterval, Laser.spawnIntervalRandom, Laser.groupSpawned, Laser.max, Laser.min, Laser.list, Laser.arrowList, Laser.SPEED, Projectile.createAnimation("sprites/dodgeLaser.png", 8, 9, 1, 3, 10), "sprites/dodgeLaserArrow.png");
     }
 
     public void detectCoin() {
@@ -434,7 +405,7 @@ public class Level {
         for (int i = 0; i < coinList.size(); i++) {
             if (coinList.get(i).x == player.x && coinList.get(i).y == player.y) {
                 coins++;
-                if(!isMuted){
+                if (!isMuted) {
                     COIN_SOUND.stop();
                     COIN_SOUND.play();
                 }
@@ -447,7 +418,7 @@ public class Level {
         //detect for current position
         for (int i = 0; i < projectileList.size(); i++) {
             if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y && projectileList.get(i).spawned) {
-                if(!isMuted){
+                if (!isMuted) {
                     music.dispose();
                 }
                 game.setScreen(new GameOver(game));
@@ -456,7 +427,7 @@ public class Level {
         //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
         for (int i = 0; i < projectileOldPos.size(); i++) {
             if (projectileOldPos.get(i)[0] == player.x && projectileOldPos.get(i)[1] == player.y) {
-                if(!isMuted){
+                if (!isMuted) {
                     music.dispose();
                 }
                 game.setScreen(new GameOver(game));
@@ -471,19 +442,19 @@ public class Level {
     }
 
     public void detectBoulderCollision() {
-        detectProjectileCollision(boulderList, boulderOldPos);
+        detectProjectileCollision(Boulder.list, Boulder.oldPos);
     }
 
     public void detectCannonCollision() {
-        detectProjectileCollision(cannonList, cannonOldPos);
+        detectProjectileCollision(Cannon.list, Cannon.oldPos);
     }
 
     public void detectBoomerangCollision() {
-        detectProjectileCollision(boomerangList, boomerangOldPos);
+        detectProjectileCollision(Boomerang.list, Boomerang.oldPos);
     }
 
     public void detectLaserCollision() {
-        detectProjectileCollision(laserList, laserOldPos);
+        detectProjectileCollision(Laser.list, Laser.oldPos);
     }
 
     public void dispose() {
@@ -494,5 +465,4 @@ public class Level {
         levelTexture.dispose();
         BackgroundSprite.getTexture().dispose();
     }
-
 }

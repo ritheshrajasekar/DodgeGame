@@ -3,6 +3,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.entities.*;
 
 
 public class Level10 extends Level implements Screen {
@@ -14,25 +15,25 @@ public class Level10 extends Level implements Screen {
         world = "HELL";
         level = " LEVEL 10";
 
-        minBoulders = 1;
-        maxBoulders = 2;
-        boulderSpawnInterval = 5;
-        boulderSpawnDelay = 2;
+        Boulder.min = 1;
+        Boulder.max = 2;
+        Boulder.spawnInterval = 5;
+        Boulder.spawnDelay = 2;
 
-        minCannons = 1;
-        maxCannons = 2;
-        cannonSpawnInterval = 5;
-        cannonSpawnDelay = 3;
+        Cannon.min = 1;
+        Cannon.max = 2;
+        Cannon.spawnInterval = 5;
+        Cannon.spawnDelay = 3;
 
-        minBoomerangs = 1;
-        maxBoomerangs = 2;
-        boomerangSpawnInterval = 5;
-        boomerangSpawnDelay = 3;
+        Boomerang.min = 1;
+        Boomerang.max = 2;
+        Boomerang.spawnInterval = 5;
+        Boomerang.spawnDelay = 3;
 
-        minLasers = 1;
-        maxLasers = 2;
-        laserSpawnInterval = 4;
-        laserSpawnDelay = 3;
+        Laser.min = 1;
+        Laser.max = 2;
+        Laser.spawnInterval = 4;
+        Laser.spawnDelay = 3;
 
         playMusic("music/08 - Hell World.mp3");
         createPlayer();

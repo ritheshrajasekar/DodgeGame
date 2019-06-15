@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Projectile extends Entity {
-    //speed can not go above 1500 because that would be moving more than one tile per frame; it'll still work but is just not ideal
     public int speed;
     public float elapsedTime;
     public boolean isOnScreen;
@@ -17,7 +16,7 @@ public class Projectile extends Entity {
     public String type;
     public boolean cutOffLastPixel;
 
-    //x and y offset here are used to animate the movement of the projectile
+    //x and y xOffset here are used to animate the movement of the projectile
     public int xOffset, yOffset;
     public float rotation;
 
@@ -76,6 +75,7 @@ public class Projectile extends Entity {
         if (x > 8) // checks if the projectile has moved across the screen, and if it has, sets isOnScreen to false
             isOnScreen = false;
     }
+
     //changes the entity x coordinates on its direction which is left
     public void leftBehavior(float deltaTime) {
         xOffset -= speed * deltaTime;
@@ -86,6 +86,7 @@ public class Projectile extends Entity {
         if (x < -1) // checks if the projectile has moved across the screen, and if it has, sets isOnScreen to false
             isOnScreen = false;
     }
+
     // changes the entity y coordinates based on its direction which is up
     public void upBehavior(float deltaTime) {
         yOffset += speed * deltaTime;
@@ -96,6 +97,7 @@ public class Projectile extends Entity {
         if (y > 8) // checks if the projectile has moved across the screen, and if it has, sets isOnScreen to false
             isOnScreen = false;
     }
+
     // changes the entity y coordinates based on its direction which is down
     public void downBehavior(float deltaTime) {
         yOffset -= speed * deltaTime;
@@ -135,9 +137,7 @@ public class Projectile extends Entity {
             //if the boomerang leaves the screen
             if (x < -1 || x > 8 || y < -1 || y > 8)
                 isOnScreen = false;
-        }
-
-        else {
+        } else {
             if (direction == "RIGHT") {
                 rightBehavior(deltaTime);
             } else if (direction == "UP") {

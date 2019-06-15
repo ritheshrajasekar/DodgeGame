@@ -3,6 +3,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.entities.*;
 
 
 public class Level7 extends Level implements Screen {
@@ -14,20 +15,20 @@ public class Level7 extends Level implements Screen {
         world = "JUNGLE";
         level = " LEVEL 7";
 
-        minBoulders = 1;
-        maxBoulders = 3;
-        boulderSpawnInterval = 4;
-        boulderSpawnDelay = 2;
+        Boulder.min = 1;
+        Boulder.max = 3;
+        Boulder.spawnInterval = 4;
+        Boulder.spawnDelay = 2;
 
-        minCannons = 1;
-        maxCannons = 3;
-        cannonSpawnInterval = 5;
-        cannonSpawnDelay = 3;
+        Cannon.min = 1;
+        Cannon.max = 3;
+        Cannon.spawnInterval = 5;
+        Cannon.spawnDelay = 3;
 
-        minBoomerangs = 1;
-        maxBoomerangs = 3;
-        boomerangSpawnInterval = 5;
-        boomerangSpawnDelay = 3;
+        Boomerang.min = 1;
+        Boomerang.max = 3;
+        Boomerang.spawnInterval = 5;
+        Boomerang.spawnDelay = 3;
 
         playMusic("music/07 - Jungle World.mp3");
         createPlayer();

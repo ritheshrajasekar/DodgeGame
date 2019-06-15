@@ -3,6 +3,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.entities.*;
 
 
 public class Level1 extends Level implements Screen {
@@ -14,10 +15,10 @@ public class Level1 extends Level implements Screen {
         world = "GRASS";
         level = " LEVEL 1";
 
-        minBoulders = 3;
-        maxBoulders = 6;
-        boulderSpawnInterval = 5;
-        boulderSpawnDelay = 2;
+        Boulder.min = 3;
+        Boulder.max = 6;
+        Boulder.spawnInterval = 5;
+        Boulder.spawnDelay = 2;
 
         playMusic("music/05 - Grass World.mp3");
         createPlayer();

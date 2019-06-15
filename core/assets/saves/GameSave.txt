@@ -8,6 +8,6 @@ stars07: 0
 stars08: 0
 stars09: 0
 stars10: 0
-stars11: 2
-stars12: 4
-unlockedLevel: 13
+stars11: 0
+stars12: 0
+unlockedLevel: 1

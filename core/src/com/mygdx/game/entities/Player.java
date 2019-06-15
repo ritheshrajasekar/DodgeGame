@@ -41,7 +41,7 @@ public class Player extends Entity {
         //increments shiftCount if shift is pressed because without shiftCount, the player moves too fast
         if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
             shiftCount++;
-            if (shiftCount == 3)
+            if (shiftCount == 4)
                 shiftCount = 0;
         } else {
             shiftCount = -1;

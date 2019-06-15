@@ -110,7 +110,7 @@ public class Start implements Screen {
             if (Gdx.input.justTouched()) {
                 music.stop();
                 this.dispose();
-                game.setScreen(new Options(game));
+                game.setScreen(new Info(game));
             }
         } else {
             game.batch.draw(optionsButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);

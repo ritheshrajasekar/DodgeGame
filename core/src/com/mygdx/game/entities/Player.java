@@ -25,6 +25,8 @@ public class Player extends Entity {
 
     //creates the animation for the player
     public Player() {
+        invincibilityState = 0;
+
         playerTexture = new Texture("sprites/dodgePlayer.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(playerTexture, 8, 10);
         animationFrames = new TextureRegion[9];

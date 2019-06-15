@@ -3,7 +3,6 @@
 
 package com.mygdx.game.com.mygdx.game.screens;
 
-import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.utilities.FileStreaming;
-
-import java.io.File;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level.NUM_LEVELS;
 import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;

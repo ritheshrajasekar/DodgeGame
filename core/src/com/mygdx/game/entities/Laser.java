@@ -1,5 +1,5 @@
 //class for Laser projectiles
-//created by Matt Send and Zak Asis
+//created by Matt Seng and Zak Asis
 
 package com.mygdx.game.entities;
 

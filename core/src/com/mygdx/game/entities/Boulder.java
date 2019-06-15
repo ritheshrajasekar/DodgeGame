@@ -1,5 +1,5 @@
 //class for boulder projectiles
-//created by Matt Send and Rithik Rajasekar
+//created by Matt Seng and Rithik Rajasekar
 package com.mygdx.game.entities;
 
 import java.util.ArrayList;

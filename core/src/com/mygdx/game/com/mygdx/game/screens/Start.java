@@ -22,8 +22,8 @@ public class Start implements Screen {
     private Texture playButtonInactive;
     private Texture playButtonActive;
     private Texture startScreenBackground;
-    private Texture optionsButtonInactive;
-    private Texture optionsButtonActive;
+    private Texture infoButtonInactive;
+    private Texture infoButtonActive;
     private Texture trophy = new Texture("sprites/trophy.png");
     private static final int EXIT_BUTTON_WIDTH = 300;
     private static final int EXIT_BUTTON_HEIGHT = 150;
@@ -47,8 +47,8 @@ public class Start implements Screen {
         playButtonActive = new Texture("sprites/playButtonActive.jpg");
         startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
 
-        optionsButtonInactive = new Texture("sprites/optionsButton.jpg");
-        optionsButtonActive = new Texture("sprites/optionsButtonActive.jpg");
+        infoButtonInactive = new Texture("sprites/infoButton.jpg");
+        infoButtonActive = new Texture("sprites/infoButtonActive.jpg");
         backgroundSprite = new Sprite(startScreenBackground);
         backgroundSprite.scale(6);
 
@@ -106,14 +106,14 @@ public class Start implements Screen {
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > OPTIONS_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < OPTIONS_BUTTON_Y_VALUE + OPTION_BUTTON_HEIGHT) {
-            game.batch.draw(optionsButtonActive, DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
+            game.batch.draw(infoButtonActive, DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
             if (Gdx.input.justTouched()) {
                 music.stop();
                 this.dispose();
                 game.setScreen(new Info(game));
             }
         } else {
-            game.batch.draw(optionsButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
+            game.batch.draw(infoButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
         }
         //can also use escape to exit or space to go to level select
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))

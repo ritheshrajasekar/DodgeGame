@@ -18,7 +18,7 @@ public class Help implements Screen {
     private DodgeGame game;
     private Texture background;
     private Music music;
-    private Texture optionsButtonInactive;
+    private Texture infoButtonInactive;
 
     public static Sprite backgroundSprite;
 
@@ -29,7 +29,7 @@ public class Help implements Screen {
 
     public Help(DodgeGame game){
         this.game = game;
-        optionsButtonInactive = new Texture("sprites/optionsButton.jpg");
+        infoButtonInactive = new Texture("sprites/infoButton.jpg");
         background = new Texture("sprites/instructions.png");
         backgroundSprite = new Sprite(background);
         backgroundSprite.scale(4);
@@ -58,7 +58,7 @@ public class Help implements Screen {
         backgroundSprite.draw(game.batch);
 
         //displays options button and see if it's clicked
-        game.batch.draw(optionsButtonInactive, OPTIONS_BUTTON_X_VAL, OPTIONS_BUTTON_Y_VAL, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
+        game.batch.draw(infoButtonInactive, OPTIONS_BUTTON_X_VAL, OPTIONS_BUTTON_Y_VAL, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
         if (Gdx.input.getX() > OPTIONS_BUTTON_X_VAL &&
                 Gdx.input.getX() < OPTIONS_BUTTON_X_VAL + OPTIONS_BUTTON_WIDTH &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > OPTIONS_BUTTON_Y_VAL &&

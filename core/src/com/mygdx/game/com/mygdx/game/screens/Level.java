@@ -36,7 +36,8 @@ public class Level {
     public static final Music BOOMERANG_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Boomerang.mp3"));
     public static final Music LASER_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Laser.mp3"));
 
-    public String world, level;
+    public static String world;
+    public String level;
     public Music music;
     public DodgeGame game;
     public Timer timer;

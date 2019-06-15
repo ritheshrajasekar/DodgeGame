@@ -15,7 +15,7 @@ public class BlinkingArrow extends Entity {
     private Animation arrowAnimation;
 
     private float rotation;
-    //x and y offset here are used to reposition the arrowTexture after rotation
+    //x and y xOffset here are used to reposition the arrowTexture after rotation
     private int xOffset, yOffset;
 
     public float elapsedTime;

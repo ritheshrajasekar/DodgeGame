@@ -41,18 +41,24 @@ public class LevelSelect implements Screen {
     private final Sprite jungleBackground = new Sprite(jungle);
     private final Sprite hellBackground = new Sprite(hell);
 
-    private static final int X_VALUE_LEFTMOST = 100;
-    private static final int X_VALUE_LEFT = 430;
-    private static final int X_VALUE_RIGHT = 750;
-    private static final int X_VALUE_RIGHTMOST = 1070;
-    private static final int Y_VALUE_TOP = 600;
-    private static final int Y_VALUE_MIDDLE = 350;
-    private static final int Y_VALUE_BOTTOM = 100;
-    private static final int X_VALUE_HOME_BUTTON = 1180;
-    private static final int Y_VALUE_HOME_BUTTON = 620;
+    //highly questionable random number but believe me it is completely necessary in order for the background to be in the correct position
+    private final int BACKGROUND_OFFSET = 22;
+
     private static final int BUTTON_SIZE = 100;
     private static final int LOCK_SIZE = 100;
     private static final int HOME_BUTTON_SIZE = 100;
+
+    private static final int X_VALUE_HOME_BUTTON = 1280 - HOME_BUTTON_SIZE;
+    private static final int Y_VALUE_HOME_BUTTON = 720 - HOME_BUTTON_SIZE;
+
+    private static final int X_VALUE_LEFTMOST = DodgeGame.WIDTH / 8 - BUTTON_SIZE / 2;
+    private static final int X_VALUE_LEFT = DodgeGame.WIDTH * 3 / 8 - BUTTON_SIZE / 2;
+    private static final int X_VALUE_RIGHT = DodgeGame.WIDTH * 5 / 8 - BUTTON_SIZE / 2;
+    private static final int X_VALUE_RIGHTMOST = DodgeGame.WIDTH * 7 / 8 - BUTTON_SIZE / 2;
+    private static final int Y_VALUE_TOP = 600;
+    private static final int Y_VALUE_MIDDLE = 360;
+    private static final int Y_VALUE_BOTTOM = 120;
+
     private static final int[][] BUTTON_COORDS = {
             {X_VALUE_LEFTMOST, Y_VALUE_TOP},
             {X_VALUE_LEFTMOST, Y_VALUE_MIDDLE},
@@ -75,7 +81,7 @@ public class LevelSelect implements Screen {
             buttons[i] = new Texture("sprites/buttonNum" + (i + 1) + ".png");
         }
 
-        grassBackground.scale(7);
+        grassBackground.scale(6);
         sandBackground.scale(6);
         jungleBackground.scale(6);
         hellBackground.scale(6);
@@ -83,7 +89,7 @@ public class LevelSelect implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
-        if(!isMuted){
+        if (!isMuted) {
             music.play();
         }
     }
@@ -94,32 +100,27 @@ public class LevelSelect implements Screen {
         game.batch.begin();
 
         //displays backgrounds
-        grassBackground.setPosition(DodgeGame.WIDTH / 8, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
+        grassBackground.setPosition(DodgeGame.WIDTH / 8 - BACKGROUND_OFFSET, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         grassBackground.draw(game.batch);
-        sandBackground.setPosition(DodgeGame.WIDTH / 8 + 320, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
+        sandBackground.setPosition(DodgeGame.WIDTH * 3 / 8 - BACKGROUND_OFFSET, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         sandBackground.draw(game.batch);
-        jungleBackground.setPosition(DodgeGame.WIDTH / 8 + 320 + 320, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
+        jungleBackground.setPosition(DodgeGame.WIDTH * 5 / 8 - BACKGROUND_OFFSET, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         jungleBackground.draw(game.batch);
-        hellBackground.setPosition(DodgeGame.WIDTH / 8 + 320 + 320 + 320, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
+        hellBackground.setPosition(DodgeGame.WIDTH * 7 / 8 - BACKGROUND_OFFSET, DodgeGame.HEIGHT / 2 - grassBackground.getHeight() / 2);
         hellBackground.draw(game.batch);
 
         //draws buttons
         for (int i = 0; i < NUM_LEVELS; i++) {
             game.batch.draw(buttons[i], BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], BUTTON_SIZE, BUTTON_SIZE);
-            if(FileStreaming.unlockedLevel < i + 1){
-                if(i <= 2){
+            if (FileStreaming.unlockedLevel < i + 1) {
+                if (i <= 2) {
                     game.batch.draw(lockGrass, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
-                }
-                else if( i<=5){
+                } else if (i <= 5) {
                     game.batch.draw(lockSand, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
-                }
-                else if(i <=8){
+                } else if (i <= 8) {
                     game.batch.draw(lockJungle, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
-
-                }
-                else{
+                } else {
                     game.batch.draw(lockHell, BUTTON_COORDS[i][0], BUTTON_COORDS[i][1], LOCK_SIZE, LOCK_SIZE);
-
                 }
             }
         }
@@ -149,9 +150,9 @@ public class LevelSelect implements Screen {
                 DodgeGame.HEIGHT - Gdx.input.getY() < Y_VALUE_HOME_BUTTON + HOME_BUTTON_SIZE &&
                 Gdx.input.justTouched() ||
                 Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-                music.stop();
-                this.dispose();
-                game.setScreen(new Start(game));
+            music.stop();
+            this.dispose();
+            game.setScreen(new Start(game));
         }
 
         game.batch.end();
@@ -176,9 +177,8 @@ public class LevelSelect implements Screen {
                 case 4:
                     starTexture = perfectStar;
             }
-            game.batch.draw(starTexture, BUTTON_COORDS[i][0] - 56, BUTTON_COORDS[i][1] - 100, 224, 70);
+            game.batch.draw(starTexture, BUTTON_COORDS[i][0] - 62, BUTTON_COORDS[i][1] - 100, 224, 70);
         }
-
         game.batch.end();
     }
 

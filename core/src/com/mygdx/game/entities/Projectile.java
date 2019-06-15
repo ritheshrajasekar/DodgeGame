@@ -17,7 +17,7 @@ public class Projectile extends Entity {
     public String type;
     public boolean cutOffLastPixel;
 
-    //x and y offset here are used to animate the movement of the projectile
+    //x and y xOffset here are used to animate the movement of the projectile
     public int xOffset, yOffset;
     public float rotation;
 

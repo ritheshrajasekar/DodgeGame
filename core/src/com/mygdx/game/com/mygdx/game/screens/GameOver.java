@@ -1,3 +1,6 @@
+//this class serves as the screen that appears when the player dies
+// created by Rithesh Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -7,9 +10,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.utilities.GameLevelManager;
 
@@ -53,6 +54,7 @@ public class GameOver implements Screen {
     }
 
     public void render(float delta) {
+        //sets background
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();

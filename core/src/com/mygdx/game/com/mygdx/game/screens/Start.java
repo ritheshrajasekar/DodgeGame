@@ -1,3 +1,6 @@
+//this class serves as the start screen for the game
+//created by Rithesh Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;

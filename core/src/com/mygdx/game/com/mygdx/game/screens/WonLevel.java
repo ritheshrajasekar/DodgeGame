@@ -1,3 +1,6 @@
+//this class serves as the win screen which appears when the user beats the level
+//created by Rithesh Rajasekar and Rithik Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -70,7 +73,7 @@ public class WonLevel implements Screen {
             FileStreaming.unlockedLevel = currentLevelNumber + 1;
 
         FileStreaming.write();
-
+        // if the last level beaten was 12, instead of this screen appearing, it prompts the 13th level which FinishGame
         if (currentLevelNumber == 12 && FileStreaming.unlockedLevel == 13) {
             music.stop();
             this.dispose();
@@ -79,6 +82,7 @@ public class WonLevel implements Screen {
     }
 
     public void render(float delta) {
+        //draws background
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
@@ -109,7 +113,7 @@ public class WonLevel implements Screen {
             this.dispose();
             game.setScreen(new LevelSelect(game));
         }
-
+        //draws the stars according to the file streaming
         switch (stars) {
             case 1:
                 game.batch.draw(oneStar, DodgeGame.WIDTH / 2 - 112, Y_VALUE_SELECT_LEVEL + BUTTON_SIZE / 2 - 35, 224, 70);

@@ -1,3 +1,6 @@
+//this class is serves as the screen that appears when the user beats the entire game
+// was created by Rithesh Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -39,7 +42,7 @@ public class FinishGame implements Screen {
         this.game = game;
 
         endGameBackgroundSprite = new Sprite(endGmeBackground);
-
+        // sets the music as long as the game is not muted
         music = Gdx.audio.newMusic(Gdx.files.internal("music/10 - Ending.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
@@ -53,6 +56,7 @@ public class FinishGame implements Screen {
     }
 
     public void render(float delta) {
+        //sets background
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
@@ -74,7 +78,7 @@ public class FinishGame implements Screen {
             this.dispose();
             game.setScreen(new Start(game));
         }
-
+        //draws trophy and congrats
         game.batch.draw(trophy, X_VALUE_TROPHY, Y_VALUE_TROPHY, TROPHY_WIDTH, TROPHY_HEIGHT);
 
         game.batch.draw(congratulations, X_VALUE_CONGRATULATIONS, Y_VALUE_CONGRATULATIONS, CONGRATULATIONS_WIDTH, CONGRATULATIONS_HEIGHT);

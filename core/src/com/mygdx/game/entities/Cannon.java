@@ -1,3 +1,6 @@
+//class for cannons
+//created by Rithik Rajasekar and Matt Seng
+
 package com.mygdx.game.entities;
 
 import java.util.ArrayList;

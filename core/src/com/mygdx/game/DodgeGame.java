@@ -10,10 +10,6 @@ import com.mygdx.game.com.mygdx.game.screens.Start;
 import com.mygdx.game.utilities.FileStreaming;
 
 
-/**
- * Main game class.
- */
-
 //Creating a DodgeGame which is called in your other screens where you create an object of type DodgeGame and also access it's public static fields.
 public class DodgeGame extends Game {
     public static final int WIDTH = 1280;

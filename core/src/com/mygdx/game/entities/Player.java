@@ -1,3 +1,6 @@
+//this class serves as the player object
+// created by Matt Send, and Zak Asis
+
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;

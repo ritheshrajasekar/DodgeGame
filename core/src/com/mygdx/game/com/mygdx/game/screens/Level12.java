@@ -1,3 +1,6 @@
+// this class serves as the screen which is level12
+// created by Matt Seng and Zak Asis
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;

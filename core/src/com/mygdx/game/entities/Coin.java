@@ -1,3 +1,5 @@
+//class for the coins which appear on the screen
+//created by Rithesh Rajasekar
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;
@@ -19,6 +21,8 @@ public class Coin extends Entity {
         TextureRegion[][] tmpFrames = TextureRegion.split(coin, 8, 8);
         x = xVal;
         y = yVal;
+
+        //creates the animation
         animationFrames = new TextureRegion[24];
         int index = 0;
 

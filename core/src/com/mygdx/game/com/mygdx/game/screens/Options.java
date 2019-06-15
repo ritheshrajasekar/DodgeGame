@@ -1,3 +1,6 @@
+//serves as the class which is the options menu
+//created by Rithesh Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Files;
@@ -67,6 +70,7 @@ public class Options implements Screen {
     }
 
     public void render(float delta) {
+        //sets background
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();

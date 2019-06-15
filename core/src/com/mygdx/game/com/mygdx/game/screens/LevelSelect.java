@@ -1,3 +1,6 @@
+//this class serves as the screen for the level select
+//created by Rithesh Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;

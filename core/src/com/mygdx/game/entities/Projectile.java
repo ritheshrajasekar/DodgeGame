@@ -1,3 +1,6 @@
+//this class serves as the super class for the projectiles which contains all the methods and fields
+//created by Rithik Rajasekar, Zak Asis, and Matt Seng
+
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -49,6 +52,7 @@ public class Projectile extends Entity {
     }
 
     public static Animation createAnimation(String path, int width, int height, int rows, int cols, int frames) {
+        //creates animation
         int numTextures = rows * cols;
 
         Texture projectileTexture = new Texture(path);

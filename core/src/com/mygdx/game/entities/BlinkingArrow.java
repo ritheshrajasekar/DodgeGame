@@ -1,3 +1,6 @@
+//this class serves as the class for displaying the blinking arrows
+//created by Matt Seng, Rithik Rajasekar, and Zak Asis
+
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;
@@ -45,6 +48,7 @@ public class BlinkingArrow extends Entity {
             yOffset = 7;
         }
 
+        //makes the animation for the arrow
         TextureRegion[][] tmpFrames = TextureRegion.split(arrowTexture, 10, 8);
         arrowAnimationFrames = new TextureRegion[2];
 

@@ -1,3 +1,5 @@
+//class for countdown timer which is used various timses throughout the game
+//created by Rithesh Rajasekar
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Color;

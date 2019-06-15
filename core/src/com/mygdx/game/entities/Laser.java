@@ -1,3 +1,6 @@
+//class for Laser projectiles
+//created by Matt Send and Zak Asis
+
 package com.mygdx.game.entities;
 
 import java.util.ArrayList;

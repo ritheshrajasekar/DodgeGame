@@ -1,4 +1,4 @@
-stars01: 1
+stars01: 4
 stars02: 0
 stars03: 0
 stars04: 0

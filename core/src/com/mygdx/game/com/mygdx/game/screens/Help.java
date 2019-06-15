@@ -1,3 +1,6 @@
+//This class serves as the help screen
+//created by Rithik Rajasekar and Rithesh Rajasekar
+
 package com.mygdx.game.com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -54,7 +57,7 @@ public class Help implements Screen {
         backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - backgroundSprite.getHeight() / 2);
         backgroundSprite.draw(game.batch);
 
-        //displays home button and see if it's clicked
+        //displays options button and see if it's clicked
         game.batch.draw(optionsButtonInactive, OPTIONS_BUTTON_XVAL, OPTIONS_BUTTON_YVAL, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
         if (Gdx.input.getX() > OPTIONS_BUTTON_XVAL &&
                 Gdx.input.getX() < OPTIONS_BUTTON_XVAL + OPTIONS_BUTTON_WIDTH &&
@@ -66,14 +69,6 @@ public class Help implements Screen {
             this.dispose();
             game.setScreen(new Options(game));
         }
-
-/*
-        if( Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            music.stop();
-            this.dispose();
-            game.setScreen(new Options(game));
-        }
-*/
 
         game.batch.end();
     }

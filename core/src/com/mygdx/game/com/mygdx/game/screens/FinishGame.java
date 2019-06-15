@@ -23,12 +23,12 @@ public class FinishGame implements Screen {
     private static final int HOME_BUTTON_SIZE = 100;
     private static final int TROPHY_WIDTH = 160 * 2;
     private static final int TROPHY_HEIGHT = 93 * 2;
-    private static final int X_VALUE_TROPHY = (int)(DodgeGame.WIDTH * 0.75) - TROPHY_WIDTH/2 + 100;
-    private static final int Y_VALUE_TROPHY = DodgeGame.HEIGHT/2 - TROPHY_HEIGHT /2 ;
+    private static final int X_VALUE_TROPHY = (int) (DodgeGame.WIDTH * 0.75) - TROPHY_WIDTH / 2 + 100;
+    private static final int Y_VALUE_TROPHY = DodgeGame.HEIGHT / 2 - TROPHY_HEIGHT / 2;
     private static final int CONGRATULATIONS_WIDTH = 1280;
-    private static final int CONGRATULATIONS_HEIGHT= 350;
+    private static final int CONGRATULATIONS_HEIGHT = 350;
     private static final int X_VALUE_CONGRATULATIONS = DodgeGame.WIDTH / 2 - CONGRATULATIONS_WIDTH / 2 + 20;
-    private static final int Y_VALUE_CONGRATULATIONS = (int)(DodgeGame.HEIGHT * 0.45);
+    private static final int Y_VALUE_CONGRATULATIONS = (int) (DodgeGame.HEIGHT * 0.45);
 
     public static Sprite endGameBackgroundSprite;
 
@@ -43,7 +43,7 @@ public class FinishGame implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/10 - Ending.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
-        if(!isMuted){
+        if (!isMuted) {
             music.play();
         }
     }

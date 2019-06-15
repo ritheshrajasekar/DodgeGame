@@ -3,7 +3,7 @@ package com.mygdx.game.entities;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Laser extends Projectile{
+public class Laser extends Projectile {
     public static final int SPEED = 0;
     public static int min, max;
     public static double spawnInterval;

@@ -30,7 +30,7 @@ public class Start implements Screen {
     private static final int OPTIONS_BUTTON_WIDTH = 300;
     private static final int OPTION_BUTTON_HEIGHT = 150;
     private static final int PLAY_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.45);
-    private static final int OPTIONS_BUTTON_Y_VALUE = (int)(DodgeGame.HEIGHT * 0.23);
+    private static final int OPTIONS_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.23);
     private static final int EXIT_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.01);
     private Music music;
 
@@ -43,17 +43,17 @@ public class Start implements Screen {
         exitButtonActive = new Texture("sprites/exitButtonActive.jpg");
         playButtonInactive = new Texture("sprites/playButton.jpg");
         playButtonActive = new Texture("sprites/playButtonActive.jpg");
-       startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
+        startScreenBackground = new Texture("sprites/dodgeStartScreen.png");
 
         optionsButtonInactive = new Texture("sprites/optionsButton.jpg");
         optionsButtonActive = new Texture("sprites/optionsButtonActive.jpg");
         backgroundSprite = new Sprite(startScreenBackground);
-       backgroundSprite.scale(6);
+        backgroundSprite.scale(6);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/01 - Menu.mp3"));
         music.setLooping(true);
         music.setVolume(1f);
-        if(!isMuted){
+        if (!isMuted) {
             music.play();
         }
     }
@@ -69,7 +69,7 @@ public class Start implements Screen {
         backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - backgroundSprite.getHeight() / 2);
         backgroundSprite.draw(game.batch);
         //draws two trophies if the user beat all the levels
-        if(FileStreaming.unlockedLevel == 13){
+        if (FileStreaming.unlockedLevel == 13) {
             game.batch.draw(trophy, 797, 193, 163, 93);
             game.batch.draw(trophy, 330, 193, 163, 93);
         }
@@ -104,14 +104,14 @@ public class Start implements Screen {
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2 &&
                 DodgeGame.HEIGHT - Gdx.input.getY() > OPTIONS_BUTTON_Y_VALUE &&
                 DodgeGame.HEIGHT - Gdx.input.getY() < OPTIONS_BUTTON_Y_VALUE + OPTION_BUTTON_HEIGHT) {
-            game.batch.draw(optionsButtonActive, DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE,OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
+            game.batch.draw(optionsButtonActive, DodgeGame.WIDTH / 2 - OPTIONS_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
             if (Gdx.input.justTouched()) {
                 music.stop();
                 this.dispose();
                 game.setScreen(new Options(game));
             }
         } else {
-            game.batch.draw(optionsButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2,OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH,OPTION_BUTTON_HEIGHT);
+            game.batch.draw(optionsButtonInactive, DodgeGame.WIDTH / 2 - PLAY_BUTTON_WIDTH / 2, OPTIONS_BUTTON_Y_VALUE, OPTIONS_BUTTON_WIDTH, OPTION_BUTTON_HEIGHT);
         }
         //can also use escape to exit or space to go to level select
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
@@ -142,12 +142,12 @@ public class Start implements Screen {
     }
 
     public void dispose() {
-       music.dispose();
-       startScreenBackground.dispose();
-       exitButtonActive.dispose();
-       exitButtonInactive.dispose();
-       playButtonActive.dispose();
-       playButtonInactive.dispose();
+        music.dispose();
+        startScreenBackground.dispose();
+        exitButtonActive.dispose();
+        exitButtonInactive.dispose();
+        playButtonActive.dispose();
+        playButtonInactive.dispose();
 
     }
 }

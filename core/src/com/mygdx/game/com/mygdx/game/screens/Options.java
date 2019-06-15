@@ -1,9 +1,8 @@
 //serves as the class which is the options menu
-//created by Rithesh Rajasekar
+//created by Rithesh Rajasekar and edited by Rithik Rajasekar
 
 package com.mygdx.game.com.mygdx.game.screens;
 
-import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.utilities.FileStreaming;
-
-import java.io.File;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level.NUM_LEVELS;
 import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
@@ -29,6 +26,7 @@ public class Options implements Screen {
     private Texture background;
     private Texture clearAllClicked;
     private Texture unlockAllClicked;
+    private Texture helpButton;
 
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 100;
@@ -37,8 +35,9 @@ public class Options implements Screen {
     private static final int HOME_BUTTON_YVAL = DodgeGame.HEIGHT - HOME_BUTTON_SIZE;
 
     private static final int MUTE_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.01);
-    private static final int CLEAR_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.23);
-    private static final int UNLOCK_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.45);
+    private static final int CLEAR_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.16);
+    private static final int UNLOCK_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.31);
+    private static final int OPTION_BUTTON_Y_VALUE = (int) (DodgeGame.HEIGHT * 0.46);
     private Music music;
 
     public static Sprite backgroundSprite;
@@ -53,6 +52,8 @@ public class Options implements Screen {
         homeButton = new Texture("sprites/homeButton.png");
         clearAllClicked = new Texture("sprites/clearDataButtonClicked.png");
         unlockAllClicked = new Texture("sprites/unlockAllButtonClicked.png");
+        helpButton = new Texture("sprites/helpButton.png");
+
         background = new Texture("sprites/dodgeStartScreen.png");
         backgroundSprite = new Sprite(background);
         backgroundSprite.scale(6);
@@ -120,6 +121,17 @@ public class Options implements Screen {
             game.batch.draw(unlockAllClicked, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, UNLOCK_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
             FileStreaming.unlockedLevel = 12;
             FileStreaming.write();
+        }
+
+        //displays help button and sees if it is clicked
+        game.batch.draw(helpButton, DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2, OPTION_BUTTON_Y_VALUE, BUTTON_WIDTH, BUTTON_HEIGHT);
+        if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + BUTTON_WIDTH / 2 &&
+                Gdx.input.getX() > DodgeGame.WIDTH / 2 - BUTTON_WIDTH / 2 &&
+                DodgeGame.HEIGHT - Gdx.input.getY() > OPTION_BUTTON_Y_VALUE &&
+                DodgeGame.HEIGHT - Gdx.input.getY() < OPTION_BUTTON_Y_VALUE + BUTTON_HEIGHT && Gdx.input.justTouched()){
+            music.stop();
+            this.dispose();
+            game.setScreen(new Help(game));
         }
 
         //displays home button and see if it's clicked

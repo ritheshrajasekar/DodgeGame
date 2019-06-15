@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
+import com.mygdx.game.utilities.FileStreaming;
 
+import static com.mygdx.game.com.mygdx.game.screens.Level.currentLevelNumber;
 import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
 
 public class Start implements Screen {
@@ -20,6 +22,7 @@ public class Start implements Screen {
     private Texture startScreenBackground;
     private Texture optionsButtonInactive;
     private Texture optionsButtonActive;
+    private Texture trophy = new Texture("sprites/trophy.png");
     private static final int EXIT_BUTTON_WIDTH = 300;
     private static final int EXIT_BUTTON_HEIGHT = 150;
     private static final int PLAY_BUTTON_WIDTH = 300;
@@ -65,7 +68,11 @@ public class Start implements Screen {
         game.batch.begin();
         backgroundSprite.setPosition(DodgeGame.WIDTH / 2 - backgroundSprite.getWidth() / 2, DodgeGame.HEIGHT / 2 - backgroundSprite.getHeight() / 2);
         backgroundSprite.draw(game.batch);
-
+        //draws two trophies if the user beat all the levels
+        if(FileStreaming.unlockedLevel == 13){
+            game.batch.draw(trophy, 797, 193, 163, 93);
+            game.batch.draw(trophy, 330, 193, 163, 93);
+        }
         //checks exit button click
         if (Gdx.input.getX() < DodgeGame.WIDTH / 2 + EXIT_BUTTON_WIDTH / 2 &&
                 Gdx.input.getX() > DodgeGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2 &&

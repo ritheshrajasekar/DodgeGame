@@ -48,6 +48,8 @@ public class GameLevelManager {
             case 12:
                 game.setScreen( new Level12(game));
                 break;
+            case 13:
+                game.setScreen(new FinishGame(game));
         }
     }
 }

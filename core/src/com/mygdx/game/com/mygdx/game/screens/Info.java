@@ -16,7 +16,7 @@ import com.mygdx.game.utilities.FileStreaming;
 import static com.mygdx.game.com.mygdx.game.screens.Level.NUM_LEVELS;
 import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
 
-public class Options implements Screen {
+public class Info implements Screen {
     private DodgeGame game;
     private Texture muteButton;
     private Texture unmuteButton;
@@ -43,7 +43,7 @@ public class Options implements Screen {
     public static Sprite backgroundSprite;
 
     //private timer Timer;
-    public Options(DodgeGame game) {
+    public Info(DodgeGame game) {
         this.game = game;
         muteButton = new Texture("sprites/muteButton.png");
         unmuteButton = new Texture("sprites/unmuteButton.png");

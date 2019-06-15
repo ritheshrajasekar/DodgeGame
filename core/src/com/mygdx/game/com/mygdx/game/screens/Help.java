@@ -67,7 +67,7 @@ public class Help implements Screen {
                 Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             music.stop();
             this.dispose();
-            game.setScreen(new Options(game));
+            game.setScreen(new Info(game));
         }
 
         game.batch.end();

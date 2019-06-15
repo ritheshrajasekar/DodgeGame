@@ -95,7 +95,7 @@ public class Level {
 
     public void show() {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
-        timer = new Timer(60.1);
+        timer = new Timer(10);
         coinCounter = new CoinCounter();
     }
 

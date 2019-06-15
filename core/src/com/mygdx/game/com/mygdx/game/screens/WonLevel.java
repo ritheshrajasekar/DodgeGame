@@ -70,6 +70,12 @@ public class WonLevel implements Screen {
             FileStreaming.unlockedLevel = currentLevelNumber + 1;
 
         FileStreaming.write();
+
+        if(FileStreaming.unlockedLevel == 13){
+            music.stop();
+            this.dispose();
+            new GameLevelManager().playLevel(game, 13);
+        }
     }
 
     public void render(float delta) {

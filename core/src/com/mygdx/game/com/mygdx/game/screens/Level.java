@@ -1,4 +1,4 @@
-//Authors were Zachary Asis, Mathew Seng, Rithesh Rajsaekar, and Rithik Rajasekar
+//Authors were Zak Asis, Matt Seng, Rithesh Rajsaekar, and Rithik Rajasekar
 // the purpose of this class is to be the super class for all the specific levels so that all the game logic is consolidated into one class
 
 package com.mygdx.game.com.mygdx.game.screens;
@@ -42,6 +42,7 @@ public class Level {
     public DodgeGame game;
     public Timer timer;
     public CoinCounter coinCounter;
+    public InvincibilityBar invincibilityBar;
     public Player player;
     public Texture levelTexture;
     public static Sprite BackgroundSprite;
@@ -56,6 +57,7 @@ public class Level {
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
         timer = new Timer(60.1);
         coinCounter = new CoinCounter();
+        invincibilityBar = new InvincibilityBar();
         resetProjectiles();
     }
 
@@ -118,6 +120,10 @@ public class Level {
         coinCounter.render(game.batch, game.font);
     }
 
+    public void displayInvincibilityBar() {
+        invincibilityBar.render(game.batch);
+    }
+
     public void displayWorldAndLevel() {
         game.font.setColor(Color.WHITE);
         game.font.getData().setScale(4f);
@@ -146,8 +152,9 @@ public class Level {
         game.batch.draw(GRID, GRID_OFFSET_X, GRID_OFFSET_Y, GRID_WIDTH, GRID_HEIGHT);
     }
 
-    public void renderPlayer() {
+    public void renderPlayer(float delta) {
         player.update();
+        player.updateInvincibility(delta);
         player.render(game.batch);
     }
 
@@ -415,29 +422,32 @@ public class Level {
     }
 
     public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList, ArrayList<Integer[]> projectileOldPos) {
-        //detect for current position
-        for (int i = 0; i < projectileList.size(); i++) {
-            if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y && projectileList.get(i).spawned) {
-                if (!isMuted) {
-                    music.dispose();
+        //only detects collision if the player is not invincible
+        if (player.invincibilityTime == 0) {
+            //detect for current position
+            for (int i = 0; i < projectileList.size(); i++) {
+                if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y && projectileList.get(i).spawned) {
+                    if (!isMuted) {
+                        music.dispose();
+                    }
+                    game.setScreen(new GameOver(game));
                 }
-                game.setScreen(new GameOver(game));
             }
-        }
-        //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
-        for (int i = 0; i < projectileOldPos.size(); i++) {
-            if (projectileOldPos.get(i)[0] == player.x && projectileOldPos.get(i)[1] == player.y) {
-                if (!isMuted) {
-                    music.dispose();
+            //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
+            for (int i = 0; i < projectileOldPos.size(); i++) {
+                if (projectileOldPos.get(i)[0] == player.x && projectileOldPos.get(i)[1] == player.y) {
+                    if (!isMuted) {
+                        music.dispose();
+                    }
+                    game.setScreen(new GameOver(game));
                 }
-                game.setScreen(new GameOver(game));
             }
-        }
-        //updates the old positions
-        projectileOldPos.clear();
-        for (Projectile p : projectileList) {
-            if (p.spawned)
-                projectileOldPos.add(new Integer[]{p.x, p.y});
+            //updates the old positions
+            projectileOldPos.clear();
+            for (Projectile p : projectileList) {
+                if (p.spawned)
+                    projectileOldPos.add(new Integer[]{p.x, p.y});
+            }
         }
     }
 

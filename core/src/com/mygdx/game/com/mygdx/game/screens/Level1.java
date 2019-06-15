@@ -6,7 +6,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.entities.*;
+import com.mygdx.game.entities.Boulder;
 
 
 public class Level1 extends Level implements Screen {
@@ -37,6 +37,7 @@ public class Level1 extends Level implements Screen {
         displayWorldAndLevel();
         drawGrid();
         displayCoinCounter();
+        displayInvincibilityBar();
 
         detectCollision();
         detectCoin();
@@ -53,7 +54,7 @@ public class Level1 extends Level implements Screen {
     }
 
     public void renderEntities(float delta) {
-        renderPlayer();
+        renderPlayer(delta);
         renderCoins();
         renderBoulders(delta);
     }

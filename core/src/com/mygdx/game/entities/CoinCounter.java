@@ -9,20 +9,22 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.game.DodgeGame;
-import com.mygdx.game.com.mygdx.game.screens.Level;
 
 import static com.mygdx.game.com.mygdx.game.screens.Level.COIN_SIZE;
 
-
 public class CoinCounter {
+    private final int X_COORD = 335;
+    private final int Y_COORD = 150;
+    private final int SYMBOL_X_OFFSET = 66;
+    private final int NUMBER_X_OFFSET = 116;
+    private final int NUMBER_Y_OFFSET = 53;
+
     private String coinCountString;
     private int coins;
     Texture coin;
     TextureRegion animationFrames[];
     Animation animation;
     float elapsedTime;
-    int xOffset;
 
     public CoinCounter() {
         coins = 0;
@@ -55,23 +57,12 @@ public class CoinCounter {
     public void render(SpriteBatch batch, BitmapFont font) {
         batch.end();
         batch.begin();
-        switch (Level.world) {
-            case "GRASS":
-                xOffset = 180;
-                break;
-            case "HELL":
-                xOffset = 100;
-                break;
-            default:
-                xOffset = 150;
-                break;
-        }
 
-        batch.draw(animation.getKeyFrame(elapsedTime, true), 230, DodgeGame.HEIGHT / 2 + xOffset, COIN_SIZE, COIN_SIZE);
+        batch.draw(animation.getKeyFrame(elapsedTime, true), X_COORD, Y_COORD, COIN_SIZE, COIN_SIZE);
         //draws coins and number of coins
         font.setColor(Color.YELLOW);
         font.getData().setScale(4f);
-        font.draw(batch, "x", (int) (DodgeGame.WIDTH * 0.20) + 40, DodgeGame.HEIGHT / 2 + xOffset + 53);
-        font.draw(batch, getCoinCountString(), (int) (DodgeGame.WIDTH * 0.20) + 90, DodgeGame.HEIGHT / 2 + xOffset + 53);
+        font.draw(batch, "x", X_COORD + SYMBOL_X_OFFSET, Y_COORD + NUMBER_Y_OFFSET);
+        font.draw(batch, getCoinCountString(), X_COORD + NUMBER_X_OFFSET, Y_COORD + NUMBER_Y_OFFSET);
     }
 }

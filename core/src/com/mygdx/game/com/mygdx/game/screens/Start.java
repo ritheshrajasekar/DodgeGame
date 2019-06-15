@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.DodgeGame;
 import com.mygdx.game.utilities.FileStreaming;
 
-import static com.mygdx.game.com.mygdx.game.screens.Level.currentLevelNumber;
 import static com.mygdx.game.com.mygdx.game.screens.Level.isMuted;
 
 public class Start implements Screen {

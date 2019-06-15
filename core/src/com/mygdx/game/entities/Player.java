@@ -1,5 +1,5 @@
 //this class serves as the player object
-// created by Matt Send, and Zak Asis
+// created by Matt Seng, and Zak Asis
 
 package com.mygdx.game.entities;
 
@@ -13,22 +13,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
 
 public class Player extends Entity {
-    private Texture player;
+    private Texture playerTexture;
     private TextureRegion[] animationFrames;
     private Animation animation;
     private float elapsedTime;
     private int shiftCount;
 
+    public static int invincibilityState;
+    public float invincibilityTime;
+    private int colorFrame = 1;
 
     //creates the animation for the player
     public Player() {
-        player = new Texture("sprites/dodgeGuy.png");
-
-        TextureRegion[][] tmpFrames = TextureRegion.split(player, 8, 10);
-
+        playerTexture = new Texture("sprites/dodgePlayer.png");
+        TextureRegion[][] tmpFrames = TextureRegion.split(playerTexture, 8, 10);
         animationFrames = new TextureRegion[9];
-        int index = 0;
 
+        int index = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 animationFrames[index++] = tmpFrames[i][j];
@@ -78,11 +79,51 @@ public class Player extends Entity {
         }
     }
 
-    // renders the player animation
-    public void render(SpriteBatch batch) {
-
-        batch.draw(animation.getKeyFrame(elapsedTime, true), xCoordToPixel(x), yCoordToPixel(y), PLAYER_WIDTH, PLAYER_HEIGHT);
+    public void updateInvincibility(float delta) {
+        if (invincibilityState == 0 && coins >= 5)
+            invincibilityState = 1;
+        if (invincibilityState == 1 && coins >= 10)
+            invincibilityState = 2;
+        if (invincibilityState == 2 && coins >= 15)
+            invincibilityState = 3;
+        if (invincibilityState == 3 && Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            invincibilityState = -1;
+            //sets how long the player has invincibility for
+            invincibilityTime = 3;
+        }
+        if (invincibilityTime > 0) {
+            invincibilityTime -= delta;
+        }
+        if (invincibilityTime < 0) {
+            invincibilityTime = 0;
+        }
     }
 
+    // renders the player animation
+    public void render(SpriteBatch batch) {
+        if (invincibilityTime == 0)
+            batch.draw(animation.getKeyFrame(elapsedTime, true), xCoordToPixel(x), yCoordToPixel(y), PLAYER_WIDTH, PLAYER_HEIGHT);
+        else {
+            //makes the colored player
+            Texture playerColorTexture = new Texture("sprites/playerColors/dodgePlayer" + colorFrame + ".png");
+            TextureRegion[][] tmpFrames = TextureRegion.split(playerColorTexture, 8, 10);
+            TextureRegion[] animationColorFrames = new TextureRegion[9];
 
+            int index = 0;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    animationColorFrames[index++] = tmpFrames[i][j];
+                }
+            }
+
+            Animation animationColor = new Animation(1f / 9f, animationColorFrames);
+
+            batch.draw(animationColor.getKeyFrame(elapsedTime, true), xCoordToPixel(x), yCoordToPixel(y), PLAYER_WIDTH, PLAYER_HEIGHT);
+
+            colorFrame++;
+            if (colorFrame > 36)
+                colorFrame = 1;
+        }
+
+    }
 }

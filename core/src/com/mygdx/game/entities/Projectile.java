@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import static com.mygdx.game.com.mygdx.game.screens.Level1.*;
+import static com.mygdx.game.com.mygdx.game.screens.Level1.PLAYER_MOVE_DISTANCE;
+import static com.mygdx.game.com.mygdx.game.screens.Level1.PLAYER_WIDTH;
 
 public class Projectile extends Entity {
     public int speed;

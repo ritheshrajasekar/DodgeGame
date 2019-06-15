@@ -376,15 +376,19 @@ public class Level {
                             if (direction == "UP") {
                                 projectileList.add(new Projectile(type, x, j, direction, s, a, cutOffLastPixel));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
+                                projectileSpawnCoords.add(new Integer[]{x, j});
                             } else if (direction == "DOWN") {
                                 projectileList.add(new Projectile(type, x, j, direction, s, a, cutOffLastPixel));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
+                                projectileSpawnCoords.add(new Integer[]{x, j});
                             } else if (direction == "LEFT") {
                                 projectileList.add(new Projectile(type, j, y, direction, s, a, cutOffLastPixel));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
+                                projectileSpawnCoords.add(new Integer[]{j, y});
                             } else if (direction == "RIGHT") {
                                 projectileList.add(new Projectile(type, j, y, direction, s, a, cutOffLastPixel));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
+                                projectileSpawnCoords.add(new Integer[]{j, y});
                             }
                             if (direction == "DOWN" || direction == "LEFT")
                                 cutOffLastPixel = false;
@@ -392,10 +396,10 @@ public class Level {
                     } else {
                         projectileList.add(new Projectile(type, x, y, direction, s, a, false));
                         arrowList.add(new BlinkingArrow(x, y, direction, path));
+                        projectileSpawnCoords.add(new Integer[]{x, y});
                     }
                     xList.add(x);
                     yList.add(y);
-                    projectileSpawnCoords.add(new Integer[]{x, y});
                 } else {
                     i--;
                 }

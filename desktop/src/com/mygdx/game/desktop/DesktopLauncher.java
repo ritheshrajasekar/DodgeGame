@@ -1,8 +1,6 @@
 // this class launches the game by creating a new object of DodgeGame
 // this class was created by the Rithesh Rajasekar
-/**
- *
- */
+
 package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

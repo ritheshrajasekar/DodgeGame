@@ -108,7 +108,7 @@ public class Level {
         timer.render(game.batch, game.font);
 
         //checks if time is up
-        if (timer.getWorldTimer() < 0) {
+        if (timer.getWorldTimer() < 1) {
             if (!isMuted) {
                 music.stop();
                 music.dispose();
@@ -452,7 +452,7 @@ public class Level {
                 INVINCIBILITY_MUSIC.play();
         }
         //stops music when the game ends
-        if (timer.getWorldTimer() <= 0) {
+        if (timer.getWorldTimer() <= 1) {
             music.dispose();
             INVINCIBILITY_MUSIC.dispose();
         }

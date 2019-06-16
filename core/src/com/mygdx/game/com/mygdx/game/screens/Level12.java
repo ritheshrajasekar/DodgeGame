@@ -29,7 +29,7 @@ public class Level12 extends Level implements Screen {
         Cannon.min = 2;
         Cannon.max = 3;
         Cannon.spawnInterval = 5;
-        Cannon.spawnDelay = 3;
+        Cannon.spawnDelay = 2.5;
 
         Boomerang.min = 2;
         Boomerang.max = 3;
@@ -39,7 +39,7 @@ public class Level12 extends Level implements Screen {
         Laser.min = 2;
         Laser.max = 4;
         Laser.spawnInterval = 4;
-        Laser.spawnDelay = 3;
+        Laser.spawnDelay = 3.5;
 
         playMusic("music/09 - Boss Battle.mp3");
         createPlayer();

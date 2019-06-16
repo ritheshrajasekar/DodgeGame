@@ -30,7 +30,7 @@ public class Level10 extends Level implements Screen {
         Cannon.min = 1;
         Cannon.max = 2;
         Cannon.spawnInterval = 5;
-        Cannon.spawnDelay = 3;
+        Cannon.spawnDelay = 2.5;
 
         Boomerang.min = 1;
         Boomerang.max = 2;
@@ -40,7 +40,7 @@ public class Level10 extends Level implements Screen {
         Laser.min = 1;
         Laser.max = 2;
         Laser.spawnInterval = 4;
-        Laser.spawnDelay = 3;
+        Laser.spawnDelay = 3.5;
 
         playMusic("music/08 - Hell World.mp3");
         createPlayer();

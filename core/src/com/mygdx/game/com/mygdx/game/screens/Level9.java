@@ -29,7 +29,7 @@ public class Level9 extends Level implements Screen {
         Cannon.min = 2;
         Cannon.max = 4;
         Cannon.spawnInterval = 5;
-        Cannon.spawnDelay = 3;
+        Cannon.spawnDelay = 2.5;
 
         Boomerang.min = 3;
         Boomerang.max = 5;

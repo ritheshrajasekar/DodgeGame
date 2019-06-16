@@ -27,7 +27,7 @@ public class Level6 extends Level implements Screen {
         Cannon.min = 3;
         Cannon.max = 6;
         Cannon.spawnInterval = 5;
-        Cannon.spawnDelay = 3;
+        Cannon.spawnDelay = 2.5;
 
         playMusic("music/06 - Sand World.mp3");
         createPlayer();

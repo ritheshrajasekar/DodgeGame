@@ -1,11 +1,11 @@
 stars01: 4
 stars02: 1
 stars03: 0
-stars04: 0
+stars04: 4
 stars05: 0
 stars06: 0
 stars07: 4
-stars08: 0
+stars08: 4
 stars09: 0
 stars10: 0
 stars11: 0

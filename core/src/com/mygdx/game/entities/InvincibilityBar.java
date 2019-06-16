@@ -10,15 +10,11 @@ public class InvincibilityBar {
     private final int Y_COORD = 80;
 
     private Texture bar;
-//    private Texture bar0 = new Texture("sprites/dodgeInvincibilityBar0.png");
-//    private Texture bar1 = new Texture("sprites/dodgeInvincibilityBar1.png");
-//    private Texture bar2 = new Texture("sprites/dodgeInvincibilityBar2.png");
-//    private Texture bar3 = new Texture("sprites/dodgeInvincibilityBar3.png");
+    private Texture bar0 = new Texture("sprites/dodgeInvincibilityBar0.png");
+    private Texture bar1 = new Texture("sprites/dodgeInvincibilityBar1.png");
+    private Texture bar2 = new Texture("sprites/dodgeInvincibilityBar2.png");
+    private Texture bar3 = new Texture("sprites/dodgeInvincibilityBar3.png");
 
-    private Texture bar0 = new Texture("sprites/dodgeBoulder.png");
-    private Texture bar1 = new Texture("sprites/dodgeCannonball.png");
-    private Texture bar2 = new Texture("sprites/dodgeBoomerang.png");
-    private Texture bar3 = new Texture("sprites/dodgeLaser.png");
     //renders the  bar based on the invincibilityState of the player
     public void render(SpriteBatch batch) {
         switch (Player.invincibilityState) {

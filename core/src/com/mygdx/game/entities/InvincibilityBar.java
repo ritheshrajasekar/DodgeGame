@@ -38,6 +38,6 @@ public class InvincibilityBar {
 
         batch.end();
         batch.begin();
-        batch.draw(bar, X_COORD, Y_COORD, 32 * 7, 5 * 7);
+        batch.draw(bar, X_COORD, Y_COORD, 34 * 7, 5 * 7);
     }
 }

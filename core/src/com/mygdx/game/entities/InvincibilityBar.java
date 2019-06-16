@@ -19,7 +19,7 @@ public class InvincibilityBar {
     private Texture bar1 = new Texture("sprites/dodgeCannonball.png");
     private Texture bar2 = new Texture("sprites/dodgeBoomerang.png");
     private Texture bar3 = new Texture("sprites/dodgeLaser.png");
-
+    //renders the  bar based on the invincibilityState of the player
     public void render(SpriteBatch batch) {
         switch (Player.invincibilityState) {
             case 1:

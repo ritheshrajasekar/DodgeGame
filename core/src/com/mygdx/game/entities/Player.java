@@ -82,6 +82,7 @@ public class Player extends Entity {
     }
 
     public void updateInvincibility(float delta) {
+        //decides how the state of the bar based on the number of coins
         if (invincibilityState == 0 && coins >= 5)
             invincibilityState = 1;
         if (invincibilityState == 1 && coins >= 10)

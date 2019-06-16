@@ -38,7 +38,6 @@ public class Start implements Screen {
 
     public static Sprite backgroundSprite;
 
-    //private timer Timer;
     public Start(DodgeGame game) {
         this.game = game;
         exitButtonInactive = new Texture("sprites/exitButton.jpg");

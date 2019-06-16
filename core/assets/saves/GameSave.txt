@@ -4,7 +4,7 @@ stars03: 0
 stars04: 0
 stars05: 0
 stars06: 0
-stars07: 0
+stars07: 4
 stars08: 0
 stars09: 0
 stars10: 0

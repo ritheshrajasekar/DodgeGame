@@ -27,7 +27,7 @@ public class TestBoulder {
     public TestBoulder(int dx, int dy){
         this.x = xCoordToPixel(dx);
         this.y = yCoordToPixel(dy);
-
+        //creates animation
         boulderTexture = new Texture("sprites/dodgeBoulder.png");
         TextureRegion[][] tmpFrames = TextureRegion.split(boulderTexture,8,8);
         boulderAnimationFrames = new TextureRegion[12];
@@ -53,6 +53,7 @@ public class TestBoulder {
     }
 
     public void update(float deltaTime){
+        //updates animation
         elapsedTime += Gdx.graphics.getDeltaTime();
         x += SPEED * deltaTime;
         if(x > (TestGameScreen.GRID_WIDTH + TestGameScreen.GRID_OFFSET_X))

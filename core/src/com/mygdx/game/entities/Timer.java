@@ -25,7 +25,7 @@ public class Timer {
         worldTimerString = "" + (int) worldTimer;
         timeCount = 0;
     }
-
+    //updates the countdown timer
     public void update(float dt) {
         timeCount += dt;
         if (timeCount >= 0.1) {

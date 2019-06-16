@@ -452,7 +452,7 @@ public class Level {
                 INVINCIBILITY_MUSIC.play();
         }
         //stops music when the game ends
-        if (timer.getWorldTimer() <= 1) {
+        if (timer.getWorldTimer() <= 1 && !isMuted) {
             music.dispose();
             INVINCIBILITY_MUSIC.dispose();
         }
@@ -482,8 +482,11 @@ public class Level {
 
     public void die() {
         alive = false;
-        music.dispose();
-        INVINCIBILITY_MUSIC.dispose();
+        if(!isMuted){
+            music.dispose();
+            INVINCIBILITY_MUSIC.dispose();
+
+        }
         game.setScreen(new GameOver(game));
     }
 

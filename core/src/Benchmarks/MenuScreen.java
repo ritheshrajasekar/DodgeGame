@@ -1,3 +1,5 @@
+//this class serves as the intital menuScreen
+//created by Rithesh Rajasekar
 package Benchmarks;
 
 import com.badlogic.gdx.Gdx;
@@ -39,7 +41,7 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-
+        // checks if the exit button is touched
         if(Gdx.input.getX() < DodgeGameBenchmarks.WIDTH/2  + EXIT_BUTTON_WIDTH /2 &&
                 Gdx.input.getX() > DodgeGameBenchmarks.WIDTH/2 - EXIT_BUTTON_WIDTH/2 &&
                 DodgeGameBenchmarks.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_YVALUE  &&
@@ -53,6 +55,7 @@ public class MenuScreen implements Screen {
         else {
             game.batch.draw(exitButtonInactive, DodgeGameBenchmarks.WIDTH/2 - EXIT_BUTTON_WIDTH/2,EXIT_BUTTON_YVALUE, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
         }
+        //checks if the playButton is touched
         if(Gdx.input.getX() < DodgeGameBenchmarks.WIDTH/2  + PLAY_BUTTON_WIDTH /2 &&
                 Gdx.input.getX() > DodgeGameBenchmarks.WIDTH/2 - PLAY_BUTTON_WIDTH/2 &&
                 DodgeGameBenchmarks.HEIGHT - Gdx.input.getY() > PLAY_BUTTON_YVALUE  &&

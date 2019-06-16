@@ -1,3 +1,7 @@
+// this class launches the game by creating a new object of DodgeGameScreen for benchmarks
+// this class was created by the Rithesh Rajasekar
+
+
 package com.mygdx.game.desktop;
 
 import Benchmarks.DodgeGameScreen;

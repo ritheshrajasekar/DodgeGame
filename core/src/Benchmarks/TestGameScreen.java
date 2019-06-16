@@ -1,3 +1,5 @@
+//prototype game screen
+//created by Rithik Rajasekar
 package Benchmarks;
 
 import com.badlogic.gdx.Gdx;

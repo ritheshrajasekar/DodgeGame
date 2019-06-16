@@ -1,4 +1,6 @@
-//Author : Rithesh
+//this class serves as the game object that is being used in every screen
+//created by Rithesh Rajasekar
+
 
 package com.mygdx.game;
 

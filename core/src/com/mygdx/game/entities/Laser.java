@@ -20,6 +20,6 @@ public class Laser extends Projectile {
 
     //this constructor is never actually used
     public Laser(int dx, int dy, String d) {
-        super("Laser", dx, dy, d, SPEED, createAnimation("sprites/dodgeLaser.png", 8, 9, 1, 3, 10), false);
+        super("Laser", dx, dy, d, SPEED, createAnimation("sprites/dodgeLaser.png", 8, 9, 1, 3, 10), 1);
     }
 }

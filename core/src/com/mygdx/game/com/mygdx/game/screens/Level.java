@@ -35,11 +35,13 @@ public class Level {
     public static final Music CANNON_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Cannonball.mp3"));
     public static final Music BOOMERANG_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Boomerang.mp3"));
     public static final Music LASER_SOUND = Gdx.audio.newMusic(Gdx.files.internal("music/Laser.mp3"));
+    public static final Music INVINCIBILITY_MUSIC = Gdx.audio.newMusic(Gdx.files.internal("music/11 - Invincibility.mp3"));
 
     public static String world;
     public String level;
     public Music music;
     public DodgeGame game;
+    public boolean alive;
     public Timer timer;
     public CoinCounter coinCounter;
     public InvincibilityBar invincibilityBar;
@@ -54,6 +56,7 @@ public class Level {
     public ArrayList<Integer[]> projectileSpawnCoords = new ArrayList<>();
 
     public void show() {
+        alive = true;
         //do Timer(60.1) because sometimes starting the level will lag causing stuff that happens at exactly 60 seconds to not be registered
         timer = new Timer(60.1);
         coinCounter = new CoinCounter();
@@ -105,7 +108,7 @@ public class Level {
         timer.render(game.batch, game.font);
 
         //checks if time is up
-        if (timer.getWorldTimer() < 1) {
+        if (timer.getWorldTimer() < 0) {
             if (!isMuted) {
                 music.stop();
                 music.dispose();
@@ -187,8 +190,8 @@ public class Level {
         for (int i = 0; i < projectileList.size(); i++) {
             //only updates and renders once the projectile is spawned
             if (projectileList.get(i).spawned) {
-                //deletes laser after 2 seconds
-                if (projectileList.get(i).type == "Laser" && projectileList.get(i).elapsedTime > 2)
+                //deletes laser after 1.5 seconds
+                if (projectileList.get(i).type == "Laser" && projectileList.get(i).elapsedTime > 1.5)
                     projectileList.get(i).isOnScreen = false;
                 //updates and render if the projectile is on screen
                 if (projectileList.get(i).isOnScreen) {
@@ -346,34 +349,38 @@ public class Level {
                 if (!inList) {
                     if (type == "Laser") {
                         //creates 8 lasers for each tile
-                        boolean cutOffLastPixel = false;
+                        int renderStatus = 1;
                         if (direction == "DOWN" || direction == "LEFT")
-                            cutOffLastPixel = true;
+                            renderStatus = 2;
                         for (int j = 0; j < 8; j++) {
                             if ((direction == "UP" || direction == "RIGHT") && j == 7)
-                                cutOffLastPixel = true;
+                                renderStatus = 2;
                             if (direction == "UP") {
-                                projectileList.add(new Projectile(type, x, j, direction, s, a, cutOffLastPixel));
+                                projectileList.add(new Projectile(type, x, j, direction, s, a, renderStatus));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
                                 projectileSpawnCoords.add(new Integer[]{x, j});
                             } else if (direction == "DOWN") {
-                                projectileList.add(new Projectile(type, x, j, direction, s, a, cutOffLastPixel));
+                                projectileList.add(new Projectile(type, x, j, direction, s, a, renderStatus));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
                                 projectileSpawnCoords.add(new Integer[]{x, j});
                             } else if (direction == "LEFT") {
-                                projectileList.add(new Projectile(type, j, y, direction, s, a, cutOffLastPixel));
+                                projectileList.add(new Projectile(type, j, y, direction, s, a, renderStatus));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
                                 projectileSpawnCoords.add(new Integer[]{j, y});
                             } else if (direction == "RIGHT") {
-                                projectileList.add(new Projectile(type, j, y, direction, s, a, cutOffLastPixel));
+                                projectileList.add(new Projectile(type, j, y, direction, s, a, renderStatus));
                                 arrowList.add(new BlinkingArrow(x, y, direction, path));
                                 projectileSpawnCoords.add(new Integer[]{j, y});
                             }
                             if (direction == "DOWN" || direction == "LEFT")
-                                cutOffLastPixel = false;
+                                renderStatus = 1;
                         }
+                        //adds another laser that doesn't render where the arrow was so no other projectiles can spawn there
+                        projectileList.add(new Projectile(type, x, y, direction, s, a, 0));
+                        arrowList.add(new BlinkingArrow(x, y, direction, path));
+                        projectileSpawnCoords.add(new Integer[]{x, y});
                     } else {
-                        projectileList.add(new Projectile(type, x, y, direction, s, a, false));
+                        projectileList.add(new Projectile(type, x, y, direction, s, a, 1));
                         arrowList.add(new BlinkingArrow(x, y, direction, path));
                         projectileSpawnCoords.add(new Integer[]{x, y});
                     }
@@ -424,30 +431,36 @@ public class Level {
     public void detectProjectileCollision(CopyOnWriteArrayList<Projectile> projectileList, ArrayList<Integer[]> projectileOldPos) {
         //only detects collision if the player is not invincible
         if (player.invincibilityTime == 0) {
+            INVINCIBILITY_MUSIC.stop();
+            if (!isMuted && alive)
+                music.play();
             //detect for current position
             for (int i = 0; i < projectileList.size(); i++) {
                 if (projectileList.get(i).x == player.x && projectileList.get(i).y == player.y && projectileList.get(i).spawned) {
-                    if (!isMuted) {
-                        music.dispose();
-                    }
-                    game.setScreen(new GameOver(game));
+                    die();
                 }
             }
             //detect for position one frame ago (to prevent phasing through the projectile if you go towards it on the exact frame)
             for (int i = 0; i < projectileOldPos.size(); i++) {
                 if (projectileOldPos.get(i)[0] == player.x && projectileOldPos.get(i)[1] == player.y) {
-                    if (!isMuted) {
-                        music.dispose();
-                    }
-                    game.setScreen(new GameOver(game));
+                    die();
                 }
             }
-            //updates the old positions
-            projectileOldPos.clear();
-            for (Projectile p : projectileList) {
-                if (p.spawned)
-                    projectileOldPos.add(new Integer[]{p.x, p.y});
-            }
+        } else {
+            music.pause();
+            if (!isMuted)
+                INVINCIBILITY_MUSIC.play();
+        }
+        //stops music when the game ends
+        if (timer.getWorldTimer() <= 0) {
+            music.dispose();
+            INVINCIBILITY_MUSIC.dispose();
+        }
+        //updates the old positions
+        projectileOldPos.clear();
+        for (Projectile p : projectileList) {
+            if (p.spawned)
+                projectileOldPos.add(new Integer[]{p.x, p.y});
         }
     }
 
@@ -467,11 +480,19 @@ public class Level {
         detectProjectileCollision(Laser.list, Laser.oldPos);
     }
 
+    public void die() {
+        alive = false;
+        music.dispose();
+        INVINCIBILITY_MUSIC.dispose();
+        game.setScreen(new GameOver(game));
+    }
+
     public void dispose() {
         //disposes of all textures and sounds
         GRID.dispose();
         COIN_SOUND.dispose();
         music.dispose();
+        INVINCIBILITY_MUSIC.dispose();
         levelTexture.dispose();
         BackgroundSprite.getTexture().dispose();
     }

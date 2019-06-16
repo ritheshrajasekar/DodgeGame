@@ -13,7 +13,7 @@ public class Timer {
     private final int Y_COORD = 50;
     private final int TIME_X_COORD = X_COORD + 74;
     private final int TIME_Y_COORD = Y_COORD + 125;
-    private final int TIME_LESS_THAN_TEN_OFFSET = 53;
+    private final int TIME_LESS_THAN_TEN_OFFSET = 15;
 
     private double worldTimer;
     private String worldTimerString;

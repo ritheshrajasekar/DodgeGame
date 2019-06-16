@@ -18,7 +18,8 @@ public class Projectile extends Entity {
     Animation projectileAnimation;
     public boolean spawned;
     public String type;
-    public boolean cutOffLastPixel;
+    //0 = don't render, 1 = render normally, 2 = cut off last pixel (for lasers)
+    public int renderStatus;
 
     //x and y xOffset here are used to animate the movement of the projectile
     public int xOffset, yOffset;
@@ -26,7 +27,7 @@ public class Projectile extends Entity {
 
     private boolean acrossScreen;
 
-    public Projectile(String t, int dx, int dy, String d, int s, Animation a, boolean c) {
+    public Projectile(String t, int dx, int dy, String d, int s, Animation a, int r) {
         isOnScreen = true;
 
         type = t;
@@ -35,7 +36,7 @@ public class Projectile extends Entity {
         direction = d;
         speed = s;
         projectileAnimation = a;
-        cutOffLastPixel = c;
+        renderStatus = r;
 
         //rotates projectile
         if (direction == "UP") {
@@ -157,9 +158,9 @@ public class Projectile extends Entity {
 
     public void render(SpriteBatch batch) {
         if (type == "Laser") {
-            if (cutOffLastPixel)
+            if (renderStatus == 2)
                 batch.draw(projectileAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);
-            else//the laser needs a special render method because it covers 9 pixels instead of the usual 8 in order to go over the grid lines
+            if (renderStatus == 1)//the laser needs a special render method because it covers 9 pixels instead of the usual 8 in order to go over the grid lines
                 batch.draw(projectileAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, 63, 1, 1, rotation);
         } else
             batch.draw(projectileAnimation.getKeyFrame(elapsedTime, true), xCoordToPixel(x) + xOffset, yCoordToPixel(y) + yOffset, PLAYER_WIDTH / 2, PLAYER_WIDTH / 2, PLAYER_WIDTH, PLAYER_WIDTH, 1, 1, rotation);

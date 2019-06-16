@@ -6,8 +6,7 @@ package com.mygdx.game.com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DodgeGame;
-import com.mygdx.game.entities.Boulder;
-import com.mygdx.game.entities.Cannon;
+import com.mygdx.game.entities.*;
 
 
 public class Level4 extends Level implements Screen {

@@ -19,6 +19,6 @@ public class Boulder extends Projectile {
 
     //this constructor is never actually used
     public Boulder(int dx, int dy, String d) {
-        super("Boulder", dx, dy, d, SPEED, createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3, 12), false);
+        super("Boulder", dx, dy, d, SPEED, createAnimation("sprites/dodgeBoulder.png", 8, 8, 4, 3, 12), 1);
     }
 }

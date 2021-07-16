@@ -1,3 +1,5 @@
+# Dodge Game
+
 Keep dodging to conquer all the worlds!
 
 A fun and interactive game created using Java and the LibGDX game library. Developed using advanced object oriented programming 
